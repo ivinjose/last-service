@@ -1,5 +1,5 @@
 {
-  "name": "last-service",  
+  "name": "last-service",
   "description": "This is a personal project to manage the details of my last service",
   "version": "0.1.0",
   "private": true,
@@ -25,6 +25,7 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
+    "nodemon": "^1.11.0",
     "react-scripts": "0.9.4"
   }
 }
