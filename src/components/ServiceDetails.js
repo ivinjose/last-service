@@ -18,13 +18,13 @@ class ServiceDetails extends React.Component {
 					<option value="mercedes">Hero Honda Splendor</option>
 				</select> 
 				<ServicedItem />
-				<button onClick="this.saveServicedItem">Save</button>
+				<button onClick={this.saveServicedItem}>Save</button>
 			</div>
 		);
 	}
 
 	saveServicedItem(){
-		
+
 	}
 }
 
