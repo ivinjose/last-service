@@ -1,9 +1,7 @@
 import React from 'react';
 import ServiceDetails from './ServiceDetails';
+import Counter from './Counter';
  
-/**
- * A counter button: tap the button to increase the count.
- */
 class Home extends React.Component {
 	constructor() {
 		super();
@@ -15,7 +13,10 @@ class Home extends React.Component {
 	render() {
 		console.log(this);
 		return (
-			<ServiceDetails />
+			<div>
+				<Counter />
+				<ServiceDetails />
+			</div>
 		);
 	}
 }
