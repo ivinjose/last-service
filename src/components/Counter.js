@@ -9,8 +9,8 @@ class Counter extends React.Component {
 		super();
 		this.state = { 
 			counterValue: 0
-		 };
-		 this.store = createStore();
+		};
+		this.store = createStore();
 	}
 
 	componentWillMount(){
@@ -38,8 +38,3 @@ class Counter extends React.Component {
 }
 
 export default Counter;
-
-
-// window.onload = () => {
-// 	render();
-// }
