@@ -1,13 +1,12 @@
-import counter from '../reducers/reducer';
 
-const createStore = () => {
+const createStore = (reducer) => {
 	let state;
 	let listeners = [];
 
 	const getState = () => state;
 
 	const dispatch = (action) =>{
-		state = counter( state, action );
+		state = reducer( state, action );
 		listeners.forEach( listener => listener() );
 	};
 
