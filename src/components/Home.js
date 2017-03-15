@@ -11,7 +11,6 @@ class Home extends React.Component {
 	}
  
 	render() {
-		console.log(this);
 		return (
 			<div>
 				<Counter />

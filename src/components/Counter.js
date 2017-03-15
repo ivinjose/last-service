@@ -1,6 +1,6 @@
 import React from 'react';
 import createStore from '../stores/createStore';
-import counter from '../reducers/reducer';
+import counterReducer from '../reducers/counterReducer';
 
 /**
  * A counter button: tap the button to increase the count.
@@ -11,7 +11,7 @@ class Counter extends React.Component {
 		this.state = { 
 			counterValue: 0
 		};
-		this.store = createStore(counter);
+		this.store = createStore(counterReducer);
 	}
 
 	componentWillMount(){
