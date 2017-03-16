@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from '../stores/createStore';
-import ServicedItem from './ServicedItem';
-import serviceDetailsReducer from '../reducers/serviceDetailsReducer';
+import createStore from '../../stores/createStore';
+import ServicedItem from '../ServicedItem';
+import serviceDetailsReducer from '../../reducers/serviceDetailsReducer';
 import styles from './ServiceDetails.css';
 
 /**
