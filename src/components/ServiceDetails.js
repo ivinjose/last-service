@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import createStore from '../stores/createStore';
 import ServicedItem from './ServicedItem';
 import serviceDetailsReducer from '../reducers/serviceDetailsReducer';
+import styles from './ServiceDetails.css';
 
 /**
  * A counter button: tap the button to increase the count.
@@ -25,7 +26,7 @@ class ServiceDetails extends React.Component {
  
 	render() {
 		return (
-			<div className="service-details">
+			<div className={styles['service-details']}>
 				<div>Choose your vehicle:</div> 
 				<select ref="vehicle">
 					<option value="electra">Royal Enfield Electra</option>
