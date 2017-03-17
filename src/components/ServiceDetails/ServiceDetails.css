@@ -1,4 +1,11 @@
 
-.service-details{
-    background-color: red;
+.service-details{}
+.row{
+    margin-bottom: 10px;
+}
+.input{
+    margin-left: 10px;
+}
+select{
+    height: 10px;
 }

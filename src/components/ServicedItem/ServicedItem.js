@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styles from './ServicedItem.css'
  
 /**
  * A counter button: tap the button to increase the count.
@@ -11,15 +12,15 @@ class ServicedItem extends React.Component {
  
 	render() {
 		return (
-			<div className="serviced-item">
-				<input type="text" className="item-name" ref="item-name"/>
-				<select className="item-service" ref="item-service">
+			<div className={styles['serviced-item']}>
+				<input type="text" className={styles['item-name']} ref="item-name"/>
+				<select className={styles['item-service']} ref="item-service">
 					<option default>Select the type of service done</option>
 					<option value="replaced">Replaced</option>
 					<option value="fixed">Fixed</option>
 					<option value="checkup">Checkup</option>
 				</select>
-				<input type="text" className="kms-reading" ref="kms-reading"/>
+				<input type="text" className={styles['kms-reading']} ref="kms-reading"/>
 			</div>
 		);
 	}

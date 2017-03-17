@@ -27,13 +27,17 @@ class ServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<div>Choose your vehicle:</div> 
-				<select ref="vehicle">
-					<option value="electra">Royal Enfield Electra</option>
-					<option value="i20">Hyundai i20</option>
-					<option value="splendor">Hero Honda Splendor</option>
-				</select> 
-				<ServicedItem ref="serviced-item"/>
+				<div  className={styles['row']}>
+					<span>Choose your vehicle:</span> 
+					<select ref="vehicle" className={'input'}>
+						<option value="electra">Royal Enfield Electra</option>
+						<option value="i20">Hyundai i20</option>
+						<option value="splendor">Hero Honda Splendor</option>
+					</select> 
+				</div>
+				<div  className={styles['row']}>
+					<ServicedItem ref="serviced-item"/>
+				</div>
 				<button onClick={this.saveServicedItem.bind(this)}>Save</button>
 				{this.state && this.state.serviceDetails}
 			</div>
