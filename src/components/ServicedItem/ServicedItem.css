@@ -1,5 +1,6 @@
 
-.serviced-item{}
-.item-name{
-    margin-right: 10px;
+.serviced-item{
+    .item-name{
+        margin-right: 10px;
+    }
 }
