@@ -1,5 +1,6 @@
 import React from 'react';
-import ServiceDetails from '../ServiceDetails';
+import AddServiceDetails from '../AddServiceDetails';
+import ShowServiceDetails from '../ShowServiceDetails';
 import Counter from '../Counter';
 import createStore from '../../stores/createStore';
 import serviceDetailsReducer from '../../reducers/serviceDetailsReducer';
@@ -20,13 +21,15 @@ class Home extends React.Component {
 		},function(){
 			console.log(this.state.serviceDetails);	
 		});
-		
 	}
  
 	render() {
 		return (
 			<div>
-				<ServiceDetails store={this.store} />
+				<AddServiceDetails store={this.store} />
+				{this.state && this.state.serviceDetails &&
+					<ShowServiceDetails data={this.state.serviceDetails.data} />
+				}
 			</div>
 		);
 	}

@@ -2,12 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import ServicedItem from '../ServicedItem';
-import styles from './ServiceDetails.css';
+import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 
-/**
- * A counter button: tap the button to increase the count.
- */
 class ServiceDetails extends React.Component {
 	constructor() {
 		super();
