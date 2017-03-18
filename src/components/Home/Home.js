@@ -1,6 +1,6 @@
 import React from 'react';
-import ServiceDetails from './ServiceDetails';
-import Counter from './Counter';
+import ServiceDetails from '../ServiceDetails';
+import Counter from '../Counter';
  
 class Home extends React.Component {
 	constructor() {

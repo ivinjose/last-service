@@ -1,6 +1,6 @@
 import React from 'react';
-import createStore from '../stores/createStore';
-import counterReducer from '../reducers/counterReducer';
+import createStore from '../../stores/createStore';
+import counterReducer from '../../reducers/counterReducer';
 
 /**
  * A counter button: tap the button to increase the count.
