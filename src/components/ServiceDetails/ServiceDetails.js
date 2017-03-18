@@ -45,7 +45,7 @@ class ServiceDetails extends React.Component {
 						<ServicedItem ref="serviced-item" onSave={this.saveServicedItem.bind(this)}/>
 					</div>
 				</div>
-				{this.state && this.state.serviceDetails}
+				{false&&this.state && this.state.serviceDetails}
 			</div>
 		);
 	}
@@ -53,8 +53,8 @@ class ServiceDetails extends React.Component {
 	saveServicedItem(e){
 		let vehicle = { vehicle: ReactDOM.findDOMNode( this.refs.vehicle ).value };
 		let servicedItem = this.refs['serviced-item'].getValues() ;
-		let data = JSON.stringify( Object.assign( {}, vehicle, servicedItem ) );
-
+		// let data = JSON.stringify( Object.assign( {}, vehicle, servicedItem ) );
+		let data = Object.assign( {}, vehicle, servicedItem );
 		this.store.dispatch({ type: 'ADD', data: data });
 	}
 }
