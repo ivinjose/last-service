@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 import createStore from '../../stores/createStore';
 import ServicedItem from '../ServicedItem';
 import serviceDetailsReducer from '../../reducers/serviceDetailsReducer';
 import styles from './ServiceDetails.css';
+import globalStyles from '../../styles/global.css';
 
 /**
  * A counter button: tap the button to increase the count.
@@ -27,18 +29,22 @@ class ServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<div  className={styles['row']}>
-					<span>Choose your vehicle:</span> 
-					<select ref="vehicle" className={'input'}>
-						<option value="electra">Royal Enfield Electra</option>
-						<option value="i20">Hyundai i20</option>
-						<option value="splendor">Hero Honda Splendor</option>
-					</select> 
+				<div  className={globalStyles['row']}>
+					<div className={globalStyles['label']}>Choose your vehicle:</div>
+					<div className={globalStyles['value']}>
+						<select ref="vehicle" className={classNames(styles['vehicle-name'],globalStyles['drop-down'])}>
+							<option value="electra">Royal Enfield Electra</option>
+							<option value="i20">Hyundai i20</option>
+							<option value="splendor">Hero Honda Splendor</option>
+						</select> 
+					</div>
 				</div>
-				<div  className={styles['row']}>
-					<ServicedItem ref="serviced-item"/>
+				<div  className={globalStyles['row']}>
+					<div className={globalStyles['label']}>Enter service details:</div>
+					<div className={globalStyles['value']}>
+						<ServicedItem ref="serviced-item" onSave={this.saveServicedItem.bind(this)}/>
+					</div>
 				</div>
-				<button onClick={this.saveServicedItem.bind(this)}>Save</button>
 				{this.state && this.state.serviceDetails}
 			</div>
 		);

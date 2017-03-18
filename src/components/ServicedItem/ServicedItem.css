@@ -1,6 +1,32 @@
 
 .serviced-item{
     .item-name{
-        margin-right: 10px;
+        width: 220px
+    }
+    .item-service{
+        margin-left: 10px;
+        width: 240px;
+    }
+    .date{
+        margin-left: 10px;
+        width: 100px;
+    }
+    .kms-reading{
+        margin-left: 10px;
+        width: 160px;
+    }
+    .amount{
+        margin-left: 10px;
+        width: 100px;
+    }
+    .button{
+        margin-left: 10px;
+        padding: 2px 26px;
+        background-color: #f2eeee;
+        border: 1px solid #999;
+        border-radius: 2px;
+        &:active{
+            background-color: #e4e4e4;
+        }
     }
 }

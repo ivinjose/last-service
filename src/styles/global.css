@@ -1,3 +1,16 @@
-body{
-    
+.row{
+    margin-bottom: 10px;
+    .label{
+        margin-right: 10px;
+        display: inline-block;
+    }
+    .value{
+        display: inline-block;
+    }
+}
+
+.drop-down{
+    padding: 3px 0px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
 }
