@@ -6,10 +6,7 @@ const createStore = (reducer) => {
 	const getState = () => state;
 
 	const dispatch = (action) =>{
-		if( !state.data ){
-			state.data = [];
-		}
-		state.data.push( reducer( state, action ) );
+		state= reducer( state, action );
 		listeners.forEach( listener => listener() );
 	};
 

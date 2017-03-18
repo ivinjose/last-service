@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import createStore from '../../stores/createStore';
 import ServicedItem from '../ServicedItem';
-import serviceDetailsReducer from '../../reducers/serviceDetailsReducer';
 import styles from './ServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 
@@ -13,17 +11,6 @@ import globalStyles from '../../styles/global.css';
 class ServiceDetails extends React.Component {
 	constructor() {
 		super();
-		this.store = createStore(serviceDetailsReducer);
-	}
-
-	componentWillMount(){
-		this.store.subscribe( this.change.bind(this) );
-	}
-
-	change(){
-		this.setState({
-			serviceDetails: this.store.getState()
-		});
 	}
  
 	render() {
@@ -45,7 +32,7 @@ class ServiceDetails extends React.Component {
 						<ServicedItem ref="serviced-item" onSave={this.saveServicedItem.bind(this)}/>
 					</div>
 				</div>
-				{false&&this.state && this.state.serviceDetails}
+				
 			</div>
 		);
 	}
@@ -53,9 +40,9 @@ class ServiceDetails extends React.Component {
 	saveServicedItem(e){
 		let vehicle = { vehicle: ReactDOM.findDOMNode( this.refs.vehicle ).value };
 		let servicedItem = this.refs['serviced-item'].getValues() ;
-		// let data = JSON.stringify( Object.assign( {}, vehicle, servicedItem ) );
+
 		let data = Object.assign( {}, vehicle, servicedItem );
-		this.store.dispatch({ type: 'ADD', data: data });
+		this.props.store.dispatch({ type: 'ADD', data: data });
 	}
 }
 
