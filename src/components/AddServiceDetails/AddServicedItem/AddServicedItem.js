@@ -22,7 +22,7 @@ class ServicedItem extends React.Component {
 					<option value="Fixed">Fixed</option>
 					<option value="Checkup">Checkup</option>
 				</select>
-				<input type="text" className={styles['date']} ref="date" placeholder="dd/mm/yyyy"/>
+				<input type="date" className={styles['date']} ref="date" placeholder="dd/mm/yyyy"/>
 				<input type="text" className={styles['kms-reading']} ref="kms-reading" placeholder="kms reading (ex: 32000)"/>
 				<input type="text" className={styles['amount']} ref="amount" placeholder="Amount paid"/>
 				<button className={styles['button']} onClick={this.props.onSave}>Save</button>
@@ -31,11 +31,17 @@ class ServicedItem extends React.Component {
 	}
 
 	getValues(){
-		let itemName = ReactDOM.findDOMNode( this.refs['item-name'] ).value;
-		let itemService = ReactDOM.findDOMNode( this.refs['item-service'] ).value;
-		let kmsReading = ReactDOM.findDOMNode( this.refs['kms-reading'] ).value;
-		let date = ReactDOM.findDOMNode( this.refs['date'] ).value;
-		let amount = ReactDOM.findDOMNode( this.refs['amount'] ).value;
+		// let itemName = ReactDOM.findDOMNode( this.refs['item-name'] ).value;
+		// let itemService = ReactDOM.findDOMNode( this.refs['item-service'] ).value;
+		// let kmsReading = ReactDOM.findDOMNode( this.refs['kms-reading'] ).value;
+		// let date = ReactDOM.findDOMNode( this.refs['date'] ).value;
+		// let amount = ReactDOM.findDOMNode( this.refs['amount'] ).value;
+
+		let itemName = "Air filter";
+		let itemService = "Changed";
+		let kmsReading = "32500";
+		let date = "28/02/1989";
+		let amount = "450";
 
 		return { 
 			itemName: itemName,

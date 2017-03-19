@@ -1,5 +1,6 @@
 .service-details{
     .vehicle-name{
+        height: 26px;
         width: 220px;
     }
 }

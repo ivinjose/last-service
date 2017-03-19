@@ -12,20 +12,20 @@ class ServiceDetails extends React.Component {
 	render() {
 		console.log(this.props.data);
 		return (
-			<div className={styles['service-details']}>
+			<table className={styles['service-details']}>
 				{this.props.data.map(function(serviceDetail, index){
 					return (
-						<div className={globalStyles['row']} key={index}>
-							<div>{serviceDetail.vehicle}</div>
-							<div>{serviceDetail.itemName}</div>
-							<div>{serviceDetail.itemService}</div>
-							<div>{serviceDetail.date}</div>
-							<div>{serviceDetail.kmsReading}</div>
-							<div>{serviceDetail.amount}</div>
-						</div>
+						<tr className={classNames(globalStyles['row'],styles['row'])} key={index}>
+							<td className={styles['cell']}>{serviceDetail.vehicle}</td>
+							<td className={styles['cell']}>{serviceDetail.itemName}</td>
+							<td className={styles['cell']}>{serviceDetail.itemService}</td>
+							<td className={styles['cell']}>{serviceDetail.date}</td>
+							<td className={styles['cell']}>{serviceDetail.kmsReading} kms</td>
+							<td className={styles['cell']}>{serviceDetail.amount} INR</td>
+						</tr>
 					)
 				})}			
-			</div>
+			</table>
 		);
 	}
 }

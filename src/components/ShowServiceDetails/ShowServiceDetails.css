@@ -1,5 +1,20 @@
 .service-details{
-    .vehicle-name{
-        width: 220px;
+    margin-top: 80px;
+    .row{
+        margin-bottom: 0;
+        border-top: 1px solid #ccc;
+        &:last-child{
+            border-bottom: 1px solid #ccc;
+        }
+    }
+    .cell{
+        border-left: 1px solid #ccc;
+        display: inline-block;
+        padding: 3px;
+        text-align: center;
+        width: 200px;
+        &:last-child{
+            border-right: 1px solid #ccc;
+        }
     }
 }
