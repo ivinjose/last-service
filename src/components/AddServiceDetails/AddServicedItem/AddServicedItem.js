@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import styles from './ServicedItem.css'
-import globalStyles from '../../styles/global.css';
+import styles from './AddServicedItem.css'
+import globalStyles from '../../../styles/global.css';
  
 /**
  * A counter button: tap the button to increase the count.
@@ -18,9 +18,9 @@ class ServicedItem extends React.Component {
 				<input type="text" className={styles['item-name']} ref="item-name" placeholder="Example: Air filter or Engine oil"/>
 				<select className={classNames(styles['item-service'],globalStyles['drop-down'])} ref="item-service">
 					<option default>Select the type of service done</option>
-					<option value="replaced">Replaced</option>
-					<option value="fixed">Fixed</option>
-					<option value="checkup">Checkup</option>
+					<option value="Replaced">Replaced</option>
+					<option value="Fixed">Fixed</option>
+					<option value="Checkup">Checkup</option>
 				</select>
 				<input type="text" className={styles['date']} ref="date" placeholder="dd/mm/yyyy"/>
 				<input type="text" className={styles['kms-reading']} ref="kms-reading" placeholder="kms reading (ex: 32000)"/>
