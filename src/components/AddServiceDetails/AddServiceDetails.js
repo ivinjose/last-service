@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
+import {addServiceDetails} from '../../actions/actionCreators';
 
 class ServiceDetails extends React.Component {
 	constructor() {
@@ -39,7 +40,7 @@ class ServiceDetails extends React.Component {
 		let servicedItem = this.refs['serviced-item'].getValues() ;
 
 		let data = Object.assign( {}, vehicle, servicedItem );
-		this.props.store.dispatch({ type: 'ADD', data: data });
+		this.props.store.dispatch(addServiceDetails(data));
 	}
 }
 
