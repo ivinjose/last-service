@@ -1,14 +1,15 @@
+import { createStore } from 'redux'
 import React from 'react';
 import AddServiceDetails from '../AddServiceDetails';
 import ShowServiceDetails from '../ShowServiceDetails';
 import Counter from '../Counter';
-import createStore from '../../stores/createStore';
+// import createStore from '../../stores/createStore';
 import serviceDetailsReducer from '../../reducers/serviceDetailsReducer';
  
 class Home extends React.Component {
 	constructor() {
 		super();
-		this.store = createStore(serviceDetailsReducer);
+		this.store = createStore(serviceDetailsReducer, [ 'Use Redux' ]);
 	}
 
 	componentWillMount(){
