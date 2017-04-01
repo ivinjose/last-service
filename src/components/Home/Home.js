@@ -1,15 +1,16 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import React from 'react';
 import AddServiceDetails from '../AddServiceDetails';
 import ShowServiceDetails from '../ShowServiceDetails';
 import Counter from '../Counter';
 // import createStore from '../../stores/createStore';
 import serviceDetailsReducer from '../../reducers/serviceDetailsReducer';
+import ReduxThunk from 'redux-thunk'
  
 class Home extends React.Component {
 	constructor() {
 		super();
-		this.store = createStore(serviceDetailsReducer, [ 'Use Redux' ]);
+		this.store = createStore(serviceDetailsReducer, [ 'Use Redux' ], applyMiddleware(ReduxThunk));
 	}
 
 	componentWillMount(){

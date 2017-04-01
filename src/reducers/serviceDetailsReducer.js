@@ -1,8 +1,14 @@
-import {ADD_SERVICE_DETAILS} from '../actions/actionConstants';
+import {ADD_SERVICE_DETAILS, ADD_SERVICE_DETAILS_ASYNC} from '../actions/actionConstants';
 
 const serviceDetailsReducer = (state = 0, action) => {
 	switch (action.type) {
 		case ADD_SERVICE_DETAILS:
+			if( !state.data ){
+				state.data = [];
+			}
+			state.data.push( action.data );
+			return state;
+		case ADD_SERVICE_DETAILS_ASYNC:
 			if( !state.data ){
 				state.data = [];
 			}
