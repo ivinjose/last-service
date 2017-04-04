@@ -10,14 +10,26 @@ import styles from '../styles/global.css';
 const store = createStore(serviceDetailsReducer, [ 'Use Redux' ], applyMiddleware(ReduxThunk));
 
 class Provider extends React.Component{
+	getChildContext(){
+		return{
+			store: this.props.store
+		};
+	}
+
 	render(){
 		return this.props.children;
 	}
 }
+
+Provider.childContextTypes = {
+	store: React.PropTypes.object
+};
  
 document.addEventListener('DOMContentLoaded', function() {
 	ReactDOM.render(
-		<Home store={store}/>,
+		<Provider store={store}>
+			<Home/>
+		</Provider>,
 		document.getElementById('mount')
 	);
 });

@@ -36,7 +36,7 @@ class ServiceDetails extends React.Component {
 	}
 
 	saveServicedItem(e){
-		let { store } = this.props;
+		let { store } = this.context;
 		let vehicle = { vehicle: ReactDOM.findDOMNode( this.refs.vehicle ).value };
 		let servicedItem = this.refs['serviced-item'].getValues() ;
 
@@ -44,5 +44,9 @@ class ServiceDetails extends React.Component {
 		store.dispatch(addServiceDetailsAsync(data));
 	}
 }
+
+ServiceDetails.contextTypes = {
+	store: React.PropTypes.object
+};
 
 export default ServiceDetails;

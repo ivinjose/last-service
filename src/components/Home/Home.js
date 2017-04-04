@@ -8,12 +8,12 @@ class Home extends React.Component {
 	}
 
 	componentWillMount(){
-		const { store } = this.props;
+		const { store } = this.context;
 		store.subscribe( this.change.bind(this) );
 	}
 
 	change(){
-		const { store } = this.props;
+		const { store } = this.context;
 		this.setState({
 			serviceDetails: store.getState()
 		},function(){
@@ -22,10 +22,9 @@ class Home extends React.Component {
 	}
  
 	render() {
-		const { store } = this.props;
 		return (
 			<div>
-				<AddServiceDetails store={store} />
+				<AddServiceDetails />
 				{this.state && this.state.serviceDetails &&
 					<ShowServiceDetails data={this.state.serviceDetails.data} />
 				}
@@ -33,5 +32,9 @@ class Home extends React.Component {
 		);
 	}
 }
+
+Home.contextTypes = {
+	store: React.PropTypes.object
+};
 
 export default Home;
