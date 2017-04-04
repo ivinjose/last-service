@@ -36,11 +36,12 @@ class ServiceDetails extends React.Component {
 	}
 
 	saveServicedItem(e){
+		let { store } = this.props;
 		let vehicle = { vehicle: ReactDOM.findDOMNode( this.refs.vehicle ).value };
 		let servicedItem = this.refs['serviced-item'].getValues() ;
 
 		let data = Object.assign( {}, vehicle, servicedItem );
-		this.props.store.dispatch(addServiceDetailsAsync(data));
+		store.dispatch(addServiceDetailsAsync(data));
 	}
 }
 
