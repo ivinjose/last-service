@@ -10,7 +10,6 @@ class ServiceDetails extends React.Component {
 	}
  
 	render() {
-		console.log(this.props.data);
 		return (
 			<table className={styles['service-details']}>
 				{this.props.data.map(function(serviceDetail, index){

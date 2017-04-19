@@ -2,7 +2,6 @@ import {ADD_SERVICE_DETAILS, ADD_SERVICE_DETAILS_ASYNC} from './actionConstants'
 import fetch from 'isomorphic-fetch';
 
 export function addServiceDetails(data){
-    console.log(data);
     return { 
         type: ADD_SERVICE_DETAILS,
         data: data

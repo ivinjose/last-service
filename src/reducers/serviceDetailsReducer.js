@@ -3,11 +3,9 @@ import {ADD_SERVICE_DETAILS, ADD_SERVICE_DETAILS_ASYNC} from '../actions/actionC
 const serviceDetailsReducer = (state = 0, action) => {
 	switch (action.type) {
 		case ADD_SERVICE_DETAILS:
-			if( !state.data ){
-				state.data = [];
-			}
-			state.data.push( action.data );
-			return state;
+			let data = state.data.slice();
+			data.push( action.data );
+			return { ...state, data: data };
 		case ADD_SERVICE_DETAILS_ASYNC:
 			if( !state.data ){
 				state.data = [];

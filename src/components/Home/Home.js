@@ -17,7 +17,7 @@ class Home extends React.Component {
 		this.setState({
 			serviceDetails: store.getState()
 		},function(){
-			console.log(this.state.serviceDetails);	
+			console.log(this.state.serviceDetails);
 		});
 	}
  
