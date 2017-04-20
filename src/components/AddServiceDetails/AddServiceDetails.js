@@ -41,7 +41,7 @@ class ServiceDetails extends React.Component {
 		let servicedItem = this.refs['serviced-item'].getValues() ;
 
 		let data = Object.assign( {}, vehicle, servicedItem );
-		store.dispatch(addServiceDetails(data));
+		store.dispatch(addServiceDetailsAsync(data));
 	}
 }
 

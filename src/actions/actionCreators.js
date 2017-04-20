@@ -10,11 +10,18 @@ export function addServiceDetails(data){
 
 export function addServiceDetailsAsync(data){
     return function(dispatch){
-        fetch('http://localhost:4001/addservicedetails')
-            .then(function(response){
+        fetch('http://localhost:4001/addservicedetails', 
+            { 
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) 
+            }
+            ).then(function(response){
                 return response.text();              
             }).then(function(response){
-                dispatch( addServiceDetails( response ) );
+                dispatch( addServiceDetails( data ) );
             });
     }
 }
