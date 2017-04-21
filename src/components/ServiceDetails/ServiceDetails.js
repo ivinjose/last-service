@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import styles from './ShowServiceDetails.css';
+import styles from './ServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 
 class ServiceDetails extends React.Component {

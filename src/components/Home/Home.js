@@ -1,6 +1,6 @@
 import React from 'react';
 import AddServiceDetails from '../AddServiceDetails';
-import ShowServiceDetails from '../ShowServiceDetails';
+import ServiceDetails from '../ServiceDetails';
  
 class Home extends React.Component {
 	constructor() {
@@ -26,7 +26,7 @@ class Home extends React.Component {
 			<div>
 				<AddServiceDetails />
 				{this.state && this.state.serviceDetails &&
-					<ShowServiceDetails data={this.state.serviceDetails.data} />
+					<ServiceDetails data={this.state.serviceDetails.data} />
 				}
 			</div>
 		);
