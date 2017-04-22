@@ -10,7 +10,7 @@ class ServiceDetails extends React.Component {
 	constructor() {
 		super();
 	}
- 
+
 	render() {
 		return (
 			<div className={styles['service-details']}>

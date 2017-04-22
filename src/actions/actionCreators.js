@@ -1,4 +1,4 @@
-import {ADD_SERVICE_DETAILS, ADD_SERVICE_DETAILS_ASYNC} from './actionConstants';
+import {ADD_SERVICE_DETAILS, GET_SERVICE_DETAILS_SUCCESS} from './actionConstants';
 import fetch from 'isomorphic-fetch';
 
 export function addServiceDetails(data){
@@ -22,6 +22,27 @@ export function addServiceDetailsAsync(data){
                 return response.text();              
             }).then(function(response){
                 dispatch( addServiceDetails( data ) );
+            });
+    }
+}
+
+export function getServiceDetailsSuccess(data){
+    return { 
+        type: GET_SERVICE_DETAILS_SUCCESS,
+        data: data
+    };
+}
+
+export function getServiceDetailsOf(vehicle){
+    return function(dispatch){
+        fetch('http://localhost:4001/getservicedetails?vehicle='+vehicle, 
+            { 
+                method: 'GET'
+            }
+            ).then(function(response){
+                return response.json();              
+            }).then(function(response){
+                dispatch( getServiceDetailsSuccess( response ) );
             });
     }
 }
