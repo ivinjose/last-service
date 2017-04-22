@@ -1,9 +1,9 @@
-import {ADD_SERVICE_DETAILS, GET_SERVICE_DETAILS_SUCCESS} from '../actions/actionConstants';
+import {ADD_SERVICE_DETAILS_SUCCESS, GET_SERVICE_DETAILS_SUCCESS} from '../actions/actionConstants';
 
 const serviceDetailsReducer = (state = 0, action) => {
 	let data;
 	switch (action.type) {
-		case ADD_SERVICE_DETAILS:
+		case ADD_SERVICE_DETAILS_SUCCESS:
 			data = state.data.slice();
 			data.push( action.data );
 			return { ...state, data: data };
