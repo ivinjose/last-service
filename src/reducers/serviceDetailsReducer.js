@@ -1,4 +1,4 @@
-import {ADD_SERVICE_DETAILS_SUCCESS, GET_SERVICE_DETAILS_SUCCESS} from '../actions/actionConstants';
+import {ADD_SERVICE_DETAILS_SUCCESS, GET_SERVICE_DETAILS_SUCCESS, CHANGE_ROUTE} from '../actions/actionConstants';
 
 const serviceDetailsReducer = (state = 0, action) => {
 	let data;
@@ -18,6 +18,13 @@ const serviceDetailsReducer = (state = 0, action) => {
 				...state, 
 				appData: {
 					serviceDetails: data
+				} 
+			};
+		case CHANGE_ROUTE:
+			return { 
+				...state, 
+				metaData: {
+					currentRoute: action.data
 				} 
 			};
 		default:

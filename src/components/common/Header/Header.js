@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from './Header.css';
 import routes from '../../../routes/routes';
+import {changeRoute} from '../../../actions/actionCreators';
 
 class Header extends React.Component {
 	constructor() {
@@ -11,9 +12,20 @@ class Header extends React.Component {
 	componentWillMount(){
 		const { store } = this.context;
 		let state = store.getState();
-		this.currentRoute = state.metaData.currentRoute;
+		this.setState({
+			currentRoute: state.metaData.currentRoute
+		});
+		store.subscribe( this.change.bind(this) );
 	}
  
+	change(){
+		const { store } = this.context;
+		let state = store.getState();
+		this.setState({
+			currentRoute: state.metaData.currentRoute
+		});
+	}
+
 	render() {
 		return (
 			<div className={styles['header']}>
@@ -21,18 +33,24 @@ class Header extends React.Component {
 					<ul className={styles['nav']}>
 						{
 							routes.map( (route, index) => {
-								if( index == this.currentRoute ){
-									return <li key={index} className={styles['active']}><a href={route.path}>{route.name}</a></li>
-								}
-								else {
-									return <li key={index}><a href={route.path}>{route.name}</a></li>
-								}
+								return (
+									<li key={index} className={index==this.state.currentRoute?styles['active']:null} >
+										<a href={route.path} onClick={this.changeRoute.bind(this)} data-index={index}>{route.name}</a>
+									</li>
+								);
 							})
 						}
 					</ul>
 				</nav>
 			</div>
 		);
+	}
+
+	changeRoute(e){
+		e.preventDefault();
+		let index = e.target.attributes.getNamedItem('data-index').value;
+		const { store } = this.context;
+		store.dispatch( changeRoute(index) );
 	}
 }
 

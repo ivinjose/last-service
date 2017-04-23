@@ -1,4 +1,4 @@
-import {ADD_SERVICE_DETAILS_SUCCESS, GET_SERVICE_DETAILS_SUCCESS} from './actionConstants';
+import {ADD_SERVICE_DETAILS_SUCCESS, GET_SERVICE_DETAILS_SUCCESS, CHANGE_ROUTE} from './actionConstants';
 import fetch from 'isomorphic-fetch';
 
 export function addServiceDetailsSuccess(data){
@@ -45,4 +45,11 @@ export function getServiceDetailsOf(vehicle){
                 dispatch( getServiceDetailsSuccess( response ) );
             });
     }
+}
+
+export function changeRoute(data){
+    return { 
+        type: CHANGE_ROUTE,
+        data: data
+    };
 }
