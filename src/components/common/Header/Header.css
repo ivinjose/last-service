@@ -1,0 +1,44 @@
+.header{
+    .navbar {
+        border: 1px solid transparent;
+        background-color: #222;
+        border-color: #080808;
+        padding-left: 80px;
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+
+        .nav{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+                float: left;
+                a {
+                    display: block;
+                    color: #9d9d9d;
+                    padding: 15px;
+
+                    &:hover{
+                        color: #fff;
+                        text-decoration: none;
+                    }
+                }   
+
+                &.active{
+                    background-color: #080808;
+                    a{
+                        color: #fff;
+                    }
+                }
+            }
+
+            &:after{
+                display: table;
+                content: " ";
+                clear: both;
+            }
+        }
+    } 
+}

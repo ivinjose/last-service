@@ -5,6 +5,7 @@ import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import {getServiceDetailsOf} from '../../actions/actionCreators';
 import ServiceDetails from '../ServiceDetails';
+import Header from '../common/Header';
 
 class ViewServiceDetails extends React.Component {
 	constructor() {
@@ -29,6 +30,7 @@ class ViewServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
+				<Header />
 				<div className={globalStyles['row']}>
 					<div className={globalStyles['label']}>Choose your vehicle:</div>
 					<div className={globalStyles['value']}>
