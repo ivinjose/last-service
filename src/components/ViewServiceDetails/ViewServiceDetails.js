@@ -31,7 +31,7 @@ class ViewServiceDetails extends React.Component {
 				<div className={globalStyles['row']}>
 					<div className={globalStyles['label']}>Choose your vehicle:</div>
 					<div className={globalStyles['value']}>
-						<select ref="vehicle" onClick={this.chooseVehicle.bind(this)} className={classNames(styles['vehicle-name'],globalStyles['drop-down'])}>
+						<select ref="vehicle" onChange={this.chooseVehicle.bind(this)} className={classNames(styles['vehicle-name'],globalStyles['drop-down'])}>
 							<option value=""></option>
 							<option value="Royal Enfield Electra">Royal Enfield Electra</option>
 							<option value="Hyundai i20">Hyundai i20</option>

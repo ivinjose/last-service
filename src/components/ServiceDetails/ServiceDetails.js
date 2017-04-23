@@ -10,6 +10,11 @@ class ServiceDetails extends React.Component {
 	}
  
 	render() {
+		if( this.props.data.length == 0 ){
+			return(
+				<div>No data available!</div>
+			)
+		}
 		return (
 			<table className={styles['service-details']}>
 				{this.props.data.map(function(serviceDetail, index){

@@ -9,7 +9,6 @@ const serviceDetailsReducer = (state = 0, action) => {
 			return { ...state, data: data };
 		case GET_SERVICE_DETAILS_SUCCESS:
 			data = action.data.slice();
-			data.push( action.data );
 			return { ...state, data: data };
 		case 'REMOVE':
 			return state - 1;
