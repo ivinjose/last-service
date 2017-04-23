@@ -1,6 +1,6 @@
 let state = {
     "metaData": {
-        "currentPath": "/",
+        "currentRoute": 0,
         "loadingState": "loading"
     },
     "appData": {

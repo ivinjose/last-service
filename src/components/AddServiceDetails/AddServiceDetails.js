@@ -6,7 +6,7 @@ import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import {addServiceDetails} from '../../actions/actionCreators';
 
-class ServiceDetails extends React.Component {
+class AddServiceDetails extends React.Component {
 	constructor() {
 		super();
 	}
@@ -45,8 +45,8 @@ class ServiceDetails extends React.Component {
 	}
 }
 
-ServiceDetails.contextTypes = {
+AddServiceDetails.contextTypes = {
 	store: React.PropTypes.object
 };
 
-export default ServiceDetails;
+export default AddServiceDetails;
