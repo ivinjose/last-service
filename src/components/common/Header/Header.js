@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { browserHistory } from 'react-router'; 
 import styles from './Header.css';
 import routes from '../../../routes/routes';
-import {changeRoute} from '../../../actions/actionCreators';
+import { changeRoute } from '../../../actions/actionCreators';
 
 class Header extends React.Component {
 	constructor() {
@@ -22,7 +23,10 @@ class Header extends React.Component {
 		const { store } = this.context;
 		let state = store.getState();
 		this.setState({
+			previousRoute: this.state.currentRoute,
 			currentRoute: state.metaData.currentRoute
+		}, ()=> {
+			browserHistory.push( routes[this.state.currentRoute].path );
 		});
 	}
 
