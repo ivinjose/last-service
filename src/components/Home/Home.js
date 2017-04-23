@@ -14,8 +14,9 @@ class Home extends React.Component {
 
 	change(){
 		const { store } = this.context;
+		let state = store.getState();
 		this.setState({
-			serviceDetails: store.getState()
+			serviceDetails: state.appData.serviceDetails
 		},function(){
 			console.log(this.state.serviceDetails);
 		});
@@ -26,7 +27,7 @@ class Home extends React.Component {
 			<div>
 				<AddServiceDetails />
 				{this.state && this.state.serviceDetails &&
-					<ServiceDetails data={this.state.serviceDetails.data} />
+					<ServiceDetails data={this.state.serviceDetails} />
 				}
 			</div>
 		);

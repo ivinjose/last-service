@@ -9,8 +9,9 @@ import serviceDetailsReducer from '../reducers/serviceDetailsReducer';
 import styles from '../styles/global.css';
 import Home from './Home';
 import ViewServiceDetails from './ViewServiceDetails';
+import initialState from '../state/initialState';
 
-const store = createStore( serviceDetailsReducer, { loading: true, data: [] }, applyMiddleware( ReduxThunk, ReduxFreeze ) );
+const store = createStore( serviceDetailsReducer, initialState, applyMiddleware( ReduxThunk, ReduxFreeze ) );
 
 const Root = () => (
 	<Provider store={store}>

@@ -1,0 +1,28 @@
+{
+    "metaData": {
+        "currentPath": "/home",
+        "loadingState": "loading"
+    },
+    "appData": {
+        "serviceDetails": [
+            {
+                "_id": "58f84244f3de83b05883a6cb",
+                "vehicle": "Royal Enfield Electra",
+                "itemName": "Air filter",
+                "itemService": "Changed",
+                "kmsReading": "32500",
+                "date": "28/02/1989",
+                "amount": "450"
+            },
+            {
+                "_id": "58f84244f3de83b05883a6cb",
+                "vehicle": "Royal Enfield Electra",
+                "itemName": "Air filter",
+                "itemService": "Changed",
+                "kmsReading": "32500",
+                "date": "28/02/1989",
+                "amount": "450"
+            }
+        ]
+    }
+}
