@@ -20,8 +20,6 @@ const serviceDetailsReducer = (state = 0, action) => {
 					serviceDetails: data
 				} 
 			};
-		case 'REMOVE':
-			return state - 1;
 		default:
 			return state;
 	}
