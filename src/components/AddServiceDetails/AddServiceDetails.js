@@ -38,7 +38,7 @@ class AddServiceDetails extends React.Component {
 			<div className={styles['service-details']}>
 
 				<div className={globalStyles['row']}>
-					<SelectField hintText="Choose your vehicle" value={this.state.vehicle} onChange={this.updateVehicle.bind(this)}>
+					<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.vehicle} onChange={this.updateVehicle.bind(this)}>
 						<MenuItem value={"Royal Enfield Electra"} primaryText="Royal Enfield Electra" />
 						<MenuItem value={"Hyundai i20"} primaryText="Hyundai i20" />
 						<MenuItem value={"Hero Honda Splendor"} primaryText="Hero Honda Splendor" />
@@ -49,6 +49,7 @@ class AddServiceDetails extends React.Component {
 					<DatePicker 
 						hintText="On which date service happened?" 
 						onChange={this.updateDate.bind(this)}
+						fullWidth={true}
 						formatDate={new DateTimeFormat('en-US', {
 							day: 'numeric',
 							month: 'long',
@@ -60,21 +61,22 @@ class AddServiceDetails extends React.Component {
 					<AutoComplete 
 						hintText="Which part was serviced?" 
 						dataSource={serviceableParts} 
+						fullWidth={true}
 						filter={AutoComplete.caseInsensitiveFilter} 
 						onUpdateInput={this.updateServicedComponent.bind(this)}
 						/>
 				</div>
 
 				<div  className={globalStyles['row']}>
-					<TextField hintText="Amount paid" onChange={this.updateAmount.bind(this)} />
+					<TextField hintText="How much you paid?" fullWidth={true} onChange={this.updateAmount.bind(this)} />
 				</div>
 
 				<div  className={globalStyles['row']}>
-					<TextField hintText="Any comments? (Optional)" onChange={this.updateComments.bind(this)} />
+					<TextField hintText="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
 				</div>
 
 				<div  className={globalStyles['row']}>
-					<RaisedButton label="Save" primary={true} onClick={this.saveServicedItem.bind(this)}/>
+					<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
 				</div>
 				
 			</div>
