@@ -38,7 +38,7 @@ class AddServiceDetails extends React.Component {
 			<div className={styles['service-details']}>
 
 				<div className={globalStyles['row']}>
-					<SelectField hintText="Choose your vehicle" value={this.state.vehicle} onChange={this.onVehicleUpdate.bind(this)}>
+					<SelectField hintText="Choose your vehicle" value={this.state.vehicle} onChange={this.updateVehicle.bind(this)}>
 						<MenuItem value={"Royal Enfield Electra"} primaryText="Royal Enfield Electra" />
 						<MenuItem value={"Hyundai i20"} primaryText="Hyundai i20" />
 						<MenuItem value={"Hero Honda Splendor"} primaryText="Hero Honda Splendor" />
@@ -48,7 +48,7 @@ class AddServiceDetails extends React.Component {
 				<div className={globalStyles['row']}>
 					<DatePicker 
 						hintText="On which date service happened?" 
-						onUpdateInput={this.dateUpdate.bind(this)}
+						onChange={this.updateDate.bind(this)}
 						formatDate={new DateTimeFormat('en-US', {
 							day: 'numeric',
 							month: 'long',
@@ -60,61 +60,75 @@ class AddServiceDetails extends React.Component {
 					<AutoComplete 
 						hintText="Which part was serviced?" 
 						dataSource={serviceableParts} 
-						filter={AutoComplete.caseInsensitiveFilter}
-						/*onUpdateInput={this.serviceablePartUpdate.bind(this)}*//>
+						filter={AutoComplete.caseInsensitiveFilter} 
+						onUpdateInput={this.updateServicedComponent.bind(this)}
+						/>
 				</div>
 
 				<div  className={globalStyles['row']}>
-					<TextField hintText="Amount paid" /*onUpdateInput={this.commentsUpdate.bind(this)}*//>
+					<TextField hintText="Amount paid" onChange={this.updateAmount.bind(this)} />
 				</div>
 
 				<div  className={globalStyles['row']}>
-					<TextField hintText="Any comments? (Optional)" /*onUpdateInput={this.commentsUpdate.bind(this)}*//>
+					<TextField hintText="Any comments? (Optional)" onChange={this.updateComments.bind(this)} />
 				</div>
 
-				<RaisedButton label="Save" primary={true} />
-
-				{/* <div  className={globalStyles['row']}>
-					<div className={globalStyles['label']}>Enter service details:</div>
-					<div className={globalStyles['value']}>
-						<ServicedItem ref="serviced-item" onSave={this.saveServicedItem.bind(this)}/>
-					</div>
-				</div> */}
+				<div  className={globalStyles['row']}>
+					<RaisedButton label="Save" primary={true} onClick={this.saveServicedItem.bind(this)}/>
+				</div>
 				
 			</div>
 		);
 	}
 
-	saveServicedItem(e){
-		let { store } = this.context;
-		let vehicle = { vehicle: this.state.vehicle };
-		let servicedItem = this.refs['serviced-item'].getValues() ;
-
-		let data = Object.assign( {}, vehicle, servicedItem );
-		store.dispatch(addServiceDetails(data));
-	}
-
-	onVehicleUpdate(event,key,payload){
+	updateVehicle(event, key, payload){
 		this.setState({
 			vehicle: payload
 		});
 	}
 
-	dateUpdate(event,key,payload){
-		
-	}
-
-	serviceablePartUpdate(event,key,payload){
+	updateDate(event, date){
 		this.setState({
-			servicedPart: payload
+			date: date
 		});
 	}
 
-	commentsUpdate(event,key,payload){
-
+	updateServicedComponent(searchText, dataSource, params){
+		this.setState({
+			component: searchText
+		});
 	}
 
-	
+	updateAmount(event, newValue){
+		this.setState({
+			amount: newValue
+		});
+	}
+
+	updateComments(event, newValue){
+		this.setState({
+			comments: newValue
+		});
+	}
+
+	saveServicedItem(e){
+		let { store } = this.context;
+		let vehicle = { vehicle: this.state.vehicle };
+		let date = this.state.date;
+		let component = this.state.component;
+		let amount = this.state.amount;
+		let comments = this.state.comments;
+
+		let serviceDetails = { 
+			date: date,
+			component: component,
+			amount: amount,
+			comments: comments,
+		};
+
+		let data = Object.assign( {}, vehicle, serviceDetails );
+		store.dispatch(addServiceDetails(data));
+	}
 }
 
 AddServiceDetails.contextTypes = {

@@ -8,6 +8,8 @@ import { changeRoute } from '../../../actions/actionCreators';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
+import PersonAdd from 'material-ui/svg-icons/social/person-add';
 
 class Header extends React.Component {
 	constructor() {
@@ -42,14 +44,13 @@ class Header extends React.Component {
 			<div className={styles['header']}>
 				<AppBar
 					title={routes[this.state.currentRoute].name}
-					onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
-					iconClassNameRight="muidocs-icon-navigation-expand-more" />
+					onLeftIconButtonTouchTap={this.openDrawer.bind(this)} />
 
 				<Drawer
 					docked={false}
 					width={200}
 					open={this.state.isDrawerOpen}
-					onRequestChange={(open) => this.setState({open})} >
+					onRequestChange={(isDrawerOpen) => this.setState({isDrawerOpen})} >
 						{
 							routes.map( (route, index) => {
 								return (
@@ -58,20 +59,6 @@ class Header extends React.Component {
 							})
 						}
 				</Drawer>
-
-				{/* <nav className={styles['navbar']} role="navigation">
-					<ul className={styles['nav']}>
-						{
-							routes.map( (route, index) => {
-								return (
-									<li key={index} className={index==this.state.currentRoute?styles['active']:null} >
-										<a href={route.path} onClick={this.changeRoute.bind(this)} data-index={index}>{route.name}</a>
-									</li>
-								);
-							})
-						}
-					</ul>
-				</nav> */}
 			</div>
 		);
 	}
@@ -83,12 +70,12 @@ class Header extends React.Component {
 	}
 
 	changeRoute(index){
-		const { store } = this.context;
-		store.dispatch( changeRoute(index) );
-	}
-
-	handleClose(){
-
+		this.setState({
+			isDrawerOpen: false
+		},()=>{
+			const { store } = this.context;
+			store.dispatch( changeRoute(index) );
+		});
 	}
 }
 
