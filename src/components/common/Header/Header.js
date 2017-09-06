@@ -5,9 +5,16 @@ import styles from './Header.css';
 import routes from '../../../routes/routes';
 import { changeRoute } from '../../../actions/actionCreators';
 
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+
 class Header extends React.Component {
 	constructor() {
 		super();
+		this.state = {
+			isDrawerOpen: false
+		};
 	}
 
 	componentWillMount(){
@@ -33,7 +40,26 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className={styles['header']}>
-				<nav className={styles['navbar']} role="navigation">
+				<AppBar
+					title={routes[this.state.currentRoute].name}
+					onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
+					iconClassNameRight="muidocs-icon-navigation-expand-more" />
+
+				<Drawer
+					docked={false}
+					width={200}
+					open={this.state.isDrawerOpen}
+					onRequestChange={(open) => this.setState({open})} >
+						{
+							routes.map( (route, index) => {
+								return (
+									<MenuItem onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
+								);
+							})
+						}
+				</Drawer>
+
+				{/* <nav className={styles['navbar']} role="navigation">
 					<ul className={styles['nav']}>
 						{
 							routes.map( (route, index) => {
@@ -45,16 +71,24 @@ class Header extends React.Component {
 							})
 						}
 					</ul>
-				</nav>
+				</nav> */}
 			</div>
 		);
 	}
 
-	changeRoute(e){
-		e.preventDefault();
-		let index = e.target.attributes.getNamedItem('data-index').value;
+	openDrawer(){
+		this.setState({
+			isDrawerOpen: true
+		});
+	}
+
+	changeRoute(index){
 		const { store } = this.context;
 		store.dispatch( changeRoute(index) );
+	}
+
+	handleClose(){
+
 	}
 }
 

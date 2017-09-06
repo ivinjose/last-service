@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk'
 import ReduxFreeze from 'redux-freeze'
@@ -15,10 +16,12 @@ const store = createStore( serviceDetailsReducer, initialState, applyMiddleware(
 
 const Root = () => (
 	<Provider store={store}>
-		<Router history={browserHistory}>
-			<Route path="/view" component={ViewServiceDetails} />
-			<Route path="/" component={Home} />
-		</Router>
+		<MuiThemeProvider>
+			<Router history={browserHistory}>
+					<Route path="/view" component={ViewServiceDetails} />
+					<Route path="/" component={Home} />
+			</Router>
+		</MuiThemeProvider>
 	</Provider>
 );
  
