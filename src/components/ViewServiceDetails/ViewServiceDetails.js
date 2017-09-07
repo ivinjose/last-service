@@ -7,6 +7,9 @@ import {getServiceDetailsOf} from '../../actions/actionCreators';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
 
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 class ViewServiceDetails extends React.Component {
 	constructor() {
 		super();
@@ -30,33 +33,26 @@ class ViewServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header />
-				<div className={globalStyles['row']}>
-					<div className={globalStyles['label']}>Choose your vehicle:</div>
-					<div className={globalStyles['value']}>
-						<select ref="vehicle" onChange={this.chooseVehicle.bind(this)} className={classNames(styles['vehicle-name'],globalStyles['drop-down'])}>
-							<option value=""></option>
-							<option value="Royal Enfield Electra">Royal Enfield Electra</option>
-							<option value="Hyundai i20">Hyundai i20</option>
-							<option value="Hero Honda Splendor">Hero Honda Splendor</option>
-						</select> 
+				<Header title={'View service details'}/>
+				<div className={styles['body']}>
+					<div className={globalStyles['row']}>
+						<SelectField hintText="Choose your vehicle" fullWidth={true} value={null} onChange={this.chooseVehicle.bind(this)}>
+							<MenuItem value={"Royal Enfield Electra"} primaryText="Royal Enfield Electra" />
+							<MenuItem value={"Hyundai i20"} primaryText="Hyundai i20" />
+							<MenuItem value={"Hero Honda Splendor"} primaryText="Hero Honda Splendor" />
+						</SelectField>
 					</div>
-				</div>
 
-				{this.state && this.state.serviceDetails &&
-					<ServiceDetails data={this.state.serviceDetails} />
-				}
-				
+					{this.state && this.state.serviceDetails &&
+						<ServiceDetails data={this.state.serviceDetails} />
+					}
+				</div>
 			</div>
 		);
 	}
 
-	chooseVehicle(e){
-		let target, value;
-		target = e.target;
-		value = target.value;
-		if( value === '' ) return;
-		this.getServiceDetailsOf(value);
+	chooseVehicle(event, key, payload){
+		this.getServiceDetailsOf(payload);
 	}
 
 	getServiceDetailsOf(vehicle){

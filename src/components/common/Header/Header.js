@@ -43,7 +43,7 @@ class Header extends React.Component {
 		return (
 			<div className={styles['header']}>
 				<AppBar
-					title={routes[this.state.currentRoute].name}
+					title={this.props.title}
 					onLeftIconButtonTouchTap={this.openDrawer.bind(this)} />
 
 				<Drawer

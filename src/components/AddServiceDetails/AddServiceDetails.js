@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import Header from '../common/Header';
 import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
@@ -36,49 +37,51 @@ class AddServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
+				<Header title={"Add service details"}/>
 
-				<div className={globalStyles['row']}>
-					<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.vehicle} onChange={this.updateVehicle.bind(this)}>
-						<MenuItem value={"Royal Enfield Electra"} primaryText="Royal Enfield Electra" />
-						<MenuItem value={"Hyundai i20"} primaryText="Hyundai i20" />
-						<MenuItem value={"Hero Honda Splendor"} primaryText="Hero Honda Splendor" />
-					</SelectField>
-				</div>
+				<div className={styles['body']}>
+					<div className={globalStyles['row']}>
+						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.vehicle} onChange={this.updateVehicle.bind(this)}>
+							<MenuItem value={"Royal Enfield Electra"} primaryText="Royal Enfield Electra" />
+							<MenuItem value={"Hyundai i20"} primaryText="Hyundai i20" />
+							<MenuItem value={"Hero Honda Splendor"} primaryText="Hero Honda Splendor" />
+						</SelectField>
+					</div>
 
-				<div className={globalStyles['row']}>
-					<DatePicker 
-						hintText="On which date service happened?" 
-						onChange={this.updateDate.bind(this)}
-						fullWidth={true}
-						formatDate={new DateTimeFormat('en-US', {
-							day: 'numeric',
-							month: 'long',
-							year: 'numeric',
-						}).format}/>
-				</div>
+					<div className={globalStyles['row']}>
+						<DatePicker 
+							hintText="On which date service happened?" 
+							onChange={this.updateDate.bind(this)}
+							fullWidth={true}
+							formatDate={new DateTimeFormat('en-US', {
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							}).format}/>
+					</div>
 
-				<div  className={globalStyles['row']}>
-					<AutoComplete 
-						hintText="Which part was serviced?" 
-						dataSource={serviceableParts} 
-						fullWidth={true}
-						filter={AutoComplete.caseInsensitiveFilter} 
-						onUpdateInput={this.updateServicedComponent.bind(this)}
-						/>
-				</div>
+					<div  className={globalStyles['row']}>
+						<AutoComplete 
+							hintText="Which part was serviced?" 
+							dataSource={serviceableParts} 
+							fullWidth={true}
+							filter={AutoComplete.caseInsensitiveFilter} 
+							onUpdateInput={this.updateServicedComponent.bind(this)}
+							/>
+					</div>
 
-				<div  className={globalStyles['row']}>
-					<TextField hintText="How much you paid?" fullWidth={true} onChange={this.updateAmount.bind(this)} />
-				</div>
+					<div  className={globalStyles['row']}>
+						<TextField hintText="How much you paid?" fullWidth={true} onChange={this.updateAmount.bind(this)} />
+					</div>
 
-				<div  className={globalStyles['row']}>
-					<TextField hintText="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
-				</div>
+					<div  className={globalStyles['row']}>
+						<TextField hintText="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
+					</div>
 
-				<div  className={globalStyles['row']}>
-					<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
+					<div  className={globalStyles['row']}>
+						<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
+					</div>
 				</div>
-				
 			</div>
 		);
 	}

@@ -1,7 +1,6 @@
 import React from 'react';
 import AddServiceDetails from '../AddServiceDetails';
 import ServiceDetails from '../ServiceDetails';
-import Header from '../common/Header';
  
 class Home extends React.Component {
 	constructor() {
@@ -26,7 +25,6 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header />
 				<AddServiceDetails />
 				{this.state && this.state.serviceDetails &&
 					<ServiceDetails data={this.state.serviceDetails} />
