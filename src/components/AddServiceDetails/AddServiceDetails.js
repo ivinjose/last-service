@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Header from '../common/Header';
 import ServicedItem from './AddServicedItem';
@@ -137,7 +138,7 @@ class AddServiceDetails extends React.Component {
 }
 
 AddServiceDetails.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 export default AddServiceDetails;

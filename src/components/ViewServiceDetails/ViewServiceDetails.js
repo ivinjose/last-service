@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
@@ -62,7 +63,7 @@ class ViewServiceDetails extends React.Component {
 }
 
 ViewServiceDetails.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 export default ViewServiceDetails;

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router'; 
 import styles from './Header.css';
 import routes from '../../../routes/routes';
-import { changeRoute } from '../../../actions/actionCreators';
 
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
@@ -17,26 +17,6 @@ class Header extends React.Component {
 		this.state = {
 			isDrawerOpen: false
 		};
-	}
-
-	componentWillMount(){
-		const { store } = this.context;
-		let state = store.getState();
-		this.setState({
-			currentRoute: state.metaData.currentRoute
-		});
-		store.subscribe( this.change.bind(this) );
-	}
- 
-	change(){
-		const { store } = this.context;
-		let state = store.getState();
-		this.setState({
-			previousRoute: this.state.currentRoute,
-			currentRoute: state.metaData.currentRoute
-		}, ()=> {
-			browserHistory.push( routes[this.state.currentRoute].path );
-		});
 	}
 
 	render() {
@@ -54,7 +34,7 @@ class Header extends React.Component {
 						{
 							routes.map( (route, index) => {
 								return (
-									<MenuItem onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
+									<MenuItem key={index} onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
 								);
 							})
 						}
@@ -73,14 +53,13 @@ class Header extends React.Component {
 		this.setState({
 			isDrawerOpen: false
 		},()=>{
-			const { store } = this.context;
-			store.dispatch( changeRoute(index) );
+			browserHistory.push( routes[index].path );
 		});
 	}
 }
 
 Header.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 export default Header;

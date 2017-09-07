@@ -1,6 +1,7 @@
 import React from 'react';
 import AddServiceDetails from '../AddServiceDetails';
 import ServiceDetails from '../ServiceDetails';
+import PropTypes from 'prop-types';
  
 class Home extends React.Component {
 	constructor() {
@@ -35,7 +36,7 @@ class Home extends React.Component {
 }
 
 Home.contextTypes = {
-	store: React.PropTypes.object
+	store: PropTypes.object
 };
 
 export default Home;
