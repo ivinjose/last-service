@@ -24,17 +24,31 @@ class Header extends React.Component {
 			<div className={styles['header']}>
 				<AppBar
 					title={this.props.title}
-					onLeftIconButtonTouchTap={this.openDrawer.bind(this)} />
+					onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
+					style={{backgroundColor: '#df5563'}}
+					 />
 
 				<Drawer
 					docked={false}
-					width={200}
+					width={250}
 					open={this.state.isDrawerOpen}
+					value={1}
 					onRequestChange={(isDrawerOpen) => this.setState({isDrawerOpen})} >
+						<div className={styles['info-bar']}>
+							<div className={styles['user-image-placeholder']}>
+								<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" className={styles['image']} alt="User image" />
+							</div>	
+							<div className={styles['username']}>	
+								Ivin Jose
+							</div>	
+							<div className={styles['email']}>
+								ivinjose@gmail.com
+							</div>	
+						</div>
 						{
 							routes.map( (route, index) => {
 								return (
-									<MenuItem key={index} onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
+									<MenuItem value={1} key={index} onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
 								);
 							})
 						}

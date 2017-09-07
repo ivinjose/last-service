@@ -1,45 +1,33 @@
 .header{
-    .navbar {
-        border: 1px solid transparent;
-        background-color: #222;
-        border-color: #080808;
-        margin-bottom: 40px;
-        right: 0;
-        left: 0;
-        z-index: 1030;
+    .info-bar{
+        background-color: #df5563;
+        color: #ffffff;
+        height: 112px;
+        padding: 16px;
 
-        .nav{
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            li {
-                float: left;
-                a {
-                    display: block;
-                    color: #9d9d9d;
-                    padding: 15px;
-
-                    &:focus,
-                    &:hover{
-                        color: #fff;
-                        text-decoration: none;
-                        outline: none;
-                    }
-                }   
-
-                &.active{
-                    background-color: #080808;
-                    a{
-                        color: #fff;
-                    }
-                }
-            }
-
-            &:after{
-                display: table;
-                content: " ";
-                clear: both;
+        .user-image-placeholder{
+            background-color: #f3f3f3;
+            border-radius: 33px;
+            height: 65px;
+            text-align: center;
+            width: 65px;
+            .image{
+                margin-top: 10px;
+                max-width: 40px;
+                max-height: 40px;
             }
         }
-    } 
+
+        .username{
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .email{
+            margin-top: 4px;
+            font-size: 12px;
+        }
+
+        
+    }
 }

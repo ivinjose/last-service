@@ -46,7 +46,7 @@ class Home extends React.Component {
 					<div className={styles['body']}>
 						<Empty />
 						<div className={styles['cta']}>
-							<FloatingActionButton secondary={true} onClick={this.addNew.bind(this)} /*style={{ position: 'fixed', right: '25px', bottom: '25px'}}*/>
+							<FloatingActionButton onClick={this.addNew.bind(this)}>
 								<ContentAdd />
 							</FloatingActionButton>
 						</div>
