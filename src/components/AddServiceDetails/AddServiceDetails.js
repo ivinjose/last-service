@@ -14,6 +14,9 @@ import DatePicker from 'material-ui/DatePicker';
 import AutoComplete from 'material-ui/AutoComplete';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
+
+import fetch from 'isomorphic-fetch';
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
@@ -31,7 +34,9 @@ class AddServiceDetails extends React.Component {
 		super();
 
 		this.state = {
-			vehicle: null
+			vehicle: null,
+			snackbarState: false,
+			snackbarMessage: " ",
 		};
 	}
 
@@ -83,8 +88,21 @@ class AddServiceDetails extends React.Component {
 						<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
 					</div>
 				</div>
+
+				<Snackbar
+					open={this.state.snackbarState}
+					message={this.state.snackbarMessage}
+					autoHideDuration={2000}
+					onRequestClose={this.handleRequestClose} />
+
 			</div>
 		);
+	}
+
+	closeSnackbar(){
+		this.setState({
+			snackbarState: false
+		});
 	}
 
 	updateVehicle(event, key, payload){
@@ -133,7 +151,32 @@ class AddServiceDetails extends React.Component {
 		};
 
 		let data = Object.assign( {}, vehicle, serviceDetails );
-		store.dispatch(addServiceDetails(data));
+		let _this = this;
+
+		fetch('http://localhost:4001/addservicedetails', 
+		{ 
+			method: 'POST', 
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data) 
+				   
+		}).then(function(response){
+			return( response.text() );
+		}).then(function(response){
+			return JSON.parse(response);
+		}).then(function(response){
+			_this.setState({
+				snackbarState: true,
+				snackbarMessage: response.message
+			});
+		}).catch(function(error){
+			_this.setState({
+				snackbarState: true,
+				snackbarMessage: error
+			});
+		});
+
 	}
 }
 

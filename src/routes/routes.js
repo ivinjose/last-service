@@ -4,11 +4,15 @@ export default [
         "name": "Home"
     },
     {
-        "path": "/add",
+        "path": "/addservice",
         "name": "Add Service Details"
     },
     {
         "path": "/view",
         "name": "View Service Details"
-    }
+    },
+    {
+        "path": "/addvehicle",
+        "name": "Add Vehicle Details"
+    },
 ];

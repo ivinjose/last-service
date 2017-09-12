@@ -11,6 +11,7 @@ import styles from '../styles/global.css';
 import Home from './Home';
 import ViewServiceDetails from './ViewServiceDetails';
 import AddServiceDetails from './AddServiceDetails';
+import AddVehicleDetails from './AddVehicleDetails';
 import initialState from '../state/initialState';
 
 const store = createStore( serviceDetailsReducer, initialState, applyMiddleware( ReduxThunk, ReduxFreeze ) );
@@ -20,8 +21,9 @@ const Root = () => (
 		<MuiThemeProvider>
 			<Router history={browserHistory}>
 				<Route path="/" component={Home} />
-				<Route path="/add" component={AddServiceDetails} />
+				<Route path="/addservice" component={AddServiceDetails} />
 				<Route path="/view" component={ViewServiceDetails} />
+				<Route path="/addvehicle" component={AddVehicleDetails} />
 			</Router>
 		</MuiThemeProvider>
 	</Provider>
