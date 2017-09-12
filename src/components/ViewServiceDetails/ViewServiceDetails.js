@@ -17,14 +17,11 @@ class ViewServiceDetails extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			vehicles: []
+			vehicles: [],
+			currentVehicle: null,
+			serviceDetails: null
 		};
 	}
-
-	// componentWillMount(){
-	// 	const { store } = this.context;
-	// 	store.subscribe( this.change.bind(this) );
-	// }	
 
 	componentDidMount(){
 		var _this = this;
@@ -47,16 +44,6 @@ class ViewServiceDetails extends React.Component {
 			console.log('some error');
 		});
 	}
-
-	// change(){
-	// 	const { store } = this.context;
-	// 	let state = store.getState();
-	// 	this.setState({
-	// 		serviceDetails: state.appData.serviceDetails
-	// 	},function(){
-	// 		console.log(this.state.serviceDetails);
-	// 	});
-	// }
  
 	render() {
 		return (
@@ -64,11 +51,11 @@ class ViewServiceDetails extends React.Component {
 				<Header title={'View service details'}/>
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<SelectField hintText="Choose your vehicle" fullWidth={true} value={null} onChange={this.chooseVehicle.bind(this)}>
+						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.chooseVehicle.bind(this)}>
 							{
-								this.state.vehicles.map(function(vehicle){
+								this.state.vehicles.map(function(vehicle, index){
 									return(
-										<MenuItem value={vehicle.name} primaryText={vehicle.name} />
+										<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
 									)
 								})
 
@@ -85,10 +72,34 @@ class ViewServiceDetails extends React.Component {
 	}
 
 	chooseVehicle(event, key, payload){
+		this.setState({
+			currentVehicle: payload
+		});
 		this.getServiceDetailsOf(payload);
 	}
 
 	getServiceDetailsOf(vehicle){
+		var _this = this;
+		fetch('http://localhost:4001/getservicedetails?vehicle=' + vehicle, 
+		{ 
+			method: 'GET', 
+			headers: {
+				'Content-Type': 'application/json'
+			}
+				   
+		}).then(function(response){
+			return( response.text() );
+		}).then(function(response){
+			return JSON.parse(response);
+		}).then(function(response){
+			_this.setState({
+				serviceDetails: response
+			});
+		}).catch(function(error){
+			console.log('some error');
+		});
+
+
 		let { store } = this.context;
 		store.dispatch(getServiceDetailsOf(vehicle));
 	}
