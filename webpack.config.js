@@ -38,4 +38,5 @@ module.exports = {
 			path.join(__dirname, 'node_modules'),
 		],
 	},
+    devtool: 'inline-sourcemap', // has to be removed in production
 };
