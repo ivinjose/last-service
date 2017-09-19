@@ -1,6 +1,10 @@
 .home{
     .body{
         margin: 16px;
+        .vehicle{
+            margin-top: 15px;
+            text-align: center;
+        }
         .cta{
             margin-top: 48px;
             text-align: center;
