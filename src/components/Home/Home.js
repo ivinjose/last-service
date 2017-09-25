@@ -8,6 +8,7 @@ import AddServiceDetails from '../AddServiceDetails';
 import Vehicle from './Vehicle';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import RaisedButton from 'material-ui/RaisedButton';
 import routes from '../../routes/routes';
 
 import fetch from 'isomorphic-fetch';
@@ -33,15 +34,20 @@ class Home extends React.Component {
 						{
 							this.state.vehicles.map(function(vehicle, index){
 								return(
-									<Vehicle data={{name: vehicle.name}}/>
+									<div className={styles['vehicle']}>
+										<RaisedButton
+											href={"/view?vehicle="+vehicle.name}
+											label={vehicle.name}
+											primary={true} />
+									</div>
 								)
 							})
 						}
-					</div>
-					<div className={styles['cta']}>
-						<FloatingActionButton onClick={this.addNew.bind(this)}>
-							<ContentAdd />
-						</FloatingActionButton>
+						<div className={styles['cta']}>
+							<FloatingActionButton secondary={true} onClick={this.addNew.bind(this)}>
+								<ContentAdd />
+							</FloatingActionButton>
+						</div>
 					</div>
 				</div>
 			)
