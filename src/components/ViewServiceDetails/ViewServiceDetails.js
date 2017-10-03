@@ -24,25 +24,11 @@ class ViewServiceDetails extends React.Component {
 	}
 
 	componentDidMount(){
-		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				vehicles: response.data
-			});
-		}).catch(function(error){
-			console.log('some error');
-		});
+		this.getVehiclesList();
+		let queryParams = this.props.location.query;
+		if( queryParams && queryParams.vehicle ){
+			this.chooseVehicle(null,null, queryParams.vehicle);
+		}
 	}
  
 	render() {
@@ -69,6 +55,28 @@ class ViewServiceDetails extends React.Component {
 				</div>
 			</div>
 		);
+	}
+
+	getVehiclesList(){
+		var _this = this;
+		fetch('http://localhost:4001/getvehicles', 
+		{ 
+			method: 'GET', 
+			headers: {
+				'Content-Type': 'application/json'
+			}
+				   
+		}).then(function(response){
+			return( response.text() );
+		}).then(function(response){
+			return JSON.parse(response);
+		}).then(function(response){
+			_this.setState({
+				vehicles: response.data
+			});
+		}).catch(function(error){
+			console.log('some error');
+		});
 	}
 
 	chooseVehicle(event, key, payload){

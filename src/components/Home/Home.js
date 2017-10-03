@@ -5,37 +5,49 @@ import styles from './Home.css';
 import Header from '../common/Header';
 import ServiceDetails from '../ServiceDetails';
 import AddServiceDetails from '../AddServiceDetails';
+import Vehicle from './Vehicle';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import RaisedButton from 'material-ui/RaisedButton';
 import routes from '../../routes/routes';
+
+import fetch from 'isomorphic-fetch';
 
 class Home extends React.Component {
 	constructor() {
 		super();
+		this.state = {
+			vehicles: []
+		};
 	}
 
-	componentWillMount(){
-		const { store } = this.context;
-		store.subscribe( this.change.bind(this) );
-	}
-
-	change(){
-		const { store } = this.context;
-		let state = store.getState();
-		this.setState({
-			serviceDetails: state.appData.serviceDetails
-		},function(){
-			console.log(this.state.serviceDetails);
-		});
+	componentDidMount(){
+		this.getVehiclesList();
 	}
  
 	render() {
-		if( this.state && this.state.serviceDetails && this.state.serviceDetails.length>0 ){
+		if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
 			return (
 				<div className={styles['home']}>
 					<Header title={"Service Manager"}/>
 					<div className={styles['body']}>
-						<ServiceDetails data={this.state.serviceDetails} />
+						{
+							this.state.vehicles.map(function(vehicle, index){
+								return(
+									<div className={styles['vehicle']}>
+										<RaisedButton
+											href={"/view?vehicle="+vehicle.name}
+											label={vehicle.name}
+											primary={true} />
+									</div>
+								)
+							})
+						}
+						<div className={styles['cta']}>
+							<FloatingActionButton secondary={true} onClick={this.addNew.bind(this)}>
+								<ContentAdd />
+							</FloatingActionButton>
+						</div>
 					</div>
 				</div>
 			)
@@ -54,19 +66,33 @@ class Home extends React.Component {
 				</div>
 			)
 		}
-
-		// return (
-		// 	<div>
-		// 		<AddServiceDetails />
-		// 		{this.state && this.state.serviceDetails &&
-		// 			<ServiceDetails data={this.state.serviceDetails} />
-		// 		}
-		// 	</div>
-		// );
 	}
 
 	addNew(){
 		browserHistory.push( routes[1].path );
+	}
+
+	getVehiclesList(){
+		var _this = this;
+		fetch('http://localhost:4001/getvehicles', 
+		{ 
+			method: 'GET', 
+			headers: {
+				'Content-Type': 'application/json'
+			}
+				   
+		}).then(function(response){
+			return( response.text() );
+		}).then(function(response){
+			return JSON.parse(response);
+		}).then(function(response){
+			_this.setState({
+				vehicles: response.data
+			});
+		}).catch(function(error){
+			console.log('some errors');
+			console.log(error);
+		});
 	}
 }
 
@@ -85,9 +111,5 @@ class Empty extends React.Component{
 		);
 	}
 }
-
-Home.contextTypes = {
-	store: PropTypes.object
-};
 
 export default Home;

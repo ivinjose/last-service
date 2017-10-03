@@ -34,10 +34,15 @@ class AddServiceDetails extends React.Component {
 		super();
 
 		this.state = {
-			vehicle: null,
+			vehicles: [],
+			currentVehicle: null,
 			snackbarState: false,
 			snackbarMessage: " ",
 		};
+	}
+
+	componentDidMount(){
+		this.getVehiclesList();
 	}
 
 	render() {
@@ -47,10 +52,15 @@ class AddServiceDetails extends React.Component {
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.vehicle} onChange={this.updateVehicle.bind(this)}>
-							<MenuItem value={"Royal Enfield Electra"} primaryText="Royal Enfield Electra" />
-							<MenuItem value={"Hyundai i20"} primaryText="Hyundai i20" />
-							<MenuItem value={"Hero Honda Splendor"} primaryText="Hero Honda Splendor" />
+						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.updateVehicle.bind(this)}>
+						{
+							this.state.vehicles.map(function(vehicle, index){
+								return(
+									<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
+								)
+							})
+
+						}
 						</SelectField>
 					</div>
 
@@ -99,6 +109,28 @@ class AddServiceDetails extends React.Component {
 		);
 	}
 
+	getVehiclesList(){
+		var _this = this;
+		fetch('http://localhost:4001/getvehicles', 
+		{ 
+			method: 'GET', 
+			headers: {
+				'Content-Type': 'application/json'
+			}
+				   
+		}).then(function(response){
+			return( response.text() );
+		}).then(function(response){
+			return JSON.parse(response);
+		}).then(function(response){
+			_this.setState({
+				vehicles: response.data
+			});
+		}).catch(function(error){
+			console.log('some error');
+		});
+	}
+
 	closeSnackbar(){
 		this.setState({
 			snackbarState: false
@@ -107,7 +139,7 @@ class AddServiceDetails extends React.Component {
 
 	updateVehicle(event, key, payload){
 		this.setState({
-			vehicle: payload
+			currentVehicle: payload
 		});
 	}
 
@@ -137,7 +169,7 @@ class AddServiceDetails extends React.Component {
 
 	saveServicedItem(e){
 		let { store } = this.context;
-		let vehicle = { vehicle: this.state.vehicle };
+		let currentVehicle = { vehicle: this.state.currentVehicle };
 		let date = this.state.date;
 		let component = this.state.component;
 		let amount = this.state.amount;
@@ -150,7 +182,7 @@ class AddServiceDetails extends React.Component {
 			comments: comments,
 		};
 
-		let data = Object.assign( {}, vehicle, serviceDetails );
+		let data = Object.assign( {}, currentVehicle, serviceDetails );
 		let _this = this;
 
 		fetch('http://localhost:4001/addservicedetails', 
