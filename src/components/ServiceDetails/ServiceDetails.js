@@ -31,8 +31,8 @@ class ServiceDetails extends React.Component {
                     const dateTime = me.formatDateTime(serviceDetail.date);
                     return (<Card key={index} style ={{marginBottom: '5px'}}>
                         <CardHeader
-                            title={dateTime.date}
-                            subtitle={dateTime.time}
+                            title={serviceDetail.component}
+                            subtitle={dateTime.date}
                             actAsExpander
                             showExpandableButton
                         />
@@ -44,8 +44,12 @@ class ServiceDetails extends React.Component {
                                         <td className={styles['Col-Details']}><span>{serviceDetail.amount}</span></td>
                                     </tr>
                                     <tr>
-                                        <td className={styles['Col']}>Component</td>
-                                        <td className={styles['Col-Details']}><span>{serviceDetail.component}</span></td>
+                                        <td className={styles['Col']}>Date</td>
+                                        <td className={styles['Col-Details']}><span>{dateTime.date}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td className={styles['Col']}>Time</td>
+                                        <td className={styles['Col-Details']}><span>{dateTime.time}</span></td>
                                     </tr>
                                     <tr>
                                         <td className={styles['Col']}>Distance</td>
