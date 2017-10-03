@@ -1,60 +1,69 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import classNames from 'classnames';
 import styles from './ServiceDetails.css';
-import globalStyles from '../../styles/global.css';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 class ServiceDetails extends React.Component {
-	constructor() {
-		super();
-	}
+    constructor(props) {
+        super();
+        this.formatDateTime = this.formatDateTime.bind(this);
+    }
 
-  formatDate(date){
-	   return new Date(date).toLocaleDateString(); // Todo
+    formatDateTime (date) {
+        const newDate = new Date(date);
+        return {
+            date: newDate.toLocaleDateString(),
+            time: newDate.toLocaleTimeString()
+        };
     };
-	render() {
-        const me =this;
-	    const data = this.props.data;
-		if( data.length === 0 ){
-			return(
-				<div>No data available!</div>
-			)
-		}
-		return (
 
-		    <div ref="serviceItem" className="service-details">
+    render() {
+        const me = this;
+        const data = this.props.data;
+        if (data.length === 0) {
+            return (
+                <div>No data available!</div>
+            );
+        }
+
+        return (
+		    <div ref="serviceItem" className={styles['service-details']}>
                 {data.map(function (serviceDetail, index) {
-                    return (<Card key={index} style ={{marginBottom:'5px'}}>
+                    const dateTime = me.formatDateTime(serviceDetail.date);
+                    return (<Card key={index} style ={{marginBottom: '5px'}}>
                         <CardHeader
-                            title={serviceDetail.itemService}
-                            subtitle={me.formatDate(serviceDetail.date)}
-                            actAsExpander={true}
-                            showExpandableButton={true}
+                            title={dateTime.date}
+                            subtitle={dateTime.time}
+                            actAsExpander
+                            showExpandableButton
                         />
-                        <CardText expandable={true}>
-                                <table>
-                                    <tbody>
+                        <CardText expandable>
+                            <table>
+                                <tbody>
                                     <tr>
-                                        <td>Amount</td>
-                                        <td>{serviceDetail.amount}</td>
+                                        <td className={styles['Col']}>Amount</td>
+                                        <td className={styles['Col-Details']}><span>{serviceDetail.amount}</span></td>
                                     </tr>
                                     <tr>
-                                        <td>{serviceDetail.vehicle}</td>
-                                        <td>{serviceDetail.itemName}</td>
-                                        <td>{serviceDetail.itemService}</td>
-                                        <td>{serviceDetail.kmsReading} kms</td>
+                                        <td className={styles['Col']}>Component</td>
+                                        <td className={styles['Col-Details']}><span>{serviceDetail.component}</span></td>
                                     </tr>
-                                    </tbody>
-                                </table>
+                                    <tr>
+                                        <td className={styles['Col']}>Distance</td>
+                                        <td className={styles['Col-Details']}><span>{serviceDetail.kmsReading} kms</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div className={styles['CommentsSection']}>
+                                <div className={styles['Header']}><span>Comments</span></div>
+                                <div className={styles['Comments']}>" <span>{serviceDetail.comments}</span> "</div>
+                            </div>
                         </CardText>
-                    </Card>)
+                    </Card>);
                 })
                 }
-                </div>
+            </div>
         );
-
-	}
+    }
 }
 
 export default ServiceDetails;
