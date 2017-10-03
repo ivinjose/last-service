@@ -33,11 +33,9 @@
     }
 
     .Avatar {
-      margin: auto;
+      margin: 25px auto;
       width: 150px;
       height: 150px;
-      margin-top: 25px;
-      margin-bottom: 25px;
       padding: 10px;
 
       img {
