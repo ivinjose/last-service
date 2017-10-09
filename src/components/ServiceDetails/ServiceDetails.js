@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ServiceDetails.css';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import svg from '../../../www/images/notfound.svg';
 
 class ServiceDetails extends React.Component {
     constructor(props) {
@@ -21,7 +22,16 @@ class ServiceDetails extends React.Component {
         const data = this.props.data;
         if (data.length === 0) {
             return (
-                <div>No data available!</div>
+                <div className={styles['service-details']}>
+                    <div className={styles['NoDataFound']}>
+                        <div className={styles['Header']}>
+                            <span> <h3>"Oops! no data available"</h3></span>
+                        </div>
+                        <div className={styles['Avatar']}>
+                            <img src={svg}/>
+                        </div>
+                    </div>
+                </div>
             );
         }
 
@@ -29,10 +39,10 @@ class ServiceDetails extends React.Component {
 		    <div ref="serviceItem" className={styles['service-details']}>
                 {data.map(function (serviceDetail, index) {
                     const dateTime = me.formatDateTime(serviceDetail.date);
-                    return (<Card key={index} style ={{marginBottom: '5px'}}>
+                    return (<Card key={index} style ={{marginBottom: '5px'}} initiallyExpanded={true}>
                         <CardHeader
-                            title={serviceDetail.component}
-                            subtitle={dateTime.date}
+                            title={dateTime.date}
+                            subtitle={dateTime.time}
                             actAsExpander
                             showExpandableButton
                         />
@@ -44,12 +54,8 @@ class ServiceDetails extends React.Component {
                                         <td className={styles['Col-Details']}><span>{serviceDetail.amount}</span></td>
                                     </tr>
                                     <tr>
-                                        <td className={styles['Col']}>Date</td>
-                                        <td className={styles['Col-Details']}><span>{dateTime.date}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className={styles['Col']}>Time</td>
-                                        <td className={styles['Col-Details']}><span>{dateTime.time}</span></td>
+                                        <td className={styles['Col']}>Component</td>
+                                        <td className={styles['Col-Details']}><span>{serviceDetail.component}</span></td>
                                     </tr>
                                     <tr>
                                         <td className={styles['Col']}>Distance</td>
