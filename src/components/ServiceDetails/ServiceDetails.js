@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ServiceDetails.css';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-import svg from '../../../www/images/notfound.svg';
+import svg from '../../images/notfound.svg';
 
 class ServiceDetails extends React.Component {
     constructor(props) {
