@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
-import {getServiceDetailsOf} from '../../actions/actionCreators';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
 
@@ -106,10 +105,6 @@ class ViewServiceDetails extends React.Component {
 		}).catch(function(error){
 			console.log('some error');
 		});
-
-
-		let { store } = this.context;
-		store.dispatch(getServiceDetailsOf(vehicle));
 	}
 }
 
