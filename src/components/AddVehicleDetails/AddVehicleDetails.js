@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import Header from '../common/Header';
 import styles from './AddVehicleDetails.css';
 import globalStyles from '../../styles/global.css';
-import {addServiceDetails} from '../../actions/actionCreators';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';

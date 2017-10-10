@@ -6,7 +6,6 @@ import Header from '../common/Header';
 import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
-import {addServiceDetails} from '../../actions/actionCreators';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
