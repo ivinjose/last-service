@@ -5,7 +5,7 @@ import styles from './Home.css';
 import Header from '../common/Header';
 import ServiceDetails from '../ServiceDetails';
 import AddServiceDetails from '../AddServiceDetails';
-import Vehicle from './Vehicle';
+import VehicleCard from './VehicleCard';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -35,10 +35,7 @@ class Home extends React.Component {
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']}>
-										<RaisedButton
-											href={"/view?vehicle="+vehicle.name}
-											label={vehicle.name}
-											primary={true} />
+										<VehicleCard data={{name: vehicle.name}} index={index} />
 									</div>
 								)
 							})

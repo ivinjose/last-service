@@ -1,0 +1,20 @@
+.vehicle-card{
+    border-radius: 2px;
+    margin-bottom: 15px;
+    height: 130px;
+    display: flex;
+    font-family: Roboto, sans-serif;
+
+    .vehicle-image{
+        width: 30%;
+        padding: 10px 15px;
+        border-radius: 2px 0px 0px 2px;
+    }
+
+    .vehicle-details{
+        padding: 10px 15px;
+        background-color: white;
+        width: 70%;
+        border-radius: 0px 2px 2px 0px;
+    }
+}
