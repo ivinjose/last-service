@@ -34,8 +34,8 @@ class Home extends React.Component {
 						{
 							this.state.vehicles.map(function(vehicle, index){
 								return(
-									<div className={styles['vehicle']}>
-										<VehicleCard data={{name: vehicle.name}} index={index} />
+									<div className={styles['vehicle']} index={index}>
+										<VehicleCard data={vehicle} index={index} />
 									</div>
 								)
 							})
@@ -83,6 +83,8 @@ class Home extends React.Component {
 		}).then(function(response){
 			return JSON.parse(response);
 		}).then(function(response){
+			console.log(response.data);
+			// debugger;
 			_this.setState({
 				vehicles: response.data
 			});

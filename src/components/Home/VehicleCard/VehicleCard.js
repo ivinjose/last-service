@@ -11,13 +11,25 @@ class VehicleCard extends React.Component {
 	}
  
 	render() {
+		var colorSelected = colors[this.props.index%5];
 		return(
 			<div className={styles['vehicle-card']}>
-				<div className={styles['vehicle-image']} style={{backgroundColor: colors[this.props.index%5]}}>
+				<div className={styles['vehicle-image']} style={{backgroundColor: colorSelected}}>
 
 				</div>
-				<div className={styles['vehicle-details']}>
-					{this.props.data.name}
+				<div className={styles['vehicle-details']} style={{borderColor: colorSelected}}>
+					<div className={styles['vehicle-name']}>
+						{this.props.data.name}
+					</div>
+					<div className={styles['vehicle-type']}>
+						{this.props.data.type}
+					</div>
+					<div className={styles['vehicle-last-service-date']}>
+						{this.props.data.lastServiceDate}
+					</div>
+					<div className={styles['vehicle-last-service-amount']}>
+						{this.props.data.lastServiceAmount}
+					</div>
 				</div>
 			</div>
 		);
