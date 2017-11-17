@@ -13,7 +13,7 @@ class VehicleCard extends React.Component {
 	render() {
 		var colorSelected = colors[this.props.index%5];
 		return(
-			<div className={styles['vehicle-card']}>
+			<div className={styles['vehicle-card']} onClick={this.gotoVehicleDetails.bind(this)}>
 				<div className={styles['vehicle-image']} style={{backgroundColor: colorSelected}}>
 
 				</div>
@@ -33,6 +33,10 @@ class VehicleCard extends React.Component {
 				</div>
 			</div>
 		);
+	}
+
+	gotoVehicleDetails(){
+		browserHistory.push(  "/view?vehicle="+this.props.data.name );
 	}
 }
 
