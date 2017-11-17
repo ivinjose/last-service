@@ -7,6 +7,8 @@ import styles from './AddVehicleDetails.css';
 import globalStyles from '../../styles/global.css';
 
 import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -18,6 +20,7 @@ class AddVehicleDetails extends React.Component {
 
 		this.state = {
 			vehicle: null,
+			vehicleType: null,
 			snackbarState: false,
 			snackbarMessage: " ",
 		};
@@ -31,6 +34,12 @@ class AddVehicleDetails extends React.Component {
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
 						<TextField hintText="Vehicle name" fullWidth={true} onChange={this.updateVehicle.bind(this)} />
+					</div>
+					<div className={globalStyles['row']}>
+						<SelectField hintText="Vehicle type" fullWidth={true} value={this.state.vehicleType} onChange={this.updateVehicleType.bind(this)}>
+							<MenuItem key={"Two wheeler"}  value={"Two wheeler"} primaryText="Two wheeler" />
+							<MenuItem key={"Four wheeler"}  value={"Four wheeler"} primaryText="Four wheeler" />
+						</SelectField>
 					</div>
 
 					<div  className={globalStyles['row']}>
@@ -54,6 +63,12 @@ class AddVehicleDetails extends React.Component {
 		});
 	}
 
+	updateVehicleType(event, key, payload){
+		this.setState({
+			vehicleType: payload
+		});
+	}
+
 	closeSnackbar(){
 		this.setState({
 			snackbarState: false
@@ -62,7 +77,7 @@ class AddVehicleDetails extends React.Component {
 
 	saveVehicle(e){
 		let { store } = this.context;
-		let vehicle = { name: this.state.vehicle };
+		let vehicle = { name: this.state.vehicle, type: this.state.vehicleType };
 
 		let data = Object.assign( {}, vehicle );
 		let _this = this;
