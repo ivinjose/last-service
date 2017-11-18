@@ -9,6 +9,7 @@ import VehicleCard from './VehicleCard';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 import routes from '../../routes/routes';
 
 import fetch from 'isomorphic-fetch';
@@ -17,19 +18,38 @@ class Home extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			vehicles: []
+			vehicles: [],
+			loading: false
 		};
 	}
 
 	componentDidMount(){
+		this.setState({ loading: true });
 		this.getVehiclesList();
 	}
  
 	render() {
-		if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
+		if( this.state.loading ){
 			return (
 				<div className={styles['home']}>
 					<Header title={"Service Manager"}/>
+					<div className={styles['loader']}>
+						<RefreshIndicator
+							size={50}
+							left={70}
+							top={0}
+							loadingColor="#FF9800"
+							status="loading"
+							style={{display: 'inline-block',position: 'relative'}}/>
+					</div>
+				</div>
+			)
+		}
+		else if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
+			return (
+				<div className={styles['home']}>
+					<Header title={"Service Manager"}/>
+					
 					<div className={styles['body']}>
 						{
 							this.state.vehicles.map(function(vehicle, index){
@@ -83,12 +103,12 @@ class Home extends React.Component {
 		}).then(function(response){
 			return JSON.parse(response);
 		}).then(function(response){
-			console.log(response.data);
-			// debugger;
 			_this.setState({
+				loading: false,
 				vehicles: response.data
 			});
 		}).catch(function(error){
+			this.setState({ loading: false });
 			console.log('some errors');
 			console.log(error);
 		});

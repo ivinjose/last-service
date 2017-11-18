@@ -1,4 +1,8 @@
 .home{
+    .loader{
+        margin-left: 25%;
+        margin-top: 50%;
+    }
     .body{
         margin: 16px;
         .vehicle{
