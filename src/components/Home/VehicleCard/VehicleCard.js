@@ -14,10 +14,10 @@ class VehicleCard extends React.Component {
 		var colorSelected = colors[this.props.index%5];
 		return(
 			<div className={styles['vehicle-card']} onClick={this.gotoVehicleDetails.bind(this)}>
-				<div className={styles['vehicle-image']} style={{backgroundColor: colorSelected}}>
+				<div className={styles['vehicle-image']}>
 
 				</div>
-				<div className={styles['vehicle-details']} style={{borderColor: colorSelected}}>
+				<div className={styles['vehicle-details']}>
 					<div className={styles['vehicle-name']}>
 						{this.props.data.name}
 					</div>

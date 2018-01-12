@@ -1,20 +1,18 @@
 .vehicle-card{
     border-radius: 2px;
     margin-bottom: 15px;
-    height: 130px;
+    min-height: 92px;
     display: flex;
     font-family: Roboto, sans-serif;
     box-shadow: 1px 1px 1px 1px #ccc;
 
     .vehicle-image{
-        width: 30%;
+        width: 10%;
         padding: 10px 15px;
         border-radius: 3px 0px 0px 3px;
     }
 
     .vehicle-details{
-        border-style: solid;
-        border-width: 2px;
         padding: 10px 15px;
         background-color: white;
         width: 70%;
