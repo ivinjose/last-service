@@ -55,7 +55,7 @@ class Home extends React.Component {
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']} key={index}>
-										<VehicleCard data={vehicle} index={index} />
+										<VehicleCard data={vehicle} index={index} showEdit={false}/>
 									</div>
 								)
 							})

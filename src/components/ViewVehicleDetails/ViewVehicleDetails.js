@@ -24,24 +24,6 @@ import MenuItem from 'material-ui/MenuItem';
 
 import fetch from 'isomorphic-fetch';
 
-const iconButtonElement = (
-	<IconButton
-	  touch={true}
-	  tooltip="more"
-	  tooltipPosition="bottom-left"
-	>
-	  <MoreVertIcon color={grey400} />
-	</IconButton>
-);
-
-const rightIconMenu = (
-	<IconMenu iconButtonElement={iconButtonElement}>
-	  <MenuItem>Reply</MenuItem>
-	  <MenuItem>Forward</MenuItem>
-	  <MenuItem>Delete</MenuItem>
-	</IconMenu>
-);
-
 class ViewVehicleDetails extends React.Component {
 	constructor() {
 		super();
@@ -65,7 +47,7 @@ class ViewVehicleDetails extends React.Component {
 						{
 							this.state.vehicles.map(function(vehicle, index){
 								return(
-									<VehicleCard data={vehicle} index={index} />
+									<VehicleCard data={vehicle} index={index} showEdit={true}/>
 								)
 							})
 						}

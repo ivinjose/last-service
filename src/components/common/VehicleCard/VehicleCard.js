@@ -18,20 +18,14 @@ import icon from '../../../images/ok-128.jpg';
 const colors = [ "#68A8F0", "#83C540", "#FEDC32", "#D34AA9", "#DFA142"  ];
 
 const iconButtonElement = (
-	<IconButton
-	  touch={true}
-	  tooltip="more"
-	  tooltipPosition="bottom-left"
-	>
+	<IconButton touch={true}>
 	  <MoreVertIcon color={grey400} />
 	</IconButton>
 );
 
 const rightIconMenu = (
 	<IconMenu iconButtonElement={iconButtonElement}>
-	  <MenuItem>Reply</MenuItem>
-	  <MenuItem>Forward</MenuItem>
-	  <MenuItem>Delete</MenuItem>
+	  <MenuItem>Edit</MenuItem>
 	</IconMenu>
 );
 
@@ -46,7 +40,7 @@ class VehicleCard extends React.Component {
 			<div className={styles['vehicle-card']} onClick={this.gotoVehicleDetails.bind(this)}>
 				<ListItem
 					leftAvatar={<Avatar src={icon} />}
-					rightIconButton={rightIconMenu}
+					rightIconButton={this.props.showEdit?rightIconMenu:null}
 					primaryText={this.props.data.name}
 					secondaryText={
 					<p>
