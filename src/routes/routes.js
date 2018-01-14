@@ -15,4 +15,8 @@ export default [
         "path": "/addvehicle",
         "name": "Add Vehicle Details"
     },
+    {
+        "path": "/viewvehicles",
+        "name": "View Vehicle Details"
+    },
 ];

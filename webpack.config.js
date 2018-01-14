@@ -31,12 +31,25 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpeg|png|gif|svg)$/i,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: 'images/'
-                }
+                test: /\.(jpeg|jpg|png|gif|svg)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/'
+                        }
+                    }
+                ]
+
+                // loaders: [
+                //     'file-loader',
+                //     'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                // ],
+                // options: {
+                //     name: '[name].[ext]',
+                //     outputPath: 'images/'
+                // }
             }
 
         ],

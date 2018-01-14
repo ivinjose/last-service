@@ -7,6 +7,7 @@ import Home from './Home';
 import ViewServiceDetails from './ViewServiceDetails';
 import AddServiceDetails from './AddServiceDetails';
 import AddVehicleDetails from './AddVehicleDetails';
+import ViewVehicleDetails from './ViewVehicleDetails';
 
 const Root = () => (
 	<MuiThemeProvider>
@@ -15,6 +16,7 @@ const Root = () => (
 			<Route path="/addservice" component={AddServiceDetails} />
 			<Route path="/view" component={ViewServiceDetails} />
 			<Route path="/addvehicle" component={AddVehicleDetails} />
+			<Route path="/viewvehicles" component={ViewVehicleDetails} />
 		</Router>
 	</MuiThemeProvider>
 );

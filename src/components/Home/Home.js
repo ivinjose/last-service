@@ -5,7 +5,7 @@ import styles from './Home.css';
 import Header from '../common/Header';
 import ServiceDetails from '../ServiceDetails';
 import AddServiceDetails from '../AddServiceDetails';
-import VehicleCard from './VehicleCard';
+import VehicleCard from '../common/VehicleCard';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
