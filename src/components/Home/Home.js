@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router'; 
 import styles from './Home.css';
 import Header from '../common/Header';
 import ServiceDetails from '../ServiceDetails';
@@ -10,9 +9,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-import routes from '../../routes/routes';
-
 import fetch from 'isomorphic-fetch';
+import functions from './functions';
 
 class Home extends React.Component {
 	constructor() {
@@ -25,7 +23,12 @@ class Home extends React.Component {
 
 	componentDidMount(){
 		this.setState({ loading: true });
-		this.getVehiclesList();
+		functions.getVehiclesList().then((response)=>{
+			this.setState({
+				loading: false,
+				vehicles: response
+			});
+		});
 	}
  
 	render() {
@@ -61,7 +64,7 @@ class Home extends React.Component {
 							})
 						}
 						<div className={styles['cta']}>
-							<FloatingActionButton secondary={true} onClick={this.addNew.bind(this)}>
+							<FloatingActionButton secondary={true} onClick={functions.addNew.bind(this)}>
 								<ContentAdd />
 							</FloatingActionButton>
 						</div>
@@ -75,7 +78,7 @@ class Home extends React.Component {
 					<div className={styles['body']}>
 						<Empty />
 						<div className={styles['cta']}>
-							<FloatingActionButton onClick={this.addNew.bind(this)}>
+							<FloatingActionButton onClick={functions.addNew.bind(this)}>
 								<ContentAdd />
 							</FloatingActionButton>
 						</div>
@@ -83,35 +86,6 @@ class Home extends React.Component {
 				</div>
 			)
 		}
-	}
-
-	addNew(){
-		browserHistory.push( routes[1].path );
-	}
-
-	getVehiclesList(){
-		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				loading: false,
-				vehicles: response.data
-			});
-		}).catch(function(error){
-			this.setState({ loading: false });
-			console.log('some errors');
-			console.log(error);
-		});
 	}
 }
 

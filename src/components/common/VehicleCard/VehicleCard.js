@@ -12,10 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-
 import icon from '../../../images/ok-128.jpg';
-
-const colors = [ "#68A8F0", "#83C540", "#FEDC32", "#D34AA9", "#DFA142"  ];
 
 const iconButtonElement = (
 	<IconButton touch={true}>
@@ -23,20 +20,17 @@ const iconButtonElement = (
 	</IconButton>
 );
 
-
-
 class VehicleCard extends React.Component {
 	constructor() {
 		super();
 		this.rightIconMenu = (
 			<IconMenu iconButtonElement={iconButtonElement}>
-			  <MenuItem onClick={this.gotoEditVehiclePage.bind(this)}>Edit</MenuItem>
+				<MenuItem onClick={this.gotoEditVehiclePage.bind(this)}>Edit</MenuItem>
 			</IconMenu>
 		);
 	}
  
 	render() {
-		var colorSelected = colors[this.props.index%5];
 		return(
 			<div className={styles['vehicle-card']} onClick={this.gotoVehicleDetails.bind(this)}>
 				<ListItem
@@ -64,11 +58,5 @@ class VehicleCard extends React.Component {
 		browserHistory.push( "/addvehicle?editMode=true&vehicle="+this.props.data.name );
 	}
 }
-
-// const rightIconMenu = (
-// 	<IconMenu iconButtonElement={iconButtonElement}>
-// 	  <MenuItem onClick={VehicleCard.gotoEditVehiclePage.bind(VehicleCard)}>Edit</MenuItem>
-// 	</IconMenu>
-// );
 
 export default VehicleCard;
