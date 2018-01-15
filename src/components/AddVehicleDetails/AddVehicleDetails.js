@@ -13,27 +13,47 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
 import fetch from 'isomorphic-fetch';
+import queryString from 'query-string';
 
 class AddVehicleDetails extends React.Component {
 	constructor() {
 		super();
 
 		this.state = {
-			vehicle: null,
+			editMode: false,
+			pageTitle: 'Add vehicle details',
+			vehicle: '',
 			vehicleType: null,
 			snackbarState: false,
 			snackbarMessage: " ",
 		};
 	}
 
+	componentDidMount(){
+		var queryParams = queryString.parse(location.search);
+		if( queryParams.editMode=='true' ){
+			this.setState({
+				editMode: true,
+				pageTitle: 'Edit vehicle details'
+			});
+			var resp = this.getVehicleDetails(queryParams.vehicle);
+			console.log(resp);
+		}
+		console.log('componentDidMount');
+	}
+
+	componentDidUpdate(){
+		console.log('componentDidUpdate');
+	}
+
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header title={"Add vehicle details"}/>
+				<Header title={this.state.pageTitle}/>
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<TextField hintText="Vehicle name" fullWidth={true} onChange={this.updateVehicle.bind(this)} />
+						<TextField hintText="Vehicle name" value={this.state.vehicle} fullWidth={true} onChange={this.updateVehicle.bind(this)} />
 					</div>
 					<div className={globalStyles['row']}>
 						<SelectField hintText="Vehicle type" fullWidth={true} value={this.state.vehicleType} onChange={this.updateVehicleType.bind(this)}>
@@ -43,7 +63,7 @@ class AddVehicleDetails extends React.Component {
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveVehicle.bind(this)}/>
+						<RaisedButton label={this.state.editMode?'Update':'Save'} primary={true} fullWidth={true} onClick={this.saveVehicle.bind(this)}/>
 					</div>
 				</div>
 
@@ -55,6 +75,37 @@ class AddVehicleDetails extends React.Component {
 
 			</div>
 		);
+	}
+
+	/**
+	 * This function is used when it's and edit flow
+	 * @param {string} vehicle 
+	 */
+	getVehicleDetails(vehicle){
+		var _this = this;
+		fetch('http://localhost:4001/getvehicledetails?vehicle=' + vehicle, 
+		{ 
+			method: 'GET', 
+			headers: {
+				'Content-Type': 'application/json'
+			}	   
+		}).then(function(response){
+			return( response.text() );
+		}).then(function(response){
+			return JSON.parse(response);
+		}).then(function(response){
+			_this.setState({
+				vehicleId: response._id,
+				vehicle: response.name,
+				vehicleType: response.type
+			});
+		}).catch(function(error){
+			return error;
+			_this.setState({
+				snackbarState: true,
+				snackbarMessage: error
+			});
+		});
 	}
 
 	updateVehicle(event, newValue){
@@ -79,10 +130,17 @@ class AddVehicleDetails extends React.Component {
 		let { store } = this.context;
 		let vehicle = { name: this.state.vehicle, type: this.state.vehicleType };
 
+		let url = 'http://localhost:4001/addvehicledetails';
+		if(this.state.editMode){
+			url = 'http://localhost:4001/updatevehicledetails';
+			vehicle._id = this.state.vehicleId;
+		}
+
 		let data = Object.assign( {}, vehicle );
 		let _this = this;
 
-		fetch('http://localhost:4001/addvehicledetails', 
+
+		fetch(url, 
 		{ 
 			method: 'POST', 
 			headers: {

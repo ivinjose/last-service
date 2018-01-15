@@ -23,15 +23,16 @@ const iconButtonElement = (
 	</IconButton>
 );
 
-const rightIconMenu = (
-	<IconMenu iconButtonElement={iconButtonElement}>
-	  <MenuItem>Edit</MenuItem>
-	</IconMenu>
-);
+
 
 class VehicleCard extends React.Component {
 	constructor() {
 		super();
+		this.rightIconMenu = (
+			<IconMenu iconButtonElement={iconButtonElement}>
+			  <MenuItem onClick={this.gotoEditVehiclePage.bind(this)}>Edit</MenuItem>
+			</IconMenu>
+		);
 	}
  
 	render() {
@@ -40,7 +41,7 @@ class VehicleCard extends React.Component {
 			<div className={styles['vehicle-card']} onClick={this.gotoVehicleDetails.bind(this)}>
 				<ListItem
 					leftAvatar={<Avatar src={icon} />}
-					rightIconButton={this.props.showEdit?rightIconMenu:null}
+					rightIconButton={this.props.showEdit?this.rightIconMenu:null}
 					primaryText={this.props.data.name}
 					secondaryText={
 					<p>
@@ -58,6 +59,16 @@ class VehicleCard extends React.Component {
 	gotoVehicleDetails(){
 		browserHistory.push(  "/view?vehicle="+this.props.data.name );
 	}
+
+	gotoEditVehiclePage(){
+		browserHistory.push( "/addvehicle?editMode=true&vehicle="+this.props.data.name );
+	}
 }
+
+// const rightIconMenu = (
+// 	<IconMenu iconButtonElement={iconButtonElement}>
+// 	  <MenuItem onClick={VehicleCard.gotoEditVehiclePage.bind(VehicleCard)}>Edit</MenuItem>
+// 	</IconMenu>
+// );
 
 export default VehicleCard;
