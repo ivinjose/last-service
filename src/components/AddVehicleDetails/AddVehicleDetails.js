@@ -15,6 +15,8 @@ import Snackbar from 'material-ui/Snackbar';
 import fetch from 'isomorphic-fetch';
 import queryString from 'query-string';
 
+import functions from './functions';
+
 class AddVehicleDetails extends React.Component {
 	constructor() {
 		super();
@@ -31,19 +33,38 @@ class AddVehicleDetails extends React.Component {
 
 	componentDidMount(){
 		var queryParams = queryString.parse(location.search);
-		if( queryParams.editMode=='true' ){
-			this.setState({
-				editMode: true,
-				pageTitle: 'Edit vehicle details'
+
+		if( queryParams.editMode == 'true' ){
+			functions.getVehicleDetails(queryParams.vehicle).then((response)=>{
+				this.doEditModeConfiguration(response);
 			});
-			var resp = this.getVehicleDetails(queryParams.vehicle);
-			console.log(resp);
+		}else{
+			this.doAddModeConfiguration();
 		}
-		console.log('componentDidMount');
 	}
 
-	componentDidUpdate(){
-		console.log('componentDidUpdate');
+	/**
+	 * Accepts an object of vehicle info.
+	 * Expects: _id, name, type
+	 */
+	doEditModeConfiguration(vehicle){
+		this.setState({
+			editMode: true,
+			pageTitle: 'Edit vehicle details',
+			vehicleId: vehicle._id,
+			vehicle: vehicle.name,
+			vehicleType: vehicle.type
+		});
+	}
+
+	doAddModeConfiguration(){
+		this.setState({
+			editMode: false,
+			pageTitle: 'Add vehicle details',
+			vehicleId: null,
+			vehicle: '',
+			vehicleType: null,
+		});
 	}
 
 	render() {
@@ -75,37 +96,6 @@ class AddVehicleDetails extends React.Component {
 
 			</div>
 		);
-	}
-
-	/**
-	 * This function is used when it's and edit flow
-	 * @param {string} vehicle 
-	 */
-	getVehicleDetails(vehicle){
-		var _this = this;
-		fetch('http://localhost:4001/getvehicledetails?vehicle=' + vehicle, 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}	   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				vehicleId: response._id,
-				vehicle: response.name,
-				vehicleType: response.type
-			});
-		}).catch(function(error){
-			return error;
-			_this.setState({
-				snackbarState: true,
-				snackbarMessage: error
-			});
-		});
 	}
 
 	updateVehicle(event, newValue){
