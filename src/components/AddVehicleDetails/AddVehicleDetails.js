@@ -5,13 +5,11 @@ import classNames from 'classnames';
 import Header from '../common/Header';
 import styles from './AddVehicleDetails.css';
 import globalStyles from '../../styles/global.css';
-
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
-
 import fetch from 'isomorphic-fetch';
 import queryString from 'query-string';
 
@@ -32,8 +30,16 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	componentDidMount(){
-		var queryParams = queryString.parse(location.search);
+		this.checkModeAndSetupPage();
+	}
 
+	componentWillReceiveProps(){
+		this.checkModeAndSetupPage();
+	}
+
+	checkModeAndSetupPage(){
+		var queryParams = queryString.parse(location.search);
+		
 		if( queryParams.editMode == 'true' ){
 			functions.getVehicleDetails(queryParams.vehicle).then((response)=>{
 				this.doEditModeConfiguration(response);
@@ -43,10 +49,6 @@ class AddVehicleDetails extends React.Component {
 		}
 	}
 
-	/**
-	 * Accepts an object of vehicle info.
-	 * Expects: _id, name, type
-	 */
 	doEditModeConfiguration(vehicle){
 		this.setState({
 			editMode: true,
@@ -78,13 +80,13 @@ class AddVehicleDetails extends React.Component {
 					</div>
 					<div className={globalStyles['row']}>
 						<SelectField hintText="Vehicle type" fullWidth={true} value={this.state.vehicleType} onChange={this.updateVehicleType.bind(this)}>
-							<MenuItem key={"Two wheeler"}  value={"Two wheeler"} primaryText="Two wheeler" />
-							<MenuItem key={"Four wheeler"}  value={"Four wheeler"} primaryText="Four wheeler" />
+							<MenuItem key={"Two wheeler"} value={"Two wheeler"} primaryText="Two wheeler" />
+							<MenuItem key={"Four wheeler"} value={"Four wheeler"} primaryText="Four wheeler" />
 						</SelectField>
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<RaisedButton label={this.state.editMode?'Update':'Save'} primary={true} fullWidth={true} onClick={this.saveVehicle.bind(this)}/>
+						<RaisedButton label={this.state.editMode?'Update':'Save'} primary={true} fullWidth={true} onClick={this.saveVehicleDetails.bind(this)}/>
 					</div>
 				</div>
 
@@ -116,45 +118,15 @@ class AddVehicleDetails extends React.Component {
 		});
 	}
 
-	saveVehicle(e){
-		let { store } = this.context;
-		let vehicle = { name: this.state.vehicle, type: this.state.vehicleType };
-
-		let url = 'http://localhost:4001/addvehicledetails';
-		if(this.state.editMode){
-			url = 'http://localhost:4001/updatevehicledetails';
-			vehicle._id = this.state.vehicleId;
-		}
-
-		let data = Object.assign( {}, vehicle );
-		let _this = this;
-
-
-		fetch(url, 
-		{ 
-			method: 'POST', 
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data) 
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
+	saveVehicleDetails(){
+		functions.saveVehicle(this.state.vehicle, this.state.vehicleType, this.state.editMode).then((response)=>{
+			this.setState({
 				snackbarState: true,
 				snackbarMessage: response.message
 			});
-		}).catch(function(error){
-			_this.setState({
-				snackbarState: true,
-				snackbarMessage: error
-			});
 		});
-
 	}
+
 }
 
 AddVehicleDetails.contextTypes = {
