@@ -35,7 +35,6 @@ class Home extends React.Component {
 		if( this.state.loading ){
 			return (
 				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
 					<div className={styles['loader']}>
 						<RefreshIndicator
 							size={50}
@@ -51,7 +50,6 @@ class Home extends React.Component {
 		else if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
 			return (
 				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
 					
 					<div className={styles['body']}>
 						{
