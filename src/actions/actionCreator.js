@@ -14,8 +14,8 @@ export function addVehicle( details ){
     };
 }
 
-export function addVehicleAsync( details ){
-    let vehicleObj = { name: details.vehicle, type: details.vehicleType };
+export function addVehicleAsync( vehicleDetails ){
+    let vehicleObj = { name: vehicleDetails.vehicle, type: vehicleDetails.vehicleType };
     let data = Object.assign( {}, vehicleObj );
 
     return function (dispatch){
@@ -34,7 +34,7 @@ export function addVehicleAsync( details ){
                 return JSON.parse(response);
             }).then(function(response){
                 console.log( 'Received success response from API side.' );
-                dispatch( addVehicleSuccess( response ) );
+                dispatch( addVehicleSuccess( vehicleDetails, response ) );
             }).catch(function(error){
                 console.log( 'Received error response from API side.' );
                 dispatch( addVehicleFailure( response ) );
@@ -42,10 +42,11 @@ export function addVehicleAsync( details ){
     }
 }
 
-export function addVehicleSuccess( details ){
+export function addVehicleSuccess( vehicleDetails, response ){
     return {
         type: 'ADD_VEHICLE_SUCCESS',
-        data: { ...details }
+        vehicleDetails, 
+        response
     };
 }
 

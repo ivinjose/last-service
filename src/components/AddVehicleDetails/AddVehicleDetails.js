@@ -119,8 +119,8 @@ class AddVehicleDetails extends React.Component {
 
 	saveVehicleDetails(){
 		const obj = {
-			vehicleName: this.state.vehicle,
-			vehicleType: this.state.vehicleType,
+			name: this.state.vehicle,
+			type: this.state.vehicleType,
 		}
 		this.props.addVehicleAsync( obj );
 		// functions.saveVehicle(this.state.vehicle, this.state.vehicleType, this.state.editMode).then((response)=>{
