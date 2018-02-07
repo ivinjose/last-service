@@ -1,5 +1,10 @@
 export default {
-    vehicles: [],
+    vehicles: [
+        {
+            type: 'two wheeler',
+            name: 'splendor'
+        }
+    ],
     services: [],
     ui: {
         blockUi: false,

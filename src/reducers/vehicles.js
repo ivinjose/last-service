@@ -1,5 +1,7 @@
 
 const vehicles = function( state=[], action ){
+    console.log( 'vehicles reducer: action: ', action );
+    console.log( 'vehicles reducer: currentstate: ', state );
     switch( action.type ){
         case 'ADD_VEHICLE_REQUEST':
             console.log('ADD_VEHICLE_REQUEST');
@@ -10,7 +12,6 @@ const vehicles = function( state=[], action ){
             console.log('ADD_VEHICLE_SUCCESS');
             //do stuff
             const newState = Object.assign( {}, state, { newValue: 1 } );
-            debugger;
             return newState;
             break; 
         case 'ADD_VEHICLE_FAILURE':

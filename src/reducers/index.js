@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
-import foo from './foo';
-import bar from './bar';
 import vehicles from './vehicles';
+import services from './services';
+import ui from './ui';
 
 const rootReducer = combineReducers({
-    foo,
-    bar,
+    ui,
+    services,
     vehicles
 });
 
