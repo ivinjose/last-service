@@ -47,7 +47,6 @@ class AddServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header title={"Add service details"}/>
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
