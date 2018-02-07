@@ -72,7 +72,6 @@ class AddVehicleDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header title={this.state.pageTitle}/>
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
@@ -119,12 +118,17 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	saveVehicleDetails(){
-		functions.saveVehicle(this.state.vehicle, this.state.vehicleType, this.state.editMode).then((response)=>{
-			this.setState({
-				snackbarState: true,
-				snackbarMessage: response.message
-			});
-		});
+		const obj = {
+			vehicleName: this.state.vehicle,
+			vehicleType: this.state.vehicleType,
+		}
+		this.props.addVehicleAsync( obj );
+		// functions.saveVehicle(this.state.vehicle, this.state.vehicleType, this.state.editMode).then((response)=>{
+		// 	this.setState({
+		// 		snackbarState: true,
+		// 		snackbarMessage: response.message
+		// 	});
+		// });
 	}
 
 }
