@@ -16,44 +16,22 @@ class Home extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			vehicles: [],
-			loading: false
+			vehicles: []
 		};
 	}
 
 	componentDidMount(){
 		this.setState({ loading: true });
-		functions.getVehiclesList().then((response)=>{
-			this.setState({
-				loading: false,
-				vehicles: response
-			});
-		});
+		this.props.getAllVehiclesAsync();
 	}
  
 	render() {
-		if( this.state.loading ){
+		if( this.props.vehicles.length>0 ){
 			return (
 				<div className={styles['home']}>
-					<div className={styles['loader']}>
-						<RefreshIndicator
-							size={50}
-							left={70}
-							top={0}
-							loadingColor="#FF9800"
-							status="loading"
-							style={{display: 'inline-block',position: 'relative'}}/>
-					</div>
-				</div>
-			)
-		}
-		else if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
-			return (
-				<div className={styles['home']}>
-					
 					<div className={styles['body']}>
 						{
-							this.state.vehicles.map(function(vehicle, index){
+							this.props.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']} key={index}>
 										<VehicleCard data={vehicle} index={index} showEdit={false}/>
