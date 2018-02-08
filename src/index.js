@@ -17,7 +17,7 @@ const Root = () => (
     <Provider store={store}>
         <MuiThemeProvider>
             <Router history={browserHistory}>
-                <Route path="/" component={App} >
+                <Route path="/" component={App}>
                     <IndexRoute component={Home}></IndexRoute>
                     <Route path="/addservice" component={AddServiceDetails} />
                     <Route path="/view" component={ViewServiceDetails} />

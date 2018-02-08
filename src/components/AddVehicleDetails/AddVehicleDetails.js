@@ -33,17 +33,21 @@ class AddVehicleDetails extends React.Component {
 		this.checkModeAndSetupPage();
 	}
 
-	componentWillReceiveProps(){
-		this.checkModeAndSetupPage();
+	componentWillReceiveProps(nextProps){
+		debugger;
+		console.log('nextProps', nextProps);
+		console.log('received props');
+		// this.checkModeAndSetupPage();
 	}
 
 	checkModeAndSetupPage(){
 		var queryParams = queryString.parse(location.search);
 		
 		if( queryParams.editMode == 'true' ){
-			functions.getVehicleDetails(queryParams.vehicle).then((response)=>{
-				this.doEditModeConfiguration(response);
-			});
+			this.props.getVehiclesAsync( queryParams.vehicle );
+			// functions.getVehicleDetails(queryParams.vehicle).then((response)=>{
+				// this.doEditModeConfiguration(response);
+			// });
 		}else{
 			this.doAddModeConfiguration();
 		}
