@@ -1,29 +1,23 @@
 
 const services = function( state=[], action ){
-    // console.log( 'services reducer: state: ', state );
-    // console.log( 'services reducer: action: ', action );
-    return state;
-    // console.log( 'state: ', state );
-    // console.log( 'action: ', action );
-    // switch( action.type ){
-    //     case 'ADD_VEHICLE_REQUEST':
-    //         console.log('ADD_VEHICLE_REQUEST');
-    //         //do stuff
-    //         return state;
-    //         break;
-    //     case 'ADD_VEHICLE_SUCCESS':
-    //         console.log('ADD_VEHICLE_SUCCESS');
-    //         //do stuff
-    //         const newState = Object.assign( {}, state, { newValue: 1 } );
-    //         return newState;
-    //         break; 
-    //     case 'ADD_VEHICLE_FAILURE':
-    //         console.log('ADD_VEHICLE_FAILURE');
-    //         //do stuff
-    //         break;
-    //     default: 
-    //         return state;
-    // }
+    switch( action.type ){
+        // Get all services flow
+        case 'GET_ALL_SERVICES_SUCCESS':
+            /* 
+             * Here we dont to maintain the services already in the state. 
+             * Since it's a get all services call, we wipe existing state and refill with new and complete list.
+             */
+            return [
+                ...action.services
+            ]
+            break; 
+        case 'GET_ALL_SERVICES_FAILURE':
+                console.log('GET_ALL_SERVICES_FAILURE');
+                return state;
+                break;
+        default: 
+            return state;
+        }
 }
 
 export default services;

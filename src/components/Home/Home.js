@@ -23,6 +23,7 @@ class Home extends React.Component {
 	componentDidMount(){
 		this.setState({ loading: true });
 		this.props.getAllVehiclesAsync();
+		this.props.getAllServicesAsync();
 	}
  
 	render() {
