@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
-import vehicles from './vehicles';
-import services from './services';
-import ui from './ui';
+import vehicles from './vehiclesReducer';
+import services from './servicesReducer';
+import ui from './uiReducer';
 
 const rootReducer = combineReducers({
     ui,
