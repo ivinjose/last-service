@@ -10,9 +10,7 @@ const Main = React.createClass({
         return(
             <div>
                 <h1>
-                    <Link to="/">
-                        <Header title={"Service Manager"}/>
-                    </Link>
+                    <Header title={"Service Manager"}/>
                 </h1>
                 {this.props.ui.blockUi &&
                     <PageBlocker>

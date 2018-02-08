@@ -13,15 +13,7 @@ import fetch from 'isomorphic-fetch';
 import functions from './functions';
 
 class Home extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			vehicles: []
-		};
-	}
-
 	componentDidMount(){
-		this.setState({ loading: true });
 		this.props.getAllVehiclesAsync();
 		this.props.getAllServicesAsync();
 	}
