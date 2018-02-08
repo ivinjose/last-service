@@ -23,7 +23,6 @@ class ViewServiceDetails extends React.Component {
 	}
 
 	componentDidMount(){
-		this.getVehiclesList();
 		let queryParams = this.props.location.query;
 		if( queryParams && queryParams.vehicle ){
 			this.chooseVehicle(null,null, queryParams.vehicle);
@@ -33,17 +32,15 @@ class ViewServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header title={'View service details'}/>
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
 						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.chooseVehicle.bind(this)}>
 							{
-								this.state.vehicles.map(function(vehicle, index){
+								this.props.vehicles.map(function(vehicle, index){
 									return(
 										<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
 									)
 								})
-
 							}
 						</SelectField>
 					</div>
@@ -56,55 +53,19 @@ class ViewServiceDetails extends React.Component {
 		);
 	}
 
-	getVehiclesList(){
-		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				vehicles: response.data
-			});
-		}).catch(function(error){
-			console.log('some error');
-		});
-	}
-
 	chooseVehicle(event, key, payload){
 		this.setState({
 			currentVehicle: payload
 		});
-		this.getServiceDetailsOf(payload);
+		this.setState({
+			serviceDetails: this.getServiceDetailsOf(payload)
+		});
+		
 	}
 
 	getServiceDetailsOf(vehicle){
-		var _this = this;
-		fetch('http://localhost:4001/getservicedetails?vehicle=' + vehicle, 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				serviceDetails: response
-			});
-		}).catch(function(error){
-			console.log('some error');
-		});
+		let services = this.props.services.filter( service => service.vehicle == vehicle )
+		return services;
 	}
 }
 
