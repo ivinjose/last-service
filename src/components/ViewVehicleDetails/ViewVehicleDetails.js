@@ -12,31 +12,15 @@ import {List} from 'material-ui/List';
 import functions from './functions';
 
 class ViewVehicleDetails extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			vehicles: []
-		};
-	}
-
-	componentDidMount(){
-		functions.getVehiclesList().then((response)=>{
-			this.setState({
-				vehicles: response.data
-			});
-		});
-	}
  
 	render() {
 		// if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
 			return (
-				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
-					
+				<div className={styles['home']}>					
 					<div className={styles['body']}>
 						<List>
 						{
-							this.state.vehicles.map(function(vehicle, index){
+							this.props.vehicles.map(function(vehicle, index){
 								return(
 									<VehicleCard data={vehicle} index={index} showEdit={true}/>
 								)

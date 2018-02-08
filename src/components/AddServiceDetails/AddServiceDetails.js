@@ -33,15 +33,10 @@ class AddServiceDetails extends React.Component {
 		super();
 
 		this.state = {
-			vehicles: [],
 			currentVehicle: null,
 			snackbarState: false,
 			snackbarMessage: " ",
 		};
-	}
-
-	componentDidMount(){
-		this.getVehiclesList();
 	}
 
 	render() {
@@ -52,7 +47,7 @@ class AddServiceDetails extends React.Component {
 					<div className={globalStyles['row']}>
 						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.updateVehicle.bind(this)}>
 						{
-							this.state.vehicles.map(function(vehicle, index){
+							this.props.vehicles.map(function(vehicle, index){
 								return(
 									<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
 								)
@@ -105,28 +100,6 @@ class AddServiceDetails extends React.Component {
 
 			</div>
 		);
-	}
-
-	getVehiclesList(){
-		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				vehicles: response.data
-			});
-		}).catch(function(error){
-			console.log('some error');
-		});
 	}
 
 	closeSnackbar(){
