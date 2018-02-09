@@ -34,7 +34,6 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		debugger;
 		console.log('nextProps', nextProps);
 		console.log('received props');
 		// this.checkModeAndSetupPage();

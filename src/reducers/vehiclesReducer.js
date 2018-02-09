@@ -7,7 +7,7 @@ const vehicles = function( state=[], action ){
         case 'ADD_VEHICLE_SUCCESS':
             return [
                 ...state,
-                action.vehicleDetails
+                ...action.vehiclesAdded
             ]
             break;
         case 'ADD_VEHICLE_FAILURE':
