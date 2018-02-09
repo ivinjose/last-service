@@ -1,7 +1,5 @@
 
 const vehicles = function( state=[], action ){
-    console.log( 'vehicles reducer: action: ', action );
-    console.log( 'vehicles reducer: state: ', state );
     switch( action.type ){
         // Add vehicle flow
         case 'ADD_VEHICLE_SUCCESS':
