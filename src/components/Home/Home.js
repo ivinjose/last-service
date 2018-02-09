@@ -22,7 +22,7 @@ class Home extends React.Component {
 		if( this.props.vehicles.length>0 ){
 			return (
 				<div className={styles['home']}>
-				<h1 className={styles['header']}>VEHICLES</h1>
+				<h1 className={styles['header']}>HOME</h1>
 					<div className={styles['body']}>
 						{
 							this.props.vehicles.map(function(vehicle, index){
@@ -33,11 +33,6 @@ class Home extends React.Component {
 								)
 							})
 						}
-						<div className={styles['cta']}>
-							<FloatingActionButton secondary={true} onClick={functions.addNew.bind(this)}>
-								<ContentAdd />
-							</FloatingActionButton>
-						</div>
 					</div>
 				</div>
 			)
