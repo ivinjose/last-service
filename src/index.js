@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import store from './store';
+import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import styles from './styles/global.css';
 import App from './App';
@@ -15,17 +16,19 @@ import ViewVehicleDetails from './components/ViewVehicleDetails';
 
 const Root = () => (
     <Provider store={store}>
-        <MuiThemeProvider>
-            <Router history={browserHistory}>
-                <Route path="/" component={App}>
-                    <IndexRoute component={Home}></IndexRoute>
-                    <Route path="/addservice" component={AddServiceDetails} />
-                    <Route path="/view" component={ViewServiceDetails} />
-                    <Route path="/addvehicle" component={AddVehicleDetails} />
-                    <Route path="/viewvehicles" component={ViewVehicleDetails} />
-                </Route>
-            </Router>
-        </MuiThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+            <MuiThemeProvider>
+                <Router history={browserHistory}>
+                    <Route path="/" component={App}>
+                        <IndexRoute component={Home}></IndexRoute>
+                        <Route path="/addservice" component={AddServiceDetails} />
+                        <Route path="/view" component={ViewServiceDetails} />
+                        <Route path="/addvehicle" component={AddVehicleDetails} />
+                        <Route path="/viewvehicles" component={ViewVehicleDetails} />
+                    </Route>
+                </Router>
+            </MuiThemeProvider>
+        </PersistGate>
     </Provider>
 );
  
@@ -35,5 +38,3 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('mount')
 	);
 });
-
-store.dispatch({type: 'INCREMENT_LIKES', index: "test"});

@@ -1,8 +1,8 @@
 export default {
     vehicles: [
         {
-            type: 'three wheeler',
-            name: 'BMW'
+            type: 'Three wheeler',
+            name: 'BMW Auto rikshaw'
         }
     ],
     services: [],
