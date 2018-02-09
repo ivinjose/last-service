@@ -9,9 +9,7 @@ const Main = React.createClass({
     render(){
         return(
             <div>
-                <h1>
-                    <Header title={"Service Manager"}/>
-                </h1>
+                <Header title={"Service Manager"}/>
                 {this.props.ui.blockUi &&
                     <PageBlocker>
                         <RefreshIndicator

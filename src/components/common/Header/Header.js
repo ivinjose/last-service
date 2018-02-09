@@ -25,7 +25,7 @@ class Header extends React.Component {
 				<AppBar
 					title={this.props.title}
 					onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
-					style={{backgroundColor: '#292929'}}
+					style={{backgroundColor: '#4E92DF'}}
 					 />
 
 				<Drawer
@@ -48,7 +48,7 @@ class Header extends React.Component {
 						{
 							routes.map( (route, index) => {
 								return (
-									<MenuItem value={1} key={index} onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
+									<MenuItem style={{fontWeight: 400, color: '#333333'}} value={1} key={index} onClick={this.changeRoute.bind(this, index)}>{route.name}</MenuItem>
 								);
 							})
 						}
