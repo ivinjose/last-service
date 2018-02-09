@@ -1,22 +1,23 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { browserHistory } from 'react-router';
 import thunkMiddleware from 'redux-thunk'
 import logger from 'redux-logger'
-
-// import root reducer
+import defaultState from './defaultState';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducers/index';
 
-// import default state
-import defaultState from './defaultState';
-
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+const persistedReducer = persistReducer( persistConfig, rootReducer )
 const middleware = applyMiddleware( thunkMiddleware, logger );
 
 const store = createStore( 
-    rootReducer,
+    persistedReducer,
     defaultState,
-    compose( middleware,  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() )
+    compose( middleware, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() )
 );
 
-export default store;
-
+let persistor = persistStore(store)
+export { store, persistor }
