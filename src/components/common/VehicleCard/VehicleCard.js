@@ -12,7 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import icon from '../../../images/ok-128.jpg';
+import icon from '../../../images/ninja.jpg';
 
 const iconButtonElement = (
 	<IconButton touch={true}>
@@ -37,15 +37,9 @@ class VehicleCard extends React.Component {
 					leftAvatar={<Avatar src={icon} />}
 					rightIconButton={this.props.showEdit?this.rightIconMenu:null}
 					primaryText={this.props.data.name}
-					secondaryText={
-					<p>
-						<span style={{color: darkBlack}}>Last serviced on {this.props.data.lastServiceDate}</span><br />
-						<span style={{color: darkBlack}}>Last serviced amount is {this.props.data.lastServiceAmount}</span><br />
-						<span style={{color: darkBlack}}>Vehicle type {this.props.data.type}</span><br/>
-					</p>
-					}
+					
 					secondaryTextLines={2} />
-				<Divider inset={true} />
+				<Divider inset={false} />
 			</div>
 		);
 	}
