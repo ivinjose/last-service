@@ -8,10 +8,7 @@ export function addVehicle( details ){
 }
 
 export function addVehicleAsync( vehicleDetails ){
-    let vehicleObj = { name: vehicleDetails.vehicle, type: vehicleDetails.vehicleType };
-    let data = Object.assign( {}, vehicleObj );
-
-    return function (dispatch){
+    return (dispatch) => {
         dispatch( addVehicle() );
         fetch('http://localhost:4001/addvehicledetails', 
             { 
@@ -19,25 +16,24 @@ export function addVehicleAsync( vehicleDetails ){
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) 
+                body: JSON.stringify(vehicleDetails) 
                        
             }).then(function(response){
                 return( response.text() );
             }).then(function(response){
                 return JSON.parse(response);
             }).then(function(response){
-                dispatch( addVehicleSuccess( vehicleDetails, response ) );
+                dispatch( addVehicleSuccess( response.data ) );
             }).catch(function(error){
                 dispatch( addVehicleFailure( response ) );
             });
     }
 }
 
-export function addVehicleSuccess( vehicleDetails, response ){
+export function addVehicleSuccess( vehiclesAdded ){
     return {
         type: 'ADD_VEHICLE_SUCCESS',
-        vehicleDetails, 
-        response
+        vehiclesAdded
     };
 }
 
