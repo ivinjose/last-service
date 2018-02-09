@@ -3,44 +3,43 @@ import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router'; 
 import styles from './VehicleCard.css';
 
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import icon from '../../../images/ninja.jpg';
 
+import iconBike from '../../../images/bike.jpg';
+import iconCar from '../../../images/car.jpg';
+
 const iconButtonElement = (
 	<IconButton touch={true}>
-	  <MoreVertIcon color={grey400} />
+	  <MoreVertIcon color={"#bbb"} />
 	</IconButton>
 );
 
 class VehicleCard extends React.Component {
-	constructor() {
-		super();
-		this.rightIconMenu = (
-			<IconMenu iconButtonElement={iconButtonElement}>
-				<MenuItem onClick={this.gotoEditVehiclePage.bind(this)}>Edit</MenuItem>
-			</IconMenu>
-		);
-	}
  
 	render() {
+		let iconImage = this.props.data.type == "Four wheeler"? iconCar : iconBike;
 		return(
-			<div className={styles['vehicle-card']} onClick={this.gotoVehicleDetails.bind(this)}>
-				<ListItem
-					leftAvatar={<Avatar src={icon} />}
-					rightIconButton={this.props.showEdit?this.rightIconMenu:null}
-					primaryText={this.props.data.name}
-					
-					secondaryTextLines={2} />
-				<Divider inset={false} />
-			</div>
+			<li className={styles['vehicle']} onClick={!this.props.showEdit?this.gotoVehicleDetails.bind(this):null}>
+				<div className={styles['content']}>
+					<div className={styles['text']}>
+						{this.props.data.name}
+					</div>
+					<div className={styles['avatar']}>
+						<img className={styles['image']} src={iconImage} />
+					</div>
+				</div>
+				{this.props.showEdit &&
+					<div className={styles['icon']}>
+						<IconMenu iconButtonElement={iconButtonElement}>
+							<MenuItem onClick={this.gotoEditVehiclePage.bind(this)}>Edit</MenuItem>
+						</IconMenu>
+					</div>
+				}
+			</li>
 		);
 	}
 

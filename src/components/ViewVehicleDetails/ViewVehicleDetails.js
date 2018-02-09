@@ -16,7 +16,8 @@ class ViewVehicleDetails extends React.Component {
 	render() {
 		// if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
 			return (
-				<div className={styles['home']}>					
+				<div className={styles['vehicle-details']}>
+					<h1 className={styles['header']}>VEHICLES</h1>					
 					<div className={styles['body']}>
 						<List>
 						{

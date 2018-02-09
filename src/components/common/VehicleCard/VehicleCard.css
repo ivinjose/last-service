@@ -1,5 +1,32 @@
-.vehicle-card{
+.vehicle{
+    color: #333333;
     font-family: Roboto, sans-serif;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    border-bottom: 1px solid #e8e6e6;
+    padding: 15px 0px;
+
+    .content{
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+
+        .text{
+            flex-grow: 1;
+        }
+        .avatar{
+            .image{
+                max-height: 100px;
+                max-width: 100px;
+            }
+        }
+    }
+    
+    .icon{
+        margin-right: -15px;
+    }
 
     .vehicle-image{
         width: 10%;
