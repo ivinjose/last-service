@@ -4,6 +4,10 @@ export default [
         "name": "Home"
     },
     {
+        "path": "/login",
+        "name": "Login"
+    },
+    {
         "path": "/addservice",
         "name": "Add Service Details"
     },
