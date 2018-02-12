@@ -48,7 +48,7 @@ class VehicleCard extends React.Component {
 	}
 
 	gotoEditVehiclePage(){
-		browserHistory.push( "/addvehicle?editMode=true&vehicle="+this.props.data.name );
+		browserHistory.push( "/addvehicle?editMode=true&id="+this.props.data._id );
 	}
 }
 
