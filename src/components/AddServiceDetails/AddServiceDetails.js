@@ -15,8 +15,6 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
-import fetch from 'isomorphic-fetch';
-
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
 const serviceableParts = [
@@ -147,38 +145,14 @@ class AddServiceDetails extends React.Component {
 		let comments = this.state.comments;
 
 		let serviceDetails = { 
-			date: date,
-			component: component,
-			amount: amount,
-			comments: comments,
+			vehicle: this.state.currentVehicle,
+			date,
+			component,
+			amount,
+			comments,
 		};
 
-		let data = Object.assign( {}, currentVehicle, serviceDetails );
-		let _this = this;
-
-		fetch('http://localhost:4001/addservicedetails', 
-		{ 
-			method: 'POST', 
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data) 
-				   
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				snackbarState: true,
-				snackbarMessage: response.message
-			});
-		}).catch(function(error){
-			_this.setState({
-				snackbarState: true,
-				snackbarMessage: error
-			});
-		});
+		this.props.addServiceAsync(serviceDetails);
 
 	}
 }

@@ -1,8 +1,12 @@
 import { addVehicle, addVehicleAsync, addVehicleSuccess, addVehicleFailure } from './addVehicleActions';
 import { getVehicles, getVehiclesAsync, getVehiclesSuccess, getVehiclesFailure } from './getVehicleActions';
+
+import { addService, addServiceAsync, addServiceSuccess, addServiceFailure } from './addServiceActions';
+
 import { getAllVehicles, getAllVehiclesAsync, getAllVehiclesSuccess, getAllVehiclesFailure } from './getVehicleActions';
 import { getAllServices, getAllServicesAsync, getAllServicesSuccess, getAllServicesFailure } from './getServicesActions';
 
+// Vehicles
 export { addVehicle };
 export { addVehicleAsync };
 export { addVehicleSuccess };
@@ -13,6 +17,13 @@ export { getVehiclesAsync };
 export { getVehiclesSuccess };
 export { getVehiclesFailure };
 
+// Services
+export { addService };
+export { addServiceAsync };
+export { addServiceSuccess };
+export { addServiceFailure };
+
+// Home page get all calls
 export { getAllVehicles };
 export { getAllVehiclesAsync };
 export { getAllVehiclesSuccess };

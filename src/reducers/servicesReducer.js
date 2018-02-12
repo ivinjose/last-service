@@ -1,6 +1,17 @@
 
 const services = function( state=[], action ){
     switch( action.type ){
+        // Add service flow
+        case 'ADD_SERVICE_SUCCESS':
+            return [
+                ...state,
+                ...action.servicesAdded
+            ]
+            break;
+        case 'ADD_SERVICE_FAILURE':
+            console.log('ADD_SERVICE_FAILURE');
+            break;
+            
         // Get all services flow
         case 'GET_ALL_SERVICES_SUCCESS':
             /* 
@@ -12,9 +23,9 @@ const services = function( state=[], action ){
             ]
             break; 
         case 'GET_ALL_SERVICES_FAILURE':
-                console.log('GET_ALL_SERVICES_FAILURE');
-                return state;
-                break;
+            console.log('GET_ALL_SERVICES_FAILURE');
+            return state;
+            break;
         default: 
             return state;
         }
