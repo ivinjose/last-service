@@ -1,45 +1,45 @@
 import fetch from 'isomorphic-fetch';
 
-export function addService( details ){
+export function addServicesInit( details ){
     return {
-        type: 'ADD_SERVICE_REQUEST',
+        type: 'ADD_SERVICES_INIT',
         data: { ...details }
     };
 }
 
-export function addServiceAsync( serviceDetails ){
+export function addServices( services ){
     return (dispatch) => {
-        dispatch( addService() );
-        fetch('http://localhost:4001/addservicedetails', 
+        dispatch( addServicesInit() );
+        fetch('http://localhost:4001/services', 
             { 
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(serviceDetails) 
+                body: JSON.stringify( services ) 
                        
             }).then(function(response){
                 return( response.text() );
             }).then(function(response){
                 return JSON.parse(response);
             }).then(function(response){
-                dispatch( addServiceSuccess( response.data ) );
+                dispatch( addServicesSuccess( response.data ) );
             }).catch(function(error){
-                dispatch( addServiceFailure( error ) );
+                dispatch( addServicesFailure( error ) );
             });
     }
 }
 
-export function addServiceSuccess( servicesAdded ){
+export function addServicesSuccess( servicesAdded ){
     return {
-        type: 'ADD_SERVICE_SUCCESS',
+        type: 'ADD_SERVICES_SUCCESS',
         servicesAdded
     };
 }
 
-export function addServiceFailure( details ){
+export function addServicesFailure( details ){
     return {
-        type: 'ADD_SERVICE_FAILURE',
+        type: 'ADD_SERVICES_FAILURE',
         data: { ...details }
     };
 }
