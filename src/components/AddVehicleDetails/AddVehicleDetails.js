@@ -31,12 +31,11 @@ class AddVehicleDetails extends React.Component {
 		this.checkModeAndSetupPage();
 	}
 
-
 	checkModeAndSetupPage(){
 		var queryParams = queryString.parse(location.search);
 		
 		if( queryParams.editMode == 'true' ){
-			let vehicle = this.props.vehicles.find( vehicle => vehicle.name == queryParams.vehicle );
+			let vehicle = this.props.vehicles.find( vehicle => vehicle._id == queryParams.id );
 			this.doEditModeConfiguration( vehicle );
 		}else{
 			this.doAddModeConfiguration();
