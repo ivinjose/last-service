@@ -10,9 +10,9 @@ export function getAllVehicles( ){
 export function getAllVehiclesAsync( ){
     return function (dispatch){
         dispatch( getVehicles() );
-        fetch('http://localhost:4001/getAllVehicles',
+        fetch('http://localhost:4001/vehicles',
             { 
-                method: 'GET', 
+                method: 'GET',
                 headers: {
 				    'Content-Type': 'application/json'
 			    }         

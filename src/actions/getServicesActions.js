@@ -10,7 +10,7 @@ export function getAllServices( ){
 export function getAllServicesAsync( ){
     return function (dispatch){
         dispatch( getAllServices() );
-        fetch('http://localhost:4001/getAllServices',
+        fetch('http://localhost:4001/services',
             { 
                 method: 'GET', 
                 headers: {
