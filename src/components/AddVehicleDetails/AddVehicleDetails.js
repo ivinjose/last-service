@@ -13,8 +13,6 @@ import Snackbar from 'material-ui/Snackbar';
 import fetch from 'isomorphic-fetch';
 import queryString from 'query-string';
 
-import functions from './functions';
-
 class AddVehicleDetails extends React.Component {
 	constructor() {
 		super();
@@ -33,20 +31,13 @@ class AddVehicleDetails extends React.Component {
 		this.checkModeAndSetupPage();
 	}
 
-	componentWillReceiveProps(nextProps){
-		console.log('nextProps', nextProps);
-		console.log('received props');
-		// this.checkModeAndSetupPage();
-	}
 
 	checkModeAndSetupPage(){
 		var queryParams = queryString.parse(location.search);
 		
 		if( queryParams.editMode == 'true' ){
-			this.props.getVehiclesAsync( queryParams.vehicle );
-			// functions.getVehicleDetails(queryParams.vehicle).then((response)=>{
-				// this.doEditModeConfiguration(response);
-			// });
+			let vehicle = this.props.vehicles.find( vehicle => vehicle.name == queryParams.vehicle );
+			this.doEditModeConfiguration( vehicle );
 		}else{
 			this.doAddModeConfiguration();
 		}
@@ -88,7 +79,7 @@ class AddVehicleDetails extends React.Component {
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<RaisedButton label={this.state.editMode?'Update':'Save'} primary={true} fullWidth={true} onClick={this.saveVehicleDetails.bind(this)}/>
+						<RaisedButton label={this.state.editMode?'Update':'Save'} primary={true} fullWidth={true} onClick={this.state.editMode?this.updateVehicleDetails.bind(this):this.saveVehicleDetails.bind(this)}/>
 					</div>
 				</div>
 
@@ -126,12 +117,15 @@ class AddVehicleDetails extends React.Component {
 			type: this.state.vehicleType,
 		}
 		this.props.addVehicles( [vehicle] );
-		// functions.saveVehicle(this.state.vehicle, this.state.vehicleType, this.state.editMode).then((response)=>{
-		// 	this.setState({
-		// 		snackbarState: true,
-		// 		snackbarMessage: response.message
-		// 	});
-		// });
+	}
+
+	updateVehicleDetails(){
+		const vehicle = {
+			id: this.state.vehicleId,
+			name: this.state.vehicle,
+			type: this.state.vehicleType,
+		}
+		this.props.updateVehicle( vehicle );
 	}
 
 }

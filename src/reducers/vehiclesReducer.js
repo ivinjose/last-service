@@ -1,6 +1,20 @@
 
 const vehicles = function( state=[], action ){
     switch( action.type ){
+        // Update vehicle flow
+        case 'UPDATE_VEHICLE_SUCCESS':
+            const i = state.findIndex( vehicle => vehicle._id == action.vehicleUpdated._id );
+            return [
+                ...state.slice(0, i),
+                action.vehicleUpdated,
+                ...state.slice(i+1)
+            ]
+            break;
+        case 'UPDATE_VEHICLE_FAILURE':
+            console.log('UPDATE_VEHICLE_FAILURE');
+            return state;
+            break;
+
         // Add vehicle flow
         case 'ADD_VEHICLES_SUCCESS':
             return [
