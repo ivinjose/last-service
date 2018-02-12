@@ -144,7 +144,7 @@ class AddServiceDetails extends React.Component {
 		let amount = this.state.amount;
 		let comments = this.state.comments;
 
-		let serviceDetails = { 
+		let service = { 
 			vehicle: this.state.currentVehicle,
 			date,
 			component,
@@ -152,8 +152,7 @@ class AddServiceDetails extends React.Component {
 			comments,
 		};
 
-		this.props.addServiceAsync(serviceDetails);
-
+		this.props.addServices( [service] );
 	}
 }
 
