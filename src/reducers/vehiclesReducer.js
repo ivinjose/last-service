@@ -2,14 +2,15 @@
 const vehicles = function( state=[], action ){
     switch( action.type ){
         // Add vehicle flow
-        case 'ADD_VEHICLE_SUCCESS':
+        case 'ADD_VEHICLES_SUCCESS':
             return [
                 ...state,
                 ...action.vehiclesAdded
             ]
             break;
-        case 'ADD_VEHICLE_FAILURE':
+        case 'ADD_VEHICLES_FAILURE':
             console.log('ADD_VEHICLE_FAILURE');
+            return state;
             break;
             
         // Get vehicle flow

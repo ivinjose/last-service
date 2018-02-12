@@ -1,4 +1,4 @@
-import { addVehicle, addVehicleAsync, addVehicleSuccess, addVehicleFailure } from './addVehicleActions';
+import { addVehiclesInit, addVehicles, addVehiclesSuccess, addVehiclesFailure } from './addVehiclesActions';
 import { getVehicles, getVehiclesAsync, getVehiclesSuccess, getVehiclesFailure } from './getVehicleActions';
 
 import { addService, addServiceAsync, addServiceSuccess, addServiceFailure } from './addServiceActions';
@@ -7,10 +7,10 @@ import { getAllVehicles, getAllVehiclesAsync, getAllVehiclesSuccess, getAllVehic
 import { getAllServices, getAllServicesAsync, getAllServicesSuccess, getAllServicesFailure } from './getServicesActions';
 
 // Vehicles
-export { addVehicle };
-export { addVehicleAsync };
-export { addVehicleSuccess };
-export { addVehicleFailure };
+export { addVehiclesInit };
+export { addVehicles };
+export { addVehiclesSuccess };
+export { addVehiclesFailure };
 
 export { getVehicles };
 export { getVehiclesAsync };

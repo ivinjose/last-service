@@ -121,11 +121,11 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	saveVehicleDetails(){
-		const obj = {
+		const vehicle = {
 			name: this.state.vehicle,
 			type: this.state.vehicleType,
 		}
-		this.props.addVehicleAsync( obj );
+		this.props.addVehicles( [vehicle] );
 		// functions.saveVehicle(this.state.vehicle, this.state.vehicleType, this.state.editMode).then((response)=>{
 		// 	this.setState({
 		// 		snackbarState: true,
