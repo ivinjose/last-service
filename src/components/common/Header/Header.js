@@ -25,7 +25,7 @@ class Header extends React.Component {
 				<AppBar
 					title={this.props.title}
 					onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
-					style={{backgroundColor: '#4E92DF'}}
+					style={{backgroundColor: '#4E92DF', position: 'fixed'}}
 					 />
 
 				<Drawer
