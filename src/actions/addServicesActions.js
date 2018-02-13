@@ -37,9 +37,9 @@ export function addServicesSuccess( servicesAdded ){
     };
 }
 
-export function addServicesFailure( details ){
+export function addServicesFailure( error ){
     return {
         type: 'ADD_SERVICES_FAILURE',
-        data: { ...details }
+        data: { ...error }
     };
 }

@@ -6,7 +6,7 @@ import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
-
+import SubHeader from '../common/SubHeader';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -32,6 +32,7 @@ class ViewServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
+				<SubHeader text={"VIEW SERVICES"} />
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
 						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.chooseVehicle.bind(this)}>

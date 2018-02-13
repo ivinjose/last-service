@@ -36,6 +36,7 @@ const vehicles = function( state=[], action ){
             break; 
         case 'GET_VEHICLES_FAILURE':
             console.log('GET_VEHICLES_FAILURE');
+            return state;
             break;
 
         // Get all vehicles flow
@@ -50,6 +51,7 @@ const vehicles = function( state=[], action ){
             break; 
         case 'GET_ALL_VEHICLES_FAILURE':
             console.log('GET_ALL_VEHICLES_FAILURE');
+            return state;
             break;
         default: 
             return state;

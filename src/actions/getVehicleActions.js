@@ -23,7 +23,7 @@ export function getAllVehiclesAsync( ){
             }).then(function(response){
                 dispatch( getAllVehiclesSuccess( response ) );
             }).catch(function(error){
-                dispatch( getVehiclesFailure( response ) );
+                dispatch( getAllVehiclesFailure( error ) );
             });
     }
 }
@@ -35,9 +35,9 @@ export function getAllVehiclesSuccess( response ){
     };
 }
 
-export function getAllVehiclesFailure( details ){
+export function getAllVehiclesFailure( error ){
     return {
         type: 'GET_ALL_VEHICLES_FAILURE',
-        data: { ...details }
+        data: { ...error }
     };
 }

@@ -6,10 +6,7 @@ import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
 import VehicleCard from '../common/VehicleCard';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import {List} from 'material-ui/List';
-import functions from './functions';
 
 class ViewVehicleDetails extends React.Component {
  
@@ -28,11 +25,6 @@ class ViewVehicleDetails extends React.Component {
 							})
 						}
 						</List>
-						<div className={styles['cta']}>
-							<FloatingActionButton secondary={true} onClick={functions.addNew.bind(this)}>
-								<ContentAdd />
-							</FloatingActionButton>
-						</div>
 					</div>
 				</div>
 			)

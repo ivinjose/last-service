@@ -37,9 +37,9 @@ export function updateVehicleSuccess( vehicleUpdated ){
     };
 }
 
-export function updateVehicleFailure( details ){
+export function updateVehicleFailure( error ){
     return {
         type: 'UPDATE_VEHICLE_FAILURE',
-        data: { ...details }
+        data: { ...error }
     };
 }
