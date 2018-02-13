@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Home.css';
 import Header from '../common/Header';
+import SubHeader from '../common/SubHeader';
 import ServiceDetails from '../ServiceDetails';
 import AddServiceDetails from '../AddServiceDetails';
 import VehicleCard from '../common/VehicleCard';
@@ -22,7 +23,7 @@ class Home extends React.Component {
 		if( this.props.vehicles.length>0 ){
 			return (
 				<div className={styles['home']}>
-				<h1 className={styles['header']}>HOME</h1>
+					<SubHeader text={"HOME"} />
 					<div className={styles['body']}>
 						{
 							this.props.vehicles.map(function(vehicle, index){

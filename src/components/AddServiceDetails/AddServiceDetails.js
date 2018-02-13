@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Header from '../common/Header';
+import SubHeader from '../common/SubHeader';
 import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
@@ -40,7 +41,7 @@ class AddServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-
+				<SubHeader text={"ADD SERVICE DETAILS"} />
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
 						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.updateVehicle.bind(this)}>
@@ -50,7 +51,6 @@ class AddServiceDetails extends React.Component {
 									<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
 								)
 							})
-
 						}
 						</SelectField>
 					</div>

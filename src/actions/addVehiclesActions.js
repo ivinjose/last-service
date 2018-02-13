@@ -37,9 +37,9 @@ export function addVehiclesSuccess( vehiclesAdded ){
     };
 }
 
-export function addVehiclesFailure( details ){
+export function addVehiclesFailure( error ){
     return {
         type: 'ADD_VEHICLES_FAILURE',
-        data: { ...details }
+        data: { ...error }
     };
 }

@@ -1,0 +1,10 @@
+.sub-header{
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #f5f5f5;
+    color: #82878c;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 16px 15px 13px;
+    margin: 0;        
+}

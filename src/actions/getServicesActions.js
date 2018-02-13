@@ -35,9 +35,9 @@ export function getAllServicesSuccess( response ){
     };
 }
 
-export function getAllServicesFailure( details ){
+export function getAllServicesFailure( error ){
     return {
         type: 'GET_ALL_SERVICES_FAILURE',
-        data: { ...details }
+        data: { ...error }
     };
 }

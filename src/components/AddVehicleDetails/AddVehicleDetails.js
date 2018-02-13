@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Header from '../common/Header';
+import SubHeader from '../common/SubHeader';
 import styles from './AddVehicleDetails.css';
 import globalStyles from '../../styles/global.css';
 import TextField from 'material-ui/TextField';
@@ -19,7 +20,7 @@ class AddVehicleDetails extends React.Component {
 
 		this.state = {
 			editMode: false,
-			pageTitle: 'Add vehicle details',
+			pageTitle: 'ADD VEHICLE DETAILS',
 			vehicle: '',
 			vehicleType: null,
 			snackbarState: false,
@@ -45,7 +46,7 @@ class AddVehicleDetails extends React.Component {
 	doEditModeConfiguration(vehicle){
 		this.setState({
 			editMode: true,
-			pageTitle: 'Edit vehicle details',
+			pageTitle: 'EDIT VEHICLE DETAILS',
 			vehicleId: vehicle._id,
 			vehicle: vehicle.name,
 			vehicleType: vehicle.type
@@ -55,7 +56,7 @@ class AddVehicleDetails extends React.Component {
 	doAddModeConfiguration(){
 		this.setState({
 			editMode: false,
-			pageTitle: 'Add vehicle details',
+			pageTitle: 'ADD VEHICLE DETAILS',
 			vehicleId: null,
 			vehicle: '',
 			vehicleType: null,
@@ -64,8 +65,8 @@ class AddVehicleDetails extends React.Component {
 
 	render() {
 		return (
-			<div className={styles['service-details']}>
-
+			<div className={styles['vehicle-details']}>
+				<SubHeader text={this.state.pageTitle} />
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
 						<TextField hintText="Vehicle name" value={this.state.vehicle} fullWidth={true} onChange={this.updateVehicle.bind(this)} />
