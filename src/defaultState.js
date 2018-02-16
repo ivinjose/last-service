@@ -1,4 +1,5 @@
 export default {
+    user: {},
     vehicles: [
         {
             type: 'Three wheeler',

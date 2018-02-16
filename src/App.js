@@ -6,6 +6,7 @@ import Main from './components/Main';
 
 function mapStateToProps( state ){
     return{
+        user: state.user,
         vehicles: state.vehicles,
         services: state.services,
         ui: state.ui

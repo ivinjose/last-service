@@ -2,6 +2,7 @@
 const ui = function( state=[], action ){
     let newState;
     switch( action.type ){
+        case 'GET_USER_INIT':
         case 'ADD_VEHICLES_INIT':
         case 'ADD_SERVICES_INIT':
         case 'UPDATE_VEHICLE_INIT':
@@ -11,6 +12,7 @@ const ui = function( state=[], action ){
             newState = Object.assign( {}, state, { blockUi: true, showLoader: true } );
             return newState;
             break;
+        case 'GET_USER_SUCCESS':
         case 'ADD_VEHICLES_SUCCESS':
         case 'ADD_SERVICES_SUCCESS':
         case 'UPDATE_VEHICLE_SUCCESS':
@@ -19,6 +21,7 @@ const ui = function( state=[], action ){
             newState = Object.assign( {}, state, { blockUi: false, showLoader: false } );
             return newState;
             break;
+        case 'GET_USER_FAILURE':
         case 'ADD_VEHICLES_FAILURE':
         case 'ADD_SERVICES_FAILURE':
         case 'UPDATE_VEHICLE_FAILURE':

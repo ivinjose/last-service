@@ -5,6 +5,13 @@ import { updateVehicleInit, updateVehicle, updateVehicleSuccess, updateVehicleFa
 import { getAllServices, getAllServicesAsync, getAllServicesSuccess, getAllServicesFailure } from './getServicesActions';
 import { addServicesInit, addServices, addServicesSuccess, addServicesFailure } from './addServicesActions';
 
+import { getUserInit, getUser, getUserSuccess, getUserFailure } from './getUserActions';
+
+export { getUserInit };
+export { getUser };
+export { getUserSuccess };
+export { getUserFailure };
+
 // Vehicles
 export { getAllVehicles };
 export { getAllVehiclesAsync };

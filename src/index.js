@@ -10,6 +10,7 @@ import styles from './styles/global.css';
 import App from './App';
 import Home from './components/Home';
 import Login from './components/Login';
+import User from './components/User';
 import ViewServiceDetails from './components/ViewServiceDetails';
 import AddServiceDetails from './components/AddServiceDetails';
 import AddVehicleDetails from './components/AddVehicleDetails';
@@ -22,6 +23,7 @@ const Root = () => (
                 <Router history={browserHistory}>
                     <Route path="/" component={App}>
                         <IndexRoute component={Home}></IndexRoute>
+                        <Route path="/user" component={User} />
                         <Route path="/login" component={Login} />
                         <Route path="/login/success" component={Login} />
                         <Route path="/addservice" component={AddServiceDetails} />

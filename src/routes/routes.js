@@ -23,4 +23,8 @@ export default [
         "path": "/login",
         "name": "Login"
     },
+    {
+        "path": "/user",
+        "name": "User"
+    },
 ];
