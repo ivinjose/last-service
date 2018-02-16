@@ -18,7 +18,7 @@ class User extends React.Component {
 			<div className={styles['user']}>
 				<SubHeader text={"USER"} />
 				<div className={styles['body']}>
-                        User info here
+                        Hello there, {this.props.user.displayName}
 				</div>
 			</div>
 		);

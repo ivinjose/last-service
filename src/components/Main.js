@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import PageBlocker from './Ui/PageBlocker'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
-
 import Header from './common/Header';
 
 const Main = React.createClass({
     render(){
         return(
             <div>
-                <Header title={"Service Manager"}/>
+                <Header title={"Service Manager"} user={this.props.user}/>
                 {this.props.ui.blockUi &&
                     <PageBlocker>
                         <RefreshIndicator

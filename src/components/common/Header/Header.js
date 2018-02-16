@@ -36,13 +36,13 @@ class Header extends React.Component {
 					onRequestChange={(isDrawerOpen) => this.setState({isDrawerOpen})} >
 						<div className={styles['info-bar']}>
 							<div className={styles['user-image-placeholder']}>
-								<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" className={styles['image']} alt="User image" />
+								<img src={this.props.user.photo} className={styles['image']} alt="User image" />
 							</div>	
 							<div className={styles['username']}>	
-								Ivin Jose
+								{this.props.user.displayName}
 							</div>	
 							<div className={styles['email']}>
-								ivinjose@gmail.com
+                                {this.props.user.email}
 							</div>	
 						</div>
 						{

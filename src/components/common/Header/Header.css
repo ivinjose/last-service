@@ -3,24 +3,18 @@
         background-color: #4E92DF;
         color: #ffffff;
         font-weight: 400;
-        height: 112px;
+        height: 100px;
         padding: 16px;
 
         .user-image-placeholder{
-            background-color: #f3f3f3;
-            border-radius: 33px;
-            height: 65px;
-            text-align: center;
-            width: 65px;
+            text-align: left;
             .image{
-                margin-top: 10px;
-                max-width: 40px;
-                max-height: 40px;
+                border-radius: 25px;
             }
         }
 
         .username{
-            margin-top: 16px;
+            margin-top: 10px;
             font-size: 14px;
         }
 
