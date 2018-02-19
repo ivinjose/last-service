@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './PageBlocker.css';
 
-const PageBlocker = React.createClass({
+class PageBlocker extends React.Component{
     render(){
         return(
             <div className={styles['page-blocker']}>
@@ -10,6 +10,6 @@ const PageBlocker = React.createClass({
             </div>
         );
     }
-})
+}
 
 export default PageBlocker;

@@ -4,7 +4,7 @@ import PageBlocker from './Ui/PageBlocker'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Header from './common/Header';
 
-const Main = React.createClass({
+class Main extends React.Component{
     render(){
         return(
             <div>
@@ -25,6 +25,6 @@ const Main = React.createClass({
             </div>
         );
     }
-})
+}
 
 export default Main;
