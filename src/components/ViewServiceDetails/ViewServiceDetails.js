@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import queryString from 'query-string';
 import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
@@ -23,7 +24,7 @@ class ViewServiceDetails extends React.Component {
 	}
 
 	componentDidMount(){
-		let queryParams = this.props.location.query;
+		let queryParams = queryString.parse( this.props.location.search );
 		if( queryParams && queryParams.vehicle ){
 			this.chooseVehicle(null,null, queryParams.vehicle);
 		}
