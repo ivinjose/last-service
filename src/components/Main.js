@@ -20,8 +20,8 @@ class Main extends React.Component{
                             style={{position: 'relative'}}
                         />
                     </PageBlocker>
-                }                
-                {React.cloneElement( this.props.children, this.props )}
+                }
+                { React.cloneElement( this.props.children, this.props ) }
             </div>
         );
     }
