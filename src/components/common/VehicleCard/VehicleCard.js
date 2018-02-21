@@ -8,7 +8,6 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import icon from '../../../images/ninja.jpg';
 
 import iconBike from '../../../images/bike.jpg';
 import iconCar from '../../../images/car.jpg';
@@ -30,7 +29,7 @@ class VehicleCard extends React.Component {
 						{this.props.data.name}
 					</div>
 					<div className={styles['avatar']}>
-						<img className={styles['image']} src={iconImage} />
+						<img className={styles['image']} src={`/images/${iconImage}`} />
 					</div>
 				</div>
 				{this.props.showEdit &&

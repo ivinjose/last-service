@@ -27,7 +27,7 @@ class ServiceDetails extends React.Component {
                             <h3>"Oops! no data available"</h3>
                         </div>
                         <div className={styles['Avatar']}>
-                            <img src={svg}/>
+                            <img src={`/images/${svg}`}/>
                         </div>
                     </div>
                 </div>
