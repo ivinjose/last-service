@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -16,11 +16,14 @@ import AddServiceDetails from './components/AddServiceDetails';
 import AddVehicleDetails from './components/AddVehicleDetails';
 import ViewVehicleDetails from './components/ViewVehicleDetails';
 
+/* 
+ * Old logic used in react-router v3
+ * *
 const Root = () => (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
             <MuiThemeProvider>
-                <Router history={browserHistory}>
+                <Router>
                     <Route path="/" component={App}>
                         <IndexRoute component={Home}></IndexRoute>
                         <Route path="/user" component={User} />
@@ -31,6 +34,19 @@ const Root = () => (
                         <Route path="/addvehicle" component={AddVehicleDetails} />
                         <Route path="/viewvehicles" component={ViewVehicleDetails} />
                     </Route>
+                </Router>
+            </MuiThemeProvider>
+        </PersistGate>
+    </Provider>
+);
+*/
+
+const Root = () => (
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <MuiThemeProvider>
+                <Router>
+                    <App />
                 </Router>
             </MuiThemeProvider>
         </PersistGate>

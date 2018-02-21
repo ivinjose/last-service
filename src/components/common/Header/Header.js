@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router'; 
+// import { browserHistory } from 'react-router'; 
+import { withRouter } from "react-router-dom";
 import styles from './Header.css';
 import routes from '../../../routes/routes';
 
@@ -67,7 +68,7 @@ class Header extends React.Component {
 		this.setState({
 			isDrawerOpen: false
 		},()=>{
-			browserHistory.push( routes[index].path );
+			this.props.history.push( routes[index].path );
 		});
 	}
 }
@@ -76,4 +77,4 @@ Header.contextTypes = {
 	store: PropTypes.object
 };
 
-export default Header;
+export default withRouter(Header);

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router'; 
+// import { browserHistory } from 'react-router'; 
+import { withRouter } from "react-router-dom";
 import styles from './VehicleCard.css';
 
 import IconButton from 'material-ui/IconButton';
@@ -44,12 +45,12 @@ class VehicleCard extends React.Component {
 	}
 
 	gotoVehicleDetails(){
-		browserHistory.push(  "/view?vehicle="+this.props.data.name );
+		this.props.history.push(  "/view?vehicle="+this.props.data.name );
 	}
 
 	gotoEditVehiclePage(){
-		browserHistory.push( "/addvehicle?editMode=true&id="+this.props.data._id );
+		this.props.history.push( "/addvehicle?editMode=true&id="+this.props.data._id );
 	}
 }
 
-export default VehicleCard;
+export default withRouter(VehicleCard);
