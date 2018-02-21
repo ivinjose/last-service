@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
+
 import PageBlocker from './Ui/PageBlocker'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import Header from './common/Header';
-
-import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import User from './User';
