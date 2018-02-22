@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { store } from "../store";
+import queryString from "query-string";
 
 import PageBlocker from "./Ui/PageBlocker";
 import RefreshIndicator from "material-ui/RefreshIndicator";
@@ -13,6 +15,12 @@ import AddVehicleDetails from "./AddVehicleDetails";
 import ViewVehicleDetails from "./ViewVehicleDetails";
 
 class Main extends React.Component {
+    componentDidMount() {
+        let queryParams = queryString.parse(this.props.location.search);
+        if (queryParams && queryParams.uid) {
+            this.props.getUser(queryParams.uid);
+        }
+    }
     render() {
         return (
             <div>
@@ -31,7 +39,7 @@ class Main extends React.Component {
                 )}
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/user" component={User} />
+                    <PrivateRoute path="/user" component={User} />
                     <Route path="/login" component={Login} />
                     <Route path="/login/success" component={Login} />
                     <Route path="/addservice" component={AddServiceDetails} />
@@ -44,18 +52,20 @@ class Main extends React.Component {
     }
 }
 
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-//     console.log("...rest:", rest);
-//     return (
-//         <Route
-//             {...rest}
-//             render={(props) => {
-//                 console.log("internal props:", props);
-//                 // return rest.children.props.user != null ? <Component {...props} /> : <Redirect to="/login" />;
-//                 return <Redirect to="/login" />;
-//             }}
-//         />
-//     );
-// };
+const PrivateRoute = ({ component: Component, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            render={(props) => {
+                return isUserLoggedIn() ? <Component {...props} /> : <Redirect to="/login" />;
+            }}
+        />
+    );
+};
+
+function isUserLoggedIn() {
+    const state = store.getState();
+    return state.user._id ? true : false;
+}
 
 export default Main;

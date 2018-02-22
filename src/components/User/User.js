@@ -9,16 +9,7 @@ import globalStyles from "../../styles/global.css";
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 
-import { getUser } from "../../actions/index";
-
 class User extends React.Component {
-    componentDidMount() {
-        let queryParams = queryString.parse(this.props.location.search);
-        if (queryParams && queryParams.uid) {
-            this.props.getUser(queryParams.uid);
-        }
-    }
-
     render() {
         return (
             <div className={styles["user"]}>
@@ -35,8 +26,4 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getUser }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(mapStateToProps)(User);
