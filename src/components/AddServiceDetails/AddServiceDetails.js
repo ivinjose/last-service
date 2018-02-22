@@ -1,7 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+import { addServices } from "../../actions/index";
+
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 import ServicedItem from "./AddServicedItem";
@@ -177,4 +181,14 @@ AddServiceDetails.contextTypes = {
     store: PropTypes.object
 };
 
-export default AddServiceDetails;
+function mapStateToProps(state) {
+    return {
+        vehicles: state.vehicles
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ addServices }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddServiceDetails);
