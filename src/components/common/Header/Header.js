@@ -27,34 +27,35 @@ class Header extends React.Component {
                     onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
                     style={{ backgroundColor: "#4E92DF", position: "fixed" }}
                 />
-
-                <Drawer
-                    docked={false}
-                    width={250}
-                    open={this.state.isDrawerOpen}
-                    value={1}
-                    onRequestChange={(isDrawerOpen) => this.setState({ isDrawerOpen })}
-                >
-                    <div className={styles["info-bar"]}>
-                        <div className={styles["user-image-placeholder"]}>
-                            <img src={this.props.user.photo} className={styles["image"]} alt="User image" />
+                {this.props.location.pathname != "/user" && (
+                    <Drawer
+                        docked={false}
+                        width={250}
+                        open={this.state.isDrawerOpen}
+                        value={1}
+                        onRequestChange={(isDrawerOpen) => this.setState({ isDrawerOpen })}
+                    >
+                        <div className={styles["info-bar"]}>
+                            <div className={styles["user-image-placeholder"]}>
+                                <img src={this.props.user.photo} className={styles["image"]} alt="User image" />
+                            </div>
+                            <div className={styles["username"]}>{this.props.user.displayName}</div>
+                            <div className={styles["email"]}>{this.props.user.email}</div>
                         </div>
-                        <div className={styles["username"]}>{this.props.user.displayName}</div>
-                        <div className={styles["email"]}>{this.props.user.email}</div>
-                    </div>
-                    {routes.map((route, index) => {
-                        return (
-                            <MenuItem
-                                style={{ fontWeight: 400, color: "#333333" }}
-                                value={1}
-                                key={index}
-                                onClick={this.changeRoute.bind(this, index)}
-                            >
-                                {route.name}
-                            </MenuItem>
-                        );
-                    })}
-                </Drawer>
+                        {routes.map((route, index) => {
+                            return (
+                                <MenuItem
+                                    style={{ fontWeight: 400, color: "#333333" }}
+                                    value={1}
+                                    key={index}
+                                    onClick={this.changeRoute.bind(this, index)}
+                                >
+                                    {route.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Drawer>
+                )}
             </div>
         );
     }

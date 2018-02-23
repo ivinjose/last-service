@@ -15,16 +15,10 @@ import AddVehicleDetails from "./AddVehicleDetails";
 import ViewVehicleDetails from "./ViewVehicleDetails";
 
 class Main extends React.Component {
-    componentDidMount() {
-        let queryParams = queryString.parse(this.props.location.search);
-        if (queryParams && queryParams.uid) {
-            this.props.getUser(queryParams.uid);
-        }
-    }
     render() {
         return (
             <div>
-                <Header title={"Service Manager"} user={this.props.user} />
+                <Header title={"Service Manager"} location={this.props.location} user={this.props.user || {}} />
                 {this.props.ui.blockUi && (
                     <PageBlocker>
                         <RefreshIndicator
@@ -39,7 +33,7 @@ class Main extends React.Component {
                 )}
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <PrivateRoute path="/user" component={User} />
+                    <Route path="/user" component={User} />
                     <Route path="/login" component={Login} />
                     <Route path="/addservice" component={AddServiceDetails} />
                     <Route path="/view" component={ViewServiceDetails} />
