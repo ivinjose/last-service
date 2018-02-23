@@ -12,6 +12,7 @@ import { addServicesInit, addServices, addServicesSuccess, addServicesFailure } 
 
 import { getUserInit, getUser, getUserSuccess, getUserFailure } from "./getUserActions";
 import { getUserVehiclesInit, getUserVehicles, getUserVehiclesSuccess, getUserVehiclesFailure } from "./getUserActions";
+import { getUserServicesInit, getUserServices, getUserServicesSuccess, getUserServicesFailure } from "./getUserActions";
 
 export { getUserInit };
 export { getUser };
@@ -44,6 +45,11 @@ export { getAllServices };
 export { getAllServicesAsync };
 export { getAllServicesSuccess };
 export { getAllServicesFailure };
+
+export { getUserServicesInit };
+export { getUserServices };
+export { getUserServicesSuccess };
+export { getUserServicesFailure };
 
 export { addServicesInit };
 export { addServices };

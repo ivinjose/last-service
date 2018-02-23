@@ -10,13 +10,12 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import functions from "./functions";
 
-import { getUserVehicles, getAllVehiclesAsync, getAllServicesAsync } from "../../actions/index";
+import { getUserVehicles, getUserServices } from "../../actions/index";
 
 class Home extends React.Component {
     componentDidMount() {
         this.props.getUserVehicles(this.props.user._id);
-        // this.props.getAllVehiclesAsync();
-        this.props.getAllServicesAsync();
+        this.props.getUserServices(this.props.user._id);
     }
 
     render() {
@@ -76,7 +75,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ getUserVehicles, getAllVehiclesAsync, getAllServicesAsync }, dispatch);
+    return bindActionCreators({ getUserVehicles, getUserServices }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
