@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import queryString from "query-string";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { store } from "../../store";
 import { addVehicles, updateVehicle } from "../../actions/index";
 
 import Header from "../common/Header";
@@ -135,6 +135,7 @@ class AddVehicleDetails extends React.Component {
     saveVehicleDetails() {
         const vehicle = {
             name: this.state.vehicle,
+            user: store.getState().user._id,
             type: this.state.vehicleType
         };
         this.props.addVehicles([vehicle]);
@@ -143,6 +144,7 @@ class AddVehicleDetails extends React.Component {
     updateVehicleDetails() {
         const vehicle = {
             id: this.state.vehicleId,
+            user: store.getState().user._id,
             name: this.state.vehicle,
             type: this.state.vehicleType
         };
