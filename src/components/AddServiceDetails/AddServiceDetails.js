@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { store } from "../../store";
 
 import { addServices } from "../../actions/index";
 
@@ -55,7 +55,7 @@ class AddServiceDetails extends React.Component {
                             onChange={this.updateVehicle.bind(this)}
                         >
                             {this.props.vehicles.map(function(vehicle, index) {
-                                return <MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />;
+                                return <MenuItem key={vehicle._id} value={vehicle._id} primaryText={vehicle.name} />;
                             })}
                         </SelectField>
                     </div>
@@ -158,28 +158,17 @@ class AddServiceDetails extends React.Component {
     }
 
     saveServicedItem(e) {
-        let { store } = this.context;
-        let currentVehicle = { vehicle: this.state.currentVehicle };
-        let date = this.state.date;
-        let component = this.state.component;
-        let amount = this.state.amount;
-        let comments = this.state.comments;
-
         let service = {
+            user: store.getState().user._id,
             vehicle: this.state.currentVehicle,
-            date,
-            component,
-            amount,
-            comments
+            date: this.state.date,
+            component: this.state.component,
+            amount: this.state.amount,
+            comments: this.state.comments
         };
-
         this.props.addServices([service]);
     }
 }
-
-AddServiceDetails.contextTypes = {
-    store: PropTypes.object
-};
 
 function mapStateToProps(state) {
     return {

@@ -41,7 +41,6 @@ class Main extends React.Component {
                     <Route exact path="/" component={Home} />
                     <PrivateRoute path="/user" component={User} />
                     <Route path="/login" component={Login} />
-                    <Route path="/login/success" component={Login} />
                     <Route path="/addservice" component={AddServiceDetails} />
                     <Route path="/view" component={ViewServiceDetails} />
                     <Route path="/addvehicle" component={AddVehicleDetails} />
@@ -57,7 +56,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={(props) => {
-                return isUserLoggedIn() ? <Component {...props} /> : <Redirect to="/login" />;
+                return isUserLoggedIn() ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/login" redirectReason={"You need to be logged in"} />
+                );
             }}
         />
     );

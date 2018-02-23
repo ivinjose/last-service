@@ -42,7 +42,7 @@ class ViewServiceDetails extends React.Component {
                             onChange={this.chooseVehicle.bind(this)}
                         >
                             {this.props.vehicles.map(function(vehicle, index) {
-                                return <MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />;
+                                return <MenuItem key={vehicle._id} value={vehicle._id} primaryText={vehicle.name} />;
                             })}
                         </SelectField>
                     </div>
