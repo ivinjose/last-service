@@ -11,7 +11,7 @@ class Login extends React.Component {
                     {/* <div className={styles["logo"]}>
                         <img className={styles["image"]} src={`/images/${logo}`} />
                     </div> */}
-                    <div className={styles["message"]}>Welcome to</div>
+                    <div className={styles["message"]}>Login here.</div>
                     <div className={styles["title"]}>Service Manager</div>
 
                     <GoogleButton />

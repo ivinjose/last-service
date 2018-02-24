@@ -1,30 +1,30 @@
 export default [
     {
-        "path": "/",
-        "name": "Home"
+        path: "/",
+        name: "Home"
     },
     {
-        "path": "/view",
-        "name": "View Service Details"
+        path: "/view",
+        name: "My services"
     },
     {
-        "path": "/viewvehicles",
-        "name": "View Vehicle Details"
+        path: "/viewvehicles",
+        name: "My vehicles"
     },
     {
-        "path": "/addservice",
-        "name": "Add Service Details"
+        path: "/addservice",
+        name: "Add a new Service"
     },
     {
-        "path": "/addvehicle",
-        "name": "Add Vehicle Details"
+        path: "/addvehicle",
+        name: "Add a new Vehicle"
     },
     {
-        "path": "/login",
-        "name": "Login"
+        path: "/login",
+        name: "Login"
     },
     {
-        "path": "/user",
-        "name": "User"
-    },
+        path: "/user",
+        name: "User"
+    }
 ];

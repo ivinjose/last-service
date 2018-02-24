@@ -32,7 +32,7 @@ class Main extends React.Component {
                     </PageBlocker>
                 )}
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <PrivateRoute exact path="/" component={Home} />
                     <Route path="/user" component={User} />
                     <Route path="/login" component={Login} />
                     <Route path="/addservice" component={AddServiceDetails} />

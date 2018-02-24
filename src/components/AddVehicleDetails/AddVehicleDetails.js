@@ -22,7 +22,7 @@ class AddVehicleDetails extends React.Component {
 
         this.state = {
             editMode: false,
-            pageTitle: "ADD VEHICLE DETAILS",
+            pageTitle: "ADD NEW VEHICLE",
             vehicle: "",
             vehicleType: null,
             snackbarState: false,
@@ -48,7 +48,7 @@ class AddVehicleDetails extends React.Component {
     doEditModeConfiguration(vehicle) {
         this.setState({
             editMode: true,
-            pageTitle: "EDIT VEHICLE DETAILS",
+            pageTitle: "UPDATE VEHICLE",
             vehicleId: vehicle._id,
             vehicle: vehicle.name,
             vehicleType: vehicle.type
@@ -58,7 +58,7 @@ class AddVehicleDetails extends React.Component {
     doAddModeConfiguration() {
         this.setState({
             editMode: false,
-            pageTitle: "ADD VEHICLE DETAILS",
+            pageTitle: "ADD NEW VEHICLE",
             vehicleId: null,
             vehicle: "",
             vehicleType: null

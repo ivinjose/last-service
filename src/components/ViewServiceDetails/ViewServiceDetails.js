@@ -32,7 +32,7 @@ class ViewServiceDetails extends React.Component {
     render() {
         return (
             <div className={styles["service-details"]}>
-                <SubHeader text={"VIEW SERVICES"} />
+                <SubHeader text={"MY SERVICES"} />
                 <div className={styles["body"]}>
                     <div className={globalStyles["row"]}>
                         <SelectField

@@ -8,6 +8,7 @@ import styles from "./ViewVehicleDetails.css";
 import globalStyles from "../../styles/global.css";
 import ServiceDetails from "../ServiceDetails";
 import Header from "../common/Header";
+import SubHeader from "../common/SubHeader";
 import VehicleCard from "../common/VehicleCard";
 import { List } from "material-ui/List";
 
@@ -16,7 +17,7 @@ class ViewVehicleDetails extends React.Component {
         // if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
         return (
             <div className={styles["vehicle-details"]}>
-                <h1 className={styles["header"]}>VEHICLES</h1>
+                <SubHeader text={"MY VEHICLES"} />
                 <div className={styles["body"]}>
                     <List>
                         {this.props.vehicles.map(function(vehicle, index) {
