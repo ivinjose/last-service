@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 
 import styles from "./Home.css";
 import Header from "../common/Header";
@@ -8,7 +9,7 @@ import SubHeader from "../common/SubHeader";
 import VehicleCard from "../common/VehicleCard";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
-import functions from "./functions";
+import routes from "../../routes/routes";
 
 import { getUserVehicles, getUserServices } from "../../actions/index";
 
@@ -40,7 +41,7 @@ class Home extends React.Component {
                     <div className={styles["body"]}>
                         <Empty />
                         <div className={styles["cta"]}>
-                            <FloatingActionButton onClick={functions.addNew.bind(this)}>
+                            <FloatingActionButton onClick={() => this.props.history.push(routes[4].path)}>
                                 <ContentAdd />
                             </FloatingActionButton>
                         </div>
@@ -78,4 +79,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ getUserVehicles, getUserServices }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
