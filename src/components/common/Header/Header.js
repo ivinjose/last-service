@@ -20,7 +20,7 @@ class Header extends React.Component {
     }
 
     render() {
-        return (
+        return this.props.location.pathname == "/login" ? null : (
             <div className={styles["header"]}>
                 <AppBar
                     title={this.props.title}
