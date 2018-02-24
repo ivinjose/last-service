@@ -1,30 +1,37 @@
 export default [
     {
         path: "/",
-        name: "Home"
+        name: "Home",
+        isVisibleInMenu: true
     },
     {
         path: "/view",
-        name: "My services"
+        name: "My services",
+        isVisibleInMenu: true
     },
     {
         path: "/viewvehicles",
-        name: "My vehicles"
+        name: "My vehicles",
+        isVisibleInMenu: true
     },
     {
         path: "/addservice",
-        name: "Add a new Service"
+        name: "Add a new Service",
+        isVisibleInMenu: true
     },
     {
         path: "/addvehicle",
-        name: "Add a new Vehicle"
+        name: "Add a new Vehicle",
+        isVisibleInMenu: true
     },
     {
         path: "/login",
-        name: "Login"
+        name: "Login",
+        isVisibleInMenu: false
     },
     {
         path: "/user",
-        name: "User"
+        name: "User",
+        isVisibleInMenu: false
     }
 ];

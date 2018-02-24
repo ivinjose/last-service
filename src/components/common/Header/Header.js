@@ -43,6 +43,7 @@ class Header extends React.Component {
                             <div className={styles["email"]}>{this.props.user.email}</div>
                         </div>
                         {routes.map((route, index) => {
+                            if (!route.isVisibleInMenu) return null;
                             return (
                                 <MenuItem
                                     style={{ fontWeight: 400, color: "#333333" }}
