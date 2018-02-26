@@ -42,7 +42,7 @@ class VehicleCard extends React.Component {
     }
 
     gotoVehicleDetails() {
-        this.props.history.push("/view?vehicle=" + this.props.data._id);
+        this.props.history.push("/services?vehicle=" + this.props.data._id);
     }
 
     gotoEditVehiclePage() {

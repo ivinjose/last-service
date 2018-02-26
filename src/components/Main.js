@@ -9,10 +9,10 @@ import Header from "./common/Header";
 import Home from "./Home";
 import Login from "./Login";
 import User from "./User";
-import ViewServiceDetails from "./ViewServiceDetails";
+import Services from "./Services";
+import Vehicles from "./Vehicles";
 import AddServiceDetails from "./AddServiceDetails";
 import AddVehicleDetails from "./AddVehicleDetails";
-import ViewVehicleDetails from "./ViewVehicleDetails";
 
 class Main extends React.Component {
     render() {
@@ -35,10 +35,10 @@ class Main extends React.Component {
                     <Route path="/login" component={Login} />
                     <Route path="/user" component={User} />
                     <PrivateRoute exact path="/" component={Home} />
+                    <PrivateRoute path="/services" component={Services} />
+                    <PrivateRoute path="/vehicles" component={Vehicles} />
                     <PrivateRoute path="/addservice" component={AddServiceDetails} />
-                    <PrivateRoute path="/view" component={ViewServiceDetails} />
                     <PrivateRoute path="/addvehicle" component={AddVehicleDetails} />
-                    <PrivateRoute path="/viewvehicles" component={ViewVehicleDetails} />
                 </Switch>
             </div>
         );

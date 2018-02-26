@@ -1,17 +1,17 @@
-.vehicle-details{
+.vehicles {
     padding-top: 64px;
-    .header{
+    .header {
         background-color: #f8f8f8;
-        color: #B2BBC3;
+        color: #b2bbc3;
         font-weight: 400;
         font-size: 13px;
         letter-spacing: 1px;
         padding: 15px;
-        margin: 0;        
+        margin: 0;
     }
-    .body{
+    .body {
     }
-    .cta{
+    .cta {
         text-align: right;
         margin: 20px;
     }

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import styles from "./ViewVehicleDetails.css";
+import styles from "./Vehicles.css";
 import globalStyles from "../../styles/global.css";
 import ServiceDetails from "../ServiceDetails";
 import Header from "../common/Header";
@@ -12,11 +12,11 @@ import SubHeader from "../common/SubHeader";
 import VehicleCard from "../common/VehicleCard";
 import { List } from "material-ui/List";
 
-class ViewVehicleDetails extends React.Component {
+class Vehicles extends React.Component {
     render() {
         // if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
         return (
-            <div className={styles["vehicle-details"]}>
+            <div className={styles["vehicles"]}>
                 <SubHeader text={"MY VEHICLES"} />
                 <div className={styles["body"]}>
                     <List>
@@ -37,4 +37,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(ViewVehicleDetails);
+export default connect(mapStateToProps)(Vehicles);

@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import queryString from "query-string";
 
-import styles from "./ViewServiceDetails.css";
+import styles from "./Services.css";
 import globalStyles from "../../styles/global.css";
 import ServiceDetails from "../ServiceDetails";
 import Header from "../common/Header";
@@ -12,7 +12,7 @@ import SubHeader from "../common/SubHeader";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 
-class ViewServiceDetails extends React.Component {
+class Services extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -31,7 +31,7 @@ class ViewServiceDetails extends React.Component {
 
     render() {
         return (
-            <div className={styles["service-details"]}>
+            <div className={styles["services"]}>
                 <SubHeader text={"MY SERVICES"} />
                 <div className={styles["body"]}>
                     <div className={globalStyles["row"]}>
@@ -75,4 +75,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(ViewServiceDetails);
+export default connect(mapStateToProps)(Services);

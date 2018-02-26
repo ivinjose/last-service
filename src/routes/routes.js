@@ -5,12 +5,12 @@ export default [
         isVisibleInMenu: true
     },
     {
-        path: "/view",
+        path: "/services",
         name: "My services",
         isVisibleInMenu: true
     },
     {
-        path: "/viewvehicles",
+        path: "/vehicles",
         name: "My vehicles",
         isVisibleInMenu: true
     },
