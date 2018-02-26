@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./ServiceDetails.css";
-import { Card, CardHeader, CardText } from "material-ui/Card";
 import svg from "../../images/notfound.svg";
 import ServiceDetailsCard from "./ServiceDetailCard";
 
@@ -23,10 +22,8 @@ class ServiceDetails extends React.Component {
             return (
                 <div className={styles["service-details"]}>
                     <div className={styles["no-data"]}>
-                        <div className={styles["header"]}>
-                            <h4>Looks like you have not added any services yet.</h4>
-                            <h4>Why don't you add some?</h4>
-                        </div>
+                        <h4>Looks like you have not added any service yet.</h4>
+                        <h4>Why don't you add some?</h4>
                         <div className={styles["avatar"]}>{/* <img src={`/images/${svg}`} /> */}</div>
                     </div>
                 </div>
@@ -34,7 +31,7 @@ class ServiceDetails extends React.Component {
         }
 
         return (
-            <div ref="serviceItem" className={styles["service-details"]}>
+            <div className={styles["service-details"]}>
                 {this.props.data.map((service, index) => {
                     return <ServiceDetailsCard key={index} service={service} />;
                 })}
