@@ -14,7 +14,20 @@ import { List } from "material-ui/List";
 
 class Vehicles extends React.Component {
     render() {
-        // if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
+        if (this.props.vehicles.length == 0) {
+            return (
+                <div className={styles["vehicles"]}>
+                    <SubHeader text={"MY VEHICLES"} />
+                    <div className={styles["body"]}>
+                        <div className={styles["no-data"]}>
+                            <h4>Looks like you have not added any vehicles yet.</h4>
+                            <h4>Why don't you add some?</h4>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className={styles["vehicles"]}>
                 <SubHeader text={"MY VEHICLES"} />
@@ -27,7 +40,6 @@ class Vehicles extends React.Component {
                 </div>
             </div>
         );
-        // }
     }
 }
 

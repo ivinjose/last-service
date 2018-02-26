@@ -23,7 +23,7 @@ class ServiceDetails extends React.Component {
             return (
                 <div className={styles["service-details"]}>
                     <div className={styles["no-data"]}>
-                        <div className={styles["Header"]}>
+                        <div className={styles["header"]}>
                             <h4>Looks like you have not added any services yet.</h4>
                             <h4>Why don't you add some?</h4>
                         </div>

@@ -15,4 +15,9 @@
         text-align: right;
         margin: 20px;
     }
+
+    .no-data {
+        padding: 16px;
+        text-align: center;
+    }
 }
