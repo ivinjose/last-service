@@ -2,7 +2,7 @@ import fetch from "isomorphic-fetch";
 
 export function getAllVehicles() {
     return {
-        type: "GET_ALL_VEHICLES_REQUEST",
+        type: "GET_ALL_VEHICLES_INIT",
         data: null
     };
 }

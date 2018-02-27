@@ -21,7 +21,7 @@ class Home extends React.Component {
     }
 
     render() {
-        if (this.props.ui.showLoader) {
+        if (this.props.ui.showPlaceholderLoader) {
             return (
                 <div className={styles["home"]}>
                     <SubHeader text={"HOME"} />

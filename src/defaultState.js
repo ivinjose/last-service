@@ -3,7 +3,7 @@ export default {
     vehicles: [],
     services: [],
     ui: {
-        blockUi: false,
-        showLoader: false
+        showPageBlockingLoader: false,
+        showPlaceholderLoader: false
     }
 };

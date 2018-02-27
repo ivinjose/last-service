@@ -1,43 +1,46 @@
-import fetch from 'isomorphic-fetch';
+import fetch from "isomorphic-fetch";
 
-export function getAllServices( ){
+export function getAllServices() {
     return {
-        type: 'GET_ALL_SERVICES_REQUEST',
+        type: "GET_ALL_SERVICES_INIT",
         data: null
     };
 }
 
-export function getAllServicesAsync( ){
-    return function (dispatch){
-        dispatch( getAllServices() );
-        fetch('http://localhost:4001/services',
-            { 
-                method: 'GET', 
-                headers: {
-				    'Content-Type': 'application/json'
-			    }         
-            }).then(function(response){
-                return( response.text() );
-            }).then(function(response){
+export function getAllServicesAsync() {
+    return function(dispatch) {
+        dispatch(getAllServices());
+        fetch("http://localhost:4001/services", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(function(response) {
+                return response.text();
+            })
+            .then(function(response) {
                 return JSON.parse(response);
-            }).then(function(response){
-                dispatch( getAllServicesSuccess( response ) );
-            }).catch(function(error){
-                dispatch( getAllServicesFailure( error ) );
+            })
+            .then(function(response) {
+                dispatch(getAllServicesSuccess(response));
+            })
+            .catch(function(error) {
+                dispatch(getAllServicesFailure(error));
             });
-    }
+    };
 }
 
-export function getAllServicesSuccess( response ){
+export function getAllServicesSuccess(response) {
     return {
-        type: 'GET_ALL_SERVICES_SUCCESS',
+        type: "GET_ALL_SERVICES_SUCCESS",
         services: response.data
     };
 }
 
-export function getAllServicesFailure( error ){
+export function getAllServicesFailure(error) {
     return {
-        type: 'GET_ALL_SERVICES_FAILURE',
+        type: "GET_ALL_SERVICES_FAILURE",
         data: { ...error }
     };
 }
