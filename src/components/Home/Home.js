@@ -22,64 +22,58 @@ class Home extends React.Component {
 
     render() {
         if (this.props.ui.showPlaceholderLoader) {
-            return (
-                <div className={styles["home"]}>
-                    <SubHeader text={"HOME"} />
-                    <div className={styles["body"]}>
-                        <VehicleCardLoading />
-                        <VehicleCardLoading />
-                    </div>
-                </div>
-            );
+            return <LoadingProps />;
         } else {
             if (this.props.vehicles.length > 0) {
-                return (
-                    <div className={styles["home"]}>
-                        <SubHeader text={"HOME"} />
-                        <div className={styles["body"]}>
-                            {this.props.vehicles.map(function(vehicle, index) {
-                                return (
-                                    <div className={styles["vehicle"]} key={index}>
-                                        <VehicleCard data={vehicle} index={index} showEdit={false} />
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                );
+                return <LoadedProps vehicles={this.props.vehicles} />;
             } else {
-                return (
-                    <div className={styles["home"]}>
-                        <div className={styles["body"]}>
-                            <Empty />
-                            <div className={styles["cta"]}>
-                                <FloatingActionButton onClick={() => this.props.history.push(routes[4].path)}>
-                                    <ContentAdd />
-                                </FloatingActionButton>
-                            </div>
-                        </div>
-                    </div>
-                );
+                return <EmptyProps history={this.props.history} />;
             }
         }
     }
 }
 
-class Empty extends React.Component {
-    constructor() {
-        super();
-    }
+const LoadingProps = () => (
+    <div className={styles["home"]}>
+        <SubHeader text={"HOME"} />
+        <div className={styles["body"]}>
+            <VehicleCardLoading />
+            <VehicleCardLoading />
+        </div>
+    </div>
+);
 
-    render() {
-        return (
+const LoadedProps = ({ vehicles }) => (
+    <div className={styles["home"]}>
+        <SubHeader text={"HOME"} />
+        <div className={styles["body"]}>
+            {vehicles.map(function(vehicle, index) {
+                return (
+                    <div className={styles["vehicle"]} key={index}>
+                        <VehicleCard data={vehicle} index={index} showEdit={false} />
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+);
+
+const EmptyProps = ({ history }) => (
+    <div className={styles["home"]}>
+        <div className={styles["body"]}>
             <div className={styles["empty"]}>
                 <div className={styles["text1"]}>Uh oh!</div>
                 <div className={styles["text2"]}>It looks all empty in here.</div>
                 <div className={styles["text3"]}>Why don't you add some?</div>
             </div>
-        );
-    }
-}
+            <div className={styles["cta"]}>
+                <FloatingActionButton onClick={() => history.push(routes[4].path)}>
+                    <ContentAdd />
+                </FloatingActionButton>
+            </div>
+        </div>
+    </div>
+);
 
 function mapStateToProps(state) {
     return {
