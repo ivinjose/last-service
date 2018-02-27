@@ -158,6 +158,9 @@ class AddServiceDetails extends React.Component {
     }
 
     saveServicedItem(e) {
+        if (!this.isValidInput()) {
+            return;
+        }
         let service = {
             user: store.getState().user._id,
             vehicle: this.state.currentVehicle,
@@ -167,6 +170,13 @@ class AddServiceDetails extends React.Component {
             comments: this.state.comments
         };
         this.props.addServices([service]);
+    }
+
+    isValidInput() {
+        if (!this.state.currentVehicle || !this.state.date || !this.state.component || !this.state.amount) {
+            return false;
+        }
+        return true;
     }
 }
 

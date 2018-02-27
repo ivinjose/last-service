@@ -32,7 +32,7 @@ export function addVehicles(vehicles) {
     };
 }
 
-export function addVehiclesSuccess({ vehiclesAdded, message }) {
+export function addVehiclesSuccess({ data: vehiclesAdded, message }) {
     return {
         type: "ADD_VEHICLES_SUCCESS",
         vehiclesAdded,

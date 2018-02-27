@@ -133,6 +133,9 @@ class AddVehicleDetails extends React.Component {
     }
 
     saveVehicleDetails() {
+        if (!this.isValidInput()) {
+            return;
+        }
         const vehicle = {
             name: this.state.vehicle,
             user: store.getState().user._id,
@@ -142,6 +145,9 @@ class AddVehicleDetails extends React.Component {
     }
 
     updateVehicleDetails() {
+        if (!this.isValidInput()) {
+            return;
+        }
         const vehicle = {
             id: this.state.vehicleId,
             user: store.getState().user._id,
@@ -149,6 +155,13 @@ class AddVehicleDetails extends React.Component {
             type: this.state.vehicleType
         };
         this.props.updateVehicle(vehicle);
+    }
+
+    isValidInput() {
+        if (!this.state.vehicle || !this.state.vehicleType) {
+            return false;
+        }
+        return true;
     }
 }
 

@@ -32,7 +32,7 @@ export function addServices(services) {
     };
 }
 
-export function addServicesSuccess({ servicesAdded, message }) {
+export function addServicesSuccess({ data: servicesAdded, message }) {
     return {
         type: "ADD_SERVICES_SUCCESS",
         servicesAdded,

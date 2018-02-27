@@ -32,7 +32,7 @@ export function updateVehicle({ id, name, type }) {
     };
 }
 
-export function updateVehicleSuccess({ vehicleUpdated, message }) {
+export function updateVehicleSuccess({ data: vehicleUpdated, message }) {
     return {
         type: "UPDATE_VEHICLE_SUCCESS",
         vehicleUpdated,
