@@ -1,11 +1,6 @@
 export default {
     user: {},
-    vehicles: [
-        {
-            type: 'Three wheeler',
-            name: 'BMW Auto rikshaw'
-        }
-    ],
+    vehicles: [],
     services: [],
     ui: {
         blockUi: false,

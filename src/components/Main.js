@@ -19,18 +19,19 @@ class Main extends React.Component {
         return (
             <div>
                 <Header title={"Service Manager"} location={this.props.location} user={this.props.user || {}} />
-                {this.props.ui.blockUi && (
-                    <PageBlocker>
-                        <RefreshIndicator
-                            size={50}
-                            left={0}
-                            top={0}
-                            loadingColor="#FF9800"
-                            status="loading"
-                            style={{ position: "relative" }}
-                        />
-                    </PageBlocker>
-                )}
+                {false &&
+                    this.props.ui.blockUi && (
+                        <PageBlocker>
+                            <RefreshIndicator
+                                size={50}
+                                left={0}
+                                top={0}
+                                loadingColor="#FF9800"
+                                status="loading"
+                                style={{ position: "relative" }}
+                            />
+                        </PageBlocker>
+                    )}
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/user" component={User} />

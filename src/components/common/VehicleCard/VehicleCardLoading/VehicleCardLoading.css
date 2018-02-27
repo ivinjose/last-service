@@ -1,0 +1,45 @@
+.vehicle {
+    display: flex;
+    margin: 0 15px;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 15px 0px;
+
+    .content {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .text {
+            height: 18px;
+            width: 160px;
+            border-radius: 2px;
+            animation-duration: 2s;
+        }
+        .avatar {
+            height: 54px;
+            width: 85px;
+            border-radius: 50px;
+            margin-left: 15px;
+
+            animation-duration: 4s;
+        }
+
+        .animated {
+            animation-iteration-count: infinite;
+            animation-name: placeHolderShimmer;
+            animation-timing-function: linear;
+            background: #f6f7f8;
+            background: linear-gradient(to right, #f3f3f3 8%, #ececec 36%, #f3f3f3 76%);
+        }
+    }
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}

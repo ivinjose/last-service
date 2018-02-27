@@ -7,6 +7,7 @@ import styles from "./Home.css";
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 import VehicleCard from "../common/VehicleCard";
+import VehicleCardLoading from "../common/VehicleCard/VehicleCardLoading";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import routes from "../../routes/routes";
@@ -20,34 +21,46 @@ class Home extends React.Component {
     }
 
     render() {
-        if (this.props.vehicles.length > 0) {
+        if (this.props.ui.showLoader) {
             return (
                 <div className={styles["home"]}>
                     <SubHeader text={"HOME"} />
                     <div className={styles["body"]}>
-                        {this.props.vehicles.map(function(vehicle, index) {
-                            return (
-                                <div className={styles["vehicle"]} key={index}>
-                                    <VehicleCard data={vehicle} index={index} showEdit={false} />
-                                </div>
-                            );
-                        })}
+                        <VehicleCardLoading />
+                        <VehicleCardLoading />
                     </div>
                 </div>
             );
         } else {
-            return (
-                <div className={styles["home"]}>
-                    <div className={styles["body"]}>
-                        <Empty />
-                        <div className={styles["cta"]}>
-                            <FloatingActionButton onClick={() => this.props.history.push(routes[4].path)}>
-                                <ContentAdd />
-                            </FloatingActionButton>
+            if (this.props.vehicles.length > 0) {
+                return (
+                    <div className={styles["home"]}>
+                        <SubHeader text={"HOME"} />
+                        <div className={styles["body"]}>
+                            {this.props.vehicles.map(function(vehicle, index) {
+                                return (
+                                    <div className={styles["vehicle"]} key={index}>
+                                        <VehicleCard data={vehicle} index={index} showEdit={false} />
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
-                </div>
-            );
+                );
+            } else {
+                return (
+                    <div className={styles["home"]}>
+                        <div className={styles["body"]}>
+                            <Empty />
+                            <div className={styles["cta"]}>
+                                <FloatingActionButton onClick={() => this.props.history.push(routes[4].path)}>
+                                    <ContentAdd />
+                                </FloatingActionButton>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
         }
     }
 }
@@ -70,6 +83,7 @@ class Empty extends React.Component {
 
 function mapStateToProps(state) {
     return {
+        ui: state.ui,
         user: state.user,
         vehicles: state.vehicles
     };
