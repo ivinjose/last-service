@@ -5,6 +5,7 @@ import queryString from "query-string";
 
 import PageBlocker from "./Ui/PageBlocker";
 import RefreshIndicator from "material-ui/RefreshIndicator";
+import Snackbar from "material-ui/Snackbar";
 import Header from "./common/Header";
 import Home from "./Home";
 import Login from "./Login";
@@ -31,6 +32,12 @@ class Main extends React.Component {
                         />
                     </PageBlocker>
                 )}
+                <Snackbar
+                    open={this.props.ui.snackbarMessage ? true : false}
+                    message={this.props.ui.snackbarMessage ? this.props.ui.snackbarMessage : ""}
+                    autoHideDuration={2000}
+                    onRequestClose={this.handleRequestClose}
+                />
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/user" component={User} />

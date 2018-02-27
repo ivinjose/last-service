@@ -19,15 +19,6 @@ const vehicles = function(state = [], action) {
             return state;
             break;
 
-        // Get vehicle flow
-        // case "GET_VEHICLES_SUCCESS":
-        //     return [...state, action.vehiclesList];
-        //     break;
-        // case "GET_VEHICLES_FAILURE":
-        //     console.log("GET_VEHICLES_FAILURE");
-        //     return state;
-        //     break;
-
         // Get all vehicles flow
         case "GET_USER_VEHICLES_SUCCESS":
         case "GET_ALL_VEHICLES_SUCCESS":

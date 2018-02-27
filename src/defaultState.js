@@ -4,6 +4,7 @@ export default {
     services: [],
     ui: {
         showPageBlockingLoader: false,
-        showPlaceholderLoader: false
+        showPlaceholderLoader: false,
+        snackbarMessage: null
     }
 };
