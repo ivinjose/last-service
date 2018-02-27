@@ -20,10 +20,13 @@ const ui = function(state = [], action) {
         /**
          * UPDATE VEHICLE actions
          */
+        case "ADD_VEHICLES_INIT":
         case "UPDATE_VEHICLE_INIT":
             newState = Object.assign({}, state, { showPageBlockingLoader: true, snackbarMessage: null });
             return newState;
             break;
+        case "ADD_VEHICLES_SUCCESS":
+        case "ADD_VEHICLES_FAILURE":
         case "UPDATE_VEHICLE_SUCCESS":
         case "UPDATE_VEHICLE_FAILURE":
             newState = Object.assign({}, state, { showPageBlockingLoader: false, snackbarMessage: action.message });
@@ -34,7 +37,6 @@ const ui = function(state = [], action) {
          * All other actions
          */
         case "GET_USER_INIT":
-        case "ADD_VEHICLES_INIT":
         case "ADD_SERVICES_INIT":
         case "GET_ALL_VEHICLES_INIT":
         case "GET_ALL_SERVICES_INIT":
@@ -42,7 +44,6 @@ const ui = function(state = [], action) {
             return newState;
             break;
         case "GET_USER_SUCCESS":
-        case "ADD_VEHICLES_SUCCESS":
         case "ADD_SERVICES_SUCCESS":
         case "GET_ALL_VEHICLES_SUCCESS":
         case "GET_ALL_SERVICES_SUCCESS":
@@ -50,7 +51,6 @@ const ui = function(state = [], action) {
             return newState;
             break;
         case "GET_USER_FAILURE":
-        case "ADD_VEHICLES_FAILURE":
         case "ADD_SERVICES_FAILURE":
         case "GET_ALL_VEHICLES_FAILURE":
         case "GET_ALL_SERVICES_FAILURE":
