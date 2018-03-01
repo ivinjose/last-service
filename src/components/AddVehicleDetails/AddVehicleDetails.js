@@ -14,7 +14,6 @@ import TextField from "material-ui/TextField";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import RaisedButton from "material-ui/RaisedButton";
-import Snackbar from "material-ui/Snackbar";
 
 class AddVehicleDetails extends React.Component {
     constructor() {
@@ -25,8 +24,8 @@ class AddVehicleDetails extends React.Component {
             pageTitle: "ADD NEW VEHICLE",
             vehicle: "",
             vehicleType: null,
-            snackbarState: false,
-            snackbarMessage: " "
+            vehicleErrorMessage: "",
+            vehicleTypeErrorMessage: ""
         };
     }
 
@@ -51,7 +50,9 @@ class AddVehicleDetails extends React.Component {
             pageTitle: "UPDATE VEHICLE",
             vehicleId: vehicle._id,
             vehicle: vehicle.name,
-            vehicleType: vehicle.type
+            vehicleType: vehicle.type,
+            vehicleErrorMessage: "",
+            vehicleTypeErrorMessage: ""
         });
     }
 
@@ -61,7 +62,9 @@ class AddVehicleDetails extends React.Component {
             pageTitle: "ADD NEW VEHICLE",
             vehicleId: null,
             vehicle: "",
-            vehicleType: null
+            vehicleType: null,
+            vehicleErrorMessage: "",
+            vehicleTypeErrorMessage: ""
         });
     }
 
@@ -75,6 +78,7 @@ class AddVehicleDetails extends React.Component {
                             hintText="Vehicle name"
                             value={this.state.vehicle}
                             fullWidth={true}
+                            errorText={this.state.vehicleErrorMessage}
                             onChange={this.updateVehicle.bind(this)}
                         />
                     </div>
@@ -83,6 +87,7 @@ class AddVehicleDetails extends React.Component {
                             hintText="Vehicle type"
                             fullWidth={true}
                             value={this.state.vehicleType}
+                            errorText={this.state.vehicleTypeErrorMessage}
                             onChange={this.updateVehicleType.bind(this)}
                         >
                             <MenuItem key={"Two wheeler"} value={"Two wheeler"} primaryText="Two wheeler" />
@@ -103,37 +108,29 @@ class AddVehicleDetails extends React.Component {
                         />
                     </div>
                 </div>
-
-                <Snackbar
-                    open={this.state.snackbarState}
-                    message={this.state.snackbarMessage}
-                    autoHideDuration={2000}
-                    onRequestClose={this.handleRequestClose}
-                />
             </div>
         );
     }
 
     updateVehicle(event, newValue) {
         this.setState({
-            vehicle: newValue
+            vehicle: newValue,
+            vehicleErrorMessage: ""
         });
     }
 
     updateVehicleType(event, key, payload) {
         this.setState({
-            vehicleType: payload
-        });
-    }
-
-    closeSnackbar() {
-        this.setState({
-            snackbarState: false
+            vehicleType: payload,
+            vehicleTypeErrorMessage: ""
         });
     }
 
     saveVehicleDetails() {
-        if (!this.isValidInput()) {
+        if (!this.isValidVehicle()) {
+            return;
+        }
+        if (!this.isValidVehicleType()) {
             return;
         }
         const vehicle = {
@@ -145,7 +142,10 @@ class AddVehicleDetails extends React.Component {
     }
 
     updateVehicleDetails() {
-        if (!this.isValidInput()) {
+        if (!this.isValidVehicle()) {
+            return;
+        }
+        if (!this.isValidVehicleType()) {
             return;
         }
         const vehicle = {
@@ -157,11 +157,34 @@ class AddVehicleDetails extends React.Component {
         this.props.updateVehicle(vehicle);
     }
 
-    isValidInput() {
-        if (!this.state.vehicle || !this.state.vehicleType) {
+    isValidVehicle() {
+        if (!this.state.vehicle) {
+            this.setState({
+                vehicleErrorMessage: "Please enter a name for the vehicle"
+            });
             return false;
+        } else {
+            this.setState({
+                vehicleErrorMessage: "",
+                vehicleTypeErrorMessage: ""
+            });
+            return true;
         }
-        return true;
+    }
+
+    isValidVehicleType() {
+        if (!this.state.vehicleType) {
+            this.setState({
+                vehicleTypeErrorMessage: "Please choose a vehicle type"
+            });
+            return false;
+        } else {
+            this.setState({
+                vehicleErrorMessage: "",
+                vehicleTypeErrorMessage: ""
+            });
+            return true;
+        }
     }
 }
 
