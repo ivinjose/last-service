@@ -165,8 +165,7 @@ class AddVehicleDetails extends React.Component {
             return false;
         } else {
             this.setState({
-                vehicleErrorMessage: "",
-                vehicleTypeErrorMessage: ""
+                vehicleErrorMessage: ""
             });
             return true;
         }
@@ -180,7 +179,6 @@ class AddVehicleDetails extends React.Component {
             return false;
         } else {
             this.setState({
-                vehicleErrorMessage: "",
                 vehicleTypeErrorMessage: ""
             });
             return true;

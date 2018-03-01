@@ -18,7 +18,6 @@ import DatePicker from "material-ui/DatePicker";
 import AutoComplete from "material-ui/AutoComplete";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
-import Snackbar from "material-ui/Snackbar";
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
@@ -37,8 +36,11 @@ class AddServiceDetails extends React.Component {
 
         this.state = {
             currentVehicle: null,
-            snackbarState: false,
-            snackbarMessage: " "
+            userErrorMessage: "",
+            vehicleErrorMessage: "",
+            dateErrorMessage: "",
+            componentErrorMessage: "",
+            amountErrorMessage: ""
         };
     }
 
@@ -52,6 +54,7 @@ class AddServiceDetails extends React.Component {
                             hintText="Choose your vehicle"
                             fullWidth={true}
                             value={this.state.currentVehicle}
+                            errorText={this.state.vehicleErrorMessage}
                             onChange={this.updateVehicle.bind(this)}
                         >
                             {this.props.vehicles.map(function(vehicle, index) {
@@ -65,6 +68,7 @@ class AddServiceDetails extends React.Component {
                             hintText="On which date service happened?"
                             onChange={this.updateDate.bind(this)}
                             fullWidth={true}
+                            errorText={this.state.dateErrorMessage}
                             formatDate={
                                 new DateTimeFormat("en-US", {
                                     day: "numeric",
@@ -80,6 +84,7 @@ class AddServiceDetails extends React.Component {
                             hintText="Which part was serviced?"
                             dataSource={serviceableParts}
                             fullWidth={true}
+                            errorText={this.state.componentErrorMessage}
                             filter={AutoComplete.caseInsensitiveFilter}
                             onUpdateInput={this.updateServicedComponent.bind(this)}
                         />
@@ -89,6 +94,7 @@ class AddServiceDetails extends React.Component {
                         <TextField
                             hintText="How much you paid?"
                             fullWidth={true}
+                            errorText={this.state.amountErrorMessage}
                             onChange={this.updateAmount.bind(this)}
                         />
                     </div>
@@ -110,44 +116,35 @@ class AddServiceDetails extends React.Component {
                         />
                     </div>
                 </div>
-
-                <Snackbar
-                    open={this.state.snackbarState}
-                    message={this.state.snackbarMessage}
-                    autoHideDuration={2000}
-                    onRequestClose={this.handleRequestClose}
-                />
             </div>
         );
     }
 
-    closeSnackbar() {
-        this.setState({
-            snackbarState: false
-        });
-    }
-
     updateVehicle(event, key, payload) {
         this.setState({
-            currentVehicle: payload
+            currentVehicle: payload,
+            vehicleErrorMessage: ""
         });
     }
 
     updateDate(event, date) {
         this.setState({
-            date: date
+            date: date,
+            dateErrorMessage: ""
         });
     }
 
     updateServicedComponent(searchText, dataSource, params) {
         this.setState({
-            component: searchText
+            component: searchText,
+            componentErrorMessage: ""
         });
     }
 
     updateAmount(event, newValue) {
         this.setState({
-            amount: newValue
+            amount: newValue,
+            amountErrorMessage: ""
         });
     }
 
@@ -158,7 +155,16 @@ class AddServiceDetails extends React.Component {
     }
 
     saveServicedItem(e) {
-        if (!this.isValidInput()) {
+        if (!this.isValidVehicle()) {
+            return;
+        }
+        if (!this.isValidDate()) {
+            return;
+        }
+        if (!this.isValidComponent()) {
+            return;
+        }
+        if (!this.isValidAmount()) {
             return;
         }
         let service = {
@@ -172,11 +178,60 @@ class AddServiceDetails extends React.Component {
         this.props.addServices([service]);
     }
 
-    isValidInput() {
-        if (!this.state.currentVehicle || !this.state.date || !this.state.component || !this.state.amount) {
+    isValidVehicle() {
+        if (!this.state.currentVehicle) {
+            this.setState({
+                vehicleErrorMessage: "Please choose the vehicle"
+            });
             return false;
+        } else {
+            this.setState({
+                vehicleErrorMessage: ""
+            });
+            return true;
         }
-        return true;
+    }
+
+    isValidDate() {
+        if (!this.state.date) {
+            this.setState({
+                dateErrorMessage: "Please choose the date of service"
+            });
+            return false;
+        } else {
+            this.setState({
+                dateErrorMessage: ""
+            });
+            return true;
+        }
+    }
+
+    isValidComponent() {
+        if (!this.state.component) {
+            this.setState({
+                componentErrorMessage: "Please specify the part that was serviced"
+            });
+            return false;
+        } else {
+            this.setState({
+                componentErrorMessage: ""
+            });
+            return true;
+        }
+    }
+
+    isValidAmount() {
+        if (!this.state.amount) {
+            this.setState({
+                amountErrorMessage: "Please specify the amount spent"
+            });
+            return false;
+        } else {
+            this.setState({
+                amountErrorMessage: ""
+            });
+            return true;
+        }
     }
 }
 
