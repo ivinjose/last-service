@@ -8,7 +8,8 @@ import rootReducer from "./reducers/index";
 
 const persistConfig = {
     key: "root",
-    storage
+    storage,
+    blacklist: ["ui"]
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middleware = applyMiddleware(thunkMiddleware /*, logger*/);
