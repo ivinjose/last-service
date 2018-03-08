@@ -7,13 +7,20 @@ module.exports = {
         path: path.join(__dirname, "www"),
         filename: "bundle.js"
     },
+    devtool: "sourcemap", // has to be removed in production
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
+        modules: [path.join(__dirname, "node_modules")]
+    },
     module: {
         rules: [
+            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
             {
-                test: /\.js$/,
+                test: /\.(jsx?)$/,
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
                 test: /\.css$/,
                 use: [
@@ -39,7 +46,6 @@ module.exports = {
                         }
                     }
                 ]
-
                 // loaders: [
                 //     'file-loader',
                 //     'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
@@ -50,9 +56,5 @@ module.exports = {
                 // }
             }
         ]
-    },
-    resolve: {
-        modules: [path.join(__dirname, "node_modules")]
-    },
-    devtool: "inline-sourcemap" // has to be removed in production
+    }
 };

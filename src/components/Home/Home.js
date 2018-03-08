@@ -14,6 +14,8 @@ import routes from "../../routes/routes";
 
 import { getUserVehicles, getUserServices } from "../../actions/index";
 
+import Test from "./test.tsx";
+
 class Home extends React.Component {
     componentDidMount() {
         this.props.getUserVehicles(this.props.user._id);
@@ -46,6 +48,7 @@ const LoadingProps = () => (
 const LoadedProps = ({ vehicles }) => (
     <div className={styles["home"]}>
         <SubHeader text={"HOME"} />
+        <Test compiler="TypeScript" framework="React" />
         <div className={styles["body"]}>
             {vehicles.map(function(vehicle, index) {
                 return (
