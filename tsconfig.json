@@ -1,16 +1,17 @@
 {
     "compilerOptions": {
-        "outDir": "./www/", // path to output directory
-        "sourceMap": true, // allow sourcemap support
+        "outDir": "./www/",
+        "sourceMap": true,
         "noImplicitAny": true,
-        "alwaysStrict": true,
-        "strictNullChecks": true, // enable strict null checks as a best practice
+        "strict": true,
+        "strictNullChecks": true,
         "module": "es6", // specify module code generation
         "moduleResolution": "node",
         "jsx": "react", // use typescript to transpile jsx to js
         "target": "es5", // specify ECMAScript target version
         "allowJs": true, // allow a partial TypeScript and JavaScript codebase
         "allowSyntheticDefaultImports": true
+        // "checkJs": true //GOOD. BUT causes lot of errors in JS"
     },
     "include": ["./src/**/*"]
 }

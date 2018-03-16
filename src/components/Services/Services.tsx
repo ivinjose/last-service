@@ -11,21 +11,32 @@ import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
+import types from "../../types";
 
-class Services extends React.Component<any, any> {
+interface Props {
+    services: types.Service[];
+    vehicles: types.Vehicle[];
+    location: any;
+}
+
+interface State {
+    currentVehicle: string;
+    serviceDetails: types.Service[];
+}
+
+class Services extends React.Component<Props, State> {
     constructor() {
         super();
         this.state = {
-            vehicles: [],
-            currentVehicle: null,
-            serviceDetails: null
+            currentVehicle: "",
+            serviceDetails: []
         };
     }
 
     componentDidMount() {
         let queryParams = queryString.parse(this.props.location.search);
         if (queryParams && queryParams.vehicle) {
-            this.chooseVehicle(null, null, queryParams.vehicle);
+            this.chooseVehicle(null, -1, queryParams.vehicle);
         }
     }
 
@@ -53,7 +64,7 @@ class Services extends React.Component<any, any> {
         );
     }
 
-    chooseVehicle(event: any, key: any, payload: any) {
+    chooseVehicle(event: any, key: number, payload: string): void {
         this.setState({
             currentVehicle: payload
         });
@@ -62,13 +73,13 @@ class Services extends React.Component<any, any> {
         });
     }
 
-    getServiceDetailsOf(vehicle: any) {
-        let services = this.props.services.filter((service: any) => service.vehicle == vehicle);
+    getServiceDetailsOf(vehicle: string): types.Service[] {
+        let services = this.props.services.filter((service: types.Service) => service.vehicle == vehicle);
         return services;
     }
 }
 
-function mapStateToProps(state: any) {
+function mapStateToProps(state: types.AppState) {
     return {
         services: state.services,
         vehicles: state.vehicles

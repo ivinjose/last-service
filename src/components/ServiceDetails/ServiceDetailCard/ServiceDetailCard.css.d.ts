@@ -2,6 +2,7 @@ export const serviceDetailCard: string;
 export const leftCol: string;
 export const amount: string;
 export const symbol: string;
+export const figure: string;
 export const date: string;
 export const rightCol: string;
 export const component: string;

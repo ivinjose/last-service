@@ -22,7 +22,8 @@
         .amount {
             font-size: 18px;
             line-height: 20px;
-            .symbol {
+            .symbol,
+            .figure {
                 padding-right: 2px;
             }
         }
