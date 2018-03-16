@@ -19,7 +19,6 @@ interface Props {
 
 class Vehicles extends React.Component<Props, {}> {
     render() {
-        console.log(this.props);
         if (this.props.vehicles.length == 0) {
             return (
                 <div className={styles.vehicles}>
