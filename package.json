@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ivinjose/last-service#readme",
   "dependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/material-ui": "^0.21.1",
     "@types/prop-types": "^15.5.2",
     "@types/query-string": "^5.1.0",
