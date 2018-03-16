@@ -16,6 +16,14 @@ export type Vehicle = {
     type: string;
 };
 
+export type User = {
+    _id: string;
+    googleId: string;
+    displayName: string;
+    email: string;
+    photo: string;
+};
+
 export type AppState = {
     user: {
         _id: string;
