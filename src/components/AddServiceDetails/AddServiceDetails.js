@@ -3,15 +3,11 @@ import ReactDOM from "react-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { store } from "../../store";
-
 import { addServices } from "../../actions/index";
-
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
-import ServicedItem from "./AddServicedItem";
 import styles from "./AddServiceDetails.css";
 import globalStyles from "../../styles/global.css";
-
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import DatePicker from "material-ui/DatePicker";
@@ -19,16 +15,8 @@ import AutoComplete from "material-ui/AutoComplete";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 
-let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
-
-const serviceableParts = [
-    "Engine oil",
-    "Break fluid",
-    "Air filter",
-    "Break disc",
-    "Front wiper blade",
-    "Read wiper blade"
-];
+const DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
+const serviceableParts = ["Engine oil", "Break fluid", "Air filter", "Break disc", "Front wiper blade", "Read wiper blade"];
 
 class AddServiceDetails extends React.Component {
     constructor() {
@@ -100,20 +88,11 @@ class AddServiceDetails extends React.Component {
                     </div>
 
                     <div className={globalStyles["row"]}>
-                        <TextField
-                            hintText="Any comments? (Optional)"
-                            fullWidth={true}
-                            onChange={this.updateComments.bind(this)}
-                        />
+                        <TextField hintText="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
                     </div>
 
                     <div className={globalStyles["row"]}>
-                        <RaisedButton
-                            label="Save"
-                            primary={true}
-                            fullWidth={true}
-                            onClick={this.saveServicedItem.bind(this)}
-                        />
+                        <RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)} />
                     </div>
                 </div>
             </div>

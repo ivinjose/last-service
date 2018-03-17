@@ -1,8 +1,8 @@
 import React from "react";
+import Redux from "redux";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-
 import styles from "./Home.css";
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
@@ -11,16 +11,35 @@ import VehicleCardLoading from "../common/VehicleCard/VehicleCardLoading";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import routes from "../../routes/routes";
-
 import { getUserVehicles, getUserServices } from "../../actions/index";
+import types from "../../types";
 
-class Home extends React.Component {
+interface Props {
+    getUserVehicles(id: string): void;
+    getUserServices(id: string): void;
+    user: types.User;
+    vehicles: types.Vehicle[];
+    ui: {
+        showPageBlockingLoader: boolean;
+        showPlaceholderLoader: boolean;
+        snackbarMessage: string;
+    };
+    location: {
+        pathname: string;
+    };
+    history: {
+        push(url: string): void;
+    };
+}
+
+class Home extends React.Component<Props, {}> {
     componentDidMount() {
         this.props.getUserVehicles(this.props.user._id);
         this.props.getUserServices(this.props.user._id);
     }
 
     render() {
+        console.log("props", this.props.history);
         if (this.props.ui.showPlaceholderLoader) {
             return <LoadingProps />;
         } else {
@@ -34,22 +53,22 @@ class Home extends React.Component {
 }
 
 const LoadingProps = () => (
-    <div className={styles["home"]}>
+    <div className={styles.home}>
         <SubHeader text={"HOME"} />
-        <div className={styles["body"]}>
+        <div className={styles.body}>
             <VehicleCardLoading />
             <VehicleCardLoading />
         </div>
     </div>
 );
 
-const LoadedProps = ({ vehicles }) => (
-    <div className={styles["home"]}>
+const LoadedProps: React.SFC<{ vehicles: types.Vehicle[] }> = (props) => (
+    <div className={styles.home}>
         <SubHeader text={"HOME"} />
-        <div className={styles["body"]}>
-            {vehicles.map(function(vehicle, index) {
+        <div className={styles.body}>
+            {props.vehicles.map(function(vehicle: types.Vehicle, index: number) {
                 return (
-                    <div className={styles["vehicle"]} key={index}>
+                    <div key={index}>
                         <VehicleCard data={vehicle} index={index} showEdit={false} />
                     </div>
                 );
@@ -59,14 +78,14 @@ const LoadedProps = ({ vehicles }) => (
 );
 
 const EmptyProps = ({ history }) => (
-    <div className={styles["home"]}>
-        <div className={styles["body"]}>
-            <div className={styles["empty"]}>
-                <div className={styles["text1"]}>Uh oh!</div>
-                <div className={styles["text2"]}>It looks all empty in here.</div>
-                <div className={styles["text3"]}>Why don't you add some?</div>
+    <div className={styles.home}>
+        <div className={styles.body}>
+            <div className={styles.empty}>
+                <div className={styles.text1}>Uh oh!</div>
+                <div className={styles.text2}>It looks all empty in here.</div>
+                <div className={styles.text3}>Why don't you add some?</div>
             </div>
-            <div className={styles["cta"]}>
+            <div className={styles.cta}>
                 <FloatingActionButton onClick={() => history.push(routes[4].path)}>
                     <ContentAdd />
                 </FloatingActionButton>
@@ -75,7 +94,7 @@ const EmptyProps = ({ history }) => (
     </div>
 );
 
-function mapStateToProps(state) {
+function mapStateToProps(state: types.AppState) {
     return {
         ui: state.ui,
         user: state.user,
@@ -83,7 +102,7 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Redux.Dispatch<types.AppState>) {
     return bindActionCreators({ getUserVehicles, getUserServices }, dispatch);
 }
 
