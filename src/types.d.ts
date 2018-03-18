@@ -5,8 +5,8 @@ export type Service = {
     date: string;
     user: string;
     vehicle: string;
-    kmsReading: string;
-    _id: string;
+    kmsReading?: string;
+    _id?: string;
 };
 
 export type Vehicle = {
