@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import queryString from "query-string";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getUser } from "../../actions/index";
 import styles from "./User.css";
 import globalStyles from "../../styles/global.css";
@@ -12,13 +12,7 @@ import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 import types from "../../types";
 
-interface Props {
-    location: {
-        search: string;
-    };
-    history: {
-        push(url: string): void;
-    };
+interface Props extends RouteComponentProps<any> {
     user: types.User;
     getUser(uid: string): void;
 }

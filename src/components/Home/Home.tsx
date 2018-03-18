@@ -1,8 +1,9 @@
 import React from "react";
-import Redux from "redux";
+import { Dispatch } from "redux";
+import { History } from "history";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import styles from "./Home.css";
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
@@ -14,7 +15,7 @@ import routes from "../../routes/routes";
 import { getUserVehicles, getUserServices } from "../../actions/index";
 import types from "../../types";
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
     getUserVehicles(id: string): void;
     getUserServices(id: string): void;
     user: types.User;
@@ -23,12 +24,6 @@ interface Props {
         showPageBlockingLoader: boolean;
         showPlaceholderLoader: boolean;
         snackbarMessage: string;
-    };
-    location: {
-        pathname: string;
-    };
-    history: {
-        push(url: string): void;
     };
 }
 
@@ -39,7 +34,6 @@ class Home extends React.Component<Props, {}> {
     }
 
     render() {
-        console.log("props", this.props.history);
         if (this.props.ui.showPlaceholderLoader) {
             return <LoadingProps />;
         } else {
@@ -77,7 +71,10 @@ const LoadedProps: React.SFC<{ vehicles: types.Vehicle[] }> = (props) => (
     </div>
 );
 
-const EmptyProps = ({ history }) => (
+interface EmptyPropsProps {
+    history: History;
+}
+const EmptyProps: React.SFC<EmptyPropsProps> = (props) => (
     <div className={styles.home}>
         <div className={styles.body}>
             <div className={styles.empty}>
@@ -86,7 +83,7 @@ const EmptyProps = ({ history }) => (
                 <div className={styles.text3}>Why don't you add some?</div>
             </div>
             <div className={styles.cta}>
-                <FloatingActionButton onClick={() => history.push(routes[4].path)}>
+                <FloatingActionButton onClick={() => props.history.push(routes[4].path)}>
                     <ContentAdd />
                 </FloatingActionButton>
             </div>
@@ -102,7 +99,7 @@ function mapStateToProps(state: types.AppState) {
     };
 }
 
-function mapDispatchToProps(dispatch: Redux.Dispatch<types.AppState>) {
+function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
     return bindActionCreators({ getUserVehicles, getUserServices }, dispatch);
 }
 

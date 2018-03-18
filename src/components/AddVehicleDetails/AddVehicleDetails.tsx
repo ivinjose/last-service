@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Dispatch } from "redux";
+import { RouteComponentProps } from "react-router-dom";
 import queryString from "query-string";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { store } from "../../store";
 import { addVehicles, updateVehicle } from "../../actions/index";
-
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 import styles from "./AddVehicleDetails.css";
@@ -15,15 +16,34 @@ import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import RaisedButton from "material-ui/RaisedButton";
 
-class AddVehicleDetails extends React.Component {
+import types from "../../types";
+
+interface Props extends RouteComponentProps<any> {
+    vehicles: types.Vehicle[];
+    addVehicles(vehicles: types.Vehicle[]): void;
+    updateVehicle(vehicle: types.Vehicle): void;
+}
+
+interface State {
+    editMode: boolean;
+    pageTitle: string;
+    vehicleId: string;
+    vehicle: string;
+    vehicleType: string;
+    vehicleErrorMessage: string;
+    vehicleTypeErrorMessage: string;
+}
+
+class AddVehicleDetails extends React.Component<Props, State> {
     constructor() {
         super();
 
         this.state = {
             editMode: false,
             pageTitle: "ADD NEW VEHICLE",
+            vehicleId: "",
             vehicle: "",
-            vehicleType: null,
+            vehicleType: "",
             vehicleErrorMessage: "",
             vehicleTypeErrorMessage: ""
         };
@@ -37,18 +57,22 @@ class AddVehicleDetails extends React.Component {
         var queryParams = queryString.parse(location.search);
 
         if (queryParams.editMode == "true") {
-            let vehicle = this.props.vehicles.find((vehicle) => vehicle._id == queryParams.id);
+            let vehicle = this.props.vehicles.find((vehicle: types.Vehicle) => vehicle._id == queryParams.id);
+            console.log("vehicle", vehicle);
             this.doEditModeConfiguration(vehicle);
         } else {
             this.doAddModeConfiguration();
         }
     }
 
-    doEditModeConfiguration(vehicle) {
+    doEditModeConfiguration(vehicle: types.Vehicle | undefined) {
+        if (!vehicle) {
+            return;
+        }
         this.setState({
             editMode: true,
             pageTitle: "UPDATE VEHICLE",
-            vehicleId: vehicle._id,
+            vehicleId: vehicle._id || "",
             vehicle: vehicle.name,
             vehicleType: vehicle.type,
             vehicleErrorMessage: "",
@@ -60,9 +84,9 @@ class AddVehicleDetails extends React.Component {
         this.setState({
             editMode: false,
             pageTitle: "ADD NEW VEHICLE",
-            vehicleId: null,
+            vehicleId: "",
             vehicle: "",
-            vehicleType: null,
+            vehicleType: "",
             vehicleErrorMessage: "",
             vehicleTypeErrorMessage: ""
         });
@@ -70,10 +94,10 @@ class AddVehicleDetails extends React.Component {
 
     render() {
         return (
-            <div className={styles["vehicle-details"]}>
+            <div className={styles.vehicleDetails}>
                 <SubHeader text={this.state.pageTitle} />
-                <div className={styles["body"]}>
-                    <div className={globalStyles["row"]}>
+                <div className={styles.body}>
+                    <div className={globalStyles.row}>
                         <TextField
                             hintText="Vehicle name"
                             value={this.state.vehicle}
@@ -82,7 +106,7 @@ class AddVehicleDetails extends React.Component {
                             onChange={this.updateVehicle.bind(this)}
                         />
                     </div>
-                    <div className={globalStyles["row"]}>
+                    <div className={globalStyles.row}>
                         <SelectField
                             hintText="Vehicle type"
                             fullWidth={true}
@@ -95,16 +119,12 @@ class AddVehicleDetails extends React.Component {
                         </SelectField>
                     </div>
 
-                    <div className={globalStyles["row"]}>
+                    <div className={globalStyles.row}>
                         <RaisedButton
                             label={this.state.editMode ? "Update" : "Save"}
                             primary={true}
                             fullWidth={true}
-                            onClick={
-                                this.state.editMode
-                                    ? this.updateVehicleDetails.bind(this)
-                                    : this.saveVehicleDetails.bind(this)
-                            }
+                            onClick={this.state.editMode ? this.updateVehicleDetails.bind(this) : this.saveVehicleDetails.bind(this)}
                         />
                     </div>
                 </div>
@@ -112,14 +132,14 @@ class AddVehicleDetails extends React.Component {
         );
     }
 
-    updateVehicle(event, newValue) {
+    updateVehicle(event: React.FormEvent<HTMLSelectElement>, newValue: string) {
         this.setState({
             vehicle: newValue,
             vehicleErrorMessage: ""
         });
     }
 
-    updateVehicleType(event, key, payload) {
+    updateVehicleType(event: React.FormEvent<HTMLSelectElement>, key: number, payload: string) {
         this.setState({
             vehicleType: payload,
             vehicleTypeErrorMessage: ""
@@ -186,13 +206,13 @@ class AddVehicleDetails extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: types.AppState) {
     return {
         vehicles: state.vehicles
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
     return bindActionCreators({ addVehicles, updateVehicle }, dispatch);
 }
 

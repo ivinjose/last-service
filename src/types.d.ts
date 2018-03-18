@@ -10,7 +10,7 @@ export type Service = {
 };
 
 export type Vehicle = {
-    _id: string;
+    _id?: string;
     user: string;
     name: string;
     type: string;

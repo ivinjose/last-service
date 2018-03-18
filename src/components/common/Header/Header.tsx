@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import styles from "./Header.css";
 import routes from "../../../routes/routes";
 import AppBar from "material-ui/AppBar";
@@ -11,15 +11,9 @@ import RemoveRedEye from "material-ui/svg-icons/image/remove-red-eye";
 import PersonAdd from "material-ui/svg-icons/social/person-add";
 import types from "../../../types";
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
     title: string;
     user: types.User;
-    location: {
-        pathname: string;
-    };
-    history: {
-        push(url: string): void;
-    };
 }
 
 interface State {

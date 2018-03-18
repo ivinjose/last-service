@@ -1,7 +1,7 @@
 declare function require(name: string): any;
 
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import styles from "./VehicleCard.css";
 
 import IconButton from "material-ui/IconButton";
@@ -18,13 +18,10 @@ const iconButtonElement = (
     </IconButton>
 );
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
     data: types.Vehicle;
     showEdit: boolean;
     index: number;
-    history: {
-        push(url: string): void;
-    };
 }
 
 class VehicleCard extends React.Component<Props, {}> {
