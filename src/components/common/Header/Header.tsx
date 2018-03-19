@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { History, Location } from "history";
 import PropTypes from "prop-types";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import styles from "./Header.css";
@@ -11,9 +12,11 @@ import RemoveRedEye from "material-ui/svg-icons/image/remove-red-eye";
 import PersonAdd from "material-ui/svg-icons/social/person-add";
 import types from "../../../types";
 
-interface Props extends RouteComponentProps<any> {
+interface Props {
     title: string;
     user: types.User;
+    history: History;
+    location: Location;
 }
 
 interface State {
