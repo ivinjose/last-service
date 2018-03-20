@@ -58,7 +58,6 @@ class AddVehicleDetails extends React.Component<Props, State> {
 
         if (queryParams.editMode == "true") {
             let vehicle = this.props.vehicles.find((vehicle: types.Vehicle) => vehicle._id == queryParams.id);
-            console.log("vehicle", vehicle);
             this.doEditModeConfiguration(vehicle);
         } else {
             this.doAddModeConfiguration();
@@ -216,4 +215,8 @@ function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
     return bindActionCreators({ addVehicles, updateVehicle }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddVehicleDetails);
+function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
+    return Object.assign({}, ownProps, stateProps, dispatchProps);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AddVehicleDetails);

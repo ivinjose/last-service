@@ -12,11 +12,9 @@ import RemoveRedEye from "material-ui/svg-icons/image/remove-red-eye";
 import PersonAdd from "material-ui/svg-icons/social/person-add";
 import types from "../../../types";
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
     title: string;
     user: types.User;
-    history: History;
-    location: Location;
 }
 
 interface State {

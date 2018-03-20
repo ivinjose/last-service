@@ -28,11 +28,9 @@ interface Props {
 
 class Main extends React.Component<Props, {}> {
     render() {
-        console.log("this.props.location", this.props.location);
-        console.log("Location", Location);
         return (
             <div>
-                <Header title={"Service Manager"} location={this.props.location} user={this.props.user || {}} />
+                <Header title={"Service Manager"} user={this.props.user || {}} />
                 {this.props.ui.showPageBlockingLoader && (
                     <PageBlocker>
                         <RefreshIndicator

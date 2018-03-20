@@ -57,7 +57,6 @@ class AddServiceDetails extends React.Component<Props, State> {
     }
 
     render() {
-        console.log("props", this.props);
         return (
             <div className={styles.serviceDetails}>
                 <SubHeader text={"ADD NEW SERVICE"} />
@@ -249,4 +248,8 @@ function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
     return bindActionCreators({ addServices }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddServiceDetails);
+function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
+    return Object.assign({}, ownProps, stateProps, dispatchProps);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AddServiceDetails);

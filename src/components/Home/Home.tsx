@@ -103,4 +103,8 @@ function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
     return bindActionCreators({ getUserVehicles, getUserServices }, dispatch);
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));
+function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
+    return Object.assign({}, ownProps, stateProps, dispatchProps);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps, mergeProps)(Home));

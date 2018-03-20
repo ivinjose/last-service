@@ -10,7 +10,8 @@
         "jsx": "react", // use typescript to transpile jsx to js
         "target": "es6", // specify ECMAScript target version
         "allowJs": true, // allow a partial TypeScript and JavaScript codebase
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "lib": ["es2015", "es2017", "dom"]
         // "checkJs": true //GOOD. BUT causes lot of errors in JS"
     },
     "include": ["./src/**/*"]
