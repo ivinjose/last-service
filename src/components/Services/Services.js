@@ -11,32 +11,21 @@ import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
-import types from "../../types";
 
-interface Props {
-    services: types.Service[];
-    vehicles: types.Vehicle[];
-    location: any;
-}
-
-interface State {
-    currentVehicle: string;
-    serviceDetails: types.Service[];
-}
-
-class Services extends React.Component<Props, State> {
+class Services extends React.Component {
     constructor() {
         super();
         this.state = {
-            currentVehicle: "",
-            serviceDetails: []
+            vehicles: [],
+            currentVehicle: null,
+            serviceDetails: null
         };
     }
 
     componentDidMount() {
         let queryParams = queryString.parse(this.props.location.search);
         if (queryParams && queryParams.vehicle) {
-            this.chooseVehicle(null, -1, queryParams.vehicle);
+            this.chooseVehicle(null, null, queryParams.vehicle);
         }
     }
 
@@ -52,7 +41,7 @@ class Services extends React.Component<Props, State> {
                             value={this.state.currentVehicle}
                             onChange={this.chooseVehicle.bind(this)}
                         >
-                            {this.props.vehicles.map(function(vehicle: any, index: number) {
+                            {this.props.vehicles.map(function(vehicle, index) {
                                 return <MenuItem key={vehicle._id} value={vehicle._id} primaryText={vehicle.name} />;
                             })}
                         </SelectField>
@@ -64,7 +53,7 @@ class Services extends React.Component<Props, State> {
         );
     }
 
-    chooseVehicle(event: any, key: number, payload: string): void {
+    chooseVehicle(event, key, payload) {
         this.setState({
             currentVehicle: payload
         });
@@ -73,13 +62,13 @@ class Services extends React.Component<Props, State> {
         });
     }
 
-    getServiceDetailsOf(vehicle: string): types.Service[] {
-        let services = this.props.services.filter((service: types.Service) => service.vehicle == vehicle);
+    getServiceDetailsOf(vehicle) {
+        let services = this.props.services.filter((service) => service.vehicle == vehicle);
         return services;
     }
 }
 
-function mapStateToProps(state: types.AppState) {
+function mapStateToProps(state) {
     return {
         services: state.services,
         vehicles: state.vehicles

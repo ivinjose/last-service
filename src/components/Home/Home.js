@@ -1,9 +1,8 @@
 import React from "react";
-import { Dispatch } from "redux";
-import { History } from "history";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
 import styles from "./Home.css";
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
@@ -12,22 +11,10 @@ import VehicleCardLoading from "../common/VehicleCard/VehicleCardLoading";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import routes from "../../routes/routes";
+
 import { getUserVehicles, getUserServices } from "../../actions/index";
-import types from "../../types";
 
-interface Props extends RouteComponentProps<any> {
-    getUserVehicles(id: string): void;
-    getUserServices(id: string): void;
-    user: types.User;
-    vehicles: types.Vehicle[];
-    ui: {
-        showPageBlockingLoader: boolean;
-        showPlaceholderLoader: boolean;
-        snackbarMessage: string;
-    };
-}
-
-class Home extends React.Component<Props, {}> {
+class Home extends React.Component {
     componentDidMount() {
         this.props.getUserVehicles(this.props.user._id);
         this.props.getUserServices(this.props.user._id);
@@ -47,22 +34,22 @@ class Home extends React.Component<Props, {}> {
 }
 
 const LoadingProps = () => (
-    <div className={styles.home}>
+    <div className={styles["home"]}>
         <SubHeader text={"HOME"} />
-        <div className={styles.body}>
+        <div className={styles["body"]}>
             <VehicleCardLoading />
             <VehicleCardLoading />
         </div>
     </div>
 );
 
-const LoadedProps: React.SFC<{ vehicles: types.Vehicle[] }> = (props) => (
-    <div className={styles.home}>
+const LoadedProps = ({ vehicles }) => (
+    <div className={styles["home"]}>
         <SubHeader text={"HOME"} />
-        <div className={styles.body}>
-            {props.vehicles.map(function(vehicle: types.Vehicle, index: number) {
+        <div className={styles["body"]}>
+            {vehicles.map(function(vehicle, index) {
                 return (
-                    <div key={index}>
+                    <div className={styles["vehicle"]} key={index}>
                         <VehicleCard data={vehicle} index={index} showEdit={false} />
                     </div>
                 );
@@ -71,19 +58,16 @@ const LoadedProps: React.SFC<{ vehicles: types.Vehicle[] }> = (props) => (
     </div>
 );
 
-interface EmptyPropsProps {
-    history: History;
-}
-const EmptyProps: React.SFC<EmptyPropsProps> = (props) => (
-    <div className={styles.home}>
-        <div className={styles.body}>
-            <div className={styles.empty}>
-                <div className={styles.text1}>Uh oh!</div>
-                <div className={styles.text2}>It looks all empty in here.</div>
-                <div className={styles.text3}>Why don't you add some?</div>
+const EmptyProps = ({ history }) => (
+    <div className={styles["home"]}>
+        <div className={styles["body"]}>
+            <div className={styles["empty"]}>
+                <div className={styles["text1"]}>Uh oh!</div>
+                <div className={styles["text2"]}>It looks all empty in here.</div>
+                <div className={styles["text3"]}>Why don't you add some?</div>
             </div>
-            <div className={styles.cta}>
-                <FloatingActionButton onClick={() => props.history.push(routes[4].path)}>
+            <div className={styles["cta"]}>
+                <FloatingActionButton onClick={() => history.push(routes[4].path)}>
                     <ContentAdd />
                 </FloatingActionButton>
             </div>
@@ -91,7 +75,7 @@ const EmptyProps: React.SFC<EmptyPropsProps> = (props) => (
     </div>
 );
 
-function mapStateToProps(state: types.AppState) {
+function mapStateToProps(state) {
     return {
         ui: state.ui,
         user: state.user,
@@ -99,12 +83,8 @@ function mapStateToProps(state: types.AppState) {
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
+function mapDispatchToProps(dispatch) {
     return bindActionCreators({ getUserVehicles, getUserServices }, dispatch);
 }
 
-function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
-    return Object.assign({}, ownProps, stateProps, dispatchProps);
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps, mergeProps)(Home));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

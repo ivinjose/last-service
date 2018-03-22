@@ -1,67 +1,55 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { bindActionCreators, Dispatch } from "redux";
-import { RouteComponentProps } from "react-router-dom";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { store } from "../../store";
+
 import { addServices } from "../../actions/index";
+
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
+import ServicedItem from "./AddServicedItem";
 import styles from "./AddServiceDetails.css";
 import globalStyles from "../../styles/global.css";
+
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import DatePicker from "material-ui/DatePicker";
 import AutoComplete from "material-ui/AutoComplete";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
-import types from "../../types";
 
-const DateTimeFormat = Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
-const serviceableParts = ["Engine oil", "Break fluid", "Air filter", "Break disc", "Front wiper blade", "Read wiper blade"];
+let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
-interface Props extends RouteComponentProps<any> {
-    vehicles: types.Vehicle[];
-    addServices(service: types.Service[]): void;
-}
+const serviceableParts = [
+    "Engine oil",
+    "Break fluid",
+    "Air filter",
+    "Break disc",
+    "Front wiper blade",
+    "Read wiper blade"
+];
 
-interface State {
-    currentVehicle: string;
-    userErrorMessage: string;
-    vehicleErrorMessage: string;
-    dateErrorMessage: string;
-    componentErrorMessage: string;
-    amountErrorMessage: string;
-    date: string;
-    component: string;
-    amount: string;
-    comments: string;
-}
-
-class AddServiceDetails extends React.Component<Props, State> {
+class AddServiceDetails extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            currentVehicle: "",
+            currentVehicle: null,
             userErrorMessage: "",
             vehicleErrorMessage: "",
             dateErrorMessage: "",
             componentErrorMessage: "",
-            amountErrorMessage: "",
-            date: "",
-            component: "",
-            amount: "",
-            comments: ""
+            amountErrorMessage: ""
         };
     }
 
     render() {
         return (
-            <div className={styles.serviceDetails}>
+            <div className={styles["service-details"]}>
                 <SubHeader text={"ADD NEW SERVICE"} />
-                <div className={styles.body}>
-                    <div className={globalStyles.row}>
+                <div className={styles["body"]}>
+                    <div className={globalStyles["row"]}>
                         <SelectField
                             hintText="Choose your vehicle"
                             fullWidth={true}
@@ -69,13 +57,13 @@ class AddServiceDetails extends React.Component<Props, State> {
                             errorText={this.state.vehicleErrorMessage}
                             onChange={this.updateVehicle.bind(this)}
                         >
-                            {this.props.vehicles.map(function(vehicle: types.Vehicle, index: number) {
+                            {this.props.vehicles.map(function(vehicle, index) {
                                 return <MenuItem key={vehicle._id} value={vehicle._id} primaryText={vehicle.name} />;
                             })}
                         </SelectField>
                     </div>
 
-                    <div className={globalStyles.row}>
+                    <div className={globalStyles["row"]}>
                         <DatePicker
                             hintText="On which date service happened?"
                             onChange={this.updateDate.bind(this)}
@@ -91,7 +79,7 @@ class AddServiceDetails extends React.Component<Props, State> {
                         />
                     </div>
 
-                    <div className={globalStyles.row}>
+                    <div className={globalStyles["row"]}>
                         <AutoComplete
                             hintText="Which part was serviced?"
                             dataSource={serviceableParts}
@@ -102,7 +90,7 @@ class AddServiceDetails extends React.Component<Props, State> {
                         />
                     </div>
 
-                    <div className={globalStyles.row}>
+                    <div className={globalStyles["row"]}>
                         <TextField
                             hintText="How much you paid?"
                             fullWidth={true}
@@ -111,53 +99,62 @@ class AddServiceDetails extends React.Component<Props, State> {
                         />
                     </div>
 
-                    <div className={globalStyles.row}>
-                        <TextField hintText="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
+                    <div className={globalStyles["row"]}>
+                        <TextField
+                            hintText="Any comments? (Optional)"
+                            fullWidth={true}
+                            onChange={this.updateComments.bind(this)}
+                        />
                     </div>
 
-                    <div className={globalStyles.row}>
-                        <RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)} />
+                    <div className={globalStyles["row"]}>
+                        <RaisedButton
+                            label="Save"
+                            primary={true}
+                            fullWidth={true}
+                            onClick={this.saveServicedItem.bind(this)}
+                        />
                     </div>
                 </div>
             </div>
         );
     }
 
-    updateVehicle(event: React.FormEvent<HTMLSelectElement>, key: number, payload: string) {
+    updateVehicle(event, key, payload) {
         this.setState({
             currentVehicle: payload,
             vehicleErrorMessage: ""
         });
     }
 
-    updateDate(event: React.FormEvent<HTMLSelectElement>, date: string) {
+    updateDate(event, date) {
         this.setState({
             date: date,
             dateErrorMessage: ""
         });
     }
 
-    updateServicedComponent(searchText: string) {
+    updateServicedComponent(searchText, dataSource, params) {
         this.setState({
             component: searchText,
             componentErrorMessage: ""
         });
     }
 
-    updateAmount(event: React.FormEvent<HTMLSelectElement>, newValue: string) {
+    updateAmount(event, newValue) {
         this.setState({
             amount: newValue,
             amountErrorMessage: ""
         });
     }
 
-    updateComments(event: React.FormEvent<HTMLSelectElement>, newValue: string) {
+    updateComments(event, newValue) {
         this.setState({
             comments: newValue
         });
     }
 
-    saveServicedItem(e: React.FormEvent<HTMLSelectElement>) {
+    saveServicedItem(e) {
         if (!this.isValidVehicle()) {
             return;
         }
@@ -238,18 +235,14 @@ class AddServiceDetails extends React.Component<Props, State> {
     }
 }
 
-function mapStateToProps(state: types.AppState) {
+function mapStateToProps(state) {
     return {
         vehicles: state.vehicles
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
+function mapDispatchToProps(dispatch) {
     return bindActionCreators({ addServices }, dispatch);
 }
 
-function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
-    return Object.assign({}, ownProps, stateProps, dispatchProps);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AddServiceDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(AddServiceDetails);
