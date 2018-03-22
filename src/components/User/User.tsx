@@ -1,18 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Dispatch } from "redux";
 import queryString from "query-string";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { getUser } from "../../actions/index";
-
 import styles from "./User.css";
 import globalStyles from "../../styles/global.css";
 import Header from "../common/Header";
 import SubHeader from "../common/SubHeader";
+import types from "../../types";
 
-class User extends React.Component {
+interface Props extends RouteComponentProps<any> {
+    user: types.User;
+    getUser(uid: string): void;
+}
+
+class User extends React.Component<Props, {}> {
     componentDidMount() {
         let queryParams = queryString.parse(this.props.location.search);
         if (queryParams && queryParams.uid) {
@@ -20,7 +25,7 @@ class User extends React.Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: Props) {
         if (nextProps.user && nextProps.user.displayName) {
             this.props.history.push("/");
         }
@@ -31,14 +36,18 @@ class User extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: types.AppState) {
     return {
         user: state.user
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch<types.AppState>) {
     return bindActionCreators({ getUser }, dispatch);
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(User));
+function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
+    return Object.assign({}, ownProps, stateProps, dispatchProps);
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps, mergeProps)(User));

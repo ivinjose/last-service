@@ -1,17 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { History, Location } from "history";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import styles from "./Header.css";
 import routes from "../../../routes/routes";
-
 import AppBar from "material-ui/AppBar";
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 import RemoveRedEye from "material-ui/svg-icons/image/remove-red-eye";
 import PersonAdd from "material-ui/svg-icons/social/person-add";
+import types from "../../../types";
 
-class Header extends React.Component {
+interface Props extends RouteComponentProps<any> {
+    title: string;
+    user: types.User;
+}
+
+interface State {
+    isDrawerOpen: boolean;
+}
+
+class Header extends React.Component<Props, State> {
     constructor() {
         super();
         this.state = {
@@ -21,7 +31,7 @@ class Header extends React.Component {
 
     render() {
         return this.props.location.pathname == "/login" ? null : (
-            <div className={styles["header"]}>
+            <div className={styles.header}>
                 <AppBar
                     title={this.props.title}
                     onLeftIconButtonTouchTap={this.openDrawer.bind(this)}
@@ -32,15 +42,14 @@ class Header extends React.Component {
                         docked={false}
                         width={250}
                         open={this.state.isDrawerOpen}
-                        value={1}
                         onRequestChange={(isDrawerOpen) => this.setState({ isDrawerOpen })}
                     >
-                        <div className={styles["info-bar"]}>
-                            <div className={styles["user-image-placeholder"]}>
-                                <img src={this.props.user.photo} className={styles["image"]} alt="User image" />
+                        <div className={styles.infoBar}>
+                            <div className={styles.userImagePlaceholder}>
+                                <img src={this.props.user.photo} className={styles.image} alt="User image" />
                             </div>
-                            <div className={styles["username"]}>{this.props.user.displayName}</div>
-                            <div className={styles["email"]}>{this.props.user.email}</div>
+                            <div className={styles.username}>{this.props.user.displayName}</div>
+                            <div className={styles.email}>{this.props.user.email}</div>
                         </div>
                         {routes.map((route, index) => {
                             if (!route.isVisibleInMenu) return null;
@@ -67,7 +76,7 @@ class Header extends React.Component {
         });
     }
 
-    changeRoute(index) {
+    changeRoute(index: number) {
         this.setState(
             {
                 isDrawerOpen: false
@@ -78,9 +87,5 @@ class Header extends React.Component {
         );
     }
 }
-
-Header.contextTypes = {
-    store: PropTypes.object
-};
 
 export default withRouter(Header);

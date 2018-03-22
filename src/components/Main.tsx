@@ -1,8 +1,8 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, RouteProps } from "react-router-dom";
+import { Location } from "history";
 import { store } from "../store";
 import queryString from "query-string";
-
 import PageBlocker from "./Ui/PageBlocker";
 import RefreshIndicator from "material-ui/RefreshIndicator";
 import Snackbar from "material-ui/Snackbar";
@@ -14,12 +14,23 @@ import Services from "./Services";
 import Vehicles from "./Vehicles";
 import AddServiceDetails from "./AddServiceDetails";
 import AddVehicleDetails from "./AddVehicleDetails";
+import types from "../types";
 
-class Main extends React.Component {
+interface Props {
+    user: types.User;
+    location: Location;
+    ui: {
+        showPageBlockingLoader: boolean;
+        showPlaceholderLoader: boolean;
+        snackbarMessage: string;
+    };
+}
+
+class Main extends React.Component<Props, {}> {
     render() {
         return (
             <div>
-                <Header title={"Service Manager"} location={this.props.location} user={this.props.user || {}} />
+                <Header title={"Service Manager"} user={this.props.user || {}} />
                 {this.props.ui.showPageBlockingLoader && (
                     <PageBlocker>
                         <RefreshIndicator
@@ -36,7 +47,6 @@ class Main extends React.Component {
                     open={this.props.ui.snackbarMessage ? true : false}
                     message={this.props.ui.snackbarMessage ? this.props.ui.snackbarMessage : ""}
                     autoHideDuration={2000}
-                    onRequestClose={this.handleRequestClose}
                 />
                 <Switch>
                     <Route path="/login" component={Login} />
@@ -52,22 +62,23 @@ class Main extends React.Component {
     }
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+interface PrivateRouteProps extends RouteProps {
+    component: React.ComponentType<any>;
+}
+
+const PrivateRoute = (props: PrivateRouteProps) => {
+    let { component: Component, ...rest } = props;
     return (
         <Route
             {...rest}
             render={(props) => {
-                return isUserLoggedIn() ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect to="/login" redirectReason={"You need to be logged in"} />
-                );
+                return isUserLoggedIn() ? <Component {...props} /> : <Redirect to="/login" />;
             }}
         />
     );
 };
 
-function isUserLoggedIn() {
+function isUserLoggedIn(): boolean {
     const state = store.getState();
     return state.user._id ? true : false;
 }

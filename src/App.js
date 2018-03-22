@@ -14,14 +14,10 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch);
-}
-
 /**
  * Wrapping connect with withRouter to let the shouldComponentUpdate know abut the location change
  * Ref: https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
  */
-const App = withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
+const App = withRouter(connect(mapStateToProps)(Main));
 
 export default App;
