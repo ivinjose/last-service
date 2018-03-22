@@ -1,14 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./Login.css";
+import logo from "../../images/wheels.png";
 
 class Login extends React.Component {
     render() {
         return (
-            <div className={styles.login}>
-                <div className={styles.contents}>
-                    <div className={styles.message}>Login here.</div>
-                    <div className={styles.title}>Service Manager</div>
+            <div className={styles["login"]}>
+                <div className={styles["contents"]}>
+                    {/* <div className={styles["logo"]}>
+                        <img className={styles["image"]} src={`/images/${logo}`} />
+                    </div> */}
+                    <div className={styles["message"]}>Login here.</div>
+                    <div className={styles["title"]}>Service Manager</div>
+
                     <GoogleButton />
                 </div>
             </div>
@@ -19,12 +24,12 @@ class Login extends React.Component {
 const GoogleButton = () => (
     <button
         type="button"
-        className={styles.googleButton}
+        className={styles["google-button"]}
         onClick={() => {
             window.location.replace("http://localhost:4001/auth/google");
         }}
     >
-        <span className={styles.googleButtonIcon}>
+        <span className={styles["google-button__icon"]}>
             <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z"
@@ -47,7 +52,7 @@ const GoogleButton = () => (
                 />
             </svg>
         </span>
-        <span className={styles.googleButtonText}>Sign in with Google</span>
+        <span className={styles["google-button__text"]}>Sign in with Google</span>
     </button>
 );
 
