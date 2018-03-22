@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect, RouteComponentProps } from "react-router-dom";
+import { Route, Switch, Redirect, RouteProps } from "react-router-dom";
 import { Location } from "history";
 import { store } from "../store";
 import queryString from "query-string";
@@ -62,11 +62,12 @@ class Main extends React.Component<Props, {}> {
     }
 }
 
-interface PrivateRouteProps {
-    component: React.Component;
+interface PrivateRouteProps extends RouteProps {
+    component: React.ComponentType<any>;
 }
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-const PrivateRoute = ({ component: Component, ...rest }) => {
+
+const PrivateRoute = (props: PrivateRouteProps) => {
+    let { component: Component, ...rest } = props;
     return (
         <Route
             {...rest}
