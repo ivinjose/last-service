@@ -1,14 +1,16 @@
+declare function require(name: string): any;
+
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import styles from "./VehicleCard.css";
 
 import IconButton from "material-ui/IconButton";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
-
-import iconBike from "../../../images/bike.jpg";
-import iconCar from "../../../images/car.jpg";
+const iconBike = require("../../../images/bike.jpg");
+const iconCar = require("../../../images/car.jpg");
+import types from "../../../types";
 
 const iconButtonElement = (
     <IconButton touch={true}>
@@ -16,18 +18,21 @@ const iconButtonElement = (
     </IconButton>
 );
 
-class VehicleCard extends React.Component {
+interface Props extends RouteComponentProps<any> {
+    data: types.Vehicle;
+    showEdit: boolean;
+    index: number;
+}
+
+class VehicleCard extends React.Component<Props, {}> {
     render() {
         let iconImage = this.props.data.type == "Four wheeler" ? iconCar : iconBike;
         return (
-            <li
-                className={styles["vehicle"]}
-                onClick={!this.props.showEdit ? this.gotoVehicleDetails.bind(this) : null}
-            >
+            <li className={styles["vehicle"]} onClick={!this.props.showEdit ? this.gotoVehicleDetails.bind(this) : null}>
                 <div className={styles["content"]}>
                     <div className={styles["text"]}>{this.props.data.name}</div>
                     <div className={styles["avatar"]}>
-                        <img className={styles["image"]} src={`/images/${iconImage}`} />
+                        <img className={styles["image"]} src={`/${iconImage}`} />
                     </div>
                 </div>
                 {this.props.showEdit && (
