@@ -123,14 +123,14 @@ class AddServiceDetails extends React.Component<Props, State> {
         );
     }
 
-    updateVehicle(event: React.FormEvent<HTMLSelectElement>, key: number, payload: string) {
+    updateVehicle(event: any, key: number, payload: string) {
         this.setState({
             currentVehicle: payload,
             vehicleErrorMessage: ""
         });
     }
 
-    updateDate(event: React.FormEvent<HTMLSelectElement>, date: string) {
+    updateDate(event: any, date: string) {
         this.setState({
             date: date,
             dateErrorMessage: ""
@@ -144,20 +144,20 @@ class AddServiceDetails extends React.Component<Props, State> {
         });
     }
 
-    updateAmount(event: React.FormEvent<HTMLSelectElement>, newValue: string) {
+    updateAmount(event: any, newValue: string) {
         this.setState({
             amount: newValue,
             amountErrorMessage: ""
         });
     }
 
-    updateComments(event: React.FormEvent<HTMLSelectElement>, newValue: string) {
+    updateComments(event: any, newValue: string) {
         this.setState({
             comments: newValue
         });
     }
 
-    saveServicedItem(e: React.FormEvent<HTMLSelectElement>) {
+    saveServicedItem(e: any) {
         if (!this.isValidVehicle()) {
             return;
         }
