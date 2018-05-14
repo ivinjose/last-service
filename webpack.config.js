@@ -10,7 +10,11 @@ module.exports = {
     devtool: "sourcemap", // has to be removed in production
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
-        modules: [path.join(__dirname, "node_modules")]
+        modules: [path.join(__dirname, "node_modules")],
+        alias: {
+            react: "preact-compat",
+            "react-dom": "preact-compat"
+        }
     },
     module: {
         rules: [
