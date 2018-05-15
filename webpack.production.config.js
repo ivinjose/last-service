@@ -1,6 +1,7 @@
 const path = require("path");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
     context: path.join(__dirname, "src"),
@@ -21,7 +22,13 @@ module.exports = {
         new UglifyJsPlugin(),
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify("production")
-        })
+        }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.ts$|\.css$|\.html$/,
+            minRatio: 0.8
+        }) //Refer - https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a
     ],
     module: {
         rules: [
@@ -31,7 +38,6 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             },
-            // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
                 test: /\.css$/,
                 use: [
