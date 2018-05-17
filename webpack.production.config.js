@@ -1,13 +1,15 @@
 const path = require("path");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require("webpack");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
     context: path.join(__dirname, "src"),
     entry: ["./index.js"],
     output: {
-        path: path.join(__dirname, "www"),
-        filename: "bundle.js"
+        path: path.join(__dirname, "dist"),
+        filename: "app.js"
     },
-    devtool: "sourcemap", // has to be removed in production
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
         modules: [path.join(__dirname, "node_modules")],
@@ -16,6 +18,18 @@ module.exports = {
             "react-dom": "preact-compat"
         }
     },
+    plugins: [
+        new UglifyJsPlugin(),
+        new webpack.DefinePlugin({
+            "process.env.NODE_ENV": JSON.stringify("production")
+        }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.ts$|\.css$|\.html$/,
+            minRatio: 0.8
+        }) //Refer - https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a
+    ],
     module: {
         rules: [
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
@@ -24,7 +38,6 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
                 test: /\.css$/,
                 use: [
@@ -52,14 +65,6 @@ module.exports = {
                         }
                     }
                 ]
-                // loaders: [
-                //     'file-loader',
-                //     'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
-                // ],
-                // options: {
-                //     name: '[name].[ext]',
-                //     outputPath: 'images/'
-                // }
             }
         ]
     }
