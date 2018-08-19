@@ -12,11 +12,7 @@ module.exports = {
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
-        modules: [path.join(__dirname, "node_modules")],
-        alias: {
-            react: "preact-compat",
-            "react-dom": "preact-compat"
-        }
+        modules: [path.join(__dirname, "node_modules")]
     },
     plugins: [
         new UglifyJsPlugin(),
