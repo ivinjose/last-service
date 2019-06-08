@@ -8,7 +8,7 @@ import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 
 import SelectField from '@material-ui/core/Select';
-import { MenuItem } from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 // import DatePicker from '@material-ui/core/DatePicker';
 // import AutoComplete from '@material-ui/core/AutoComplete';
 import TextField from '@material-ui/core/TextField';

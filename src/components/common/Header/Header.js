@@ -7,7 +7,7 @@ import routes from '../../../routes/routes';
 
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
-import { MenuItem } from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class Header extends React.Component {
 	constructor() {

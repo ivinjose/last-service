@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './ServiceDetails.css';
-import {Card, CardHeader, CardText} from '@material-ui/core/Card';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Collapse from '@material-ui/core/Collapse';
 import svg from '../../images/notfound.svg';
 
 class ServiceDetails extends React.Component {
@@ -46,28 +49,30 @@ class ServiceDetails extends React.Component {
                             actAsExpander
                             showExpandableButton
                         />
-                        <CardText expandable>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td className={styles['Col']}>Amount</td>
-                                        <td className={styles['Col-Details']}><span>{serviceDetail.amount}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className={styles['Col']}>Component</td>
-                                        <td className={styles['Col-Details']}><span>{serviceDetail.component}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className={styles['Col']}>Distance</td>
-                                        <td className={styles['Col-Details']}><span>{serviceDetail.kmsReading} kms</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div className={styles['CommentsSection']}>
-                                <div className={styles['Header']}><span>Comments</span></div>
-                                <div className={styles['Comments']}>" <span>{serviceDetail.comments}</span> "</div>
-                            </div>
-                        </CardText>
+                        <Collapse in={expanded}>
+                            <CardContent>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td className={styles['Col']}>Amount</td>
+                                            <td className={styles['Col-Details']}><span>{serviceDetail.amount}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td className={styles['Col']}>Component</td>
+                                            <td className={styles['Col-Details']}><span>{serviceDetail.component}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td className={styles['Col']}>Distance</td>
+                                            <td className={styles['Col-Details']}><span>{serviceDetail.kmsReading} kms</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div className={styles['CommentsSection']}>
+                                    <div className={styles['Header']}><span>Comments</span></div>
+                                    <div className={styles['Comments']}>" <span>{serviceDetail.comments}</span> "</div>
+                                </div>
+                            </CardContent>
+                        </Collapse>
                     </Card>);
                 })
                 }

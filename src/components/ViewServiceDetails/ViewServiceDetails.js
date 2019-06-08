@@ -8,7 +8,7 @@ import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
 
 import SelectField from '@material-ui/core/Select';
-import { MenuItem } from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import fetch from 'isomorphic-fetch';
 
