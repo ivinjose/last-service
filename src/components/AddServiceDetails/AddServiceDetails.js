@@ -7,13 +7,13 @@ import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
-import DatePicker from 'material-ui/DatePicker';
-import AutoComplete from 'material-ui/AutoComplete';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
+import SelectField from '@material-ui/core/Select';
+import { MenuItem } from '@material-ui/core/Menu';
+// import DatePicker from '@material-ui/core/DatePicker';
+// import AutoComplete from '@material-ui/core/AutoComplete';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import fetch from 'isomorphic-fetch';
 
@@ -64,8 +64,9 @@ class AddServiceDetails extends React.Component {
 					</div>
 
 					<div className={globalStyles['row']}>
-						<DatePicker 
-							hintText="On which date service happened?" 
+						<TextField
+							type="date"
+							label="On which date service happened?" 
 							onChange={this.updateDate.bind(this)}
 							fullWidth={true}
 							formatDate={new DateTimeFormat('en-US', {
@@ -76,13 +77,13 @@ class AddServiceDetails extends React.Component {
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<AutoComplete 
+						{/* <AutoComplete 
 							hintText="Which part was serviced?" 
 							dataSource={serviceableParts} 
 							fullWidth={true}
 							filter={AutoComplete.caseInsensitiveFilter} 
 							onUpdateInput={this.updateServicedComponent.bind(this)}
-							/>
+							/> */}
 					</div>
 
 					<div  className={globalStyles['row']}>
@@ -94,7 +95,7 @@ class AddServiceDetails extends React.Component {
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
+						<Button raised label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
 					</div>
 				</div>
 

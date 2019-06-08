@@ -5,11 +5,9 @@ import { browserHistory } from 'react-router';
 import styles from './Header.css';
 import routes from '../../../routes/routes';
 
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
+import AppBar from '@material-ui/core/AppBar';
+import Drawer from '@material-ui/core/Drawer';
+import { MenuItem } from '@material-ui/core/Menu';
 
 class Header extends React.Component {
 	constructor() {

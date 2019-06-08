@@ -6,9 +6,9 @@ import Header from '../common/Header';
 import styles from './AddVehicleDetails.css';
 import globalStyles from '../../styles/global.css';
 
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import fetch from 'isomorphic-fetch';
 
@@ -34,7 +34,7 @@ class AddVehicleDetails extends React.Component {
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<RaisedButton label="Save" primary={true} fullWidth={true} onClick={this.saveVehicle.bind(this)}/>
+						<Button raised label="Save" primary={true} fullWidth={true} onClick={this.saveVehicle.bind(this)}/>
 					</div>
 				</div>
 

@@ -6,9 +6,7 @@ import Header from '../common/Header';
 import ServiceDetails from '../ServiceDetails';
 import AddServiceDetails from '../AddServiceDetails';
 import Vehicle from './Vehicle';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '@material-ui/core/Button';
 import routes from '../../routes/routes';
 
 import fetch from 'isomorphic-fetch';
@@ -35,18 +33,17 @@ class Home extends React.Component {
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']}>
-										<RaisedButton
-											href={"/view?vehicle="+vehicle.name}
-											label={vehicle.name}
-											primary={true} />
+									<Button raised href={"/view?vehicle="+vehicle.name} label={vehicle.name} primary={true} >
+										{vehicle.name}
+									</Button>
 									</div>
 								)
 							})
 						}
 						<div className={styles['cta']}>
-							<FloatingActionButton secondary={true} onClick={this.addNew.bind(this)}>
-								<ContentAdd />
-							</FloatingActionButton>
+							<Button fab color="primary" aria-label="add" secondary={true} onClick={this.addNew.bind(this)}>
+								Add
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -58,9 +55,9 @@ class Home extends React.Component {
 					<div className={styles['body']}>
 						<Empty />
 						<div className={styles['cta']}>
-							<FloatingActionButton onClick={this.addNew.bind(this)}>
-								<ContentAdd />
-							</FloatingActionButton>
+							<Button fab color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
+								Add
+							</Button>
 						</div>
 					</div>
 				</div>
