@@ -40,7 +40,7 @@ class ViewServiceDetails extends React.Component {
 							{
 								this.state.vehicles.map(function(vehicle, index){
 									return(
-										<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
+										<MenuItem key={vehicle._id} value={vehicle._id} primaryText={vehicle.name} />
 									)
 								})
 
@@ -58,7 +58,7 @@ class ViewServiceDetails extends React.Component {
 
 	getVehiclesList(){
 		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
+		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/services', 
 		{ 
 			method: 'GET', 
 			headers: {
@@ -87,7 +87,7 @@ class ViewServiceDetails extends React.Component {
 
 	getServiceDetailsOf(vehicle){
 		var _this = this;
-		fetch('http://localhost:4001/getservicedetails?vehicle=' + vehicle, 
+		fetch('http://localhost:4001/vehicles/'+vehicle+'/services', 
 		{ 
 			method: 'GET', 
 			headers: {
@@ -100,7 +100,7 @@ class ViewServiceDetails extends React.Component {
 			return JSON.parse(response);
 		}).then(function(response){
 			_this.setState({
-				serviceDetails: response
+				serviceDetails: response.data
 			});
 		}).catch(function(error){
 			console.log('some error');

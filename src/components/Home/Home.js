@@ -33,7 +33,7 @@ class Home extends React.Component {
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']}>
-									<Button raised href={"/view?vehicle="+vehicle.name} label={vehicle.name} primary={true} >
+									<Button raised href={"/view?vehicle="+vehicle._id} label={vehicle.name} primary={true} >
 										{vehicle.name}
 									</Button>
 									</div>

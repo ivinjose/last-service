@@ -49,7 +49,7 @@ class ServiceDetails extends React.Component {
                             actAsExpander
                             showExpandableButton
                         />
-                        <Collapse in={expanded}>
+                        <Collapse in={true}>
                             <CardContent>
                                 <table>
                                     <tbody>
