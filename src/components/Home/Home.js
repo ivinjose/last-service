@@ -71,13 +71,13 @@ class Home extends React.Component {
 
 	getVehiclesList(){
 		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
+		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles', 
 		{ 
 			method: 'GET', 
 			headers: {
 				'Content-Type': 'application/json'
 			}
-				   
+
 		}).then(function(response){
 			return( response.text() );
 		}).then(function(response){
