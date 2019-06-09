@@ -141,7 +141,7 @@ function Header(props) {
                     {routes.map((route, index) => {
                         return (
                             <div>
-                                <ListItem button key={route.name} /*onClick={this.changeRoute.bind(this, index)}*/>
+                                <ListItem button key={route.name} onClick={changeRoute.bind(null, index, handleDrawerClose)} >
                                     <ListItemIcon>
                                         {index % 2 === 0 ? (
                                             <InboxIcon />
@@ -158,6 +158,11 @@ function Header(props) {
             </Drawer>
         </div>
     )
+}
+
+function changeRoute(index, cb){
+    cb();
+    browserHistory.push( routes[index].path );
 }
 
 Header.contextTypes = {
