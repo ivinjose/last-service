@@ -35,7 +35,7 @@ class ServiceDetails extends React.Component {
                         </div>
                     </div>
                 </div>
-            );
+            )
         }
 
         return (
