@@ -119,9 +119,10 @@ function Header(props) {
             </AppBar>
             <Drawer
                 className={classes.drawer}
-                variant="persistent"
+                variant="temporary"
                 anchor="left"
                 open={isDrawerOpen}
+                onClose={handleDrawerClose}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
