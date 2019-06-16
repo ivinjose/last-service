@@ -7,7 +7,7 @@ import ServiceDetails from '../ServiceDetails';
 import AddServiceDetails from '../AddServiceDetails';
 import Vehicle from './Vehicle';
 import Button from '@material-ui/core/Button';
-import routes from '../../routes/routes';
+import { routes, routeConstants, getRouteDetails } from '../../routes/routes';
 
 import fetch from 'isomorphic-fetch';
 
@@ -33,7 +33,7 @@ class Home extends React.Component {
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']}>
-									<Button raised href={"/view?vehicle="+vehicle._id} label={vehicle.name} primary={true} >
+									<Button raised href={"/services?vehicle="+vehicle._id} label={vehicle.name} primary={true} >
 										{vehicle.name}
 									</Button>
 									</div>
@@ -66,7 +66,7 @@ class Home extends React.Component {
 	}
 
 	addNew(){
-		browserHistory.push( routes[1].path );
+		browserHistory.push( getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path );
 	}
 
 	getVehiclesList(){

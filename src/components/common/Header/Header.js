@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router'
 import styles from './Header.css'
 import clsx from 'clsx'
 
-import routes from '../../../routes/routes'
+import {routes} from '../../../routes/routes'
 
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
@@ -98,7 +98,7 @@ function Header(props) {
 
     return (
         <div className={styles['header']}>
-            <AppBar position="fixed">
+            <AppBar position="static">
                 <Toolbar>
                     <IconButton
                         color="inherit"
