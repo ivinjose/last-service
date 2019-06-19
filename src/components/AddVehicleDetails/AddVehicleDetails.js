@@ -21,6 +21,10 @@ class AddVehicleDetails extends React.Component {
 			snackbarState: false,
 			snackbarMessage: " ",
 		};
+
+		this.closeSnackbar = this.closeSnackbar.bind(this);
+		this.updateVehicle = this.updateVehicle.bind(this);
+		this.saveVehicle = this.saveVehicle.bind(this);
 	}
 
 	render() {
@@ -30,25 +34,30 @@ class AddVehicleDetails extends React.Component {
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<TextField hintText="Vehicle name" fullWidth={true} onChange={this.updateVehicle.bind(this)} />
+						<TextField label="Vehicle name" fullWidth={true} onChange={this.updateVehicle} />
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<Button raised label="Save" primary={true} fullWidth={true} onClick={this.saveVehicle.bind(this)}/>
+						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveVehicle}>
+							Save
+						</Button>
 					</div>
 				</div>
 
 				<Snackbar
 					open={this.state.snackbarState}
 					message={this.state.snackbarMessage}
-					autoHideDuration={2000}
-					onRequestClose={this.handleRequestClose} />
+					autoHideDuration={1000}
+					onClose={this.closeSnackbar}
+					/>
 
 			</div>
 		);
 	}
 
 	updateVehicle(event, newValue){
+		console.log('event', newValue);
+		console.log('newValue', newValue);
 		this.setState({
 			vehicle: newValue
 		});
@@ -67,14 +76,15 @@ class AddVehicleDetails extends React.Component {
 		let data = Object.assign( {}, vehicle );
 		let _this = this;
 
-		fetch('http://localhost:4001/addvehicledetails', 
+		console.log('data',data);
+
+		fetch('http://localhost:4001/vehicles', 
 		{ 
 			method: 'POST', 
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(data) 
-				   
 		}).then(function(response){
 			return( response.text() );
 		}).then(function(response){

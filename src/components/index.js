@@ -6,8 +6,8 @@ import { Router, Route, browserHistory } from 'react-router';
 import { routes, getRouteDetails } from "../routes/routes";
 import Home from './Home';
 
-const routeComponents = routes.map((routeObj)=>{
-	return <Route path={routeObj.path} component={routeObj.component} />;
+const routeComponents = routes.map((routeObj, key)=>{
+	return <Route path={routeObj.path} component={routeObj.component} key={key} />;
 });
 
 const Root = () => (
