@@ -95,7 +95,7 @@ class AddServiceDetails extends React.Component {
 					</div>
 
 					<div  className={globalStyles['row']}>
-						<Button raised label="Save" primary={true} fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
+						<Button variant="contained" label="Save" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
 					</div>
 				</div>
 

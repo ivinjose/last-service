@@ -7,7 +7,7 @@ import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
 
-import SelectField from '@material-ui/core/Select';
+import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import fetch from 'isomorphic-fetch';
@@ -17,7 +17,7 @@ class ViewServiceDetails extends React.Component {
 		super();
 		this.state = {
 			vehicles: [],
-			currentVehicle: null,
+			currentVehicle: "",
 			serviceDetails: null
 		};
 	}
@@ -29,25 +29,38 @@ class ViewServiceDetails extends React.Component {
 			this.chooseVehicle(null,null, queryParams.vehicle);
 		}
 	}
- 
+
 	render() {
 		return (
 			<div className={styles['service-details']}>
 				<Header title={'View service details'}/>
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.chooseVehicle.bind(this)}>
+						<Select 
+							native 
+							// displayEmpty 
+							value={this.state.currentVehicle} 
+							onChange={this.chooseVehicle.bind(this)}
+							renderValue={selected => {
+								// debugger;
+								if (selected && selected.length === 0) {
+									return <em>Placeholder</em>;
+								}
+								return selected.join(', ');
+							}}
+						>
+							<MenuItem disabled value=""><em>Placeholder</em></MenuItem>
 							{
 								this.state.vehicles.map(function(vehicle, index){
 									return(
-										<MenuItem key={vehicle._id} value={vehicle._id} primaryText={vehicle.name} />
+										<MenuItem value={vehicle._id} key={index} >
+											{vehicle.name}
+										</MenuItem>
 									)
 								})
-
 							}
-						</SelectField>
+						</Select>
 					</div>
-
 					{this.state && this.state.serviceDetails &&
 						<ServiceDetails data={this.state.serviceDetails} />
 					}
@@ -58,18 +71,18 @@ class ViewServiceDetails extends React.Component {
 
 	getVehiclesList(){
 		var _this = this;
-		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/services', 
+		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles', 
 		{ 
 			method: 'GET', 
 			headers: {
 				'Content-Type': 'application/json'
 			}
-				   
 		}).then(function(response){
 			return( response.text() );
 		}).then(function(response){
 			return JSON.parse(response);
 		}).then(function(response){
+			console.log('getVehiclesList response', response.data);
 			_this.setState({
 				vehicles: response.data
 			});
@@ -93,7 +106,6 @@ class ViewServiceDetails extends React.Component {
 			headers: {
 				'Content-Type': 'application/json'
 			}
-				   
 		}).then(function(response){
 			return( response.text() );
 		}).then(function(response){

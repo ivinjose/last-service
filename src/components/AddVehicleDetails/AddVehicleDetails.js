@@ -56,6 +56,7 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	updateVehicle(event, newValue){
+		//TODO:: Debug why the data is not getting saved into DB.
 		console.log('event', newValue);
 		console.log('newValue', newValue);
 		this.setState({

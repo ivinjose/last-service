@@ -16,7 +16,7 @@ class ServicedItem extends React.Component {
 		return (
 			<div className={styles['serviced-item']}>
 				<input type="text" className={styles['item-name']} ref="item-name" placeholder="Example: Air filter or Engine oil"/>
-				<select className={classNames(styles['item-service'],globalStyles['drop-down'])} ref="item-service">
+				<select className={classNames(styles['item-service'],globalStyles['drop-down'])} value="test" ref="item-service">
 					<option default>Select the type of service done</option>
 					<option value="Replaced">Replaced</option>
 					<option value="Fixed">Fixed</option>

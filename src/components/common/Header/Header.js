@@ -140,7 +140,7 @@ function Header(props) {
                 <List>
                     {routes.map((route, index) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 <ListItem button key={route.name} onClick={changeRoute.bind(null, index, handleDrawerClose)} >
                                     <ListItemIcon>
                                         {index % 2 === 0 ? (

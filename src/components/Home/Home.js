@@ -32,8 +32,8 @@ class Home extends React.Component {
 						{
 							this.state.vehicles.map(function(vehicle, index){
 								return(
-									<div className={styles['vehicle']}>
-									<Button raised href={"/services?vehicle="+vehicle._id} label={vehicle.name} primary={true} >
+									<div className={styles['vehicle']} key={index}>
+									<Button  href={"/services?vehicle="+vehicle._id} label={vehicle.name} color="primary" >
 										{vehicle.name}
 									</Button>
 									</div>
@@ -41,7 +41,7 @@ class Home extends React.Component {
 							})
 						}
 						<div className={styles['cta']}>
-							<Button fab color="primary" aria-label="add" secondary={true} onClick={this.addNew.bind(this)}>
+							<Button variant="contained" aria-label="add" color="secondary" onClick={this.addNew.bind(this)}>
 								Add
 							</Button>
 						</div>
@@ -55,7 +55,7 @@ class Home extends React.Component {
 					<div className={styles['body']}>
 						<Empty />
 						<div className={styles['cta']}>
-							<Button fab color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
+							<Button color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
 								Add
 							</Button>
 						</div>
