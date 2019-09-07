@@ -69,9 +69,9 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	saveVehicle(e){
-		let vehicle = { name: this.state.vehicle };
+		let vehicles = [{ name: this.state.vehicle }];
 
-		let data = Object.assign( {}, vehicle );
+		let data = Object.assign( {}, vehicles );
 		let _this = this;
 
 		console.log('data',data);
