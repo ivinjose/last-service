@@ -22,43 +22,34 @@ class ViewServiceDetails extends React.Component {
 		};
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.getVehiclesList();
 		let queryParams = this.props.location.query;
-		if( queryParams && queryParams.vehicle ){
-			this.chooseVehicle(null,null, queryParams.vehicle);
+		if (queryParams && queryParams.vehicle) {
+			this.chooseVehicle(queryParams.vehicle);
 		}
 	}
 
 	render() {
+		let placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
+		const menuItems = [placeHolderItem, ...this.state.vehicles.map((vehicle) => (
+			<MenuItem value={vehicle._id} key={vehicle._id} >
+				{vehicle.name}
+			</MenuItem>
+		))];
+
 		return (
 			<div className={styles['service-details']}>
-				<Header title={'View service details'}/>
+				<Header title={'View service details'} />
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<Select 
-							native 
-							// displayEmpty 
-							value={this.state.currentVehicle} 
-							onChange={this.chooseVehicle.bind(this)}
-							renderValue={selected => {
-								// debugger;
-								if (selected && selected.length === 0) {
-									return <em>Placeholder</em>;
-								}
-								return selected.join(', ');
-							}}
+						<Select
+							displayEmpty
+							value={this.state.currentVehicle}
+							onChange={(e) => this.chooseVehicle(e.target.value)}
+							className={styles['select-cmp']}
 						>
-							<MenuItem disabled value=""><em>Placeholder</em></MenuItem>
-							{
-								this.state.vehicles.map(function(vehicle, index){
-									return(
-										<MenuItem value={vehicle._id} key={index} >
-											{vehicle.name}
-										</MenuItem>
-									)
-								})
-							}
+							{menuItems}
 						</Select>
 					</div>
 					{this.state && this.state.serviceDetails &&
@@ -69,54 +60,55 @@ class ViewServiceDetails extends React.Component {
 		);
 	}
 
-	getVehiclesList(){
+	getVehiclesList() {
 		var _this = this;
-		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			console.log('getVehiclesList response', response.data);
-			_this.setState({
-				vehicles: response.data
+		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles',
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(function (response) {
+				return (response.text());
+			}).then(function (response) {
+				return JSON.parse(response);
+			}).then(function (response) {
+				console.log('getVehiclesList response', response.data);
+				_this.setState({
+					vehicles: response.data || []
+				});//setting empty array to prevent crash if reponse is undefined
+			}).catch(function (error) {
+				console.log('some error');
 			});
-		}).catch(function(error){
-			console.log('some error');
-		});
 	}
 
-	chooseVehicle(event, key, payload){
+	chooseVehicle(id) {
+		//let vehicleId = event.target.value;
 		this.setState({
-			currentVehicle: payload
+			currentVehicle: id
 		});
-		this.getServiceDetailsOf(payload);
+		this.getServiceDetailsOf(id);
 	}
 
-	getServiceDetailsOf(vehicle){
+	getServiceDetailsOf(vehicle) {
 		var _this = this;
-		fetch('http://localhost:4001/vehicles/'+vehicle+'/services', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				serviceDetails: response.data
+		fetch('http://localhost:4001/vehicles/' + vehicle + '/services',
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(function (response) {
+				return (response.text());
+			}).then(function (response) {
+				return JSON.parse(response);
+			}).then(function (response) {
+				_this.setState({
+					serviceDetails: response.data
+				});
+			}).catch(function (error) {
+				console.log('some error');
 			});
-		}).catch(function(error){
-			console.log('some error');
-		});
 	}
 }
 
