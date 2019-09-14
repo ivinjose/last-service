@@ -18,7 +18,7 @@ class ViewServiceDetails extends React.Component {
 		this.state = {
 			vehicles: [],
 			currentVehicle: "",
-			serviceDetails: null
+			serviceDetails: [],
 		};
 	}
 
@@ -52,7 +52,7 @@ class ViewServiceDetails extends React.Component {
 							{menuItems}
 						</Select>
 					</div>
-					{this.state && this.state.serviceDetails &&
+					{this.state.serviceDetails.length > 0 &&
 						<ServiceDetails data={this.state.serviceDetails} />
 					}
 				</div>
@@ -73,17 +73,15 @@ class ViewServiceDetails extends React.Component {
 			}).then(function (response) {
 				return JSON.parse(response);
 			}).then(function (response) {
-				console.log('getVehiclesList response', response.data);
 				_this.setState({
 					vehicles: response.data || []
-				});//setting empty array to prevent crash if reponse is undefined
+				});
 			}).catch(function (error) {
-				console.log('some error');
+				console.log('Error in ViewServiceDetails - getVehiclesList ', error);
 			});
 	}
 
 	chooseVehicle(id) {
-		//let vehicleId = event.target.value;
 		this.setState({
 			currentVehicle: id
 		});
@@ -104,10 +102,10 @@ class ViewServiceDetails extends React.Component {
 				return JSON.parse(response);
 			}).then(function (response) {
 				_this.setState({
-					serviceDetails: response.data
+					serviceDetails: response.data || []
 				});
 			}).catch(function (error) {
-				console.log('some error');
+				console.log('Error in ViewServiceDetails - getServiceDetailsOf ', error);
 			});
 	}
 }
