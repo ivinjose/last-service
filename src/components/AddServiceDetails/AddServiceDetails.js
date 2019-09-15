@@ -54,14 +54,13 @@ class AddServiceDetails extends React.Component {
 						<FormControl className={styles['form-control']}>
 							<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
 							<Select 
-								fullWidth={true} 
 								value={this.state.currentVehicle} 
 								onChange={this.updateVehicle.bind(this)}>
 							{
-								this.state.vehicles.map(function(vehicle, index){
+								this.state.vehicles.map( vehicle => {
 									return(
 										<MenuItem key={vehicle._id} value={vehicle.name}>{vehicle.name}</MenuItem>
-									)
+									);
 								})
 
 							}
@@ -92,15 +91,15 @@ class AddServiceDetails extends React.Component {
 							/> */}
 					</div>
 
-					<div  className={globalStyles['row']}>
+					<div className={globalStyles['row']}>
 						<TextField placeholder="How much you paid?" fullWidth={true} onChange={this.updateAmount.bind(this)} />
 					</div>
 
-					<div  className={globalStyles['row']}>
+					<div className={globalStyles['row']}>
 						<TextField placeholder="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
 					</div>
 
-					<div  className={globalStyles['row']}>
+					<div className={globalStyles['row']}>
 						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}>Save</Button>
 					</div>
 				</div>
