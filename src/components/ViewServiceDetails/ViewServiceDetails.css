@@ -1,5 +1,9 @@
-.service-details{
+.service-details {
     .body{
         margin: 16px;
     }
+}
+
+.select-cmp {
+    width: 100%;
 }
