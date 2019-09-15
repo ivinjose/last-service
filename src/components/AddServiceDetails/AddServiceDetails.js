@@ -6,15 +6,15 @@ import Header from '../common/Header';
 import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
-
-import SelectField from '@material-ui/core/Select';
+import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 // import DatePicker from '@material-ui/core/DatePicker';
 // import AutoComplete from '@material-ui/core/AutoComplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-
 import fetch from 'isomorphic-fetch';
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
@@ -51,22 +51,27 @@ class AddServiceDetails extends React.Component {
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
-						<SelectField hintText="Choose your vehicle" fullWidth={true} value={this.state.currentVehicle} onChange={this.updateVehicle.bind(this)}>
-						{
-							this.state.vehicles.map(function(vehicle, index){
-								return(
-									<MenuItem key={vehicle._id} value={vehicle.name} primaryText={vehicle.name} />
-								)
-							})
+						<FormControl className={styles['form-control']}>
+							<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
+							<Select 
+								value={this.state.currentVehicle} 
+								onChange={this.updateVehicle.bind(this)}>
+							{
+								this.state.vehicles.map( vehicle => {
+									return(
+										<MenuItem key={vehicle._id} value={vehicle.name}>{vehicle.name}</MenuItem>
+									);
+								})
 
-						}
-						</SelectField>
+							}
+							</Select>
+						</FormControl>
 					</div>
 
 					<div className={globalStyles['row']}>
 						<TextField
 							type="date"
-							label="On which date service happened?" 
+							placeholder="On which date service happened?" 
 							onChange={this.updateDate.bind(this)}
 							fullWidth={true}
 							formatDate={new DateTimeFormat('en-US', {
@@ -86,16 +91,16 @@ class AddServiceDetails extends React.Component {
 							/> */}
 					</div>
 
-					<div  className={globalStyles['row']}>
-						<TextField hintText="How much you paid?" fullWidth={true} onChange={this.updateAmount.bind(this)} />
+					<div className={globalStyles['row']}>
+						<TextField placeholder="How much you paid?" fullWidth={true} onChange={this.updateAmount.bind(this)} />
 					</div>
 
-					<div  className={globalStyles['row']}>
-						<TextField hintText="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
+					<div className={globalStyles['row']}>
+						<TextField placeholder="Any comments? (Optional)" fullWidth={true} onChange={this.updateComments.bind(this)} />
 					</div>
 
-					<div  className={globalStyles['row']}>
-						<Button variant="contained" label="Save" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}/>
+					<div className={globalStyles['row']}>
+						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}>Save</Button>
 					</div>
 				</div>
 
@@ -111,7 +116,7 @@ class AddServiceDetails extends React.Component {
 
 	getVehiclesList(){
 		var _this = this;
-		fetch('http://localhost:4001/getvehicles', 
+		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles', 
 		{ 
 			method: 'GET', 
 			headers: {
@@ -124,10 +129,10 @@ class AddServiceDetails extends React.Component {
 			return JSON.parse(response);
 		}).then(function(response){
 			_this.setState({
-				vehicles: response.data
+				vehicles: response.data?response.data : []
 			});
 		}).catch(function(error){
-			console.log('some error');
+			console.log('Error in AddServiceDetails', error);
 		});
 	}
 
@@ -137,9 +142,9 @@ class AddServiceDetails extends React.Component {
 		});
 	}
 
-	updateVehicle(event, key, payload){
+	updateVehicle(event){
 		this.setState({
-			currentVehicle: payload
+			currentVehicle: event.target.value
 		});
 	}
 
@@ -168,7 +173,6 @@ class AddServiceDetails extends React.Component {
 	}
 
 	saveServicedItem(e){
-		let { store } = this.context;
 		let currentVehicle = { vehicle: this.state.currentVehicle };
 		let date = this.state.date;
 		let component = this.state.component;
@@ -185,7 +189,7 @@ class AddServiceDetails extends React.Component {
 		let data = Object.assign( {}, currentVehicle, serviceDetails );
 		let _this = this;
 
-		fetch('http://localhost:4001/addservicedetails', 
+		fetch('http://localhost:4001/services', 
 		{ 
 			method: 'POST', 
 			headers: {
