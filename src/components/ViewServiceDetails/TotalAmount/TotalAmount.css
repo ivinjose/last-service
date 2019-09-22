@@ -1,0 +1,13 @@
+.amount-cmp {
+    display: flex;
+    justify-content: center;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.amount {
+    border-radius: 16px;
+    color: #fff;
+    background-color: #2196f3;
+    padding: 5px 10px;
+}

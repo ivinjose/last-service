@@ -11,6 +11,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import fetch from 'isomorphic-fetch';
+import TotalAmount from './TotalAmount';
 
 class ViewServiceDetails extends React.Component {
 	constructor() {
@@ -52,6 +53,7 @@ class ViewServiceDetails extends React.Component {
 							{menuItems}
 						</Select>
 					</div>
+					<TotalAmount data={this.state.serviceDetails} />
 					{this.state.serviceDetails.length > 0 &&
 						<ServiceDetails data={this.state.serviceDetails} />
 					}
