@@ -2,6 +2,7 @@ import Home from '../components/Home';
 import ViewServiceDetails from '../components/ViewServiceDetails';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
+import Login from '../components/Login';
 
 const routeConstants = {
     HOME: 'HOME',
@@ -34,6 +35,12 @@ const routes = [
         path: "/vehicles/add",
         name: "Add Vehicle Details",
         component: AddVehicleDetails
+    },
+    {
+        key: 'LOGIN',
+        path: "/login",
+        name: "Login",
+        component: Login
     },
 ];
 
