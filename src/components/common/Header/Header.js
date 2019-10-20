@@ -96,7 +96,7 @@ function Header(props) {
 
     return (
         <div className={styles['header']}>
-            <AppBar position="static">
+            <AppBar position="static" style={{backgroundColor: '#282c34'}}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
