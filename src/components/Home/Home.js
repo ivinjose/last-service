@@ -1,13 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router'; 
 import styles from './Home.css';
 import Header from '../common/Header';
-import ServiceDetails from '../ServiceDetails';
-import AddServiceDetails from '../AddServiceDetails';
-import Vehicle from './Vehicle';
 import Button from '@material-ui/core/Button';
-import { routes, routeConstants, getRouteDetails } from '../../routes/routes';
+import {  routeConstants, getRouteDetails } from '../../routes/routes';
+import { Link } from 'react-router-dom';
 
 import fetch from 'isomorphic-fetch';
 
@@ -41,9 +37,10 @@ class Home extends React.Component {
 							})
 						}
 						<div className={styles['cta']}>
-							<Button variant="contained" aria-label="add" color="secondary" onClick={this.addNew.bind(this)}>
+							<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
+							{/* <Button variant="contained" aria-label="add" color="secondary" onClick={this.addNew.bind(this)}>
 								Add
-							</Button>
+							</Button> */}
 						</div>
 					</div>
 				</div>
@@ -55,9 +52,10 @@ class Home extends React.Component {
 					<div className={styles['body']}>
 						<Empty />
 						<div className={styles['cta']}>
-							<Button color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
+							<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
+							{/* <Button color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
 								Add
-							</Button>
+							</Button> */}
 						</div>
 					</div>
 				</div>
@@ -65,9 +63,10 @@ class Home extends React.Component {
 		}
 	}
 
-	addNew(){
-		browserHistory.push( getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path );
-	}
+	// addNew(){
+	// 	const browserHistory = createBrowserHistory();
+	// 	browserHistory.push( getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path );
+	// }
 
 	getVehiclesList(){
 		var _this = this;
