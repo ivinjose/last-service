@@ -23,7 +23,7 @@ class ServiceDetails extends React.Component {
     render() {
         const me = this;
         const data = this.props.data;
-        if (data.length === 0) {
+        if (data && data.length === 0) {
             return (
                 <div className={styles['service-details']}>
                     <div className={styles['NoDataFound']}>
@@ -40,7 +40,7 @@ class ServiceDetails extends React.Component {
 
         return (
 		    <div ref="serviceItem" className={styles['service-details']}>
-                {data.map(function (serviceDetail, index) {
+                {data && data.map(function (serviceDetail, index) {
                     const dateTime = me.formatDateTime(serviceDetail.date);
                     return (<Card key={index} style ={{marginBottom: '5px'}} >
                         <CardHeader

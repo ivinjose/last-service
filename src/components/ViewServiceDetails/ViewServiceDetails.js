@@ -24,7 +24,7 @@ class ViewServiceDetails extends React.Component {
 
 	componentDidMount() {
 		this.getVehiclesList();
-		let queryParams = this.props.location.query;
+		let queryParams = this.props.location && this.props.location.query;
 		if (queryParams && queryParams.vehicle) {
 			this.chooseVehicle(queryParams.vehicle);
 		}

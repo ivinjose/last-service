@@ -1,7 +1,7 @@
 import createStore from 'storeon';
 
 const user = store => {
-    store.on('@init', ()=>({ user: {} }));
+    store.on('@init', ()=>({ user: {isLoggedIn: true} }));
     store.on('user:loggedin', ({user})=>({ user: { isLoggedIn: true, userId: user.userId} }));
 }
 

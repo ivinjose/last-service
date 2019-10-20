@@ -1,29 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import { Router, Route, browserHistory } from 'react-router';
+import { 
+	BrowserRouter as Router,
+	Route,
+	Redirect
+} from 'react-router-dom';
+
 import styles from '../styles/global.css';
 import { routes } from "../routes/routes";
 import useStoreon from 'storeon/react'
 import StoreContext from 'storeon/react/context'
 import { store } from '../state/store';
 
+const SecureRoute = ({component: Component, ...rest}) =>{
+	const { user, dispatch } = useStoreon('user');
+	return <Route {...rest} render={(props)=> {
+		if( user.isLoggedIn ){
+			return <Component {...props} />;
+		}else{
+			return <Redirect to="/login" />;
+		}
+	}} />
+};
+
 const routeComponents = routes.map((routeObj, key)=>{
-	return <Route path={routeObj.path} component={routeObj.component} key={key} />;
+	return routeObj.isSecure
+	? <SecureRoute exact path={routeObj.path} component={routeObj.component} key={key} />
+	:<Route exact path={routeObj.path} component={routeObj.component} key={key} />;
 });
 
 const Root = () => (
 	<React.Fragment>
 		<Loader />
 		<MuiThemeProvider>
-			<Router history={browserHistory}>
+			<Router>
 				{routeComponents}
-				{/* 
-				TODO:: Figure out why this doesnt work
-				{routes.map((routeObj)=>{
-					return <Route path={routeObj.path} component={routeObj.component}/>;
-				})}; 
-				*/}
 			</Router>
 		</MuiThemeProvider>
 	</React.Fragment>
@@ -43,7 +55,7 @@ const Loader = () =>{
 document.addEventListener('DOMContentLoaded', function() {
 	ReactDOM.render(
 		<StoreContext.Provider value={store}>
-			<Root />
+			<Root />,
 		</StoreContext.Provider>,
 		document.getElementById('mount')
 	);
