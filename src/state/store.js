@@ -2,9 +2,10 @@ import createStore from 'storeon';
 
 const user = store => {
     store.on('@init', ()=>({ user: {isLoggedIn: false} }));
-    store.on('user:loggedin', ()=>{
-        return{ user: { isLoggedIn: true } }
+    store.on('user:loggedin:success', (state, data)=>{
+        return { user: { isLoggedIn: true, ...data } };
     });
+    store.on('user:loggedin:fail', ()=>({ user: {isLoggedIn: false} }));
 }
 
 const loading = store => {
