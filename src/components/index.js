@@ -7,7 +7,6 @@ import {
 	Redirect
 } from 'react-router-dom';
 
-import styles from '../styles/global.css';
 import { routes } from "../routes/routes";
 import useStoreon from 'storeon/react'
 import StoreContext from 'storeon/react/context'
@@ -32,7 +31,6 @@ const routeComponents = routes.map((routeObj, key)=>{
 
 const Root = () => (
 	<React.Fragment>
-		<Loader />
 		<MuiThemeProvider>
 			<Router>
 				{routeComponents}
@@ -40,17 +38,6 @@ const Root = () => (
 		</MuiThemeProvider>
 	</React.Fragment>
 );
-
-const Loader = () =>{
-	const { loading, dispatch } = useStoreon('loading');
-	if( !loading ) return false;
-
-	return(
-		<div className={styles['overlay']}>
-			<div className={styles['loader']}></div>
-		</div>
-	);
-}
 
 document.addEventListener('DOMContentLoaded', function() {
 	ReactDOM.render(
