@@ -23,7 +23,7 @@ const Login = () => {
                     <input ref={passwordEl} type="password" name="password" placeholder="Password" value="ivin"/>
                 </div>
                 <div className={styles['input-row']}>
-                    <button type="button" onClick={onLogin.bind(null, dispatchUser, usernameEl, passwordEl, dispatchLoading)}>Login</button>
+                    <button type="button" onClick={()=>onLogin(dispatchUser, usernameEl, passwordEl, dispatchLoading)}>Login</button>
                 </div>
             </div>
         </div>
