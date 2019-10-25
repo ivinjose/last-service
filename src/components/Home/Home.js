@@ -38,9 +38,6 @@ class Home extends React.Component {
 						}
 						<div className={styles['cta']}>
 							<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
-							{/* <Button variant="contained" aria-label="add" color="secondary" onClick={this.addNew.bind(this)}>
-								Add
-							</Button> */}
 						</div>
 					</div>
 				</div>
@@ -53,20 +50,12 @@ class Home extends React.Component {
 						<Empty />
 						<div className={styles['cta']}>
 							<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
-							{/* <Button color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
-								Add
-							</Button> */}
 						</div>
 					</div>
 				</div>
 			)
 		}
 	}
-
-	// addNew(){
-	// 	const browserHistory = createBrowserHistory();
-	// 	browserHistory.push( getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path );
-	// }
 
 	getVehiclesList(){
 		var _this = this;
@@ -86,7 +75,6 @@ class Home extends React.Component {
 				vehicles: response.data
 			});
 		}).catch(function(error){
-			console.log('some errors');
 			console.log(error);
 		});
 	}
