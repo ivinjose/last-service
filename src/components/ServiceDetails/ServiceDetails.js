@@ -21,7 +21,6 @@ class ServiceDetails extends React.Component {
     };
 
     render() {
-        const me = this;
         const data = this.props.data;
         if (data && data.length === 0) {
             return (
@@ -40,14 +39,12 @@ class ServiceDetails extends React.Component {
 
         return (
 		    <div ref="serviceItem" className={styles['service-details']}>
-                {data && data.map(function (serviceDetail, index) {
-                    const dateTime = me.formatDateTime(serviceDetail.date);
+                {data && data.map( (serviceDetail, index)=>{
+                    const dateTime = this.formatDateTime(serviceDetail.date);
                     return (<Card key={index} style ={{marginBottom: '5px'}} >
                         <CardHeader
                             title={dateTime.date}
                             subtitle={dateTime.time}
-                            // actAsExpander
-                            // showExpandableButton
                         />
                         <Collapse in={true}>
                             <CardContent>

@@ -138,7 +138,7 @@ function Header(props) {
                 <List>
                     {routes.map((route, index) => {
                         return (
-                            <div key={index}>
+                            <React.Fragment key={route.key}>
                                 <Link to={route.path} onClick={handleDrawerClose}>
                                     <ListItem button key={route.name}>
                                         <ListItemIcon>
@@ -151,7 +151,7 @@ function Header(props) {
                                         <ListItemText primary={route.name} />
                                     </ListItem>
                                 </Link>
-                            </div>
+                            </React.Fragment>
                         )
                     })}
                 </List>

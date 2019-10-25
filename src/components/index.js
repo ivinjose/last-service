@@ -42,7 +42,7 @@ const Root = () => (
 document.addEventListener('DOMContentLoaded', function() {
 	ReactDOM.render(
 		<StoreContext.Provider value={store}>
-			<Root />,
+			<Root />
 		</StoreContext.Provider>,
 		document.getElementById('mount')
 	);
