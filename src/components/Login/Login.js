@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import fetch from 'isomorphic-fetch';
 import styles from  './Login.css';
 import useStoreon from 'storeon/react'
@@ -39,34 +39,34 @@ const onLogin = (dispatchUser, usernameEl, passwordEl, dispatchLoading) => {
 
     dispatchLoading('loading:true');
 
-    setTimeout(()=>{
-        dispatchUser('user:loggedin:success', { userId: '1', username: 'ivin'  } );
-        dispatchLoading('loading:false');
-    }, 200);
+    // keeping for debugging purpose
+    // setTimeout(()=>{
+    //     dispatchUser('user:loggedin:success',  { userId: '1', username: 'ivin'  } );
+    //     dispatchLoading('loading:false');
+    // }, 200);
 
-    // fetch('http://localhost:4001/login',
-    //     {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(data)
+    fetch('http://localhost:4001/login',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
 
-    //     }).then(function (response) {
-    //         return (response.text());
-    //     }).then(function (response) {
-    //         return JSON.parse(response);
-    //     }).then(function (response) {
-    //         console.log({response});
-    //         // dispatchLoading('loading:false');
-    //         if( response.status === 'success' ){
-    //             dispatchUser('user:loggedin:success', response.data );
-    //         }else{
-    //             dispatchUser('user:loggedin:fail', response.data );
-    //         }
-    //     }).catch(function (error) {
-    //         console.log('Error in AddServiceDetails', error);
-    //     });
+        }).then(function (response) {
+            return (response.text());
+        }).then(function (response) {
+            return JSON.parse(response);
+        }).then(function (response) {
+            dispatchLoading('loading:false');
+            if( response.status === 'success' ){
+                dispatchUser('user:loggedin:success', response.data );
+            }else{
+                dispatchUser('user:loggedin:fail', response.data );
+            }
+        }).catch(function (error) {
+            console.log('Error in AddServiceDetails', error);
+        });
 }
 
 export default Login;
