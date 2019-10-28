@@ -13,7 +13,6 @@ const App = () => {
 	const { loading } = useStoreon('loading');
 	const { user } = useStoreon('user');
 	return (
-	<React.Fragment>
 		<MuiThemeProvider>
 			<Loader loading={loading} />
 			<Router>
@@ -26,7 +25,6 @@ const App = () => {
 				}
 			</Router>
 		</MuiThemeProvider>
-	</React.Fragment>
 	)
 };
 

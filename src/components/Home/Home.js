@@ -18,14 +18,14 @@ class Home extends React.Component {
 	componentDidMount(){
 		this.getVehiclesList();
 	}
- 
-	render() {
-		if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
-			return (
-				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
-					<div className={styles['body']}>
-						{
+
+	render(){
+		return(
+			<div className={styles['home']}>
+				<Header title={"Service Manager"}/>
+				<div className={styles['body']}>
+					{
+						this.state.vehicles.length > 0 ?
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']} key={index}>
@@ -35,26 +35,14 @@ class Home extends React.Component {
 									</div>
 								)
 							})
-						}
-						<div className={styles['cta']}>
-							<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
-						</div>
+							:<Empty />
+					}
+					<div className={styles['cta']}>
+						<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
 					</div>
 				</div>
-			)
-		}else{
-			return (
-				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
-					<div className={styles['body']}>
-						<Empty />
-						<div className={styles['cta']}>
-							<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
-						</div>
-					</div>
-				</div>
-			)
-		}
+			</div>
+		);
 	}
 
 	getVehiclesList(){
