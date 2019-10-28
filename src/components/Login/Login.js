@@ -13,7 +13,6 @@ const Login = () => {
 
     return(
         <div className={styles['login-page']}>
-            <Loader />
             <Header title={'View service details'} />
             <div className={styles["form"]}>
                 <div className={styles['input-row']}>
