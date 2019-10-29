@@ -17,16 +17,15 @@ const getTotalAmount = data => {
 };
 
 const TotalAmount = ({ data }) => {
+    if (data && data.length === 0) {
+        return null;
+    }
     return (
-        <Fragment>
-            {data && data.length > 0 ? (
-                <div className={styles['amount-cmp']}>
-                    <div className={styles['amount']}>
-                        Total Amount : {getTotalAmount(data)}
-                    </div>
-                </div>
-            ) : null}
-        </Fragment>
+        <div className={styles['amount-cmp']}>
+            <span className={styles['amount']}>
+                Total Amount : {getTotalAmount(data)}
+            </span>
+        </div>
     );
 };
 
