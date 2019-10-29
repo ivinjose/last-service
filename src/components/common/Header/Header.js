@@ -1,7 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { browserHistory } from 'react-router'
 import styles from './Header.css'
 import clsx from 'clsx'
 
@@ -9,7 +7,6 @@ import {routes} from '../../../routes/routes'
 
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
-import MenuItem from '@material-ui/core/MenuItem'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
@@ -22,6 +19,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
+import { Link } from 'react-router-dom';
 
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
@@ -98,7 +96,7 @@ function Header(props) {
 
     return (
         <div className={styles['header']}>
-            <AppBar position="static">
+            <AppBar position="static" style={{backgroundColor: '#282c34'}}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -136,33 +134,30 @@ function Header(props) {
                         )}
                     </IconButton>
                 </div>
-
+                
                 <List>
                     {routes.map((route, index) => {
                         return (
-                            <div key={index}>
-                                <ListItem button key={route.name} onClick={changeRoute.bind(null, index, handleDrawerClose)} >
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? (
-                                            <InboxIcon />
-                                        ) : (
-                                            <MailIcon />
-                                        )}
-                                    </ListItemIcon>
-                                    <ListItemText primary={route.name} />
-                                </ListItem>
-                            </div>
+                            <React.Fragment key={route.key}>
+                                <Link to={route.path} onClick={handleDrawerClose}>
+                                    <ListItem button key={route.name}>
+                                        <ListItemIcon>
+                                            {index % 2 === 0 ? (
+                                                <InboxIcon />
+                                            ) : (
+                                                <MailIcon />
+                                            )}
+                                        </ListItemIcon>
+                                        <ListItemText primary={route.name} />
+                                    </ListItem>
+                                </Link>
+                            </React.Fragment>
                         )
                     })}
                 </List>
             </Drawer>
         </div>
     )
-}
-
-function changeRoute(index, cb){
-    cb();
-    browserHistory.push( routes[index].path );
 }
 
 Header.contextTypes = {

@@ -1,13 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router'; 
 import styles from './Home.css';
 import Header from '../common/Header';
-import ServiceDetails from '../ServiceDetails';
-import AddServiceDetails from '../AddServiceDetails';
-import Vehicle from './Vehicle';
 import Button from '@material-ui/core/Button';
-import { routes, routeConstants, getRouteDetails } from '../../routes/routes';
+import {  routeConstants, getRouteDetails } from '../../routes/routes';
+import { Link } from 'react-router-dom';
 
 import fetch from 'isomorphic-fetch';
 
@@ -22,14 +18,14 @@ class Home extends React.Component {
 	componentDidMount(){
 		this.getVehiclesList();
 	}
- 
-	render() {
-		if( this.state && this.state.vehicles && this.state.vehicles.length>0 ){
-			return (
-				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
-					<div className={styles['body']}>
-						{
+
+	render(){
+		return(
+			<div className={styles['home']}>
+				<Header title={"Service Manager"}/>
+				<div className={styles['body']}>
+					{
+						this.state.vehicles.length > 0 ?
 							this.state.vehicles.map(function(vehicle, index){
 								return(
 									<div className={styles['vehicle']} key={index}>
@@ -39,34 +35,14 @@ class Home extends React.Component {
 									</div>
 								)
 							})
-						}
-						<div className={styles['cta']}>
-							<Button variant="contained" aria-label="add" color="secondary" onClick={this.addNew.bind(this)}>
-								Add
-							</Button>
-						</div>
+							:<Empty />
+					}
+					<div className={styles['cta']}>
+						<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
 					</div>
 				</div>
-			)
-		}else{
-			return (
-				<div className={styles['home']}>
-					<Header title={"Service Manager"}/>
-					<div className={styles['body']}>
-						<Empty />
-						<div className={styles['cta']}>
-							<Button color="primary" aria-label="add" onClick={this.addNew.bind(this)}>
-								Add
-							</Button>
-						</div>
-					</div>
-				</div>
-			)
-		}
-	}
-
-	addNew(){
-		browserHistory.push( getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path );
+			</div>
+		);
 	}
 
 	getVehiclesList(){
@@ -87,7 +63,6 @@ class Home extends React.Component {
 				vehicles: response.data
 			});
 		}).catch(function(error){
-			console.log('some errors');
 			console.log(error);
 		});
 	}

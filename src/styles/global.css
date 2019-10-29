@@ -19,39 +19,3 @@ body{
     border-radius: 2px;
     border: 1px solid #ccc;
 }
-
-.overlay{
-    background-color: rgba(0,0,0,0.4);
-    position: absolute;
-    left: 0; top: 0; right: 0; bottom: 0;
-    text-align: center;
-}
-
-.loader { 
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    margin-top: 45vh;
-  }
-  
-  .loader:after {
-    content: " ";
-    display: block;
-    width: 46px;
-    height: 46px;
-    margin: 1px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: loader 1.2s linear infinite;
-  }
-  
-  @keyframes loader {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
