@@ -17,7 +17,7 @@ const getTotalAmount = data => {
 };
 
 const TotalAmount = ({ data }) => {
-    if (data && data.length === 0) {
+    if (!data || data.length === 0) {
         return null;
     }
     return (
