@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './Home.css';
 import Header from '../common/Header';
 import Button from '@material-ui/core/Button';
-import {  routeConstants, getRouteDetails } from '../../routes/routes';
+import { routeConstants, getRouteDetails } from '../../routes/routes';
 import { Link } from 'react-router-dom';
-
-import fetch from 'isomorphic-fetch';
+import makeApiCall from "../../utils/ApiHelper";
+import connect from 'storeon/react/connect'
 
 class Home extends React.Component {
 	constructor() {
@@ -13,6 +13,8 @@ class Home extends React.Component {
 		this.state = {
 			vehicles: []
 		};
+		this.onSuccess = this.onSuccess.bind(this);
+		this.onFailure = this.onFailure.bind(this);
 	}
 
 	componentDidMount(){
@@ -45,26 +47,21 @@ class Home extends React.Component {
 		);
 	}
 
-	getVehiclesList(){
-		var _this = this;
-		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles', 
-		{ 
-			method: 'GET', 
-			headers: {
-				'Content-Type': 'application/json'
-			}
-
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				vehicles: response.data
-			});
-		}).catch(function(error){
-			console.log(error);
+	onSuccess(data){
+		this.setState({
+			vehicles: data
 		});
+	}
+
+	onFailure(error){
+		console.log(error);
+	}
+
+	getVehiclesList(){
+		const { user } = this.props;
+		if( user && user.isLoggedIn ){
+			makeApiCall("http://localhost:4001/users/" + user._id + "/vehicles", { method: 'GET' }, this.onSuccess, this.onFailure)
+		}
 	}
 }
 
@@ -84,4 +81,5 @@ class Empty extends React.Component{
 	}
 }
 
-export default Home;
+
+export default connect('user', Home);
