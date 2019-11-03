@@ -10,9 +10,6 @@ import connect from 'storeon/react/connect'
 class Home extends React.Component {
 	constructor() {
 		super();
-		this.state = {
-			vehicles: []
-		};
 		this.onSuccess = this.onSuccess.bind(this);
 		this.onFailure = this.onFailure.bind(this);
 	}
@@ -27,8 +24,8 @@ class Home extends React.Component {
 				<Header title={"Service Manager"}/>
 				<div className={styles['body']}>
 					{
-						this.state.vehicles.length > 0 ?
-							this.state.vehicles.map(function(vehicle, index){
+						this.props.vehicles?
+							this.props.vehicles.map((vehicle, index)=>{
 								return(
 									<div className={styles['vehicle']} key={index}>
 									<Button  href={"/services?vehicle="+vehicle._id} label={vehicle.name} color="primary" >
@@ -48,17 +45,20 @@ class Home extends React.Component {
 	}
 
 	onSuccess(data){
-		this.setState({
-			vehicles: data
-		});
+		const { dispatch } = this.props;
+		dispatch('loading:false');
+		dispatch('vehicles/get:success', data);
 	}
 
 	onFailure(error){
-		console.log(error);
+		const { dispatch } = this.props;
+		dispatch('loading:false');
+		dispatch('vehicles/get:error', error);
 	}
 
 	getVehiclesList(){
-		const { user } = this.props;
+		const { user, dispatch } = this.props;
+		dispatch('loading:true');
 		if( user && user.isLoggedIn ){
 			makeApiCall("http://localhost:4001/users/" + user._id + "/vehicles", { method: 'GET' }, this.onSuccess, this.onFailure)
 		}
@@ -82,4 +82,4 @@ class Empty extends React.Component{
 }
 
 
-export default connect('user', Home);
+export default connect('user', 'vehicles', Home);

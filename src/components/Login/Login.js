@@ -65,7 +65,7 @@ const doLogin = (dispatch, usernameEl, passwordEl) => {
             if( response.status === 'success' ){
                 dispatch('user:loggedin:success', response.data );
             }else{
-                dispatch('user:loggedin:fail', response.data );
+                dispatch('user:loggedin:error', response.data );
             }
         }).catch(function (error) {
             console.log('Error in AddServiceDetails', error);
