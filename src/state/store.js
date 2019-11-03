@@ -14,4 +14,8 @@ const loading = store => {
     store.on('loading:false', ()=>({ loading: false }));
 }
 
-export const store = createStore([user, loading]);
+export const store = createStore([
+    user, 
+    loading, 
+    process.env.NODE_ENV !== 'production' && require('storeon/devtools')
+]);
