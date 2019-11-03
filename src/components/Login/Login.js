@@ -1,15 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import fetch from 'isomorphic-fetch';
 import styles from  './Login.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
-import Loader from '../common/Loader';
 
-const Login = () => {
-    const { dispatch: dispatchUser } = useStoreon('user');
+const Login = (props) => {
+    const { user, dispatch: dispatchUser } = useStoreon('user');
     const { dispatch: dispatchLoading } = useStoreon('loading');
     const usernameEl = useRef(null);
     const passwordEl = useRef(null);
+
+    useEffect(()=>{
+        if(user.isLoggedIn) {
+            props.history.replace("/");
+        }
+    },[user])
 
     return(
         <div className={styles['login-page']}>
@@ -22,14 +27,14 @@ const Login = () => {
                     <input ref={passwordEl} type="password" name="password" placeholder="Password" value="ivin"/>
                 </div>
                 <div className={styles['input-row']}>
-                    <button type="button" onClick={()=>onLogin(dispatchUser, usernameEl, passwordEl, dispatchLoading)}>Login</button>
+                    <button type="button" onClick={()=>doLogin(dispatchUser, usernameEl, passwordEl, dispatchLoading)}>Login</button>
                 </div>
             </div>
         </div>
     )
 }
 
-const onLogin = (dispatchUser, usernameEl, passwordEl, dispatchLoading) => {
+const doLogin = (dispatchUser, usernameEl, passwordEl, dispatchLoading) => {
 
     const data = {
         username: usernameEl.current.value,
