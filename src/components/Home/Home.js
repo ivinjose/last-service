@@ -1,85 +1,65 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Home.css';
 import Header from '../common/Header';
 import Button from '@material-ui/core/Button';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import makeApiCall from "../../utils/ApiHelper";
-import connect from 'storeon/react/connect'
+import useStoreon from 'storeon/react'
 
-class Home extends React.Component {
-	constructor() {
-		super();
-		this.onSuccess = this.onSuccess.bind(this);
-		this.onFailure = this.onFailure.bind(this);
-	}
+const Home = () => {
+	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
-	componentDidMount(){
-		this.getVehiclesList();
-	}
-
-	render(){
-		return(
-			<div className={styles['home']}>
-				<Header title={"Service Manager"}/>
-				<div className={styles['body']}>
-					{
-						this.props.vehicles?
-							this.props.vehicles.map((vehicle, index)=>{
-								return(
-									<div className={styles['vehicle']} key={index}>
-									<Button  href={"/services?vehicle="+vehicle._id} label={vehicle.name} color="primary" >
-										{vehicle.name}
-									</Button>
-									</div>
-								)
-							})
-							:<Empty />
-					}
-					<div className={styles['cta']}>
-						<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
-	onSuccess(data){
-		const { dispatch } = this.props;
+	const onSuccess = (data) => {
 		dispatch('loading:false');
 		dispatch('vehicles/get:success', data);
 	}
 
-	onFailure(error){
-		const { dispatch } = this.props;
+	const onFailure = (error) => {
 		dispatch('loading:false');
 		dispatch('vehicles/get:error', error);
 	}
 
-	getVehiclesList(){
-		const { user, dispatch } = this.props;
+	useEffect(()=>{
 		dispatch('loading:true');
 		if( user && user.isLoggedIn ){
-			makeApiCall("http://localhost:4001/users/" + user._id + "/vehicles", { method: 'GET' }, this.onSuccess, this.onFailure)
+			makeApiCall("http://localhost:4001/users/" + user._id + "/vehicles", { method: 'GET' }, onSuccess, onFailure)
 		}
-	}
-}
+	}, [dispatch]);
 
-class Empty extends React.Component{
-	constructor(){
-		super();
-	}
-
-	render(){
-		return (
-			<div className={styles['empty']}>
-				<div className={styles['text1']}>Uh oh!</div>
-				<div className={styles['text2']}>It looks all empty in here.</div>
-				<div className={styles['text3']}>Why don't you add some?</div>
+	return(
+		<div className={styles['home']}>
+			<Header title={"Service Manager"}/>
+			<div className={styles['body']}>
+				{
+					vehicles.length>0?
+						vehicles.map((vehicle)=>{
+							return(
+								<div className={styles['vehicle']} key={vehicle._id}>
+								<Button  href={"/services?vehicle="+vehicle._id} label={vehicle.name} color="primary" >
+									{vehicle.name}
+								</Button>
+								</div>
+							)
+						})
+						:<Empty />
+				}
+				<div className={styles['cta']}>
+					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
+				</div>
 			</div>
-		);
-	}
+		</div>
+	);
 }
 
+const Empty = () => {
+	return (
+		<div className={styles['empty']}>
+			<div className={styles['text1']}>Uh oh!</div>
+			<div className={styles['text2']}>It looks all empty in here.</div>
+			<div className={styles['text3']}>Why don't you add some?</div>
+		</div>
+	);
+};
 
-export default connect('user', 'vehicles', Home);
+export default Home;
