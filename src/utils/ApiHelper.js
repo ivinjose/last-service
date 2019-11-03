@@ -4,8 +4,8 @@ const defaultHeaders = {
     'Content-Type': 'application/json'
 };
 
-const makeApiCall = (url, {method, headers}, onSuccess, onFailure) => {
-    fetch(url, 
+const makeApiCall = async (url, {method, headers}) => {
+    return await fetch(url, 
 		{ 
 			method, 
 			headers: Object.assign({}, defaultHeaders, headers)
@@ -14,9 +14,9 @@ const makeApiCall = (url, {method, headers}, onSuccess, onFailure) => {
 		}).then(function(response){
 			return JSON.parse(response);
 		}).then(function(response){
-            onSuccess(response.data);
+			return response.data;
 		}).catch(function(error){
-            onFailure(error);
+			return error;
 		});
 }
 

@@ -4,26 +4,14 @@ import Header from '../common/Header';
 import Button from '@material-ui/core/Button';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
 import { Link } from 'react-router-dom';
-import makeApiCall from "../../utils/ApiHelper";
 import useStoreon from 'storeon/react'
 
 const Home = () => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
-	const onSuccess = (data) => {
-		dispatch('loading:false');
-		dispatch('vehicles/get:success', data);
-	}
-
-	const onFailure = (error) => {
-		dispatch('loading:false');
-		dispatch('vehicles/get:error', error);
-	}
-
 	useEffect(()=>{
-		dispatch('loading:true');
 		if( user && user.isLoggedIn ){
-			makeApiCall("http://localhost:4001/users/" + user._id + "/vehicles", { method: 'GET' }, onSuccess, onFailure)
+			dispatch('vehicles/get', user._id);
 		}
 	}, [dispatch]);
 
