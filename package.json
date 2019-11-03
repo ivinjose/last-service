@@ -22,7 +22,6 @@
   "dependencies": {
     "@material-ui/core": "^4.0.2",
     "@material-ui/icons": "^4.0.1",
-    "babel-core": "^6.23.1",
     "babel-loader": "^6.4.0",
     "babel-preset-react": "^6.23.0",
     "classnames": "^2.2.5",
@@ -44,9 +43,12 @@
     "webpack-dev-middleware": "^1.10.1"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.8.0",
     "eslint-plugin-react": "^7.4.0",
     "file-loader": "^1.1.4",
