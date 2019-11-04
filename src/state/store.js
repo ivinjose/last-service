@@ -3,10 +3,19 @@ import makeApiCall from "../utils/ApiHelper";
 
 const user = store => {
     store.on('@init', ()=>({ user: {isLoggedIn: false} }));
-    store.on('user:loggedin:success', (state, data)=>{
+    store.on('user/login', async (state, userCredentials)=>{
+        store.dispatch('loading:true');
+        const user = await makeApiCall("http://localhost:4001/login", { method: 'POST', body: userCredentials });
+        store.dispatch('user/login:success', user);
+    });
+    store.on('user/login:success', (state, data)=>{
+        store.dispatch('loading:false');
         return { user: { isLoggedIn: true, ...data } };
     });
-    store.on('user:loggedin:error', ()=>({ user: {isLoggedIn: false} }));
+    store.on('user/login:error', ()=>{
+        store.dispatch('loading:false');
+        return{ user: {isLoggedIn: false} }
+    });
 }
 
 const loading = store => {

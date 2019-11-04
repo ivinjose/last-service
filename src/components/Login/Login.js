@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import fetch from 'isomorphic-fetch';
 import styles from  './Login.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
@@ -34,42 +33,17 @@ const Login = (props) => {
 }
 
 const doLogin = (dispatch, usernameEl, passwordEl) => {
-
-    const data = {
+    const userCredentials = {
         username: usernameEl.current.value,
         password: passwordEl.current.value,
     };
-
-    dispatch('loading:true');
+    dispatch('user/login', userCredentials);
 
     // keeping for debugging purpose
     // setTimeout(()=>{
-    //     dispatch('user:loggedin:success',  { userId: '1', username: 'ivin'  } );
+    //     dispatch('user/login:success',  { userId: '1', username: 'ivin'  } );
     //     dispatch('loading:false');
     // }, 200);
-
-    fetch('http://localhost:4001/login',
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-
-        }).then(function (response) {
-            return (response.text());
-        }).then(function (response) {
-            return JSON.parse(response);
-        }).then(function (response) {
-            dispatch('loading:false');
-            if( response.status === 'success' ){
-                dispatch('user:loggedin:success', response.data );
-            }else{
-                dispatch('user:loggedin:error', response.data );
-            }
-        }).catch(function (error) {
-            console.log('Error in AddServiceDetails', error);
-        });
 }
 
 export default Login;

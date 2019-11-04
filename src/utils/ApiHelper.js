@@ -4,11 +4,12 @@ const defaultHeaders = {
     'Content-Type': 'application/json'
 };
 
-const makeApiCall = async (url, {method, headers}) => {
+const makeApiCall = async (url, {method, headers, body}) => {
     return await fetch(url, 
 		{ 
 			method, 
-			headers: Object.assign({}, defaultHeaders, headers)
+			headers: Object.assign({}, defaultHeaders, headers),
+			body: JSON.stringify(body)
 		}).then(function(response){
 			return( response.text() );
 		}).then(function(response){
