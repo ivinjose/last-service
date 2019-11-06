@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
@@ -11,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import fetch from 'isomorphic-fetch';
+import queryString from 'query-string';
 
 class ViewServiceDetails extends React.Component {
 	constructor() {
@@ -24,7 +23,7 @@ class ViewServiceDetails extends React.Component {
 
 	componentDidMount() {
 		this.getVehiclesList();
-		let queryParams = this.props.location && this.props.location.query;
+		let queryParams = queryString.parse(this.props.location.search);
 		if (queryParams && queryParams.vehicle) {
 			this.chooseVehicle(queryParams.vehicle);
 		}

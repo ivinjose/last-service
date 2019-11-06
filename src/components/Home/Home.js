@@ -24,9 +24,7 @@ const Home = () => {
 						vehicles.map((vehicle)=>{
 							return(
 								<div className={styles['vehicle']} key={vehicle._id}>
-								<Button  href={"/services?vehicle="+vehicle._id} label={vehicle.name} color="primary" >
-									{vehicle.name}
-								</Button>
+								<Link to={"/services?vehicle="+vehicle._id}>{vehicle.name}</Link>
 								</div>
 							)
 						})
