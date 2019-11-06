@@ -13,7 +13,7 @@ const Home = () => {
 		if( user && user.isLoggedIn ){
 			dispatch('vehicles/get', user._id);
 		}
-	}, [dispatch]);
+	}, []);
 
 	return(
 		<div className={styles['home']}>

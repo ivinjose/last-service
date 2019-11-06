@@ -5,20 +5,18 @@ const defaultHeaders = {
 };
 
 const makeApiCall = async (url, {method, headers, body}) => {
-    return await fetch(url, 
-		{ 
-			method, 
-			headers: Object.assign({}, defaultHeaders, headers),
-			body: JSON.stringify(body)
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			return response.data;
-		}).catch(function(error){
-			return error;
-		});
+	try{
+		const apiResponse = await fetch(url,
+			{ 
+				method, 
+				headers: Object.assign({}, defaultHeaders, headers),
+				body: JSON.stringify(body)
+			});
+		const jsonResponse = await apiResponse.json();
+		return jsonResponse.data;
+	}catch(error){
+		return error;
+	}
 }
 
 export default makeApiCall;
