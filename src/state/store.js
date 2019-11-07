@@ -48,9 +48,31 @@ const vehicles = store => {
     });
 }
 
+const services = store => {
+    store.on('@init', ()=>({ services: [] }));
+
+    store.on('services/get', async (state, vehicle)=>{
+        store.dispatch('loading:true');
+        const services = await makeApiCall("http://localhost:4001/vehicles/" + vehicle + "/services", { method: 'GET' });
+        store.dispatch('services/get:success', services);
+    });
+
+    store.on('services/get:success', (state, data)=>{
+        store.dispatch('loading:false');
+        return { services: data };
+    });
+
+    store.on('services/get:error', (state, error)=>{
+        store.dispatch('loading:false');
+        console.log('Error in fetching services', error);
+        return { services: [] };
+    });
+}
+
 export const store = createStore([
     user, 
     loading, 
     vehicles,
+    services,
     process.env.NODE_ENV !== 'production' && require('storeon/devtools')
 ]);
