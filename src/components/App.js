@@ -10,8 +10,7 @@ import Loader from './common/Loader';
 import SecureRoute from './common/SecureRoute';
 
 const App = () => { 
-	const { loading } = useStoreon('loading');
-	const { user } = useStoreon('user');
+	const { loading, user } = useStoreon('loading', 'user');
 	return (
 		<MuiThemeProvider>
 			<Loader loading={loading} />
