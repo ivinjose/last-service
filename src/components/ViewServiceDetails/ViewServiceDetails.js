@@ -1,39 +1,34 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
-
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
-import fetch from 'isomorphic-fetch';
 import TotalAmount from './TotalAmount';
+import queryString from 'query-string';
+import connect from 'storeon/react/connect'
 
 class ViewServiceDetails extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			vehicles: [],
-			currentVehicle: "",
-			serviceDetails: [],
+			currentVehicle: ""
 		};
 	}
 
 	componentDidMount() {
-		this.getVehiclesList();
-		let queryParams = this.props.location.query;
+		let queryParams = queryString.parse(this.props.location.search);
 		if (queryParams && queryParams.vehicle) {
 			this.chooseVehicle(queryParams.vehicle);
 		}
 	}
 
 	render() {
+		//TODO::Find out why multiple renders happen
 		let placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
-		const menuItems = [placeHolderItem, ...this.state.vehicles.map((vehicle) => (
+		const menuItems = [placeHolderItem, ...this.props.vehicles.map((vehicle) => (
 			<MenuItem value={vehicle._id} key={vehicle._id} >
 				{vehicle.name}
 			</MenuItem>
@@ -53,34 +48,13 @@ class ViewServiceDetails extends React.Component {
 							{menuItems}
 						</Select>
 					</div>
-					<TotalAmount data={this.state.serviceDetails} />
-					{this.state.serviceDetails.length > 0 &&
-						<ServiceDetails data={this.state.serviceDetails} />
+          <TotalAmount data={this.props.services} />
+					{this.props.services.length > 0 &&
+						<ServiceDetails data={this.props.services} />
 					}
 				</div>
 			</div>
 		);
-	}
-
-	getVehiclesList() {
-		var _this = this;
-		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles',
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then(function (response) {
-				return (response.text());
-			}).then(function (response) {
-				return JSON.parse(response);
-			}).then(function (response) {
-				_this.setState({
-					vehicles: response.data || []
-				});
-			}).catch(function (error) {
-				console.log('Error in ViewServiceDetails - getVehiclesList ', error);
-			});
 	}
 
 	chooseVehicle(id) {
@@ -91,24 +65,7 @@ class ViewServiceDetails extends React.Component {
 	}
 
 	getServiceDetailsOf(vehicle) {
-		var _this = this;
-		fetch('http://localhost:4001/vehicles/' + vehicle + '/services',
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			}).then(function (response) {
-				return (response.text());
-			}).then(function (response) {
-				return JSON.parse(response);
-			}).then(function (response) {
-				_this.setState({
-					serviceDetails: response.data || []
-				});
-			}).catch(function (error) {
-				console.log('Error in ViewServiceDetails - getServiceDetailsOf ', error);
-			});
+		this.props.dispatch('services/get', vehicle);
 	}
 }
 
@@ -116,4 +73,4 @@ ViewServiceDetails.contextTypes = {
 	store: PropTypes.object
 };
 
-export default ViewServiceDetails;
+export default connect('vehicles', 'services', ViewServiceDetails);

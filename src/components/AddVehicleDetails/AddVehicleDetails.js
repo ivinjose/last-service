@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Header from '../common/Header';
 import styles from './AddVehicleDetails.css';
 import globalStyles from '../../styles/global.css';
@@ -9,8 +7,7 @@ import globalStyles from '../../styles/global.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-
-import fetch from 'isomorphic-fetch';
+import connect from 'storeon/react/connect'
 
 class AddVehicleDetails extends React.Component {
 	constructor() {
@@ -68,32 +65,8 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	saveVehicle(e){
-		let data = [{ name: this.state.vehicle }];
-		let _this = this;
-
-		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles', 
-		{ 
-			method: 'POST', 
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data) 
-		}).then(function(response){
-			return( response.text() );
-		}).then(function(response){
-			return JSON.parse(response);
-		}).then(function(response){
-			_this.setState({
-				snackbarState: true,
-				snackbarMessage: response.message
-			});
-		}).catch(function(error){
-			_this.setState({
-				snackbarState: true,
-				snackbarMessage: error
-			});
-		});
-
+		const vehicles = [{ name: this.state.vehicle }];
+		this.props.dispatch('vehicles/add', {userId: this.props.user._id, vehicles: vehicles})
 	}
 }
 
@@ -101,4 +74,4 @@ AddVehicleDetails.contextTypes = {
 	store: PropTypes.object
 };
 
-export default AddVehicleDetails;
+export default connect('user', AddVehicleDetails);
