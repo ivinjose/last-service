@@ -1,0 +1,19 @@
+.service-reports {
+    .body{
+        margin: 16px;
+    }
+}
+
+.select-cmp {
+    width: 100%;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 50px;
+    overflow: hidden;
+    
+    width: 100%;
+    height: 100%;
+}
