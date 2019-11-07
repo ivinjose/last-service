@@ -4,10 +4,9 @@ import styles from './ViewServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import ServiceDetails from '../ServiceDetails';
 import Header from '../common/Header';
-
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import TotalAmount from './TotalAmount';
 import queryString from 'query-string';
 import connect from 'storeon/react/connect'
 
@@ -49,6 +48,7 @@ class ViewServiceDetails extends React.Component {
 							{menuItems}
 						</Select>
 					</div>
+          <TotalAmount data={this.props.services} />
 					{this.props.services.length > 0 &&
 						<ServiceDetails data={this.props.services} />
 					}
