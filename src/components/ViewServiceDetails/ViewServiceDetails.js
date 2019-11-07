@@ -26,12 +26,8 @@ class ViewServiceDetails extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(props){
-		console.log('componentWillReceiveProps props', props);
-		//TODO::Figure out why multiple re-render are happening
-	}
-
 	render() {
+		//TODO::Find out why multiple renders happen
 		let placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
 		const menuItems = [placeHolderItem, ...this.props.vehicles.map((vehicle) => (
 			<MenuItem value={vehicle._id} key={vehicle._id} >
