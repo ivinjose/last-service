@@ -3,7 +3,7 @@ const mapData = data =>
         .map(({ amount, component }) => {
             return {
                 name: component,
-                value: !isNaN(parseInt(amount)) ? parseInt(amount) : 100,
+                value: !isNaN(parseInt(amount)) ? parseInt(amount) : 100, // FIXME: no need to check if data is in valid format
             };
         })
         .sort(({ value: a }, { value: b }) => {

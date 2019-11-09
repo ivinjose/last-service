@@ -1,3 +1,4 @@
+// Color codes for piechart
 const COLORS = [
     '#c02942',
     '#d95b43',
