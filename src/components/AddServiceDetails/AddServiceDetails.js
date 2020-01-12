@@ -12,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import fetch from 'isomorphic-fetch';
 import connect from 'storeon/react/connect'
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
@@ -43,8 +42,6 @@ class AddServiceDetails extends React.Component {
 	}
 
 	render() {
-		// console.log('render');
-		// console.log('this.props',this.props);
 		return (
 			<div className={styles['service-details']}>
 				<Header title={"Add service details"} />
@@ -156,7 +153,7 @@ class AddServiceDetails extends React.Component {
 
 	saveServicedItem(e) {
 		const id = this.state.currentVehicle;
-		const name = this.state.vehicles.find((vehicle) => vehicle._id === id).name;
+		const name = this.props.vehicles.find((vehicle) => vehicle._id === id).name;
 		const vehicleDetails = { vehicle: id, name };
 		const date = this.state.date;
 		//let component = this.state.component;
@@ -169,41 +166,41 @@ class AddServiceDetails extends React.Component {
 			amount: amount,
 			comments: comments,
 		};
-
 		const data = { ...vehicleDetails, ...serviceDetails };
-		const _this = this;
+		this.props.dispatch('service/add', {vehicleId: id, serviceDetails: data})
 
-		fetch(`http://localhost:4001/vehicles/${id}/service`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
+		// fetch(`http://localhost:4001/vehicles/${id}/service`,
+		// 	{
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json'
+		// 		},
+		// 		body: JSON.stringify(data),
+		// 		credentials: 'include'
 
-			}).then(function (response) {
-				return (response.text());
-			}).then(function (response) {
-				return JSON.parse(response);
-			}).then(function (response) {
-				_this.setState({
-					snackbarState: true,
-					snackbarMessage: response.message,
-					currentVehicle: null,
-					date: "",
-					comments: "",
-					amount: "",
-				});
-			}).catch(function (error) {
-				_this.setState({
-					snackbarState: true,
-					snackbarMessage: error,
-					currentVehicle: null,
-					date: "",
-					comments: "",
-					amount: "",
-				});
-			});
+		// 	}).then(function (response) {
+		// 		return (response.text());
+		// 	}).then(function (response) {
+		// 		return JSON.parse(response);
+		// 	}).then(function (response) {
+		// 		_this.setState({
+		// 			snackbarState: true,
+		// 			snackbarMessage: response.message,
+		// 			currentVehicle: null,
+		// 			date: "",
+		// 			comments: "",
+		// 			amount: "",
+		// 		});
+		// 	}).catch(function (error) {
+		// 		_this.setState({
+		// 			snackbarState: true,
+		// 			snackbarMessage: error,
+		// 			currentVehicle: null,
+		// 			date: "",
+		// 			comments: "",
+		// 			amount: "",
+		// 		});
+		// 	});
 
 	}
 }
