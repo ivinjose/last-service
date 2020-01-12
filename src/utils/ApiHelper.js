@@ -10,7 +10,8 @@ const makeApiCall = async (url, {method, headers, body}) => {
 			{ 
 				method, 
 				headers: Object.assign({}, defaultHeaders, headers),
-				body: JSON.stringify(body)
+				body: JSON.stringify(body),
+				credentials: "include"
 			});
 		const jsonResponse = await apiResponse.json();
 		return jsonResponse.data;
