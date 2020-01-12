@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Header from '../common/Header';
-import ServicedItem from './AddServicedItem';
 import styles from './AddServiceDetails.css';
 import globalStyles from '../../styles/global.css';
 import Select from '@material-ui/core/Select';
@@ -16,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import fetch from 'isomorphic-fetch';
+import connect from 'storeon/react/connect'
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
@@ -44,12 +42,9 @@ class AddServiceDetails extends React.Component {
 		this.closeSnackbar = this.closeSnackbar.bind(this);
 	}
 
-	componentDidMount() {
-		this.getVehiclesList();
-	}
-
-
 	render() {
+		// console.log('render');
+		// console.log('this.props',this.props);
 		return (
 			<div className={styles['service-details']}>
 				<Header title={"Add service details"} />
@@ -62,7 +57,7 @@ class AddServiceDetails extends React.Component {
 								value={this.state.currentVehicle}
 								onChange={this.updateVehicle.bind(this)}>
 								{
-									this.state.vehicles.map(vehicle => {
+									this.props.vehicles.map(vehicle => {
 										return (
 											<MenuItem key={vehicle._id} value={vehicle._id} >{vehicle.name}</MenuItem>
 										);
@@ -123,28 +118,6 @@ class AddServiceDetails extends React.Component {
 		);
 	}
 
-	getVehiclesList() {
-		var _this = this;
-		fetch('http://localhost:4001/users/5a86de0b90d792bccf3c3404/vehicles',
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				}
-
-			}).then(function (response) {
-				return (response.text());
-			}).then(function (response) {
-				return JSON.parse(response);
-			}).then(function (response) {
-				_this.setState({
-					vehicles: response.data ? response.data : []
-				});
-			}).catch(function (error) {
-				console.log('Error in AddServiceDetails', error);
-			});
-	}
-
 	closeSnackbar() {
 		this.setState({
 			snackbarState: false
@@ -180,7 +153,6 @@ class AddServiceDetails extends React.Component {
 			comments: event.target.value
 		});
 	}
-
 
 	saveServicedItem(e) {
 		const id = this.state.currentVehicle;
@@ -240,4 +212,4 @@ AddServiceDetails.contextTypes = {
 	store: PropTypes.object
 };
 
-export default AddServiceDetails;
+export default connect('user', 'vehicles', AddServiceDetails);
