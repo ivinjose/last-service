@@ -7,10 +7,11 @@ import {
 import useStoreon from 'storeon/react'
 import { routes } from "../routes/routes";
 import Loader from './common/Loader';
+import Snackbar from '@material-ui/core/Snackbar';
 import SecureRoute from './common/SecureRoute';
 
 const App = () => { 
-	const { loading, user } = useStoreon('loading', 'user');
+	const { loading, user, snackbarMessage, dispatch } = useStoreon('loading', 'user', 'snackbarMessage');
 	return (
 		<MuiThemeProvider>
 			<Loader loading={loading} />
@@ -23,6 +24,11 @@ const App = () => {
 					})
 				}
 			</Router>
+			<Snackbar
+					open={snackbarMessage.show}
+					message={snackbarMessage.message}
+					autoHideDuration={1000}
+					onClose={()=>dispatch('snackbar:hide')} />
 		</MuiThemeProvider>
 	)
 };

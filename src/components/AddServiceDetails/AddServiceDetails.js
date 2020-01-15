@@ -11,7 +11,6 @@ import FormControl from '@material-ui/core/FormControl';
 // import AutoComplete from '@material-ui/core/AutoComplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import connect from 'storeon/react/connect'
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
@@ -32,13 +31,10 @@ class AddServiceDetails extends React.Component {
 		this.state = {
 			vehicles: [],
 			currentVehicle: null,
-			snackbarState: false,
-			snackbarMessage: " ",
 			date: "",
 			amount: "",
 			comments: "",
 		};
-		this.closeSnackbar = this.closeSnackbar.bind(this);
 	}
 
 	render() {
@@ -105,20 +101,8 @@ class AddServiceDetails extends React.Component {
 					</div>
 				</div>
 
-				<Snackbar
-					open={this.state.snackbarState}
-					message={this.state.snackbarMessage}
-					autoHideDuration={2000}
-					onClose={this.closeSnackbar} />
-
 			</div>
 		);
-	}
-
-	closeSnackbar() {
-		this.setState({
-			snackbarState: false
-		});
 	}
 
 	updateVehicle(event) {
@@ -209,4 +193,4 @@ AddServiceDetails.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('user', 'vehicles', AddServiceDetails);
+export default connect('user', 'vehicles', 'snackbarMessage', AddServiceDetails);

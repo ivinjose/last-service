@@ -6,7 +6,6 @@ import globalStyles from '../../styles/global.css';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import connect from 'storeon/react/connect'
 
 class AddVehicleDetails extends React.Component {
@@ -14,12 +13,9 @@ class AddVehicleDetails extends React.Component {
 		super();
 
 		this.state = {
-			vehicle: null,
-			snackbarState: false,
-			snackbarMessage: " ",
+			vehicle: null
 		};
 
-		this.closeSnackbar = this.closeSnackbar.bind(this);
 		this.updateVehicle = this.updateVehicle.bind(this);
 		this.saveVehicle = this.saveVehicle.bind(this);
 	}
@@ -40,14 +36,6 @@ class AddVehicleDetails extends React.Component {
 						</Button>
 					</div>
 				</div>
-
-				<Snackbar
-					open={this.state.snackbarState}
-					message={this.state.snackbarMessage}
-					autoHideDuration={1000}
-					onClose={this.closeSnackbar}
-					/>
-
 			</div>
 		);
 	}
@@ -55,12 +43,6 @@ class AddVehicleDetails extends React.Component {
 	updateVehicle(event){
 		this.setState({
 			vehicle: event.target.value
-		});
-	}
-
-	closeSnackbar(){
-		this.setState({
-			snackbarState: false
 		});
 	}
 

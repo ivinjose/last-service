@@ -7,6 +7,14 @@ const loading = store => {
     store.on('loading:false', ()=>({ loading: false }));
 }
 
+const snackbarMessage = store => {
+    store.on('@init', ()=>({ snackbarMessage: {show: false, message: null} }));
+    store.on('snackbar:show', (state, message)=>{
+        return { snackbarMessage: {show: true, message} }
+    });
+    store.on('snackbar:hide', ()=>({ snackbarMessage: {show: false, message: null} }));
+}
+
 const user = store => {
     store.on('@init', ()=>({ user: {isLoggedIn: false} }));
 
@@ -89,6 +97,7 @@ const services = store => {
         store.dispatch('loading:true');
         const newServices = await makeApiCall("http://localhost:4001/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
         store.dispatch('service/add:success', newServices);
+        store.dispatch('snackbar:show', "Service added sucessfully");
     });
 
     store.on('service/add:success', (state, newServices)=>{
@@ -106,6 +115,7 @@ const services = store => {
 export const store = createStore([
     user, 
     loading, 
+    snackbarMessage,
     vehicles,
     services,
     process.env.NODE_ENV !== 'production' && require('storeon/devtools')
