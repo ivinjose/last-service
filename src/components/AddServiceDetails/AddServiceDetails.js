@@ -152,40 +152,6 @@ class AddServiceDetails extends React.Component {
 		};
 		const data = { ...vehicleDetails, ...serviceDetails };
 		this.props.dispatch('service/add', {vehicleId: id, serviceDetails: data})
-
-		// fetch(`http://localhost:4001/vehicles/${id}/service`,
-		// 	{
-		// 		method: 'POST',
-		// 		headers: {
-		// 			'Content-Type': 'application/json'
-		// 		},
-		// 		body: JSON.stringify(data),
-		// 		credentials: 'include'
-
-		// 	}).then(function (response) {
-		// 		return (response.text());
-		// 	}).then(function (response) {
-		// 		return JSON.parse(response);
-		// 	}).then(function (response) {
-		// 		_this.setState({
-		// 			snackbarState: true,
-		// 			snackbarMessage: response.message,
-		// 			currentVehicle: null,
-		// 			date: "",
-		// 			comments: "",
-		// 			amount: "",
-		// 		});
-		// 	}).catch(function (error) {
-		// 		_this.setState({
-		// 			snackbarState: true,
-		// 			snackbarMessage: error,
-		// 			currentVehicle: null,
-		// 			date: "",
-		// 			comments: "",
-		// 			amount: "",
-		// 		});
-		// 	});
-
 	}
 }
 
