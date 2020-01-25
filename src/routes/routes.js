@@ -3,12 +3,14 @@ import ViewServiceDetails from '../components/ViewServiceDetails';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
 import Login from '../components/Login';
+import ViewServiceReports from '../components/ViewServiceReports';
 
 const routeConstants = {
     HOME: 'HOME',
     VIEW_SERVICES: 'VIEW_SERVICES',
     ADD_SERVICE_DETAILS: 'ADD_SERVICE_DETAILS',
-    ADD_VEHICLE_DETAILS: 'ADD_VEHICLE_DETAILS'
+    ADD_VEHICLE_DETAILS: 'ADD_VEHICLE_DETAILS',
+    VIEW_SERVICE_REPORTS: 'VIEW_SERVICE_REPORTS',
 }
 
 const routes = [
@@ -46,6 +48,13 @@ const routes = [
         name: "Login",
         component: Login,
         isSecure: false
+    },
+    {
+        key: 'VIEW_SERVICE_REPORTS',
+        path: "/services/reports",
+        name: "View Service Reports",
+        component: ViewServiceReports,
+        isSecure: true
     },
 ];
 
