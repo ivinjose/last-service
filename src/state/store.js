@@ -21,7 +21,12 @@ const user = store => {
     store.on('user/login', async (state, userCredentials)=>{
         store.dispatch('loading:true');
         const user = await makeApiCall("http://localhost:4001/login", { method: 'POST', body: userCredentials });
-        store.dispatch('user/login:success', user);
+        if( user && user._id ){
+            store.dispatch('user/login:success', user);
+        }else{
+            store.dispatch('snackbar:show', "Invalid usernme or passowrd. Please try again.");
+            store.dispatch('user/login:error');
+        }
     });
 
     store.on('user/login:success', (state, data)=>{
