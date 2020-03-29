@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import styles from  './Login.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
     const { user, dispatch } = useStoreon('user');
@@ -16,7 +17,7 @@ const Login = (props) => {
 
     return(
         <div className={styles['login-page']}>
-            <Header title={'View service details'} />
+            <Header title={'Service details'} />
             <div className={styles["form"]}>
                 <div className={styles['input-row']}>
                     <input ref={usernameEl} type="text" name="username" placeholder="Username" value="ivin"/>
@@ -26,6 +27,10 @@ const Login = (props) => {
                 </div>
                 <div className={styles['input-row']}>
                     <button type="button" onClick={()=>doLogin(dispatch, usernameEl, passwordEl)}>Login</button>
+                </div>
+                <br/>
+                <div className={styles['input-row']}>
+                    <div className={styles['signup-cue']}>New User? <Link to="/signup" className={styles['link']}> Join!</Link></div>
                 </div>
             </div>
         </div>
