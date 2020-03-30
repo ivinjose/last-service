@@ -1,4 +1,4 @@
-.login-page{
+.signup-page{
   color: #fff;
   background-color: #438cd6;
   height: 100vh;
@@ -23,6 +23,7 @@
   font-size: 16px;
   height: 30px;
   padding: 3px 8px;
+  width: 200px;
 }
 
 .input-row button{
@@ -46,14 +47,5 @@
 }
 
 ::placeholder{
-  color: #999;
-}
-
-.signup-cue{
-  color: #fff;
-}
-
-.link{
-  color: #77ff4c;
-  margin-left: 3px;
+  color: #ccc;
 }

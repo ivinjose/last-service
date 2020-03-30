@@ -3,6 +3,7 @@ import ViewServiceDetails from '../components/ViewServiceDetails';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
 import Login from '../components/Login';
+import Signup from '../components/Signup';
 
 const routeConstants = {
     HOME: 'HOME',
@@ -47,6 +48,13 @@ const routes = [
         component: Login,
         isSecure: false
     },
+    {
+        key: 'SIGNUP',
+        path: "/signup",
+        name: "Signup",
+        component: Signup,
+        isSecure: false
+    }
 ];
 
 function getRouteDetails(searchRouteKey){

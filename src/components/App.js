@@ -27,7 +27,7 @@ const App = () => {
 			<Snackbar
 					open={snackbarMessage.show}
 					message={snackbarMessage.message}
-					autoHideDuration={1000}
+					autoHideDuration={2500}
 					onClose={()=>dispatch('snackbar:hide')} />
 		</MuiThemeProvider>
 	)

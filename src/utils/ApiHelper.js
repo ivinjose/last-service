@@ -14,7 +14,7 @@ const makeApiCall = async (url, {method, headers, body}) => {
 				credentials: "include"
 			});
 		const jsonResponse = await apiResponse.json();
-		return jsonResponse.data;
+		return jsonResponse;
 	}catch(error){
 		return error;
 	}
