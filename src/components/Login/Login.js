@@ -11,7 +11,10 @@ const Login = (props) => {
 
     useEffect(()=>{
         if(user.isLoggedIn) {
-            props.history.replace("/");
+            //TODO:: check why this is going into endless loops totally randomly
+            setTimeout( ()=>{
+                props.history.replace("/");
+            }, 1);
         }
     },[user])
 
