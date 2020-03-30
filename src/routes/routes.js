@@ -2,8 +2,9 @@ import Home from '../components/Home';
 import ViewServiceDetails from '../components/ViewServiceDetails';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
-import Login from '../components/Login';
 import Signup from '../components/Signup';
+import Login from '../components/Login';
+import Logout from '../components/Logout';
 
 const routeConstants = {
     HOME: 'HOME',
@@ -42,6 +43,13 @@ const routes = [
         isSecure: true
     },
     {
+        key: 'SIGNUP',
+        path: "/signup",
+        name: "Signup",
+        component: Signup,
+        isSecure: false
+    },
+    {
         key: 'LOGIN',
         path: "/login",
         name: "Login",
@@ -49,12 +57,12 @@ const routes = [
         isSecure: false
     },
     {
-        key: 'SIGNUP',
-        path: "/signup",
-        name: "Signup",
-        component: Signup,
-        isSecure: false
-    }
+        key: 'LOGOUT',
+        path: "/logout",
+        name: "Logout",
+        component: Logout,
+        isSecure: true
+    }  
 ];
 
 function getRouteDetails(searchRouteKey){
