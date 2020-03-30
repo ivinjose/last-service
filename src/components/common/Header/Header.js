@@ -4,7 +4,7 @@ import styles from './Header.css'
 import clsx from 'clsx'
 
 import {routes} from '../../../routes/routes'
-
+import useStoreon from 'storeon/react'
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -85,6 +85,7 @@ function Header(props) {
     const classes = useStyles()
     const theme = useTheme()
     const [isDrawerOpen, openDrawer] = React.useState(false)
+    const { user } = useStoreon('user');
 
     function handleDrawerOpen() {
         openDrawer(true)
@@ -137,6 +138,9 @@ function Header(props) {
                 
                 <List>
                     {routes.map((route, index) => {
+                        if(route.isSecure !== user.isLoggedIn ){
+                            return null;
+                        }
                         return (
                             <React.Fragment key={route.key}>
                                 <Link to={route.path} onClick={handleDrawerClose}>
