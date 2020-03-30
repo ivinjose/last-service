@@ -25,7 +25,7 @@ const user = store => {
     store.on('user/signup:error', ()=>{
         store.dispatch('loading:false');
         store.dispatch('snackbar:show', Strings.SIGNUP_ERROR);
-        return{ user: {isLoggedIn: false} }
+        return { user: {isLoggedIn: false} }
     });
 
 
@@ -49,7 +49,13 @@ const user = store => {
     store.on('user/login:error', ()=>{
         store.dispatch('loading:false');
         store.dispatch('snackbar:show', Strings.LOGIN_ERROR);
-        return{ user: {isLoggedIn: false} }
+        return { user: {isLoggedIn: false} }
+    });
+
+    /* Logout flow */
+    store.on('user/logout', (state)=>{
+        store.dispatch('snackbar:show', Strings.LOGOUT_SUCCESS);
+        return { user: {isLoggedIn: false} };
     });
 };
 
