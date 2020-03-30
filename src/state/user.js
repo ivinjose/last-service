@@ -1,5 +1,6 @@
 import makeApiCall from "../utils/ApiHelper";
-import Strings from "../constants/strings";
+import Strings from "../constants/Strings";
+import ApiConstants from "../constants/ApiConstants";
 
 const user = store => {
     store.on('@init', ()=>({ user: {isLoggedIn: false} }));
@@ -7,9 +8,9 @@ const user = store => {
     /* Signup flow */
     store.on('user/signup', async (state, userDetails)=>{
         store.dispatch('loading:true');
-        const user = await makeApiCall("http://localhost:4001/signup", { method: 'POST', body: userDetails });
-        if( user && user._id ){
-            store.dispatch('user/signup:success', user);
+        const result = await makeApiCall("http://localhost:4001/signup", { method: 'POST', body: {userDetails} });
+        if( result.status === ApiConstants.STATUS_SUCCESS ){
+            store.dispatch('user/signup:success', result.data);
         }else{
             store.dispatch('user/signup:error');
         }
@@ -31,9 +32,9 @@ const user = store => {
     /* Login flow */
     store.on('user/login', async (state, userCredentials)=>{
         store.dispatch('loading:true');
-        const user = await makeApiCall("http://localhost:4001/login", { method: 'POST', body: userCredentials });
-        if( user && user._id ){
-            store.dispatch('user/login:success', user);
+        const result = await makeApiCall("http://localhost:4001/login", { method: 'POST', body: userCredentials });
+        if( result.status === ApiConstants.STATUS_SUCCESS ){
+            store.dispatch('user/login:success', result.data);
         }else{
             store.dispatch('user/login:error');
         }

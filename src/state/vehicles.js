@@ -6,7 +6,7 @@ const vehicles = store => {
     store.on('vehicles/get', async (state, userId)=>{
         store.dispatch('loading:true');
         const vehicles = await makeApiCall("http://localhost:4001/users/" + userId + "/vehicles", { method: 'GET' });
-        store.dispatch('vehicles/get:success', vehicles);
+        store.dispatch('vehicles/get:success', vehicles.data);
     });
 
     store.on('vehicles/get:success', (state, data)=>{
@@ -23,7 +23,7 @@ const vehicles = store => {
     store.on('vehicles/add', async (state, data)=>{
         store.dispatch('loading:true');
         const newVehicles = await makeApiCall("http://localhost:4001/users/" + data.userId + "/vehicles", { method: 'POST', body: data.vehicles });
-        store.dispatch('vehicles/add:success', newVehicles);
+        store.dispatch('vehicles/add:success', newVehicles.data);
     });
 
     store.on('vehicles/add:success', (state, newVehicles)=>{

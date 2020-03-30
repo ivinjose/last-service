@@ -2,15 +2,15 @@ import React, { useRef, useEffect } from 'react';
 import styles from  './Signup.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
-import Strings from "../../constants/strings";
+import Strings from "../../constants/Strings";
 
 const Signup = (props) => {
     const { user, dispatch } = useStoreon('user');
-    const usernameEl = useRef(null);
+    const nameEl = useRef(null);
+    const idEl = useRef(null);
     const passwordEl = useRef(null);
     const confirmPasswordEl = useRef(null);
-    const idEl = useRef(null);
-
+    
     useEffect(()=>{
         if(user.isLoggedIn) {
             props.history.replace("/");
@@ -23,10 +23,10 @@ const Signup = (props) => {
             <Header title={'Service details'} />
             <div className={styles["form"]}>
                 <div className={styles['input-row']}>
-                    <input ref={idEl} type="text" name="id" placeholder="Email or Mobile number"/>
+                    <input ref={nameEl} type="text" name="name" placeholder="Your Name"/>
                 </div>
                 <div className={styles['input-row']}>
-                    <input ref={usernameEl} type="text" name="username" placeholder="Username"/>
+                    <input ref={idEl} type="text" name="id" placeholder="Email or Mobile number"/>
                 </div>
                 <div className={styles['input-row']}>
                     <input ref={passwordEl} className="input" type="password" name="password" placeholder="Password"/>
@@ -35,14 +35,14 @@ const Signup = (props) => {
                     <input ref={confirmPasswordEl} type="password" name="confirm-password" placeholder="Confirm Password"/>
                 </div>
                 <div className={styles['input-row']}>
-                    <button type="button" onClick={()=>doSignup(dispatch, idEl, usernameEl, passwordEl, confirmPasswordEl)}>Create account</button>
+                    <button type="button" onClick={()=>doSignup(dispatch, nameEl, idEl, passwordEl, confirmPasswordEl)}>Create account</button>
                 </div>
             </div>
         </div>
     )
 };
 
-const doSignup = (dispatch, idEl, usernameEl, passwordEl, confirmPasswordEl) => {
+const doSignup = (dispatch, nameEl, idEl, passwordEl, confirmPasswordEl) => {
     const password = passwordEl.current.value;
     const confirmPassword = confirmPasswordEl.current.value;
 
@@ -52,8 +52,8 @@ const doSignup = (dispatch, idEl, usernameEl, passwordEl, confirmPasswordEl) => 
     }
 
     const userDetails = {
+        name: nameEl.current.value,
         id: idEl.current.value,
-        username: usernameEl.current.value,
         password
     };
 
