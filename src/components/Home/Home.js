@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './Home.css';
 import Header from '../common/Header';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
+import Strings from '../../constants/StringConstants';
 import Vehicle from "./Vehicle";
 import { Link } from 'react-router-dom';
 import useStoreon from 'storeon/react'
@@ -21,11 +22,11 @@ const Home = () => {
 			<div className={styles['body']}>
 				{
 					vehicles.length>0?
-						vehicles.map( vehicle => <Vehicle {...vehicle} /> )
+						vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} /> )
 						:<Empty />
 				}
-				<div className={styles['cta']}>
-					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>Add</Link>
+				<div className={styles['button']}>
+					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.ADD_VEHICLE}</Link>
 				</div>
 			</div>
 		</div>

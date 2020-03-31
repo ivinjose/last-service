@@ -16,11 +16,11 @@ const Vehicle = (vehicle) => {
 					</div>
 					<div className={styles['info']}>
 						<div className={styles['name']}>{vehicle.name}</div>
-						<div className={styles['subtext']}>Could be anything</div>
+						{vehicle.subtext && <div className={styles['subtext']}>{vehicle.subtext}</div>}
 					</div>
 				</div>	
 			</Link>
-			<div className={styles['menu']}>=</div>
+			{/* <div className={styles['menu']}>=</div> */}
 		</div>
 	)
 }
