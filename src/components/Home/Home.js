@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './Home.css';
 import Header from '../common/Header';
-import Button from '@material-ui/core/Button';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
+import Vehicle from "./Vehicle";
 import { Link } from 'react-router-dom';
 import useStoreon from 'storeon/react'
 
@@ -21,13 +21,7 @@ const Home = () => {
 			<div className={styles['body']}>
 				{
 					vehicles.length>0?
-						vehicles.map((vehicle)=>{
-							return(
-								<div className={styles['vehicle']} key={vehicle._id}>
-								<Link to={"/services?vehicle="+vehicle._id}>{vehicle.name}</Link>
-								</div>
-							)
-						})
+						vehicles.map( vehicle => <Vehicle {...vehicle} /> )
 						:<Empty />
 				}
 				<div className={styles['cta']}>

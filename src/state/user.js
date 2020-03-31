@@ -1,5 +1,5 @@
 import makeApiCall from "../utils/ApiHelper";
-import Strings from "../constants/Strings";
+import Strings from "../constants/StringConstants";
 import ApiConstants from "../constants/ApiConstants";
 
 const user = store => {

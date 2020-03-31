@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import styles from  './Signup.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
-import Strings from "../../constants/Strings";
+import Strings from "../../constants/StringConstants";
 
 const Signup = (props) => {
     const { user, dispatch } = useStoreon('user');

@@ -1,0 +1,41 @@
+.vehicle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 10px;
+    justify-content: space-between;
+
+    .link{
+        color: #1f1f1f;
+        text-decoration: none;
+    }
+
+    .details{
+        display: flex;
+
+        .image-block{
+            border-radius: 2px;
+            margin-right: 15px;
+
+            img{
+                width: 55px;
+            }
+        }
+
+        .info{
+            .name{
+            }
+
+            .subtext{
+                color: #6d6d6d;
+                font-size: 14px;
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .menu{
+        font-size: 25px;
+        color: #676767;
+    }
+}
