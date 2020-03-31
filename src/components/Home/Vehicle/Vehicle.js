@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Vehicle.css';
 import DataConstants from "../../../constants/DataConstants";
 import car from '../../../images/car.png';
-import bike from '../../../images/bike.jpg';
+import bike from '../../../images/bike.png';
 
 const Vehicle = (vehicle) => {
 	const image = vehicle.image || getImage(vehicle.type);
