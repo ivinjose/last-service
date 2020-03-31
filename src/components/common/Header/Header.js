@@ -13,14 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
 import { Link } from 'react-router-dom';
-
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 const drawerWidth = 240
@@ -136,29 +129,23 @@ function Header(props) {
                     </IconButton>
                 </div>
                 
-                <List>
-                    {routes.map((route, index) => {
+                <ul className={styles['list']}>
+                    {routes.map((route) => {
                         if(route.isSecure !== user.isLoggedIn ){
                             return null;
                         }
                         return (
                             <React.Fragment key={route.key}>
-                                <Link to={route.path} onClick={handleDrawerClose}>
-                                    <ListItem button key={route.name}>
-                                        <ListItemIcon>
-                                            {index % 2 === 0 ? (
-                                                <InboxIcon />
-                                            ) : (
-                                                <MailIcon />
-                                            )}
-                                        </ListItemIcon>
-                                        <ListItemText primary={route.name} />
-                                    </ListItem>
+                                <Link to={route.path} className={styles['list-link']} onClick={handleDrawerClose}>
+                                    <li className={styles['list-item']} key={route.name}>
+                                        <span className={styles['icon']}>&#8227;</span>
+                                        <span className={styles['text']}>{route.name}</span>
+                                    </li>
                                 </Link>
                             </React.Fragment>
                         )
                     })}
-                </List>
+                </ul>
             </Drawer>
         </div>
     )
