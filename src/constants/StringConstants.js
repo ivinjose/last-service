@@ -8,5 +8,7 @@ export default {
     LOGOUT_SUCCESS: "Logged out successfully. See you soon!",
     
     PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter.",
-    SOMETHING_WENT_WRONG: "Something went wrong. Please try again."
+    SOMETHING_WENT_WRONG: "Something went wrong. Please try again.",
+
+    ADD_VEHICLE: "Add vehicle"
 }

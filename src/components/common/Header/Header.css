@@ -27,7 +27,27 @@
             margin-top: 4px;
             font-size: 12px;
         }
+    }
+}
 
-        
+.list {
+    padding-left: 20px;
+
+    .list-link{
+        color: #282c34;
+        text-decoration: none;
+
+        .list-item {
+            list-style: none;
+            padding: 10px 0px;
+
+            .icon{
+                padding-right: 10px;
+            }
+
+            .text{
+                color: #438cd6;
+            }
+        }
     }
 }

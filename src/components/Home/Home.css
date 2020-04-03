@@ -1,14 +1,12 @@
 .home{
     .body{
         margin: 16px;
+
         .vehicle{
             margin-top: 15px;
             text-align: center;
         }
-        .cta{
-            margin-top: 48px;
-            text-align: center;
-        }
+
         .empty{
             .text1{
                 font-size: 24px;
@@ -25,11 +23,23 @@
                 margin-top: 64px;
                 text-align: center;
             }
+        }
 
-            /* .cta{
-                margin-top: 48px;
-                text-align: center;
-            } */
+        .button {
+            background-color: #438cd6;
+            border: 1px solid rgba(225,225,225,0.2);
+            border-radius: 4px;
+            outline-color: rgba(225,225,225,0.2);
+            outline-width: 0px;
+            color: #fff;
+            font-size: 16px;
+            padding: 8px 18px;
+            text-align: center;
+    
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
         }
     }
 }

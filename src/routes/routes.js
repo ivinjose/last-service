@@ -45,7 +45,7 @@ const routes = [
     {
         key: 'SIGNUP',
         path: "/signup",
-        name: "Signup",
+        name: "Sign Up",
         component: Signup,
         isSecure: false
     },
