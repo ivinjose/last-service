@@ -1,7 +1,7 @@
 const express = require('express');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('../../webpack.config.js');
 const app = express();
 const path = require('path');
 const compiler = webpack(webpackConfig);
@@ -17,7 +17,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
  
 app.get('/*', (req,res) => {
-	res.sendFile(path.join(__dirname, '/www/index.html'))
+	res.sendFile(path.join(__dirname, '../../www/index.html'))
 });
 
 const server = app.listen(4000, function() {
