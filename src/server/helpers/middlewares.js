@@ -5,7 +5,6 @@ const userFunctions = require("../functions/userFunctions");
 const setHeaders = (req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.header("Access-Control-Allow-Origin", constants.FRONTEND_HOST);
     res.header("Access-Control-Allow-Credentials", "true");
     next();
 };

@@ -5,7 +5,7 @@ const services = store => {
 
     store.on('services/get', async (state, vehicle)=>{
         store.dispatch('loading:true');
-        const services = await makeApiCall("http://localhost:4001/vehicles/" + vehicle + "/services", { method: 'GET' });
+        const services = await makeApiCall("http://localhost:4000/api/vehicles/" + vehicle + "/services", { method: 'GET' });
         store.dispatch('services/get:success', services.data);
     });
 
@@ -22,7 +22,7 @@ const services = store => {
 
     store.on('service/add', async (state, data)=>{
         store.dispatch('loading:true');
-        const newServices = await makeApiCall("http://localhost:4001/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
+        const newServices = await makeApiCall("http://localhost:4000/api/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
         store.dispatch('service/add:success', newServices.data);
         store.dispatch('snackbar:show', "Service added sucessfully");
     });

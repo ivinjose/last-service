@@ -5,7 +5,7 @@ const vehicles = store => {
 
     store.on('vehicles/get', async (state, userId)=>{
         store.dispatch('loading:true');
-        const vehicles = await makeApiCall("http://localhost:4001/users/" + userId + "/vehicles", { method: 'GET' });
+        const vehicles = await makeApiCall("http://localhost:4000/api/users/" + userId + "/vehicles", { method: 'GET' });
         store.dispatch('vehicles/get:success', vehicles.data);
     });
 
@@ -22,7 +22,7 @@ const vehicles = store => {
 
     store.on('vehicles/add', async (state, data)=>{
         store.dispatch('loading:true');
-        const newVehicles = await makeApiCall("http://localhost:4001/users/" + data.userId + "/vehicles", { method: 'POST', body: data.vehicles });
+        const newVehicles = await makeApiCall("http://localhost:4000/api/users/" + data.userId + "/vehicles", { method: 'POST', body: data.vehicles });
         store.dispatch('vehicles/add:success', newVehicles.data);
     });
 
