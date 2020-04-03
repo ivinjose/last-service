@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "compile": "webpack",
-    "start": "node server.js",
+    "start:client": "node server.js",
+    "start:server": "node src/server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -41,7 +42,16 @@
     "storeon": "^0.9.5",
     "style-loader": "^0.14.1",
     "webpack": "^2.2.1",
-    "webpack-dev-middleware": "^1.10.1"
+    "webpack-dev-middleware": "^1.10.1",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongo-sanitize": "^1.0.0",
+    "mongodb": "^2.2.25",
+    "mongoose": "^5.0.5",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -55,6 +65,7 @@
     "file-loader": "^1.1.4",
     "postcss-loader": "^1.3.3",
     "postcss-nested": "^1.0.0",
-    "redux-devtools": "^3.3.2"
+    "redux-devtools": "^3.3.2",
+    "nodemon": "^1.14.12"
   }
 }
