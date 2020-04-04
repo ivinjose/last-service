@@ -111,6 +111,7 @@ app.post("/api/vehicles/:id/service", function(req, res) {
 /**
  * Server the HTML for local development
  */
+app.use(express.static('www'));
 app.get('/*', (req,res) => {
 	res.sendFile(path.join(__dirname, './www/index.html'))
 });
