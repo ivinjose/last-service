@@ -1,6 +1,5 @@
 const express = require( 'express' );
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
 const path = require('path');
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
@@ -11,23 +10,25 @@ const vehicleFunctions = require("./src/server/functions/vehicleFunctions");
 const serviceFunctions = require("./src/server/functions/serviceFunctions");
 const userFunctions = require("./src/server/functions/userFunctions");
 const middlewares = require('./src/server/helpers/middlewares');
-
+const webpackConfig = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const compiler = webpack(webpackConfig);
 const app = express();
+const isDev = process.argv[2] === 'dev';
 
 /**
  * Use webpack dev middleware for local development
  */
-app.use(webpackDevMiddleware(compiler, {
-	hot: true,
-	filename: 'bundle.js',
-	publicPath: '/',
-	stats: {
-		colors: true,
-	},
-	historyApiFallback: true,
-}));
+if( isDev ){
+    app.use(webpackDevMiddleware(webpack(webpackConfig), {
+        hot: true,
+        filename: 'bundle.js',
+        publicPath: '/',
+        stats: {
+            colors: true,
+        },
+        historyApiFallback: true,
+    }));
+}
 
 app.use(cookieParser(), bodyParser.json(), middlewares.setHeaders, middlewares.validateUserCookie);
 
