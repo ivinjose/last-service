@@ -10,7 +10,7 @@ const setHeaders = (req, res, next) => {
 };
 
 const validateUserCookie = (req, res, next) => {
-    if( req.method == 'OPTIONS' || req.path == '/login' || req.path == '/signup' ){
+    if( req.method == 'OPTIONS' || req.path == '/api/login' || req.path == '/api/signup' ){
         next();
         return;
     }
