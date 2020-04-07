@@ -1,27 +1,29 @@
 .service{
-    table {
-      color: #1f2939;
-      font-size: 14px;
-      width: 100%;
-      tr {
-        td {
-          padding: 0 0 9px;
-        }
-        td.Col {
-            width: 70%;
-        }
-        td.Col-Details{
-          text-align: right;
-        }
-      }
-    }
+	font-size: 16px;
+	border: #00000012 1px solid;
+	border-radius: 4px;
+	padding: 20px 15px;
+	margin-bottom: 15px;
 
-  .CommentsSection {
-    div:first-child{
-        margin-bottom: 5px;
-      }
-    .Comments {
-      font-style: italic;
-      }
-  }
+	.date{
+		font-weight: 600;
+		margin-bottom: 15px;
+	}
+
+	table {
+		color: #1f2939;
+		width: 100%;
+
+		tr {
+			td {
+				padding: 0 0 9px;
+			}
+			.col {
+				width: 70%;
+			}
+			.col-details{
+				text-align: right;
+			}
+		}
+	}
 }
