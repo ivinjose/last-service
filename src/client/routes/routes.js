@@ -1,5 +1,5 @@
 import Home from '../components/Home';
-import ViewServiceDetails from '../components/ViewServiceDetails';
+import Services from '../components/Services';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
 import Signup from '../components/Signup';
@@ -24,21 +24,21 @@ const routes = [
     {
         key: 'VIEW_SERVICES',
         path: "/services",
-        name: "View Service Details",
-        component: ViewServiceDetails,
+        name: "View Services",
+        component: Services,
         isSecure: true
     },
     {
         key: 'ADD_SERVICE_DETAILS',
         path: "/services/add",
-        name: "Add Service Details",
+        name: "Add New Service",
         component: AddServiceDetails,
         isSecure: true
     },
     {
         key: 'ADD_VEHICLE_DETAILS',
         path: "/vehicles/add",
-        name: "Add Vehicle Details",
+        name: "Add New Vehicle",
         component: AddVehicleDetails,
         isSecure: true
     },

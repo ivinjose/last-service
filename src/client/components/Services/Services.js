@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './ViewServiceDetails.css';
+import styles from './Services.css';
 import globalStyles from '../../styles/global.css';
-import ServiceDetails from '../ServiceDetails';
+import ServiceDetails from './ServiceDetails';
 import Header from '../common/Header';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,7 +10,7 @@ import TotalAmount from './TotalAmount';
 import queryString from 'query-string';
 import connect from 'storeon/react/connect'
 
-class ViewServiceDetails extends React.Component {
+class Services extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -35,7 +35,7 @@ class ViewServiceDetails extends React.Component {
 		))];
 
 		return (
-			<div className={styles['service-details']}>
+			<div className={styles['services']}>
 				<Header title={'View service details'} />
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
@@ -69,8 +69,8 @@ class ViewServiceDetails extends React.Component {
 	}
 }
 
-ViewServiceDetails.contextTypes = {
+Services.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('vehicles', 'services', ViewServiceDetails);
+export default connect('vehicles', 'services', Services);

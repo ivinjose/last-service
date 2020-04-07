@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Collapse from '@material-ui/core/Collapse';
-import svg from '../../images/notfound.svg';
+import svg from '../../../images/notfound.svg';
 
 class ServiceDetails extends React.Component {
     constructor(props) {
