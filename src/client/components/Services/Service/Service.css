@@ -1,4 +1,4 @@
-.service-details{
+.service{
     table {
       color: #1f2939;
       font-size: 14px;
@@ -17,7 +17,6 @@
     }
 
   .CommentsSection {
-
     div:first-child{
         margin-bottom: 5px;
       }
@@ -25,24 +24,4 @@
       font-style: italic;
       }
   }
-
-  .NoDataFound {
-    padding: 16px;
-    .Header {
-      text-align: center;
-    }
-
-    .Avatar {
-      margin: 25px auto;
-      width: 150px;
-      height: 150px;
-      padding: 10px;
-
-      img {
-        width:100%;
-        height: 100%;
-      }
-    }
-  }
-
 }

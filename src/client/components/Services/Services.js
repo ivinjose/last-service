@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Services.css';
-import globalStyles from '../../styles/global.css';
-import ServiceDetails from './ServiceDetails';
+import queryString from 'query-string';
+import connect from 'storeon/react/connect'
+
 import Header from '../common/Header';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
-import queryString from 'query-string';
-import connect from 'storeon/react/connect'
+import Service from './Service';
+
+import styles from './Services.css';
+import globalStyles from '../../styles/global.css';
+import svg from '../../images/notfound.svg';
 
 class Services extends React.Component {
 	constructor() {
@@ -43,15 +46,13 @@ class Services extends React.Component {
 							displayEmpty
 							value={this.state.currentVehicle}
 							onChange={(e) => this.chooseVehicle(e.target.value)}
-							className={styles['select-cmp']}
-						>
+							className={styles['select-cmp']}>
 							{menuItems}
 						</Select>
 					</div>
-          <TotalAmount data={this.props.services} />
-					{this.props.services.length > 0 &&
-						<ServiceDetails data={this.props.services} />
-					}
+					
+					<TotalAmount data={this.props.services} />
+					{renderServices(this.props.services)}
 				</div>
 			</div>
 		);
@@ -68,6 +69,27 @@ class Services extends React.Component {
 		this.props.dispatch('services/get', vehicle);
 	}
 }
+
+const renderServices = (services) =>{
+	if( services.length > 0 ){
+		return services.map( service =>{
+			return <Service {...service} />
+		});
+	}else {
+		return <EmptyServices />
+	}
+}
+
+const EmptyServices = () => {
+	return (
+		<div className={styles['empty-view']}>
+			<h3>"Oops! no data available"</h3>
+			<div className={styles['avatar']}>
+				<img src={svg}/>
+			</div>
+		</div>
+	); 
+};
 
 Services.contextTypes = {
 	store: PropTypes.object
