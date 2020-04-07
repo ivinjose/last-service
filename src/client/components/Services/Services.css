@@ -1,0 +1,25 @@
+.services {
+    .body{
+        margin: 16px;
+
+        .empty-view {
+            padding: 16px;
+
+            .avatar {
+                margin: 25px auto;
+                width: 150px;
+                height: 150px;
+                padding: 10px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
+
+.select-cmp {
+    width: 100%;
+}

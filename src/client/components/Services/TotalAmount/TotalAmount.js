@@ -1,9 +1,20 @@
 import React from 'react';
 import styles from './TotalAmount.css';
 
-const getTotalAmount = data => {
+const TotalAmount = ({ services }) => {
+    if (!services || services.length === 0) {
+        return null;
+    }
+    return (
+        <div className={styles['total-amount']}>
+            Total Amount : {getTotalAmount(services)}
+        </div>
+    );
+};
+
+const getTotalAmount = services => {
     let totalAmount = 0;
-    data.forEach(service => {
+    services.forEach(service => {
         const amount = Number(service.amount);
         if (!isNaN(amount)) {
             totalAmount += amount;
@@ -14,19 +25,6 @@ const getTotalAmount = data => {
         style: 'currency',
         currency: 'INR',
     });
-};
-
-const TotalAmount = ({ data }) => {
-    if (!data || data.length === 0) {
-        return null;
-    }
-    return (
-        <div className={styles['amount-cmp']}>
-            <span className={styles['amount']}>
-                Total Amount : {getTotalAmount(data)}
-            </span>
-        </div>
-    );
 };
 
 export default TotalAmount;

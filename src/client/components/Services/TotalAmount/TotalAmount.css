@@ -1,0 +1,9 @@
+.total-amount {
+    display: inline-block;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #2196f3;
+    padding: 10px 15px;
+}

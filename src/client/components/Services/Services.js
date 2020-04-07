@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './ViewServiceDetails.css';
-import globalStyles from '../../styles/global.css';
-import ServiceDetails from '../ServiceDetails';
+import queryString from 'query-string';
+import connect from 'storeon/react/connect'
+
 import Header from '../common/Header';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
-import queryString from 'query-string';
-import connect from 'storeon/react/connect'
+import Service from './Service';
 
-class ViewServiceDetails extends React.Component {
+import styles from './Services.css';
+import globalStyles from '../../styles/global.css';
+import svg from '../../images/notfound.svg';
+
+class Services extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -35,7 +38,7 @@ class ViewServiceDetails extends React.Component {
 		))];
 
 		return (
-			<div className={styles['service-details']}>
+			<div className={styles['services']}>
 				<Header title={'View service details'} />
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
@@ -43,15 +46,13 @@ class ViewServiceDetails extends React.Component {
 							displayEmpty
 							value={this.state.currentVehicle}
 							onChange={(e) => this.chooseVehicle(e.target.value)}
-							className={styles['select-cmp']}
-						>
+							className={styles['select-cmp']}>
 							{menuItems}
 						</Select>
 					</div>
-          <TotalAmount data={this.props.services} />
-					{this.props.services.length > 0 &&
-						<ServiceDetails data={this.props.services} />
-					}
+					
+					<TotalAmount services={this.props.services} />
+					{renderServices(this.props.services)}
 				</div>
 			</div>
 		);
@@ -69,8 +70,29 @@ class ViewServiceDetails extends React.Component {
 	}
 }
 
-ViewServiceDetails.contextTypes = {
+const renderServices = (services) =>{
+	if( services.length > 0 ){
+		return services.map( service =>{
+			return <Service {...service} />
+		});
+	}else {
+		return <EmptyServices />
+	}
+}
+
+const EmptyServices = () => {
+	return (
+		<div className={styles['empty-view']}>
+			<h3>"Oops! no data available"</h3>
+			<div className={styles['avatar']}>
+				<img src={svg}/>
+			</div>
+		</div>
+	); 
+};
+
+Services.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('vehicles', 'services', ViewServiceDetails);
+export default connect('vehicles', 'services', Services);
