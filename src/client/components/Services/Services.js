@@ -51,7 +51,7 @@ class Services extends React.Component {
 						</Select>
 					</div>
 					
-					<TotalAmount data={this.props.services} />
+					<TotalAmount services={this.props.services} />
 					{renderServices(this.props.services)}
 				</div>
 			</div>
