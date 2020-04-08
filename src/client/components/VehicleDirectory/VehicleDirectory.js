@@ -6,31 +6,32 @@ import Card from '../common/Card';
 import Space from '../common/Stylers/Space';
 import { Link } from 'react-router-dom';
 
-import BuildIcon from '@material-ui/icons/Build';
-import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
+import service from "../../images/service.svg";
+import document from "../../images/document.svg";
+import reminder from "../../images/reminder.svg";
 
 const VehicleDirectory = () => {
     const cardCustomStyle = {
-        height: '250px',
-        width: '200px'
+        height: '200px',
+        width: '275px'
     };
     return(
         <React.Fragment>
             <Header title={'Vehicle Directory'} />
             <div className={styles['directory']}>
-                VehicleDirectory vehicle info here
+                {/* VehicleDirectory vehicle info here */}
+                <Space vertical={15} />
                 <div className={styles['cards']}>
                     <Card style={cardCustomStyle}>
-                        <CardContent link="/services" linkText="SERVICES" message="You have 2 services due!" icon={<BuildIcon fontSize="large" color="action" />} />
+                        <CardContent link="/services" linkText="SERVICES" message="You have 2 services due!" icon={service} />
                     </Card>
-                    <Space vertical={15} />
+                    <Space vertical={25} />
                     <Card style={cardCustomStyle}>
-                        <CardContent link="/documents" linkText="DOCUMENTS" message="You have 1 document for renewal!" icon={<DescriptionOutlinedIcon fontSize="large" color="action" />} />
+                        <CardContent link="/documents" linkText="DOCUMENTS" message="You have 1 document for renewal!" icon={document} />
                     </Card>
-                    <Space vertical={15} />
+                    <Space vertical={25} />
                     <Card style={cardCustomStyle}>
-                        <CardContent link="/reminder" linkText="REMINDERS" message="You have 0 reminders!" icon={<AddAlertIcon fontSize="large" color="action" />} />
+                        <CardContent link="/reminder" linkText="REMINDERS" message="You have 0 reminders!" icon={reminder} />
                     </Card>
                 </div>
             </div>
@@ -42,7 +43,7 @@ const CardContent = ({message, link, linkText, icon}) => {
     return(
         <div className={styles['card-content']}>
             <div className={styles['icon']}>
-                {icon}
+                <img src={icon} />
             </div>
             <div className={styles['message']}>
                 {message}
