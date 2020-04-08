@@ -30,7 +30,7 @@ class Services extends React.Component {
 
 	render() {
 		//TODO::Find out why multiple renders happen
-		let placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
+		const placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
 		const menuItems = [placeHolderItem, ...this.props.vehicles.map((vehicle) => (
 			<MenuItem value={vehicle._id} key={vehicle._id} >
 				{vehicle.name}
