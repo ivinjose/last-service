@@ -1,4 +1,5 @@
 import Home from '../components/Home';
+import VehicleDirectory from "../components/VehicleDirectory";
 import Services from '../components/Services';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
@@ -8,6 +9,7 @@ import Logout from '../components/Logout';
 
 const routeConstants = {
     HOME: 'HOME',
+    VEHICLE_DIRECTORY: 'VEHICLE_DIRECTORY', 
     VIEW_SERVICES: 'VIEW_SERVICES',
     ADD_SERVICE_DETAILS: 'ADD_SERVICE_DETAILS',
     ADD_VEHICLE_DETAILS: 'ADD_VEHICLE_DETAILS'
@@ -19,6 +21,13 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
+        isSecure: true
+    },
+    {
+        key: 'VEHICLE_DIRECTORY',
+        path: "/vehicle",
+        name: "Vehicle Directory",
+        component: VehicleDirectory,
         isSecure: true
     },
     {

@@ -1,0 +1,8 @@
+.card{
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
+    padding: 15px;
+    -webkit-box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.44);
+    -moz-box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.44);
+    box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.44);
+}

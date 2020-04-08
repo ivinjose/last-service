@@ -38,9 +38,9 @@ class Services extends React.Component {
 		))];
 
 		return (
-			<div className={styles['services']}>
+			<React.Fragment>
 				<Header title={'View service details'} />
-				<div className={styles['body']}>
+				<div className={styles['services']}>
 					<div className={globalStyles['row']}>
 						<Select
 							displayEmpty
@@ -54,7 +54,7 @@ class Services extends React.Component {
 					<TotalAmount services={this.props.services} />
 					{renderServices(this.props.services)}
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 
