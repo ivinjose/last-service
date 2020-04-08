@@ -61,13 +61,9 @@ app.post("/api/login", function(req, res) {
     });
 });
 
-app.get("/api/users/:id", function(req, res) {
-    userFunctions.getUser(req, res);
-});
+app.get("/api/users/:id", userFunctions.getUser);
 
-app.get("/api/users/:id/vehicles", function(req, res) {
-    vehicleFunctions.getVehiclesOfUser(req, res);
-});
+app.get("/api/users/:id/vehicles", vehicleFunctions.getVehiclesOfUser);
 
 app.get("/api/users/:id/services", function(req, res) {
     if (Object.keys(req.query).length === 0) {
@@ -93,21 +89,13 @@ app.post("/api/users/:id/vehicles", function(req, res) {
     }
 });
 
-app.post("/api/vehicles/:id", function(req, res) {
-    vehicleFunctions.addVehiclesOfUser(req, res);
-});
+app.post("/api/vehicles/:id", vehicleFunctions.addVehiclesOfUser);
 
-app.put("/api/vehicles/:id", function(req, res) {
-    vehicleFunctions.updateVehicle(req, res);
-});
+app.put("/api/vehicles/:id", vehicleFunctions.updateVehicle);
 
-// app.get("/api/services", function(req, res) {
-//     serviceFunctions.getServices(req, res);
-// });
+// app.get("/api/services", serviceFunctions.getServices;
 
-app.post("/api/vehicles/:id/service", function(req, res) {
-    serviceFunctions.addServices(req, res);
-});
+app.post("/api/vehicles/:id/service", serviceFunctions.addServices);
 
 /**
  * Server the HTML for local development
