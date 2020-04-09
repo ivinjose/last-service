@@ -40,10 +40,10 @@ class AddServiceDetails extends React.Component {
 
 	render() {
 		return (
-			<div className={styles['service-details']}>
+			<React.Fragment>
 				<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
 
-				<div className={styles['body']}>
+				<div className={styles['service-details']}>
 					<div className={globalStyles['row']}>
 						<FormControl className={styles['form-control']}>
 							<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
@@ -101,8 +101,7 @@ class AddServiceDetails extends React.Component {
 						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}>Save</Button>
 					</div>
 				</div>
-
-			</div>
+			</React.Fragment>
 		);
 	}
 

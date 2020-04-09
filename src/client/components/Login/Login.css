@@ -1,25 +1,20 @@
 .login-page{
-  color: #fff;
-  background-color: #438cd6;
   height: 100vh;
   text-align: center;
   overflow: hidden;
-}
-
-.form{
-  margin-top: 25vh;
+  margin: 156px 16px 16px;
+  color: #ccc;
 }
 
 .input-row{
-  margin: 5px 0 18px;
+  margin: 15px 0 18px;
 }
 
 .input-row input{
   background-color: rgba(225,225,225,0.2);
-  border: 1px solid rgba(225,225,225,0.2);
+  border: 1px solid rgba(140, 140, 140, 0.2);
   outline-color: rgba(225,225,225,0.2);
   outline-width: 0px;
-  color: #fff;
   font-size: 16px;
   height: 30px;
   padding: 3px 8px;
@@ -42,19 +37,18 @@
 }
 
 .input-row input:focus{
-  /* border: 1px solid red; */
   background-color: rgba(225,225,225,0.3);
 }
 
-::placeholder{
+/* ::placeholder{
   color: #ccc;
-}
+} */
 
 .signup-cue{
-  color: #fff;
+  color: #3e3e3e;
 }
 
 .link{
-  color: #77ff4c;
+  color: #0a0094;
   margin-left: 3px;
 }

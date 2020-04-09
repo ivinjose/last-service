@@ -1,6 +1,6 @@
 .directory{
     .cards{
-        padding: 15px;
+        margin: 70px 16px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;

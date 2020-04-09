@@ -23,10 +23,10 @@ class AddVehicleDetails extends React.Component {
 
 	render() {
 		return (
-			<div className={styles['service-details']}>
+			<React.Fragment>
 				<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
 
-				<div className={styles['body']}>
+				<div className={styles['service-details']}>
 					<div className={globalStyles['row']}>
 						<TextField label="Vehicle name" fullWidth={true} onChange={this.updateVehicle} />
 					</div>
@@ -37,7 +37,7 @@ class AddVehicleDetails extends React.Component {
 						</Button>
 					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 

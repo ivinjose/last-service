@@ -17,9 +17,9 @@ const Home = () => {
 	}, []);
 
 	return(
-		<div className={styles['home']}>
+		<React.Fragment>
 			<Header title={Strings.PAGE_TITLES.HOME}/>
-			<div className={styles['body']}>
+			<div className={styles['home']}>
 				{
 					vehicles.length>0?
 						vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} /> )
@@ -29,7 +29,7 @@ const Home = () => {
 					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.ADD_VEHICLE}</Link>
 				</div>
 			</div>
-		</div>
+		</React.Fragment>
 	);
 }
 

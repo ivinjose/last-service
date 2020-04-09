@@ -20,14 +20,14 @@ const Login = (props) => {
     },[user])
 
     return(
-        <div className={styles['login-page']}>
+        <React.Fragment>
             <Header title={Strings.PAGE_TITLES.LOGIN} />
-            <div className={styles["form"]}>
+            <div className={styles["login-page"]}>
                 <div className={styles['input-row']}>
-                    <input ref={usernameEl} type="text" name="username" placeholder="Email or Mobile number" />
+                    <input ref={usernameEl} type="text" name="username" placeholder="Email or Mobile number" value="ivin" />
                 </div>
                 <div className={styles['input-row']}>
-                    <input ref={passwordEl} type="password" name="password" placeholder="Password" />
+                    <input ref={passwordEl} type="password" name="password" placeholder="Password" value="ivin" />
                 </div>
                 <div className={styles['input-row']}>
                     <button type="button" onClick={()=>doLogin(dispatch, usernameEl, passwordEl)}>Login</button>
@@ -37,7 +37,7 @@ const Login = (props) => {
                     <div className={styles['signup-cue']}>New User? <Link to="/signup" className={styles['link']}> Join!</Link></div>
                 </div>
             </div>
-        </div>
+        </React.Fragment>
     )
 }
 

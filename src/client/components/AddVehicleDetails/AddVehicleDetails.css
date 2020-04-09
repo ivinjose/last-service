@@ -1,9 +1,7 @@
 .service-details{
-    .body{
-        margin: 16px;
-        .vehicle-name{
-            height: 26px;
-            width: 220px;
-        }
+    margin: 70px 16px 16px;
+    .vehicle-name{
+        height: 26px;
+        width: 220px;
     }
 }

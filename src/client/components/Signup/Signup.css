@@ -1,13 +1,12 @@
 .signup-page{
   color: #fff;
-  background-color: #438cd6;
   height: 100vh;
   text-align: center;
   overflow: hidden;
 }
 
 .form{
-  margin-top: 25vh;
+  margin-top: 30%;
 }
 
 .input-row{
@@ -16,14 +15,13 @@
 
 .input-row input{
   background-color: rgba(225,225,225,0.2);
-  border: 1px solid rgba(225,225,225,0.2);
+  border: 1px solid rgba(140, 140, 140, 0.2);
   outline-color: rgba(225,225,225,0.2);
   outline-width: 0px;
-  color: #fff;
   font-size: 16px;
   height: 30px;
   padding: 3px 8px;
-  width: 200px;
+  width: 210px;
 }
 
 .input-row button{
@@ -42,10 +40,9 @@
 }
 
 .input-row input:focus{
-  /* border: 1px solid red; */
   background-color: rgba(225,225,225,0.3);
 }
 
 ::placeholder{
-  color: #ccc;
+  /* color: #ccc; */
 }
