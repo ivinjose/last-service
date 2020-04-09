@@ -138,7 +138,7 @@ function Header(props) {
                             <React.Fragment key={route.key}>
                                 <Link to={route.path} className={styles['list-link']} onClick={handleDrawerClose}>
                                     <li className={styles['list-item']} key={route.name}>
-                                        <span className={styles['icon']}>&#8227;</span>
+                                        {/* <span className={styles['icon']}>&#8227;</span> */}
                                         <span className={styles['text']}>{route.name}</span>
                                     </li>
                                 </Link>

@@ -31,7 +31,8 @@
 }
 
 .list {
-    padding-left: 20px;
+    padding-left: 0px;
+    margin: 0;
 
     .list-link{
         color: #282c34;
@@ -39,15 +40,20 @@
 
         .list-item {
             list-style: none;
-            padding: 10px 0px;
-
-            .icon{
-                padding-right: 10px;
-            }
+            margin: 0px 15px;
+            border-bottom: 1px solid #f1f1f1;
+            padding: 25px 15px;
 
             .text{
-                color: #438cd6;
+                color: #0056ad;
             }
+        }
+
+    }
+
+    .list-link:last-child{
+        .list-item{
+            border-bottom: none;
         }
     }
 }
