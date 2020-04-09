@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useStoreon from 'storeon/react'
 
+import Strings from '../../constants/StringConstants';
+
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
 const AddDocument = () => {
@@ -53,7 +55,7 @@ const AddDocument = () => {
 
 	return(
 		<React.Fragment>
-			<Header title="Add Document" />
+			<Header title={Strings.PAGE_TITLES.ADD_DOCUMENT} />
 			<div className={styles['add-document']}>
 				<FormControl className={styles['form-control']}>
 					<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>

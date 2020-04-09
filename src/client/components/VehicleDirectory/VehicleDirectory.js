@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import service from "../../images/service.svg";
 import document from "../../images/document.svg";
 import reminder from "../../images/reminder.svg";
+import Strings from '../../constants/StringConstants';
 
 const VehicleDirectory = () => {
     const cardCustomStyle = {
@@ -17,7 +18,7 @@ const VehicleDirectory = () => {
     };
     return(
         <React.Fragment>
-            <Header title={'Vehicle Directory'} />
+            <Header title={Strings.PAGE_TITLES.DIRECTORY} />
             <div className={styles['directory']}>
                 {/* VehicleDirectory vehicle info here */}
                 <Space vertical={15} />

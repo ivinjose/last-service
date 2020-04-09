@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginRight: '5px',
     },
     hide: {
         display: 'none',
@@ -104,9 +104,9 @@ function Header(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
+                    <span className={styles['title']}>
                         {props.title}
-                    </Typography>
+                    </span>
                 </Toolbar>
             </AppBar>
             <Drawer

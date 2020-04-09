@@ -10,5 +10,17 @@ export default {
     PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter.",
     SOMETHING_WENT_WRONG: "Something went wrong. Please try again.",
 
-    ADD_VEHICLE: "Add vehicle"
+    ADD_VEHICLE: "Add vehicle",
+
+    PAGE_TITLES: {
+        HOME: "SERVICE MANAGER",
+        LOGIN: "SERVICE MANAGER",
+        SIGNUP: "SERVICE MANAGER",
+        DIRECTORY: "DIRECTORY",
+        SERVICES: "SERVICES",
+        DOCUMENTS: "DOCUMENTS",
+        ADD_SERVICE: "ADD SERVICE",
+        ADD_VEHICLE: "ADD VEHICLE",
+        ADD_DOCUMENT: "ADD DOCUMENT",
+    }
 }

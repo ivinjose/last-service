@@ -3,6 +3,7 @@ import styles from  './Login.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
 import { Link } from 'react-router-dom';
+import Strings from '../../constants/StringConstants';
 
 const Login = (props) => {
     const { user, dispatch } = useStoreon('user');
@@ -20,7 +21,7 @@ const Login = (props) => {
 
     return(
         <div className={styles['login-page']}>
-            <Header title={'Service details'} />
+            <Header title={Strings.PAGE_TITLES.LOGIN} />
             <div className={styles["form"]}>
                 <div className={styles['input-row']}>
                     <input ref={usernameEl} type="text" name="username" placeholder="Email or Mobile number" />

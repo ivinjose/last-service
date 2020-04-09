@@ -1,4 +1,9 @@
 .header{
+
+    .title{
+        letter-spacing: 1px;;
+    }
+
     .info-bar{
         background-color: #df5563;
         color: #ffffff;
@@ -48,7 +53,6 @@
                 color: #0056ad;
             }
         }
-
     }
 
     .list-link:last-child{

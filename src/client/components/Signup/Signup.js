@@ -20,7 +20,7 @@ const Signup = (props) => {
 
     return(
         <div className={styles['signup-page']}>
-            <Header title={'Service details'} />
+            <Header title={Strings.PAGE_TITLES.SIGNUP} />
             <div className={styles["form"]}>
                 <div className={styles['input-row']}>
                     <input ref={nameEl} type="text" name="name" placeholder="Your Name"/>

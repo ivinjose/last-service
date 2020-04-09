@@ -18,7 +18,7 @@ const Home = () => {
 
 	return(
 		<div className={styles['home']}>
-			<Header title={"Service Manager"}/>
+			<Header title={Strings.PAGE_TITLES.HOME}/>
 			<div className={styles['body']}>
 				{
 					vehicles.length>0?

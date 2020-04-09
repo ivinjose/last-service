@@ -7,6 +7,7 @@ import globalStyles from '../../styles/global.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import connect from 'storeon/react/connect'
+import Strings from '../../constants/StringConstants';
 
 class AddVehicleDetails extends React.Component {
 	constructor() {
@@ -23,7 +24,7 @@ class AddVehicleDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header title={"Add vehicle details"}/>
+				<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>

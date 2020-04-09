@@ -13,6 +13,7 @@ import Service from './Service';
 import styles from './Services.css';
 import globalStyles from '../../styles/global.css';
 import svg from '../../images/notfound.svg';
+import Strings from '../../constants/StringConstants';
 
 class Services extends React.Component {
 	constructor() {
@@ -40,7 +41,7 @@ class Services extends React.Component {
 
 		return (
 			<React.Fragment>
-				<Header title={'View service details'} />
+				<Header title={Strings.PAGE_TITLES.SERVICES} />
 				<div className={styles['services']}>
 					<Space vertical={15} />
 					<div className={globalStyles['row']}>

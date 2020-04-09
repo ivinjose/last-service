@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import connect from 'storeon/react/connect'
+import Strings from '../../constants/StringConstants';
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
@@ -40,7 +41,7 @@ class AddServiceDetails extends React.Component {
 	render() {
 		return (
 			<div className={styles['service-details']}>
-				<Header title={"Add service details"} />
+				<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
 
 				<div className={styles['body']}>
 					<div className={globalStyles['row']}>
