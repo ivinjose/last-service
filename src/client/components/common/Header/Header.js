@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Header.css'
 import clsx from 'clsx'
+import { useLocation } from 'react-router-dom'
 
 import {routes} from '../../../routes/routes'
 import useStoreon from 'storeon/react'
@@ -19,7 +20,7 @@ const drawerWidth = 240
 const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: '5px',
-        color: '#888'
+        color: '#01376d'
     },
     hide: {
         display: 'none',
@@ -45,6 +46,7 @@ function Header(props) {
     const theme = useTheme()
     const [isDrawerOpen, openDrawer] = React.useState(false)
     const { user } = useStoreon('user');
+    const location = useLocation();
 
     function handleDrawerOpen() {
         openDrawer(true)
@@ -95,13 +97,14 @@ function Header(props) {
                 
                 <ul className={styles['list']}>
                     {routes.map((route) => {
+                        const liClassName = clsx( styles['list-item'], location.pathname == route.path? styles['selected']:null );
                         if(route.isSecure !== user.isLoggedIn ){
                             return null;
                         }
                         return (
                             <React.Fragment key={route.key}>
                                 <Link to={route.path} className={styles['list-link']} onClick={handleDrawerClose}>
-                                    <li className={styles['list-item']} key={route.name}>
+                                    <li className={liClassName} key={route.name}>
                                         <span className={styles['text']}>{route.name}</span>
                                     </li>
                                 </Link>

@@ -1,7 +1,8 @@
 .header{
-    color: #3a3a3a;
+    color: #01376d;
     background-color: #fff;
     position: fixed;
+    padding: 5px 0;
     width: 100%;
     top: 0;
     height: 56px;
@@ -55,12 +56,18 @@
 
         .list-item {
             list-style: none;
-            margin: 0px 15px;
-            border-bottom: 1px solid #f1f1f1;
-            padding: 25px 15px;
+            /* border-bottom: 1px solid #f1f1f1; */
+            padding: 10px 0px 10px 25px;
+            border-left: 9px solid #fff;
+            margin: 15px 0;
 
             .text{
-                color: #0056ad;
+                color: #01376d;
+            }
+
+            &.selected{
+                border-color: #01376d;
+                background-color: #ececec42;
             }
         }
     }
