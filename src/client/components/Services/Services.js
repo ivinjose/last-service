@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import connect from 'storeon/react/connect'
 
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
@@ -41,6 +42,7 @@ class Services extends React.Component {
 			<React.Fragment>
 				<Header title={'View service details'} />
 				<div className={styles['services']}>
+					<Space vertical={15} />
 					<div className={globalStyles['row']}>
 						<Select
 							displayEmpty
@@ -51,6 +53,7 @@ class Services extends React.Component {
 						</Select>
 					</div>
 					
+					<Space vertical={15} />
 					<TotalAmount services={this.props.services} />
 					{renderServices(this.props.services)}
 				</div>
