@@ -9,7 +9,7 @@ const Input = (props) => {
 
     return(
         <div className={inputWrapperStyle}>
-            <input className={inputStyle} type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange||null} />
+            <input className={inputStyle} {...props} />
         </div>
     )
 }

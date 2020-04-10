@@ -19,7 +19,7 @@ const user = store => {
     store.on('user/signup:success', (state, data)=>{
         store.dispatch('loading:false');
         store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SIGNUP_SUCCESS);
-        return { user: { isLoggedIn: true, ...data } };
+        return { user: { isLoggedIn: false, redirectToLogin: true } };
     });
     
     store.on('user/signup:error', ()=>{
