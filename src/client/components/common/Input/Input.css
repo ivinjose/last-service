@@ -1,0 +1,22 @@
+@import '../../../styles/colorcodes.css';
+
+.input{
+	background-color: rgba(225,225,225,0.2);
+	border: 1px solid rgba(140, 140, 140, 0.2);
+	outline-color: rgba(225,225,225,0.2);
+	outline-width: 0px;
+	font-size: 16px;
+	height: 35px;
+	padding: 3px 8px;
+	width: 210px;
+	border-radius: 2px;
+
+	&:focus{
+		background-color: rgba(225,225,225,0.3);
+	}
+}
+
+
+/* ::placeholder{
+	color: #ccc;
+} */
