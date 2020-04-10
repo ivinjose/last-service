@@ -47,7 +47,7 @@ const doSignup = (dispatch, nameEl, idEl, passwordEl, confirmPasswordEl) => {
     const confirmPassword = confirmPasswordEl.current.value;
 
     if( password !== confirmPassword ){
-        dispatch('snackbar:show', Strings.PASSWORD_MATCH_ERROR);
+        dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.PASSWORD_MATCH_ERROR);
         return;
     }
 
