@@ -1,3 +1,5 @@
+@import '../../styles/colorcodes.css';
+
 .directory{
     .cards{
         margin: 70px 16px 16px;
@@ -37,7 +39,7 @@
 
             a{
                 text-decoration: none;
-                color: #287bd0;
+                color: var(--ctaText);
             }
         }
     }

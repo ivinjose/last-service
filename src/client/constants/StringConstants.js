@@ -8,8 +8,10 @@ export default {
         PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter."
     },
 
-    LINK_TEXT: {
-        ADD_VEHICLE: "Add vehicle"
+    CTA_TEXT: {
+        ADD_VEHICLE: "Add vehicle",
+        LOGIN: "Login",
+        SIGNUP: "Sign up!"
     },
     
     PAGE_TITLES: {

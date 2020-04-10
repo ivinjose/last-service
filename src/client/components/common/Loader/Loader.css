@@ -1,15 +1,18 @@
+@import '../../../styles/colorcodes.css';
+
 .overlay{
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.10);
   position: absolute;
   left: 0; top: 0; right: 0; bottom: 0;
   text-align: center;
+  z-index: 2;
 }
 
 .loader { 
     display: inline-block;
     width: 64px;
     height: 64px;
-    margin-top: 45vh;
+    margin-top: 40vh;
   }
   
   .loader:after {
@@ -19,8 +22,8 @@
     height: 46px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid #fff;
-    border-color: #fff transparent #fff transparent;
+    border: 5px solid var(--ctaText);
+    border-color: var(--ctaText) transparent var(--ctaText) transparent;
     animation: loader 1.2s linear infinite;
   }
   

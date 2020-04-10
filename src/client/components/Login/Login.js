@@ -30,12 +30,9 @@ const Login = (props) => {
                     <input ref={passwordEl} type="password" name="password" placeholder="Password" value="ivin" />
                 </div>
                 <div className={styles['input-row']}>
-                    <button type="button" onClick={()=>doLogin(dispatch, usernameEl, passwordEl)}>Login</button>
+                    <button type="button" onClick={()=>doLogin(dispatch, usernameEl, passwordEl)}>{Strings.CTA_TEXT.LOGIN}</button>
                 </div>
-                <br/>
-                <div className={styles['input-row']}>
-                    <div className={styles['signup-cue']}>New User? <Link to="/signup" className={styles['link']}> Join!</Link></div>
-                </div>
+                <div className={styles['signup-cue']}>New User? <Link to="/signup" className={styles['link']}>{Strings.CTA_TEXT.SIGNUP}</Link></div>
             </div>
         </React.Fragment>
     )

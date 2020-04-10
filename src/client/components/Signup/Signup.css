@@ -19,9 +19,10 @@
   outline-color: rgba(225,225,225,0.2);
   outline-width: 0px;
   font-size: 16px;
-  height: 30px;
+  height: 35px;
   padding: 3px 8px;
   width: 210px;
+  border-radius: 2px;
 }
 
 .input-row button{

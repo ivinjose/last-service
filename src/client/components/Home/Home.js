@@ -26,7 +26,7 @@ const Home = () => {
 						:<Empty />
 				}
 				<div className={styles['button']}>
-					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.LINK_TEXT.ADD_VEHICLE}</Link>
+					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
 				</div>
 			</div>
 		</React.Fragment>
