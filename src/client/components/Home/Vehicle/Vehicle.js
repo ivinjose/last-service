@@ -25,6 +25,20 @@ const Vehicle = (vehicle) => {
 	)
 }
 
+const VehicleEmpty = () => {
+	return(
+		<div className={styles['vehicle-empty']}>
+			<div className={styles['details']}>
+				<div className={styles['image-block']}></div>
+				<div className={styles['info']}>
+					<div className={styles['name']}></div>
+					<div className={styles['subtext']}></div>
+				</div>
+			</div>	
+		</div>
+	)
+}
+
 const getImage = (type) =>{
 	let icon;
 	switch (type){
@@ -39,3 +53,4 @@ const getImage = (type) =>{
 }
 
 export default Vehicle;
+export { VehicleEmpty };

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import styles from './Home.css';
 import Header from '../common/Header';
-import Space from '../common/Stylers/Space';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
-import Vehicle from "./Vehicle";
+import Vehicle, { VehicleEmpty } from "./Vehicle";
 import { Link } from 'react-router-dom';
 import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
@@ -25,24 +24,30 @@ const Home = () => {
 				{
 					loading?
 						<Loader />
-						:vehicles.length > 0 ?
-							<Vehicles vehicles={vehicles} />
-							:<Empty />
+						:vehicles.length == 0 ?
+							<Empty />
+							:
+							<React.Fragment>
+								<Vehicles vehicles={vehicles} />
+								<div className={styles['button']}>
+									<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
+								</div>
+							</React.Fragment>
 				}
-				<div className={styles['button']}>
-					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
-				</div>
 			</div>
 		</React.Fragment>
 	);
 }
 
-const Loader = () => {
-	return <div>loading</div>;
-}
+const Vehicles = ({vehicles}) => vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} />);
 
-const Vehicles = ({vehicles}) => {
-	return vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} /> )
+const Loader = () => {
+	return (
+		<React.Fragment>
+			<VehicleEmpty />
+			<VehicleEmpty />
+		</React.Fragment>
+	);
 }
 
 const Empty = () => {
