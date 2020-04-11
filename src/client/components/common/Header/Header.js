@@ -1,43 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './Header.css'
+import Styles from './Header.css'
 import clsx from 'clsx'
+import { useLocation } from 'react-router-dom'
 
 import {routes} from '../../../routes/routes'
 import useStoreon from 'storeon/react'
-import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
 import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
-import Typography from '@material-ui/core/Typography'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import userIcon from "../../../images/user.svg"
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 const drawerWidth = 240
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-    },
-    appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginRight: '5px',
+        color: '#01376d'
     },
     hide: {
         display: 'none',
@@ -54,24 +38,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: -drawerWidth,
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
-    },
+        justifyContent: 'space-between',
+        marginTop: '10px'
+    }
 }))
 
 function Header(props) {
@@ -79,6 +48,7 @@ function Header(props) {
     const theme = useTheme()
     const [isDrawerOpen, openDrawer] = React.useState(false)
     const { user } = useStoreon('user');
+    const location = useLocation();
 
     function handleDrawerOpen() {
         openDrawer(true)
@@ -89,26 +59,24 @@ function Header(props) {
     }
 
     return (
-        <div className={styles['header']}>
-            <AppBar position="static" style={{backgroundColor: '#282c34'}}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="Open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(
-                            classes.menuButton,
-                            isDrawerOpen && classes.hide
-                        )}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        {props.title}
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+        <div className={Styles['header']}>
+            <Toolbar>
+                <IconButton
+                    color="inherit"
+                    aria-label="Open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(
+                        classes.menuButton,
+                        isDrawerOpen && classes.hide
+                    )}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <span className={Styles['title']}>
+                    {props.title}
+                </span>
+            </Toolbar>
             <Drawer
                 className={classes.drawer}
                 variant="temporary"
@@ -120,6 +88,7 @@ function Header(props) {
                 }}
             >
                 <div className={classes.drawerHeader}>
+                    <User {...user} />
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? (
                             <ChevronLeftIcon />
@@ -129,17 +98,17 @@ function Header(props) {
                     </IconButton>
                 </div>
                 
-                <ul className={styles['list']}>
+                <ul className={Styles['list']}>
                     {routes.map((route) => {
+                        const liClassName = clsx( Styles['list-item'], location.pathname == route.path? Styles['selected']:null );
                         if(route.isSecure !== user.isLoggedIn ){
                             return null;
                         }
                         return (
                             <React.Fragment key={route.key}>
-                                <Link to={route.path} className={styles['list-link']} onClick={handleDrawerClose}>
-                                    <li className={styles['list-item']} key={route.name}>
-                                        <span className={styles['icon']}>&#8227;</span>
-                                        <span className={styles['text']}>{route.name}</span>
+                                <Link to={route.path} className={Styles['list-link']} onClick={handleDrawerClose}>
+                                    <li className={liClassName} key={route.name}>
+                                        <span className={Styles['text']}>{route.name}</span>
                                     </li>
                                 </Link>
                             </React.Fragment>
@@ -150,6 +119,24 @@ function Header(props) {
         </div>
     )
 }
+
+const User = ({name, id}) => {
+    return(
+        <div className={Styles['user']}>
+            <div className={Styles['image']}>
+                <img src={userIcon} />
+            </div>
+            <div className={Styles['info']}>
+                <div className={Styles['name']}>
+                    {name}
+                </div>
+                <div className={Styles['id']}>
+                    {id}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 Header.contextTypes = {
     store: PropTypes.object,

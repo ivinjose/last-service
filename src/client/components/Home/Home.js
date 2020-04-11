@@ -3,12 +3,13 @@ import styles from './Home.css';
 import Header from '../common/Header';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
-import Vehicle from "./Vehicle";
+import Vehicle, { VehicleEmpty } from "./Vehicle";
 import { Link } from 'react-router-dom';
+import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
 const Home = () => {
-	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
+	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
 	useEffect(()=>{
 		if( user && user.isLoggedIn ){
@@ -17,28 +18,43 @@ const Home = () => {
 	}, []);
 
 	return(
-		<div className={styles['home']}>
-			<Header title={"Service Manager"}/>
-			<div className={styles['body']}>
+		<React.Fragment>
+			<Header title={Strings.PAGE_TITLES.HOME} user={user}/>
+			<div className={styles['home']}>
 				{
-					vehicles.length>0?
-						vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} /> )
-						:<Empty />
+					loading?
+						<Loader />
+						:vehicles.length == 0 ?
+							<Empty />
+							:
+							<React.Fragment>
+								<Vehicles vehicles={vehicles} />
+								<div className={styles['button']}>
+									<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
+								</div>
+							</React.Fragment>
 				}
-				<div className={styles['button']}>
-					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.ADD_VEHICLE}</Link>
-				</div>
 			</div>
-		</div>
+		</React.Fragment>
+	);
+}
+
+const Vehicles = ({vehicles}) => vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} />);
+
+const Loader = () => {
+	return (
+		<React.Fragment>
+			<VehicleEmpty />
+			<VehicleEmpty />
+		</React.Fragment>
 	);
 }
 
 const Empty = () => {
 	return (
 		<div className={styles['empty']}>
-			<div className={styles['text1']}>Uh oh!</div>
-			<div className={styles['text2']}>It looks all empty in here.</div>
-			<div className={styles['text3']}>Why don't you add some?</div>
+			<img className={styles['image']} src={lizard} />
+			<div>It's so empty in here!</div>
 		</div>
 	);
 };

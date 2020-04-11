@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import connect from 'storeon/react/connect'
+import Strings from '../../constants/StringConstants';
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
@@ -39,10 +40,10 @@ class AddServiceDetails extends React.Component {
 
 	render() {
 		return (
-			<div className={styles['service-details']}>
-				<Header title={"Add service details"} />
+			<React.Fragment>
+				<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
 
-				<div className={styles['body']}>
+				<div className={styles['service-details']}>
 					<div className={globalStyles['row']}>
 						<FormControl className={styles['form-control']}>
 							<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
@@ -100,8 +101,7 @@ class AddServiceDetails extends React.Component {
 						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}>Save</Button>
 					</div>
 				</div>
-
-			</div>
+			</React.Fragment>
 		);
 	}
 

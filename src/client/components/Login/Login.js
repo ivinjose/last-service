@@ -1,13 +1,20 @@
-import React, { useRef, useEffect } from 'react';
-import styles from  './Login.css';
+import React, { useState, useEffect } from 'react';
+import Styles from  './Login.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
+import Input from "../common/Input";
 import { Link } from 'react-router-dom';
+import Strings from '../../constants/StringConstants';
 
 const Login = (props) => {
     const { user, dispatch } = useStoreon('user');
-    const usernameEl = useRef(null);
-    const passwordEl = useRef(null);
+    const [id, setId] = useState();
+    const [password, setPassword] = useState();
+
+    const setIdCb = event => setId(event.target.value);
+    const setPasswordCb = event => setPassword(event.target.value);
+    const doLogin = () => dispatch('user/login', {id, password});
 
     useEffect(()=>{
         if(user.isLoggedIn) {
@@ -19,39 +26,22 @@ const Login = (props) => {
     },[user])
 
     return(
-        <div className={styles['login-page']}>
-            <Header title={'Service details'} />
-            <div className={styles["form"]}>
-                <div className={styles['input-row']}>
-                    <input ref={usernameEl} type="text" name="username" placeholder="Email or Mobile number" />
-                </div>
-                <div className={styles['input-row']}>
-                    <input ref={passwordEl} type="password" name="password" placeholder="Password" />
-                </div>
-                <div className={styles['input-row']}>
-                    <button type="button" onClick={()=>doLogin(dispatch, usernameEl, passwordEl)}>Login</button>
-                </div>
-                <br/>
-                <div className={styles['input-row']}>
-                    <div className={styles['signup-cue']}>New User? <Link to="/signup" className={styles['link']}> Join!</Link></div>
-                </div>
+        <React.Fragment>
+            <Header title={Strings.PAGE_TITLES.LOGIN} />
+            <div className={Styles["login-page"]}>
+                <Input type="text" name="id" placeholder="Email or Mobile number" onChange={setIdCb}/>
+                <Space vertical={15} />
+
+                <Input type="password" name="password" placeholder="Password" onChange={setPasswordCb}/>
+                <Space vertical={15} />
+
+                <button className={Styles['button']} type="button" onClick={doLogin}>{Strings.CTA_TEXT.LOGIN}</button>
+                <Space vertical={25} />
+
+                <div className={Styles['signup-cue']}>New User? <Link to="/signup" className={Styles['link']}>{Strings.CTA_TEXT.SIGNUP}</Link></div>
             </div>
-        </div>
+        </React.Fragment>
     )
-}
-
-const doLogin = (dispatch, usernameEl, passwordEl) => {
-    const userCredentials = {
-        username: usernameEl.current.value,
-        password: passwordEl.current.value,
-    };
-    dispatch('user/login', userCredentials);
-
-    // keeping for debugging purpose
-    // setTimeout(()=>{
-    //     dispatch('user/login:success',  { userId: '1', username: 'ivin'  } );
-    //     dispatch('loading:false');
-    // }, 200);
 }
 
 export default Login;

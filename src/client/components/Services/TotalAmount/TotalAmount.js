@@ -7,7 +7,7 @@ const TotalAmount = ({ services }) => {
     }
     return (
         <div className={styles['total-amount']}>
-            Total Amount : {getTotalAmount(services)}
+            Total Amount: {getTotalAmount(services)}
         </div>
     );
 };

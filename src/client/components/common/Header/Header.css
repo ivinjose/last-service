@@ -1,53 +1,73 @@
+@import '../../../styles/colorcodes.css';
+
 .header{
-    .info-bar{
-        background-color: #df5563;
-        color: #ffffff;
-        height: 112px;
-        padding: 16px;
+    color: var(--ctaText);
+    background-color: #fff;
+    position: fixed;
+    font-weight: 500;
+    padding: 5px 0;
+    width: 100%;
+    top: 0;
+    height: 56px;
+    -webkit-box-shadow: 0px 6px 5px -7px rgba(77,75,77,1);
+    -moz-box-shadow: 0px 6px 5px -7px rgba(77,75,77,1);
+    box-shadow: 0px 6px 5px -7px rgba(77,75,77,1);
+    z-index: 2;
 
-        .user-image-placeholder{
-            background-color: #f3f3f3;
-            border-radius: 33px;
-            height: 65px;
-            text-align: center;
-            width: 65px;
-            .image{
-                margin-top: 10px;
-                max-width: 40px;
-                max-height: 40px;
-            }
+    .title{
+        letter-spacing: 1px;;
+    }
+}
+
+.user{
+    display: flex;
+
+    .image{
+        padding: 10px;
+
+        img{
+            width: 32px;
         }
+    }
 
-        .username{
-            margin-top: 16px;
-            font-size: 14px;
-        }
+    .info{
+        color: #373737;
+        font-size: 13px;
+        margin-top: 14px;
 
-        .email{
-            margin-top: 4px;
-            font-size: 12px;
+        .id{
+            color: #999;
         }
     }
 }
 
 .list {
-    padding-left: 20px;
+    padding-left: 0px;
+    margin: 10px 0 0 0;
 
     .list-link{
-        color: #282c34;
         text-decoration: none;
 
         .list-item {
             list-style: none;
-            padding: 10px 0px;
-
-            .icon{
-                padding-right: 10px;
-            }
+            padding: 13px 0px 13px 25px;
+            border-left: 9px solid #fff;
+            margin: 10px 0;
 
             .text{
-                color: #438cd6;
+                color: var(--ctaText);
             }
+
+            &.selected{
+                border-color: var(--ctaText);
+                background-color: #ececec42;
+            }
+        }
+    }
+
+    .list-link:last-child{
+        .list-item{
+            border-bottom: none;
         }
     }
 }

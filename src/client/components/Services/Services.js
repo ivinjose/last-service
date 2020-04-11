@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import connect from 'storeon/react/connect'
 
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
@@ -12,6 +13,7 @@ import Service from './Service';
 import styles from './Services.css';
 import globalStyles from '../../styles/global.css';
 import svg from '../../images/notfound.svg';
+import Strings from '../../constants/StringConstants';
 
 class Services extends React.Component {
 	constructor() {
@@ -30,7 +32,7 @@ class Services extends React.Component {
 
 	render() {
 		//TODO::Find out why multiple renders happen
-		let placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
+		const placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
 		const menuItems = [placeHolderItem, ...this.props.vehicles.map((vehicle) => (
 			<MenuItem value={vehicle._id} key={vehicle._id} >
 				{vehicle.name}
@@ -38,9 +40,10 @@ class Services extends React.Component {
 		))];
 
 		return (
-			<div className={styles['services']}>
-				<Header title={'View service details'} />
-				<div className={styles['body']}>
+			<React.Fragment>
+				<Header title={Strings.PAGE_TITLES.SERVICES} />
+				<div className={styles['services']}>
+					<Space vertical={15} />
 					<div className={globalStyles['row']}>
 						<Select
 							displayEmpty
@@ -51,10 +54,11 @@ class Services extends React.Component {
 						</Select>
 					</div>
 					
+					<Space vertical={15} />
 					<TotalAmount services={this.props.services} />
 					{renderServices(this.props.services)}
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 

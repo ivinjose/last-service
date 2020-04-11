@@ -7,6 +7,7 @@ import globalStyles from '../../styles/global.css';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import connect from 'storeon/react/connect'
+import Strings from '../../constants/StringConstants';
 
 class AddVehicleDetails extends React.Component {
 	constructor() {
@@ -22,10 +23,10 @@ class AddVehicleDetails extends React.Component {
 
 	render() {
 		return (
-			<div className={styles['service-details']}>
-				<Header title={"Add vehicle details"}/>
+			<React.Fragment>
+				<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
 
-				<div className={styles['body']}>
+				<div className={styles['service-details']}>
 					<div className={globalStyles['row']}>
 						<TextField label="Vehicle name" fullWidth={true} onChange={this.updateVehicle} />
 					</div>
@@ -36,7 +37,7 @@ class AddVehicleDetails extends React.Component {
 						</Button>
 					</div>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 
@@ -47,6 +48,10 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	saveVehicle(e){
+		if( !this.state.vehicle ){
+			this.props.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
+			return;
+		}
 		const vehicles = [{ name: this.state.vehicle }];
 		this.props.dispatch('vehicles/add', {userId: this.props.user._id, vehicles: vehicles})
 	}

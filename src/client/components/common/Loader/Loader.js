@@ -5,7 +5,7 @@ const Loader = ({loading = false}) =>{
 	if( !loading ) return null;
 	return(
 		<div className={styles['overlay']}>
-			<div className={styles['loader']}></div>
+			<div className={styles['loading-bar']}></div>
 		</div>
 	);
 }
