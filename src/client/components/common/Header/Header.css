@@ -17,7 +17,6 @@
     .title{
         letter-spacing: 1px;;
     }
-
 }
 
 .user{
@@ -34,7 +33,7 @@
     .info{
         color: #373737;
         font-size: 13px;
-        margin-top: 15px;
+        margin-top: 14px;
 
         .id{
             color: #999;
