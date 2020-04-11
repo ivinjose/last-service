@@ -1,7 +1,7 @@
 @import '../../styles/colorcodes.css';
 
 .login-page{
-	height: 100vh;
+	height: 50vh;
 	text-align: center;
 	margin: 156px 16px 16px;
 	color: #ccc;

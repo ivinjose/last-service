@@ -19,7 +19,8 @@
             margin-right: 15px;
 
             img{
-                width: 55px;
+                max-width: 60px;
+                max-height: 70px;
             }
         }
 
