@@ -10,7 +10,7 @@ import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
 const Home = () => {
-	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
+	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
 	useEffect(()=>{
 		if( user && user.isLoggedIn ){
@@ -23,9 +23,11 @@ const Home = () => {
 			<Header title={Strings.PAGE_TITLES.HOME} user={user}/>
 			<div className={styles['home']}>
 				{
-					vehicles.length>0?
-						vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} /> )
-						:<Empty />
+					loading?
+						<Loader />
+						:vehicles.length > 0 ?
+							<Vehicles vehicles={vehicles} />
+							:<Empty />
 				}
 				<div className={styles['button']}>
 					<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
@@ -35,11 +37,19 @@ const Home = () => {
 	);
 }
 
+const Loader = () => {
+	return <div>loading</div>;
+}
+
+const Vehicles = ({vehicles}) => {
+	return vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} /> )
+}
+
 const Empty = () => {
 	return (
 		<div className={styles['empty']}>
 			<img className={styles['image']} src={lizard} />
-			<div>It's soo empty in here!</div>
+			<div>It's so empty in here!</div>
 		</div>
 	);
 };
