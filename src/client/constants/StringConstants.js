@@ -5,7 +5,7 @@ export default {
         LOGIN_SUCCESS: "Logged in successfully. Welcome!",
         LOGIN_ERROR: "Invalid username or password. Please try again.",
         LOGOUT_SUCCESS: "Logged out successfully. See you soon!",
-        INVALID_DETAILS: "Empty/Incorrect details entered. Please verify the details entered",
+        INVALID_DETAILS: "Empty/Incorrect details entered. Please verify the details entered.",
         PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter."
     },
 

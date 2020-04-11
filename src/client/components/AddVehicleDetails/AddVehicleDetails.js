@@ -48,6 +48,10 @@ class AddVehicleDetails extends React.Component {
 	}
 
 	saveVehicle(e){
+		if( !this.state.vehicle ){
+			this.props.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
+			return;
+		}
 		const vehicles = [{ name: this.state.vehicle }];
 		this.props.dispatch('vehicles/add', {userId: this.props.user._id, vehicles: vehicles})
 	}
