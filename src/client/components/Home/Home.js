@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import styles from './Home.css';
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
 import Vehicle from "./Vehicle";
 import { Link } from 'react-router-dom';
+import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
 const Home = () => {
@@ -18,7 +20,7 @@ const Home = () => {
 
 	return(
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.HOME}/>
+			<Header title={Strings.PAGE_TITLES.HOME} user={user}/>
 			<div className={styles['home']}>
 				{
 					vehicles.length>0?
@@ -36,9 +38,8 @@ const Home = () => {
 const Empty = () => {
 	return (
 		<div className={styles['empty']}>
-			<div className={styles['text1']}>Uh oh!</div>
-			<div className={styles['text2']}>It looks all empty in here.</div>
-			<div className={styles['text3']}>Why don't you add some?</div>
+			<img className={styles['image']} src={lizard} />
+			<div>It's soo empty in here!</div>
 		</div>
 	);
 };

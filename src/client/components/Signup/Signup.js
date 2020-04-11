@@ -54,7 +54,7 @@ const Signup = (props) => {
                 <Space vertical={15} />
                 
                 <Input type="password" name="confirm-password" placeholder="Confirm Password" onChange={setConfirmPasswordCb} />
-                <Space vertical={15} />
+                <Space vertical={25} />
 
                 <button type="button" className={styles['button']} onClick={doSignup}>Create account</button>
             </div>

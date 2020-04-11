@@ -18,40 +18,33 @@
         letter-spacing: 1px;;
     }
 
-    /* .info-bar{
-        background-color: #df5563;
-        color: #ffffff;
-        height: 112px;
-        padding: 16px;
+}
 
-        .user-image-placeholder{
-            background-color: #f3f3f3;
-            border-radius: 33px;
-            height: 65px;
-            text-align: center;
-            width: 65px;
-            .image{
-                margin-top: 10px;
-                max-width: 40px;
-                max-height: 40px;
-            }
-        }
+.user{
+    display: flex;
 
-        .username{
-            margin-top: 16px;
-            font-size: 14px;
-        }
+    .image{
+        padding: 10px;
 
-        .email{
-            margin-top: 4px;
-            font-size: 12px;
+        img{
+            width: 32px;
         }
-    } */
+    }
+
+    .info{
+        color: #373737;
+        font-size: 13px;
+        margin-top: 15px;
+
+        .id{
+            color: #999;
+        }
+    }
 }
 
 .list {
     padding-left: 0px;
-    margin: 0;
+    margin: 10px 0 0 0;
 
     .list-link{
         text-decoration: none;

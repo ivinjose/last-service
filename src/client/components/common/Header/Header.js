@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './Header.css'
+import Styles from './Header.css'
 import clsx from 'clsx'
 import { useLocation } from 'react-router-dom'
 
@@ -12,6 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import userIcon from "../../../images/user.svg"
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
@@ -37,7 +38,8 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
+        marginTop: '10px'
     }
 }))
 
@@ -57,7 +59,7 @@ function Header(props) {
     }
 
     return (
-        <div className={styles['header']}>
+        <div className={Styles['header']}>
             <Toolbar>
                 <IconButton
                     color="inherit"
@@ -71,7 +73,7 @@ function Header(props) {
                 >
                     <MenuIcon />
                 </IconButton>
-                <span className={styles['title']}>
+                <span className={Styles['title']}>
                     {props.title}
                 </span>
             </Toolbar>
@@ -86,6 +88,7 @@ function Header(props) {
                 }}
             >
                 <div className={classes.drawerHeader}>
+                    <User {...user} />
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? (
                             <ChevronLeftIcon />
@@ -95,17 +98,17 @@ function Header(props) {
                     </IconButton>
                 </div>
                 
-                <ul className={styles['list']}>
+                <ul className={Styles['list']}>
                     {routes.map((route) => {
-                        const liClassName = clsx( styles['list-item'], location.pathname == route.path? styles['selected']:null );
+                        const liClassName = clsx( Styles['list-item'], location.pathname == route.path? Styles['selected']:null );
                         if(route.isSecure !== user.isLoggedIn ){
                             return null;
                         }
                         return (
                             <React.Fragment key={route.key}>
-                                <Link to={route.path} className={styles['list-link']} onClick={handleDrawerClose}>
+                                <Link to={route.path} className={Styles['list-link']} onClick={handleDrawerClose}>
                                     <li className={liClassName} key={route.name}>
-                                        <span className={styles['text']}>{route.name}</span>
+                                        <span className={Styles['text']}>{route.name}</span>
                                     </li>
                                 </Link>
                             </React.Fragment>
@@ -116,6 +119,24 @@ function Header(props) {
         </div>
     )
 }
+
+const User = ({name, id}) => {
+    return(
+        <div className={Styles['user']}>
+            <div className={Styles['image']}>
+                <img src={userIcon} />
+            </div>
+            <div className={Styles['info']}>
+                <div className={Styles['name']}>
+                    {name}
+                </div>
+                <div className={Styles['id']}>
+                    {id}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 Header.contextTypes = {
     store: PropTypes.object,
