@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
 import Service, { ServiceEmpty } from './Service';
 
-import styles from './Services.css';
+import styles from './ServicesPage.css';
 import globalStyles from '../../styles/global.css';
 import svg from '../../images/notfound.svg';
 import Strings from '../../constants/StringConstants';
@@ -42,7 +42,7 @@ class Services extends React.Component {
 		return (
 			<React.Fragment>
 				<Header title={Strings.PAGE_TITLES.SERVICES} />
-				<div className={styles['services']}>
+				<div className={styles['services-page']}>
 					<Space vertical={15} />
 					<div className={globalStyles['row']}>
 						<Select

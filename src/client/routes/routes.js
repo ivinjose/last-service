@@ -1,11 +1,11 @@
 import Home from '../components/Home';
 import VehicleDirectory from "../components/VehicleDirectory";
-import Services from '../components/Services';
+import ServicesPage from '../components/ServicesPage';
 import AddDocument from '../components/AddDocument';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
 import Signup from '../components/Signup';
-import Login from '../components/Login';
+import LoginPage from '../components/LoginPage';
 import Logout from '../components/Logout';
 
 const routeConstants = {
@@ -36,7 +36,7 @@ const routes = [
         key: 'VIEW_SERVICES',
         path: "/services",
         name: "View Services",
-        component: Services,
+        component: ServicesPage,
         isSecure: true
     },
     {
@@ -71,7 +71,7 @@ const routes = [
         key: 'LOGIN',
         path: "/login",
         name: "Login",
-        component: Login,
+        component: LoginPage,
         isSecure: false
     },
     {
