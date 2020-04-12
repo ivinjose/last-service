@@ -6,7 +6,7 @@ import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
 import SignupPage from '../components/SignupPage';
 import LoginPage from '../components/LoginPage';
-import Logout from '../components/Logout';
+import LogoutPage from '../components/LogoutPage';
 
 const routeConstants = {
     HOME: 'HOME',
@@ -78,7 +78,7 @@ const routes = [
         key: 'LOGOUT',
         path: "/logout",
         name: "Logout",
-        component: Logout,
+        component: LogoutPage,
         isSecure: true
     }  
 ];

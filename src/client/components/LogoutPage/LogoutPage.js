@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useStoreon from 'storeon/react'
 
-const Logout = () => {
+const LogoutPage = () => {
     const { user, dispatch } = useStoreon('user');
 
     useEffect(()=>{
@@ -13,4 +13,4 @@ const Logout = () => {
     return null;
 };
 
-export default Logout;
+export default LogoutPage;
