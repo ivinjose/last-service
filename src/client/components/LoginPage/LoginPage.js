@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Styles from  './Login.css';
+import Styles from  './LoginPage.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
@@ -7,7 +7,7 @@ import Input from "../common/Input";
 import { Link } from 'react-router-dom';
 import Strings from '../../constants/StringConstants';
 
-const Login = (props) => {
+const LoginPage = (props) => {
     const { user, dispatch } = useStoreon('user');
     const [id, setId] = useState();
     const [password, setPassword] = useState();
@@ -44,4 +44,4 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+export default LoginPage;
