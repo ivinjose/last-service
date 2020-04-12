@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
-import styles from './AddDocument.css';
+import styles from './AddDocumentPage.css';
 
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,7 +16,7 @@ import Strings from '../../constants/StringConstants';
 
 let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
 
-const AddDocument = () => {
+const AddDocumentPage = () => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 	let currentVehicle, name, renewalDate, expiryDate, reminderDate, extraInfo;
 
@@ -56,7 +56,7 @@ const AddDocument = () => {
 	return(
 		<React.Fragment>
 			<Header title={Strings.PAGE_TITLES.ADD_DOCUMENT} />
-			<div className={styles['add-document']}>
+			<div className={styles['add-document-page']}>
 				<FormControl className={styles['form-control']}>
 					<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
 					<Select
@@ -105,4 +105,4 @@ const AddDocument = () => {
 	)
 };
 
-export default AddDocument;
+export default AddDocumentPage;
