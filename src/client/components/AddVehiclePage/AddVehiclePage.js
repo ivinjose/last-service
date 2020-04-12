@@ -33,18 +33,18 @@ const AddVehiclePage = () => {
 
 			<div className={styles['add-vehicle-page']}>
 				<Input type="text" name="name" placeholder="Vehicle Name" style={{width: '100%'}} onChange={updateNameCb} />
-				<Space vertical={15} />
+				<Space vertical={25} />
 
-				<select name="Icecream Flavours" onChange={updateTypeCb}>
-					<option value="">What type of vehicle?</option>
+				<select className={styles['vehicle-type']} name="vehicle-type" onChange={updateTypeCb}>
+					<option value="">Type of vehicle?</option>
 					<option value="two-wheeler">Two wheeler</option>
 					<option value="four-wheeler">Four wheeler</option>
 					<option value="other">Other</option>
 				</select>
-				<Space vertical={15} />
+				<Space vertical={25} />
 
 				<Input type="text" name="registration" placeholder="Vehicle RC Number" style={{width: '100%'}} onChange={updateRegistrationCb} />
-				<Space vertical={25} />
+				<Space vertical={30} />
 
 				<Button variant="contained" color="primary" fullWidth={true} onClick={saveVehicle}>
 					Save
