@@ -35,7 +35,8 @@ module.exports = {
             req.body.forEach((vehicle)=>{
                 const vehicleData = {
                     name : vehicle.name || null, //is null to be pushed to DB?
-                    type:  vehicle.type || "Four wheeler",
+                    type:  vehicle.type || "other",
+                    registration: vehicle.registration || null,                    
                     user: user
                 };
                 data.push(vehicleData);
@@ -43,10 +44,12 @@ module.exports = {
         }
         else {
             const name = req.body.name || null;
-            const type = req.body.type || "Four wheeler" ;
+            const type = req.body.type || "other" ;
+            const registration = req.body.registration || null;
             const vehicleData = {
                 name,
                 type,
+                registration,
                 user
             };
             data.push(vehicleData);

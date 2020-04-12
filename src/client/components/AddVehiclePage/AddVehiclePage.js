@@ -1,64 +1,57 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import useStoreon from 'storeon/react'
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
+import Input from "../common/Input";
 import styles from './AddVehiclePage.css';
-import globalStyles from '../../styles/global.css';
-
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import connect from 'storeon/react/connect'
 import Strings from '../../constants/StringConstants';
 
-class AddVehiclePage extends React.Component {
-	constructor() {
-		super();
+const AddVehiclePage = () => {
+	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
-		this.state = {
-			vehicle: null
-		};
+	const [ name, setName ] = useState();
+	const [ type, setType ] = useState();
+	const [ registration, setRegistration ] = useState();
 
-		this.updateVehicle = this.updateVehicle.bind(this);
-		this.saveVehicle = this.saveVehicle.bind(this);
-	}
+	const updateNameCb = event => setName(event.target.value);
+	const updateTypeCb = event => setType(event.target.value);
+	const updateRegistrationCb = event => setRegistration(event.target.value);
 
-	render() {
-		return (
-			<React.Fragment>
-				<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
-
-				<div className={styles['add-vehicle-page']}>
-					<div className={globalStyles['row']}>
-						<TextField label="Vehicle name" fullWidth={true} onChange={this.updateVehicle} />
-					</div>
-
-					<div  className={globalStyles['row']}>
-						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveVehicle}>
-							Save
-						</Button>
-					</div>
-				</div>
-			</React.Fragment>
-		);
-	}
-
-	updateVehicle(event){
-		this.setState({
-			vehicle: event.target.value
-		});
-	}
-
-	saveVehicle(e){
-		if( !this.state.vehicle ){
-			this.props.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
+	const saveVehicle = () => {
+		if( !(name && type) ){
+			dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
 			return;
 		}
-		const vehicles = [{ name: this.state.vehicle }];
-		this.props.dispatch('vehicles/add', {userId: this.props.user._id, vehicles: vehicles})
+		const vehicle = { name, type, registration };
+		dispatch('vehicles/add', {userId: user._id, vehicles: [vehicle]})
 	}
-}
+	
+	return (
+		<React.Fragment>
+			<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
 
-AddVehiclePage.contextTypes = {
-	store: PropTypes.object
+			<div className={styles['add-vehicle-page']}>
+				<Input type="text" name="name" placeholder="Vehicle Name" style={{width: '100%'}} onChange={updateNameCb} />
+				<Space vertical={15} />
+
+				<select name="Icecream Flavours" onChange={updateTypeCb}>
+					<option value="">What type of vehicle?</option>
+					<option value="two-wheeler">Two wheeler</option>
+					<option value="four-wheeler">Four wheeler</option>
+					<option value="other">Other</option>
+				</select>
+				<Space vertical={15} />
+
+				<Input type="text" name="registration" placeholder="Vehicle RC Number" style={{width: '100%'}} onChange={updateRegistrationCb} />
+				<Space vertical={25} />
+
+				<Button variant="contained" color="primary" fullWidth={true} onClick={saveVehicle}>
+					Save
+				</Button>
+			</div>
+		</React.Fragment>
+	);
 };
 
-export default connect('user', AddVehiclePage);
+export default AddVehiclePage;
