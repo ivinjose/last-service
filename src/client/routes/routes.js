@@ -1,4 +1,4 @@
-import Home from '../components/Home';
+import HomePage from '../components/HomePage';
 import VehicleDirectory from "../components/VehicleDirectory";
 import ServicesPage from '../components/ServicesPage';
 import AddDocument from '../components/AddDocument';
@@ -21,8 +21,8 @@ const routes = [
     {
         key: 'HOME',
         path: "/",
-        name: "Home",
-        component: Home,
+        name: "HomePage",
+        component: HomePage,
         isSecure: true
     },
     {

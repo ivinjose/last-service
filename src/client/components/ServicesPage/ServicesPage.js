@@ -15,7 +15,7 @@ import globalStyles from '../../styles/global.css';
 import svg from '../../images/notfound.svg';
 import Strings from '../../constants/StringConstants';
 
-class Services extends React.Component {
+class ServicesPage extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -114,8 +114,8 @@ const EmptyServices = () => {
 	); 
 };
 
-Services.contextTypes = {
+ServicesPage.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('vehicles', 'services', 'loading', Services);
+export default connect('vehicles', 'services', 'loading', ServicesPage);
