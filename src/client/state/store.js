@@ -1,4 +1,5 @@
 import createStore from 'storeon';
+import { persistState } from '@storeon/localstorage'
 import user from './user';
 import vehicles from './vehicles';
 import services from './services';
@@ -23,5 +24,6 @@ export const store = createStore([
     snackbarMessage,
     vehicles,
     services,
+    persistState(['user']),
     process.env.NODE_ENV !== 'production' && require('storeon/devtools')
 ]);

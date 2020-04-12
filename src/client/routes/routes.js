@@ -21,7 +21,7 @@ const routes = [
     {
         key: 'HOME',
         path: "/",
-        name: "HomePage",
+        name: "Home",
         component: HomePage,
         isSecure: true
     },
