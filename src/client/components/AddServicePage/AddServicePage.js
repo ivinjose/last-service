@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../common/Header';
-import styles from './AddServiceDetails.css';
+import styles from './AddServicePage.css';
 import globalStyles from '../../styles/global.css';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -25,7 +25,7 @@ const serviceableParts = [
 	'Read wiper blade',
 ];
 
-class AddServiceDetails extends React.Component {
+class AddServicePage extends React.Component {
 	constructor() {
 		super();
 
@@ -43,7 +43,7 @@ class AddServiceDetails extends React.Component {
 			<React.Fragment>
 				<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
 
-				<div className={styles['service-details']}>
+				<div className={styles['add-service-page']}>
 					<div className={globalStyles['row']}>
 						<FormControl className={styles['form-control']}>
 							<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
@@ -155,8 +155,8 @@ class AddServiceDetails extends React.Component {
 	}
 }
 
-AddServiceDetails.contextTypes = {
+AddServicePage.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('user', 'vehicles', 'snackbarMessage', AddServiceDetails);
+export default connect('user', 'vehicles', 'snackbarMessage', AddServicePage);
