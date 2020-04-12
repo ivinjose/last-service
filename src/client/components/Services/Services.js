@@ -8,7 +8,7 @@ import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
-import Service from './Service';
+import Service, { ServiceEmpty } from './Service';
 
 import styles from './Services.css';
 import globalStyles from '../../styles/global.css';
@@ -55,8 +55,7 @@ class Services extends React.Component {
 					</div>
 					
 					<Space vertical={15} />
-					<TotalAmount services={this.props.services} />
-					{renderServices(this.props.services)}
+					{renderServices(this.props.services, this.props.loading)}
 				</div>
 			</React.Fragment>
 		);
@@ -74,20 +73,40 @@ class Services extends React.Component {
 	}
 }
 
-const renderServices = (services) =>{
-	if( services.length > 0 ){
-		return services.map( service =>{
-			return <Service {...service} />
-		});
-	}else {
-		return <EmptyServices />
+const renderServices = (services, loading) =>{
+	if( loading ){
+		return <Loader />
+	}else{
+		if( services.length == 0 ){
+			return <EmptyServices />;
+		}else{
+			return(
+				<React.Fragment>
+					<TotalAmount services={services} />
+					{
+						services.map( service =>{
+							return <Service {...service} />
+						})
+					}
+				</React.Fragment>
+			)
+		}
 	}
+}
+
+const Loader = () => {
+	return (
+		<React.Fragment>
+			<ServiceEmpty />
+			<ServiceEmpty />
+		</React.Fragment>
+	);
 }
 
 const EmptyServices = () => {
 	return (
 		<div className={styles['empty-view']}>
-			<h3>"Oops! no data available"</h3>
+			<h3>Looks like you haven't selected anything?</h3>
 			<div className={styles['avatar']}>
 				<img src={svg}/>
 			</div>
@@ -99,4 +118,4 @@ Services.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('vehicles', 'services', Services);
+export default connect('vehicles', 'services', 'loading', Services);

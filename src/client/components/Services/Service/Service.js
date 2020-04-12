@@ -36,4 +36,17 @@ const formatDateTime = (date) => {
 	};
 };
 
+const ServiceEmpty = () => {
+	return(
+		<div className={styles['service-empty']} >
+			<div className={styles['date']}></div>
+			<div className={styles['amount']}></div>
+			<div className={styles['component']}></div>
+			<div className={styles['distance']}></div>
+			<div className={styles['comments']}></div>
+		</div>
+	);
+}
+
 export default Service;
+export { ServiceEmpty };
