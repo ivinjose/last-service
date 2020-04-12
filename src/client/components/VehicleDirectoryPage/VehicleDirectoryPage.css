@@ -1,6 +1,6 @@
 @import '../../styles/colorcodes.css';
 
-.directory{
+.vehicle-directory-page{
     .cards{
         margin: 70px 16px 16px;
         display: flex;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './VehicleDirectory.css';
+import styles from './VehicleDirectoryPage.css';
 
 import Header from '../common/Header';
 import Card from '../common/Card';
@@ -11,7 +11,7 @@ import document from "../../images/document.svg";
 import reminder from "../../images/reminder.svg";
 import Strings from '../../constants/StringConstants';
 
-const VehicleDirectory = () => {
+const VehicleDirectoryPage = () => {
     const cardCustomStyle = {
         height: '200px',
         width: '275px'
@@ -19,7 +19,7 @@ const VehicleDirectory = () => {
     return(
         <React.Fragment>
             <Header title={Strings.PAGE_TITLES.DIRECTORY} />
-            <div className={styles['directory']}>
+            <div className={styles['vehicle-directory-page']}>
                 {/* VehicleDirectory vehicle info here */}
                 <Space vertical={15} />
                 <div className={styles['cards']}>
@@ -56,4 +56,4 @@ const CardContent = ({message, link, linkText, icon}) => {
     );
 };
 
-export default VehicleDirectory;
+export default VehicleDirectoryPage;

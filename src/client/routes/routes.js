@@ -1,5 +1,5 @@
 import HomePage from '../components/HomePage';
-import VehicleDirectory from "../components/VehicleDirectory";
+import VehicleDirectoryPage from "../components/VehicleDirectoryPage";
 import ServicesPage from '../components/ServicesPage';
 import AddDocumentPage from '../components/AddDocumentPage';
 import AddServicePage from '../components/AddServicePage';
@@ -29,7 +29,7 @@ const routes = [
         key: 'VEHICLE_DIRECTORY',
         path: "/vehicle",
         name: "Vehicle Directory",
-        component: VehicleDirectory,
+        component: VehicleDirectoryPage,
         isSecure: true
     },
     {
