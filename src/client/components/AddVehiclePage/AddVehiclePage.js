@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../common/Header';
-import styles from './AddVehicleDetails.css';
+import styles from './AddVehiclePage.css';
 import globalStyles from '../../styles/global.css';
 
 import TextField from '@material-ui/core/TextField';
@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import connect from 'storeon/react/connect'
 import Strings from '../../constants/StringConstants';
 
-class AddVehicleDetails extends React.Component {
+class AddVehiclePage extends React.Component {
 	constructor() {
 		super();
 
@@ -26,7 +26,7 @@ class AddVehicleDetails extends React.Component {
 			<React.Fragment>
 				<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
 
-				<div className={styles['service-details']}>
+				<div className={styles['add-vehicle-page']}>
 					<div className={globalStyles['row']}>
 						<TextField label="Vehicle name" fullWidth={true} onChange={this.updateVehicle} />
 					</div>
@@ -57,8 +57,8 @@ class AddVehicleDetails extends React.Component {
 	}
 }
 
-AddVehicleDetails.contextTypes = {
+AddVehiclePage.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('user', AddVehicleDetails);
+export default connect('user', AddVehiclePage);

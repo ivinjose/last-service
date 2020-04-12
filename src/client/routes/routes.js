@@ -3,7 +3,7 @@ import VehicleDirectory from "../components/VehicleDirectory";
 import ServicesPage from '../components/ServicesPage';
 import AddDocumentPage from '../components/AddDocumentPage';
 import AddServiceDetails from '../components/AddServiceDetails';
-import AddVehicleDetails from '../components/AddVehicleDetails';
+import AddVehiclePage from '../components/AddVehiclePage';
 import SignupPage from '../components/SignupPage';
 import LoginPage from '../components/LoginPage';
 import LogoutPage from '../components/LogoutPage';
@@ -57,7 +57,7 @@ const routes = [
         key: 'ADD_VEHICLE_DETAILS',
         path: "/vehicles/add",
         name: "Add New Vehicle",
-        component: AddVehicleDetails,
+        component: AddVehiclePage,
         isSecure: true
     },
     {
