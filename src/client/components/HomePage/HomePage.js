@@ -20,7 +20,7 @@ const HomePage = () => {
 	return(
 		<React.Fragment>
 			<Header title={Strings.PAGE_TITLES.HOME} user={user}/>
-			<div className={styles['home']}>
+			<div className={styles['home-page']}>
 				{
 					loading?
 						<Loader />

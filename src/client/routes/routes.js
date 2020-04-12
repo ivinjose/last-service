@@ -4,7 +4,7 @@ import ServicesPage from '../components/ServicesPage';
 import AddDocument from '../components/AddDocument';
 import AddServiceDetails from '../components/AddServiceDetails';
 import AddVehicleDetails from '../components/AddVehicleDetails';
-import Signup from '../components/Signup';
+import SignupPage from '../components/SignupPage';
 import LoginPage from '../components/LoginPage';
 import Logout from '../components/Logout';
 
@@ -64,7 +64,7 @@ const routes = [
         key: 'SIGNUP',
         path: "/signup",
         name: "Create account",
-        component: Signup,
+        component: SignupPage,
         isSecure: false
     },
     {

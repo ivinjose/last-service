@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styles from  './Signup.css';
+import styles from  './SignupPage.css';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import Input from "../common/Input";
 import Strings from "../../constants/StringConstants";
 
-const Signup = (props) => {
+const SignupPage = (props) => {
     const { user, dispatch } = useStoreon('user');
 
     const [ name, setName ] = useState();
@@ -62,4 +62,4 @@ const Signup = (props) => {
     )
 };
 
-export default Signup;
+export default SignupPage;
