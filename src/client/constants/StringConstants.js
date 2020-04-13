@@ -6,7 +6,8 @@ export default {
         LOGIN_ERROR: "Invalid username or password. Please try again.",
         LOGOUT_SUCCESS: "Logged out successfully. See you soon!",
         INVALID_DETAILS: "Empty/Incorrect details entered. Please verify the details entered.",
-        PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter."
+        PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter.",
+        VEHICLE_ADD_SUCCESS: "Your vehicle is added successfully. Start adding services."
     },
 
     CTA_TEXT: {

@@ -1,4 +1,6 @@
 import makeApiCall from "../utils/ApiHelper";
+import Strings from "../constants/StringConstants";
+import { getRouteDetails, routeConstants } from "../routes/routes";
 
 const vehicles = store => {
     store.on('@init', ()=>({ vehicles: [] }));
@@ -28,6 +30,8 @@ const vehicles = store => {
 
     store.on('vehicles/add:success', (state, newVehicles)=>{
         store.dispatch('loading:false');
+        store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.VEHICLE_ADD_SUCCESS);
+        store.dispatch('redirect:enabled', getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
         return { vehicles: [ ...state.vehicles, ...newVehicles ] };
     });
 
