@@ -6,9 +6,12 @@ import Input from "../common/Input";
 import styles from './AddVehiclePage.css';
 import Button from '@material-ui/core/Button';
 import Strings from '../../constants/StringConstants';
+import { saveVehiclesAsync } from "../../state/vehicles";
+import { getRouteDetails, routeConstants } from "../../routes/routes";
+import ApiConstants from "../../constants/ApiConstants";
 
 const AddVehiclePage = (props) => {
-	const { user, redirect, loading, dispatch } = useStoreon('user', 'redirect', 'loading');
+	const { user, dispatch } = useStoreon('user');
 
 	const [ name, setName ] = useState();
 	const [ type, setType ] = useState();
@@ -23,17 +26,17 @@ const AddVehiclePage = (props) => {
 			dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
 			return;
 		}
-		const vehicle = { name, type, registration };
-		dispatch('vehicles/add', {userId: user._id, vehicles: [vehicle]})
-	}
 
-	useEffect(()=>{
-		if( redirect && redirect.url ){
-			//TODO:: Have a common technique for undoing all the UI store actions, from all pages
-			dispatch('redirect:disabled');
-			props.history.push(redirect.url);
-		}
-	},[redirect])
+		const vehicle = { name, type, registration };
+
+		saveVehiclesAsync( dispatch, {userId: user._id, vehicles: [vehicle]} ).then((response)=>{
+			if( response == ApiConstants.STATUS_SUCCESS ){
+				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+			}else{
+				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
+			}
+		});
+	}
 	
 	return (
 		<React.Fragment>

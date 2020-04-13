@@ -18,19 +18,10 @@ const snackbarMessage = store => {
     store.on('snackbar:hide', ()=>({ snackbarMessage: {show: false, message: null} }));
 }
 
-const redirect = store => {
-    store.on('@init', ()=>({ redirect: {} }));
-    store.on('redirect:enabled', (state, path)=> {
-        return { redirect: { url: path } } 
-    });
-    store.on('redirect:disabled', ()=>({ redirect: {} }));
-}
-
 export const store = createStore([
-    user, 
     loading, 
-    redirect,
     snackbarMessage,
+    user,
     vehicles,
     services,
     persistState(['user']),

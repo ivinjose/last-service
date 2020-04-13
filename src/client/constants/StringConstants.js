@@ -7,7 +7,8 @@ export default {
         LOGOUT_SUCCESS: "Logged out successfully. See you soon!",
         INVALID_DETAILS: "Empty/Incorrect details entered. Please verify the details entered.",
         PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter.",
-        VEHICLE_ADD_SUCCESS: "Your vehicle is added successfully. Start adding services."
+        VEHICLE_ADD_SUCCESS: "Your vehicle is added successfully. Start adding services.",
+        SOMETHING_WENT_WROING: "Something went wrong. Please try again."
     },
 
     CTA_TEXT: {

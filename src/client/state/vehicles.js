@@ -1,6 +1,6 @@
 import makeApiCall from "../utils/ApiHelper";
 import Strings from "../constants/StringConstants";
-import { getRouteDetails, routeConstants } from "../routes/routes";
+import ApiConstants from "../constants/ApiConstants";
 
 const vehicles = store => {
     store.on('@init', ()=>({ vehicles: [] }));
@@ -22,16 +22,20 @@ const vehicles = store => {
         return { vehicles: [] };
     });
 
-    store.on('vehicles/add', async (state, data)=>{
+    /**
+     * The below mthod is not used anymore.
+     * Its replaced by the promisified version saveVehiclesAsync
+     * Keeping this one only for reference.
+     */
+    /* store.on('vehicles/add', async (state, data)=>{
         store.dispatch('loading:true');
         const newVehicles = await makeApiCall("/api/users/" + data.userId + "/vehicles", { method: 'POST', body: data.vehicles });
         store.dispatch('vehicles/add:success', newVehicles.data);
-    });
+    }); */
 
     store.on('vehicles/add:success', (state, newVehicles)=>{
         store.dispatch('loading:false');
         store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.VEHICLE_ADD_SUCCESS);
-        store.dispatch('redirect:enabled', getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
         return { vehicles: [ ...state.vehicles, ...newVehicles ] };
     });
 
@@ -41,5 +45,19 @@ const vehicles = store => {
         return { vehicles: state.vehicles };
     });
 };
+
+export const saveVehiclesAsync = async (dispatch, data) => {
+    dispatch('loading:true');
+    const newVehicles = await makeApiCall("/api/users/" + data.userId + "/vehicles", { method: 'POST', body: data.vehicles });
+    return new Promise(resolve => {
+        if( newVehicles.status == ApiConstants.STATUS_SUCCESS ){
+            dispatch('vehicles/add:success', newVehicles.data);
+            resolve(ApiConstants.STATUS_SUCCESS);
+        }else{
+            dispatch('vehicles/add:error', newVehicles.message);
+            resolve(ApiConstants.STATUS_ERROR);
+        }
+    });
+}
 
 export default vehicles;
