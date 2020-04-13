@@ -9,9 +9,9 @@ module.exports = {
     getServices(req, res) {
         Service.find({}, (err, result) => {
             if (err) {
-                res.status(404).send({ message: "Could not fetch the services", meta: err });
+                res.status(404).send({ status: 'error', message: "Could not fetch the services", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully fetched the services", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully fetched the services", data: result });
             }
         });
     },
@@ -43,9 +43,9 @@ module.exports = {
             },
             (err, result) => {
                 if (err) {
-                    res.status(404).send({ message: "Could not fetch the services", meta: err });
+                    res.status(404).send({ status: 'error', message: "Could not fetch the services", meta: err });
                 } else {
-                    res.status(200).send({ message: "Successfully fetched the services", data: result });
+                    res.status(200).send({ status: 'success', message: "Successfully fetched the services", data: result });
                 }
             }
         );
@@ -54,9 +54,9 @@ module.exports = {
     getServicesOfUser(req, res) {
         Service.find({ user: req.params.id }, (err, result) => {
             if (err) {
-                res.status(404).send({ message: "Could not fetch the services", meta: err });
+                res.status(404).send({ status: 'error', message: "Could not fetch the services", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully fetched the services", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully fetched the services", data: result });
             }
         });
     },
@@ -64,9 +64,9 @@ module.exports = {
     getServicesOfVehicle(req, res) {
         Service.find({ vehicle: req.params.id }, (err, result) => {
             if (err) {
-                res.status(404).send({ message: "Could not fetch the services", meta: err });
+                res.status(404).send({ status: 'error', message: "Could not fetch the services", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully fetched the services", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully fetched the services", data: result });
             }
         });
     },
@@ -74,9 +74,9 @@ module.exports = {
     addServices(req, res) {
         Service.insertMany(req.body, (err, result) => {
             if (err) {
-                res.status(404).send({ message: "Could not save the service", meta: err });
+                res.status(404).send({ status: 'error', message: "Could not save the service", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully saved the service", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully saved the service", data: result });
             }
         });
     }

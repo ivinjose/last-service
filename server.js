@@ -47,7 +47,7 @@ app.post("/api/signup", function(req, res) {
     userFunctions.signup(req).then((result)=>{
         res.status(200).send({ status: 'success', message: "Successfully created the user", data: result });
     }).catch(err =>{
-        res.status(500).send({ status: 'fail', message: "Could not create the user", meta: err || {} });
+        res.status(500).send({ status: 'error', message: "Could not create the user", meta: err || {} });
     });
 });
 
@@ -57,7 +57,7 @@ app.post("/api/login", function(req, res) {
         res.cookie('token', token);
         res.status(200).send({ status: 'success', message: "Successfully matched the user", data: result });
     }).catch(err =>{
-        res.status(404).send({ status: 'fail', message: "Could not find a matching user", meta: err || {} });
+        res.status(404).send({ status: 'error', message: "Could not find a matching user", meta: err || {} });
     });
 });
 

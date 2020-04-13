@@ -9,9 +9,9 @@ module.exports = {
     // getVehicles(req, res) {
     //     Vehicle.find({}, (err, result) => {
     //         if (err) {
-    //             res.status(404).send({ message: "Could not fetch the vehicles", meta: err });
+    //             res.status(404).send({ status: 'error', message: "Could not fetch the vehicles", meta: err });
     //         } else {
-    //             res.status(200).send({ message: "Successfully fetched the vehicles", data: result });
+    //             res.status(200).send({ status: 'success', message: "Successfully fetched the vehicles", data: result });
     //         }
     //     });
     // },
@@ -19,9 +19,9 @@ module.exports = {
     getVehiclesOfUser(req, res) {
         Vehicle.find({ user: req.params.id }, (err, result) => {
             if (err) {
-                res.status(404).send({ message: "Could not fetch the vehicles", meta: err });
+                res.status(404).send({ status: 'error', message: "Could not fetch the vehicles", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully fetched the vehicles", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully fetched the vehicles", data: result });
             }
         });
     },
@@ -57,9 +57,9 @@ module.exports = {
 
         Vehicle.insertMany(data, (err, result) => {
             if (err) {
-                res.status(404).send({ message: "Could not save the vehicle", meta: err });
+                res.status(404).send({ status: 'error', message: "Could not save the vehicle", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully saved the vehicle", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully saved the vehicle", data: result });
             }
         });
     },
@@ -70,9 +70,9 @@ module.exports = {
         var options = { new: true };
         Vehicle.findOneAndUpdate(conditions, update, options, (err, result) => {
             if (err) {
-                res.status(400).send({ message: "Could not update the vehicle", meta: err });
+                res.status(400).send({ status: 'error', message: "Could not update the vehicle", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully updated the vehicle", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully updated the vehicle", data: result });
             }
         });
     }
