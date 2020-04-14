@@ -58,6 +58,6 @@ export const saveVehiclesAsync = async (dispatch, data) => {
             resolve(ApiConstants.STATUS_ERROR);
         }
     });
-}
+};
 
 export default vehicles;

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './HomePage.css';
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
 import { routeConstants, getRouteDetails } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
 import Vehicle, { VehicleEmpty } from "./Vehicle";
@@ -29,6 +30,7 @@ const HomePage = () => {
 							:
 							<React.Fragment>
 								<Vehicles vehicles={vehicles} />
+								<Space vertical={15} />
 								<div className={styles['button']}>
 									<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
 								</div>

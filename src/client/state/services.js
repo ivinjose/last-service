@@ -1,4 +1,5 @@
 import makeApiCall from "../utils/ApiHelper";
+import ApiConstants from "../constants/ApiConstants";
 
 const services = store => {
     store.on('@init', ()=>({ services: [] }));
@@ -20,12 +21,12 @@ const services = store => {
         return { services: [] };
     });
 
-    store.on('service/add', async (state, data)=>{
-        store.dispatch('loading:true');
-        const newServices = await makeApiCall("/api/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
-        store.dispatch('service/add:success', newServices.data);
-        store.dispatch('snackbar:show', "Service added sucessfully");
-    });
+    // store.on('service/add', async (state, data)=>{
+    //     store.dispatch('loading:true');
+    //     const newServices = await makeApiCall("/api/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
+    //     store.dispatch('service/add:success', newServices.data);
+    //     store.dispatch('snackbar:show', "Service added sucessfully");
+    // });
 
     store.on('service/add:success', (state, newServices)=>{
         store.dispatch('loading:false');
@@ -38,5 +39,19 @@ const services = store => {
         return { services: state.services };
     });
 };
+
+export const saveServiceAsync = async (dispatch, data) => {
+    dispatch('loading:true');
+    const newService = await makeApiCall("/api/vehicles/" + data.vehicle + "/service", { method: 'POST', body: data });
+    return new Promise(resolve => {
+        if( newService.status == ApiConstants.STATUS_SUCCESS ){
+            dispatch('vehicles/add:success', newService.data);
+            resolve(ApiConstants.STATUS_SUCCESS);
+        }else{
+            dispatch('vehicles/add:error', newService.message);
+            resolve(ApiConstants.STATUS_ERROR);
+        }
+    });
+}
 
 export default services;

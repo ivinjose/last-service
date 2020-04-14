@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useStoreon from 'storeon/react'
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';

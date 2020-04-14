@@ -1,162 +1,123 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState }  from 'react';
 import Header from '../common/Header';
+import Space from '../common/Stylers/Space';
 import styles from './AddServicePage.css';
-import globalStyles from '../../styles/global.css';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-// import DatePicker from '@material-ui/core/DatePicker';
-// import AutoComplete from '@material-ui/core/AutoComplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import connect from 'storeon/react/connect'
 import Strings from '../../constants/StringConstants';
+import { saveServiceAsync } from "../../state/services";
+import { getRouteDetails, routeConstants } from "../../routes/routes";
+import ApiConstants from "../../constants/ApiConstants";
+import useStoreon from 'storeon/react'
 
-let DateTimeFormat = global.Intl.DateTimeFormat; //IntlPolyfill.DateTimeFormat;
-
-const serviceableParts = [
-	'Engine oil',
-	'Break fluid',
-	'Air filter',
-	'Break disc',
-	'Front wiper blade',
-	'Read wiper blade',
+const serviceableComponents = [
+	{ 'id': 'general', 'label': 'General Service' },
+	{ 'id': 'engine-oil', 'label': 'Engine oil' },
+	{ 'id': 'break-fluid', 'label': 'Break fluid' },
+	{ 'id': 'air-filter', 'label': 'Air filter' },
+	{ 'id': 'break-disc', 'label': 'Break disc' },
+	{ 'id': 'font-wiper-blade', 'label': 'Front wiper blade' },
+	{ 'id': 'rear-wiper-blade', 'label': 'Rear wiper blade' }
 ];
 
-class AddServicePage extends React.Component {
-	constructor() {
-		super();
+const AddServicePage = (props) => {
+	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
-		this.state = {
-			vehicles: [],
-			currentVehicle: null,
-			date: "",
-			amount: "",
-			comments: "",
-		};
-	}
+	const [ vehicleId, setVehicleId ] = useState();
+	const [ date, setDate ] = useState();
+	const [ component, setComponent ] = useState();
+	const [ amount, setAmount ] = useState();
+	const [ comment, setComment ] = useState();
 
-	render() {
-		return (
-			<React.Fragment>
-				<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
+	const updateVehicleIdCb = event => setVehicleId(event.target.value); 
+	const updateDateCb = event => setDate(event.target.value);
+	const updateComponentCb = event => setComponent(event.target.value); 
+	const updateAmountCb = event => setAmount(event.target.value); 
+	const updateCommentCb = event => setComment(event.target.value); 
 
-				<div className={styles['add-service-page']}>
-					<div className={globalStyles['row']}>
-						<FormControl className={styles['form-control']}>
-							<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>
-							<Select
-								value={this.state.currentVehicle}
-								onChange={this.updateVehicle.bind(this)}>
-								{
-									this.props.vehicles.map(vehicle => {
-										return (
-											<MenuItem key={vehicle._id} value={vehicle._id} >{vehicle.name}</MenuItem>
-										);
-									})
+	const saveService = () => {
+		if( !(vehicleId && date && component && amount) ){
+			dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
+			return;
+		}
 
-								}
-							</Select>
-						</FormControl>
-					</div>
+		const service = { user: user._id, vehicle: vehicleId, date, component, amount, comment };
 
-					<div className={globalStyles['row']}>
-						<TextField
-							type="date"
-							placeholder="On which date service happened?"
-							onChange={this.updateDate.bind(this)}
-							fullWidth={true}
-							value={this.state.date} />
-					</div>
-
-					<div className={globalStyles['row']}>
-						{/* <AutoComplete 
-							hintText="Which part was serviced?" 
-							dataSource={serviceableParts} 
-							fullWidth={true}
-							filter={AutoComplete.caseInsensitiveFilter} 
-							onUpdateInput={this.updateServicedComponent.bind(this)}
-							/> */}
-					</div>
-
-					<div className={globalStyles['row']}>
-						<TextField
-							placeholder="How much you paid?"
-							fullWidth={true}
-							onChange={this.updateAmount.bind(this)}
-							value={this.state.amount} />
-					</div>
-
-					<div className={globalStyles['row']}>
-						<TextField
-							placeholder="Any comments? (Optional)"
-							fullWidth={true}
-							onChange={this.updateComments.bind(this)}
-							value={this.state.comments} />
-					</div>
-
-					<div className={globalStyles['row']}>
-						<Button variant="contained" color="primary" fullWidth={true} onClick={this.saveServicedItem.bind(this)}>Save</Button>
-					</div>
-				</div>
-			</React.Fragment>
-		);
-	}
-
-	updateVehicle(event) {
-		this.setState({
-			currentVehicle: event.target.value
+		saveServiceAsync( dispatch, service ).then((response)=>{
+			if( response == ApiConstants.STATUS_SUCCESS ){
+				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+			}else{
+				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
+			}
 		});
 	}
 
-	updateDate(event) {
-		this.setState({
-			date: event.target.value
-		});
-	}
+	return (
+		<React.Fragment>
+			<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
 
-	updateServicedComponent(searchText, dataSource, params) {
-		this.setState({
-			component: searchText
-		});
-	}
+			<div className={styles['add-service-page']}>
+				<FormControl className={styles['form-control']}>
+					<InputLabel>Choose your vehicle</InputLabel>
+					<Select
+						onChange={updateVehicleIdCb}>
+						{
+							vehicles.map(vehicle => {
+								return (
+									<MenuItem key={vehicle._id} value={vehicle._id} >{vehicle.name}</MenuItem>
+								);
+							})
 
-	updateAmount(event) {
-		this.setState({
-			amount: event.target.value
-		});
-	}
+						}
+					</Select>
+				</FormControl>
+				<Space vertical={25} />
 
-	updateComments(event) {
-		this.setState({
-			comments: event.target.value
-		});
-	}
+				<TextField
+					type="date"
+					placeholder="On which date service happened?"
+					onChange={updateDateCb}
+					fullWidth={true}
+					value={date} />
+				<Space vertical={15} />
 
-	saveServicedItem(e) {
-		const id = this.state.currentVehicle;
-		const name = this.props.vehicles.find((vehicle) => vehicle._id === id).name;
-		const vehicleDetails = { vehicle: id, name };
-		const date = this.state.date;
-		//let component = this.state.component;
-		const amount = this.state.amount;
-		const comments = this.state.comments;
+				<FormControl className={styles['form-control']}>
+					<InputLabel>Type of service / Component</InputLabel>
+					<Select value={component} onChange={updateComponentCb}>
+						{
+							serviceableComponents.map(component => {
+								return (
+									<MenuItem key={component.id} value={component.id} >{component.label}</MenuItem>
+								);
+							})
 
-		const serviceDetails = {
-			date: date,
-			//component: component,
-			amount: amount,
-			comments: comments,
-		};
-		const data = { ...vehicleDetails, ...serviceDetails };
-		this.props.dispatch('service/add', {vehicleId: id, serviceDetails: data})
-	}
+						}
+					</Select>
+				</FormControl>
+				<Space vertical={25} />
+
+				<TextField
+					placeholder="How much you paid?"
+					fullWidth={true}
+					onChange={updateAmountCb}
+					value={amount} />
+				<Space vertical={25} />
+
+				<TextField
+					placeholder="Any comments? (Optional)"
+					fullWidth={true}
+					onChange={updateCommentCb}
+					value={comment} />
+				<Space vertical={35} />
+
+				<Button variant="contained" color="primary" fullWidth={true} onClick={saveService}>Save</Button>
+			</div>
+		</React.Fragment>
+	);
 }
 
-AddServicePage.contextTypes = {
-	store: PropTypes.object
-};
-
-export default connect('user', 'vehicles', 'snackbarMessage', AddServicePage);
+export default AddServicePage;
