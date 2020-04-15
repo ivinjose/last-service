@@ -9,6 +9,14 @@ const Service = (service) => {
 			<div className={styles['date']}>{dateTime.date}</div>
 			<table>
 				<tbody>
+					{
+						service.vehicle &&
+						<tr>
+							<td className={styles['col']}>Vehicle</td>
+							<td className={styles['col-details']}><span>{service.vehicle}</span></td>
+						</tr>
+					}
+					
 					<tr>
 						<td className={styles['col']}>Amount</td>
 						<td className={styles['col-details']}><span>{service.amount}</span></td>
@@ -23,7 +31,7 @@ const Service = (service) => {
 					</tr>
 				</tbody>
 			</table>
-			<div className={styles['comments']}>"{service.comments}"</div>
+			<div className={styles['comments']}>{service.comment}</div>
 		</div>
 	);
 };

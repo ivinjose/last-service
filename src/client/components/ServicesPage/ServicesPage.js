@@ -8,7 +8,7 @@ import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
-import Service, { ServiceEmpty } from './Service';
+import Service, { ServiceEmpty } from '../common/Service';
 
 import styles from './ServicesPage.css';
 import globalStyles from '../../styles/global.css';
