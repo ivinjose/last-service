@@ -29,8 +29,8 @@ const AddVehiclePage = (props) => {
 
 		const vehicle = { name, type, registration };
 
-		saveVehiclesAsync( dispatch, {userId: user._id, vehicles: [vehicle]} ).then((response)=>{
-			if( response == ApiConstants.STATUS_SUCCESS ){
+		saveVehiclesAsync( dispatch, {userId: user._id, vehicles: [vehicle]} ).then(({status, data, message})=>{
+			if( status == ApiConstants.STATUS_SUCCESS ){
 				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);

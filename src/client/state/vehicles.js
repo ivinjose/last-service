@@ -52,10 +52,10 @@ export const saveVehiclesAsync = async (dispatch, data) => {
     return new Promise(resolve => {
         if( newVehicles.status == ApiConstants.STATUS_SUCCESS ){
             dispatch('vehicles/add:success', newVehicles.data);
-            resolve(ApiConstants.STATUS_SUCCESS);
+            resolve({ status: ApiConstants.STATUS_SUCCESS, data: newVehicles, message: newVehicles.message });
         }else{
             dispatch('vehicles/add:error', newVehicles.message);
-            resolve(ApiConstants.STATUS_ERROR);
+            resolve({ status: ApiConstants.STATUS_ERROR, data: null, message: newVehicles.message });
         }
     });
 };

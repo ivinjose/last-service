@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import styles from './AddServicePage.css';
@@ -13,6 +13,7 @@ import { saveServiceAsync } from "../../state/services";
 import { getRouteDetails, routeConstants } from "../../routes/routes";
 import ApiConstants from "../../constants/ApiConstants";
 import useStoreon from 'storeon/react'
+import queryString from 'query-string';
 
 const serviceableComponents = [
 	{ 'id': 'general', 'label': 'General Service' },
@@ -24,6 +25,14 @@ const serviceableComponents = [
 	{ 'id': 'rear-wiper-blade', 'label': 'Rear wiper blade' }
 ];
 
+const getVehicleFromLocation = location => {
+	const queryParams = queryString.parse(location.search);
+	if (queryParams && queryParams.vehicle) {
+		return queryParams.vehicle;
+	}
+	return "";
+};
+
 const AddServicePage = (props) => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
@@ -32,6 +41,13 @@ const AddServicePage = (props) => {
 	const [ component, setComponent ] = useState();
 	const [ amount, setAmount ] = useState();
 	const [ comment, setComment ] = useState();
+
+	useEffect(()=>{
+		const vehicleFromLocation = getVehicleFromLocation(props.location);
+		console.log({vehicleFromLocation});
+		//TODO:: Debug why this state value is not reflecting in Select Component
+		setVehicleId( vehicleFromLocation );
+	});
 
 	const updateVehicleIdCb = event => setVehicleId(event.target.value); 
 	const updateDateCb = event => setDate(event.target.value);
@@ -47,9 +63,10 @@ const AddServicePage = (props) => {
 
 		const service = { user: user._id, vehicle: vehicleId, date, component, amount, comment };
 
-		saveServiceAsync( dispatch, service ).then((response)=>{
-			if( response == ApiConstants.STATUS_SUCCESS ){
+		saveServiceAsync( dispatch, service ).then(({status, data, message})=>{
+			if( status == ApiConstants.STATUS_SUCCESS ){
 				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+				console.log('onsave data: ', data);
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
 			}
@@ -64,6 +81,7 @@ const AddServicePage = (props) => {
 				<FormControl className={styles['form-control']}>
 					<InputLabel>Choose your vehicle</InputLabel>
 					<Select
+						value={vehicleId}
 						onChange={updateVehicleIdCb}>
 						{
 							vehicles.map(vehicle => {
