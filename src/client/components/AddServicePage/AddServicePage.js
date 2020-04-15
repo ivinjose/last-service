@@ -36,16 +36,16 @@ const getVehicleFromLocation = location => {
 const AddServicePage = (props) => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
-	const [ vehicleId, setVehicleId ] = useState();
-	const [ date, setDate ] = useState();
-	const [ component, setComponent ] = useState();
-	const [ amount, setAmount ] = useState();
-	const [ comment, setComment ] = useState();
+	const [ vehicleId, setVehicleId ] = useState("");
+	const [ date, setDate ] = useState("");
+	const [ component, setComponent ] = useState("");
+	const [ amount, setAmount ] = useState("");
+	const [ comment, setComment ] = useState("");
 
 	useEffect(()=>{
 		const vehicleFromLocation = getVehicleFromLocation(props.location);
-		console.log({vehicleFromLocation});
 		//TODO:: Debug why this state value is not reflecting in Select Component
+		console.log({vehicleFromLocation});
 		setVehicleId( vehicleFromLocation );
 	});
 
@@ -83,14 +83,7 @@ const AddServicePage = (props) => {
 					<Select
 						value={vehicleId}
 						onChange={updateVehicleIdCb}>
-						{
-							vehicles.map(vehicle => {
-								return (
-									<MenuItem key={vehicle._id} value={vehicle._id} >{vehicle.name}</MenuItem>
-								);
-							})
-
-						}
+						{ vehicles.map(vehicle => <MenuItem key={vehicle._id} value={vehicle._id} >{vehicle.name}</MenuItem> ) }
 					</Select>
 				</FormControl>
 				<Space vertical={25} />
@@ -106,14 +99,7 @@ const AddServicePage = (props) => {
 				<FormControl className={styles['form-control']}>
 					<InputLabel>Type of service / Component</InputLabel>
 					<Select value={component} onChange={updateComponentCb}>
-						{
-							serviceableComponents.map(component => {
-								return (
-									<MenuItem key={component.id} value={component.id} >{component.label}</MenuItem>
-								);
-							})
-
-						}
+						{ serviceableComponents.map(component => <MenuItem key={component.id} value={component.id} >{component.label}</MenuItem>) }
 					</Select>
 				</FormControl>
 				<Space vertical={25} />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { 
 	BrowserRouter as Router,
 	Route,
@@ -13,7 +12,7 @@ import SecureRoute from './common/SecureRoute';
 const App = () => { 
 	const { loading, user, snackbarMessage, dispatch } = useStoreon('loading', 'user', 'snackbarMessage');
 	return (
-		<MuiThemeProvider>
+		<React.Fragment>
 			<Loader loading={loading} />
 			<Router>
 				{
@@ -29,7 +28,7 @@ const App = () => {
 					message={snackbarMessage.message}
 					autoHideDuration={2500}
 					onClose={()=>dispatch('snackbar:hide')} />
-		</MuiThemeProvider>
+		</React.Fragment>
 	)
 };
 
