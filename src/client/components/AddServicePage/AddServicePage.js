@@ -113,7 +113,7 @@ const AddServicePage = (props) => {
 			<Space vertical={35} />
 			{
 				newService &&
-				<Service service={newService} style={{paddingLeft: '15px', paddingRight: '15px', border:'none', backgroundColor: '#34e79a8f', borderRadius:'3px', margin:'10px'}} />
+				<Service service={newService} style={{paddingLeft: '15px', paddingRight: '15px', border:'none', backgroundColor: '#34e79a8f', borderRadius:'3px', marginLeft:'15px', marginRight:'15px'}} />
 			}
 		</React.Fragment>
 	);

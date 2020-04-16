@@ -1,4 +1,5 @@
 import queryString from 'query-string';
+import { prettifyDate } from "../../utils/Helpers";
 
 export const getVehicleFromLocation = location => {
 	const queryParams = queryString.parse(location.search);
@@ -11,5 +12,6 @@ export const getVehicleFromLocation = location => {
 export const mutateNewServiceForDisplay = (newService, vehicles, components ) => {
 	const vehicle = vehicles.find( vehicle => vehicle._id === newService.vehicle );
 	const component = components.find( component => component.id === newService.component );
-	return Object.assign({}, newService, { vehicle: vehicle.name, component: component.label });
+	const prettifiedDate = prettifyDate(newService.date);
+	return Object.assign({}, newService, { vehicle: vehicle.name, component: component.label, date: prettifiedDate });
 }

@@ -37,6 +37,6 @@ export const store = createStore([
     vehicles,
     services,
     serviceableComponents,
-    persistState(['user', 'vehicles', 'services']),
+    persistState(['user', 'vehicles']),
     process.env.NODE_ENV !== 'production' && require('storeon/devtools')
 ]);

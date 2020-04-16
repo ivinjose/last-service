@@ -14,6 +14,7 @@ import styles from './ServicesPage.css';
 import globalStyles from '../../styles/global.css';
 import svg from '../../images/notfound.svg';
 import Strings from '../../constants/StringConstants';
+import { prettifyDate } from "../../utils/Helpers";
 
 class ServicesPage extends React.Component {
 	constructor() {
@@ -55,7 +56,7 @@ class ServicesPage extends React.Component {
 					</div>
 					
 					<Space vertical={15} />
-					{renderServices(this.props.services, this.props.loading)}
+					{renderServices(this.props.services, this.props.loading, this.props.serviceableComponents)}
 				</div>
 			</React.Fragment>
 		);
@@ -73,7 +74,7 @@ class ServicesPage extends React.Component {
 	}
 }
 
-const renderServices = (services, loading) =>{
+const renderServices = (services, loading, components) =>{
 	if( loading ){
 		return <Loader />
 	}else{
@@ -85,6 +86,10 @@ const renderServices = (services, loading) =>{
 					<TotalAmount services={services} />
 					{
 						services.map( service =>{
+							service.vehicle = null; /** Setting it to null because no point in repeating the vehicle name in the services page */
+							service.date = prettifyDate(service.date);
+							const component = components.find( component => component.id === service.component );
+							service.component = component? component.label : null;
 							return <Service service={service} />
 						})
 					}
@@ -118,4 +123,4 @@ ServicesPage.contextTypes = {
 	store: PropTypes.object
 };
 
-export default connect('vehicles', 'services', 'loading', ServicesPage);
+export default connect('vehicles', 'services', 'serviceableComponents', 'loading', ServicesPage);
