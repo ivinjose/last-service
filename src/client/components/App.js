@@ -8,6 +8,7 @@ import { routes } from "../routes/routes";
 import Loader from './common/Loader';
 import Snackbar from '@material-ui/core/Snackbar';
 import SecureRoute from './common/SecureRoute';
+import globalStyles from '../styles/global.css';
 
 const App = () => { 
 	const { loading, user, snackbarMessage, dispatch } = useStoreon('loading', 'user', 'snackbarMessage');

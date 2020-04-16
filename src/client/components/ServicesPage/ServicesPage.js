@@ -11,8 +11,7 @@ import TotalAmount from './TotalAmount';
 import Service, { ServiceEmpty } from '../common/Service';
 
 import styles from './ServicesPage.css';
-import globalStyles from '../../styles/global.css';
-import svg from '../../images/notfound.svg';
+import lizard from '../../images/lizard.jpg';
 import Strings from '../../constants/StringConstants';
 import { prettifyDate } from "../../utils/Helpers";
 
@@ -45,15 +44,13 @@ class ServicesPage extends React.Component {
 				<Header title={Strings.PAGE_TITLES.SERVICES} />
 				<div className={styles['services-page']}>
 					<Space vertical={15} />
-					<div className={globalStyles['row']}>
-						<Select
-							displayEmpty
-							value={this.state.currentVehicle}
-							onChange={(e) => this.chooseVehicle(e.target.value)}
-							className={styles['select-cmp']}>
-							{menuItems}
-						</Select>
-					</div>
+					<Select
+						displayEmpty
+						value={this.state.currentVehicle}
+						onChange={(e) => this.chooseVehicle(e.target.value)}
+						className={styles['select-cmp']}>
+						{menuItems}
+					</Select>
 					
 					<Space vertical={15} />
 					{renderServices(this.props.services, this.props.loading, this.props.serviceableComponents)}
@@ -79,7 +76,7 @@ const renderServices = (services, loading, components) =>{
 		return <Loader />
 	}else{
 		if( services.length == 0 ){
-			return <EmptyServices />;
+			return <Empty />;
 		}else{
 			return(
 				<React.Fragment>
@@ -108,15 +105,13 @@ const Loader = () => {
 	);
 }
 
-const EmptyServices = () => {
+const Empty = () => {
 	return (
-		<div className={styles['empty-view']}>
-			<h3>Looks like you haven't selected anything?</h3>
-			<div className={styles['avatar']}>
-				<img src={svg}/>
-			</div>
+		<div className={styles['empty']}>
+			<img className={styles['image']} src={lizard} />
+			<div>It's so empty in here!</div>
 		</div>
-	); 
+	);
 };
 
 ServicesPage.contextTypes = {
