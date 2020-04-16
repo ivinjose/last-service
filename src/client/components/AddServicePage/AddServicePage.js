@@ -50,6 +50,11 @@ const AddServicePage = (props) => {
 			if( status == ApiConstants.STATUS_SUCCESS ){
 				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
 				const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
+				setVehicleId("");
+				setDate("");
+				setComponent("");
+				setAmount("");
+				setComment("");
 				setNewService( mutatedNewService )
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
