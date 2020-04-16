@@ -2,8 +2,9 @@
 .service-empty{
 	font-size: 16px;
 	border-bottom: #00000021 1px solid;
-	padding: 20px 15px;
+	padding: 20px 0px;
 	margin-bottom: 15px;
+	color: #1f2939;
 
 	.date{
 		font-weight: 600;
@@ -13,6 +14,7 @@
 	table {
 		color: #1f2939;
 		width: 100%;
+		margin-left: -1px;
 
 		tr {
 			td {
@@ -25,6 +27,10 @@
 				text-align: right;
 			}
 		}
+	}
+
+	.comment{
+		margin-top: 10px;
 	}
 }
 
@@ -57,7 +63,7 @@
         width: 115px;
     }
 
-    .comments{
+    .comment{
 		width: 215px;
 		margin-bottom: 0;
     }

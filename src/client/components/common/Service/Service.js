@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './Service.css';
 
-const Service = (service) => {
+const Service = ({service, style}) => {
 	const dateTime = formatDateTime(service.date);
 
 	return(
-		<div className={styles['service']} key={service._id} >
+		<div className={styles['service']} style={style}  key={service._id} >
 			<div className={styles['date']}>{dateTime.date}</div>
 			<table>
 				<tbody>
@@ -31,7 +31,7 @@ const Service = (service) => {
 					</tr>
 				</tbody>
 			</table>
-			<div className={styles['comments']}>{service.comment}</div>
+			{ service.comment && <div className={styles['comment']}>{service.comment}</div> }
 		</div>
 	);
 };

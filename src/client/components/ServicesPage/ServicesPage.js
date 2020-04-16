@@ -85,7 +85,7 @@ const renderServices = (services, loading) =>{
 					<TotalAmount services={services} />
 					{
 						services.map( service =>{
-							return <Service {...service} />
+							return <Service service={service} />
 						})
 					}
 				</React.Fragment>
