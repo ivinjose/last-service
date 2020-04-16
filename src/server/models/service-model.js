@@ -7,7 +7,7 @@ const serviceSchema = new Schema({
     date: String,
     component: String,
     amount: String,
-    comments: String
+    comment: String
 });
 
 const Service = mongoose.model("service", serviceSchema);

@@ -1,12 +1,12 @@
-import Home from '../components/Home';
-import VehicleDirectory from "../components/VehicleDirectory";
-import Services from '../components/Services';
-import AddDocument from '../components/AddDocument';
-import AddServiceDetails from '../components/AddServiceDetails';
-import AddVehicleDetails from '../components/AddVehicleDetails';
-import Signup from '../components/Signup';
-import Login from '../components/Login';
-import Logout from '../components/Logout';
+import HomePage from '../components/HomePage';
+import VehicleDirectoryPage from "../components/VehicleDirectoryPage";
+import ServicesPage from '../components/ServicesPage';
+import AddDocumentPage from '../components/AddDocumentPage';
+import AddServicePage from '../components/AddServicePage';
+import AddVehiclePage from '../components/AddVehiclePage';
+import SignupPage from '../components/SignupPage';
+import LoginPage from '../components/LoginPage';
+import LogoutPage from '../components/LogoutPage';
 
 const routeConstants = {
     HOME: 'HOME',
@@ -22,63 +22,63 @@ const routes = [
         key: 'HOME',
         path: "/",
         name: "Home",
-        component: Home,
+        component: HomePage,
         isSecure: true
     },
     {
         key: 'VEHICLE_DIRECTORY',
         path: "/vehicle",
         name: "Vehicle Directory",
-        component: VehicleDirectory,
+        component: VehicleDirectoryPage,
         isSecure: true
     },
     {
         key: 'VIEW_SERVICES',
         path: "/services",
         name: "View Services",
-        component: Services,
+        component: ServicesPage,
         isSecure: true
     },
     {
         key: 'ADD_SERVICE_DETAILS',
         path: "/services/add",
         name: "Add New Service",
-        component: AddServiceDetails,
+        component: AddServicePage,
         isSecure: true
     },
     {
         key: 'ADD_DOCUMENT',
         path: "/document/add",
         name: "Add New Document",
-        component: AddDocument,
+        component: AddDocumentPage,
         isSecure: true
     },
     {
         key: 'ADD_VEHICLE_DETAILS',
         path: "/vehicles/add",
         name: "Add New Vehicle",
-        component: AddVehicleDetails,
+        component: AddVehiclePage,
         isSecure: true
     },
     {
         key: 'SIGNUP',
         path: "/signup",
         name: "Create account",
-        component: Signup,
+        component: SignupPage,
         isSecure: false
     },
     {
         key: 'LOGIN',
         path: "/login",
         name: "Login",
-        component: Login,
+        component: LoginPage,
         isSecure: false
     },
     {
         key: 'LOGOUT',
         path: "/logout",
         name: "Logout",
-        component: Logout,
+        component: LogoutPage,
         isSecure: true
     }  
 ];

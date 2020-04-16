@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Styles from './Header.css'
 import clsx from 'clsx'
 import { useLocation } from 'react-router-dom'
@@ -137,9 +136,5 @@ const User = ({name, id}) => {
         </div>
     );
 };
-
-Header.contextTypes = {
-    store: PropTypes.object,
-}
 
 export default Header

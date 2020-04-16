@@ -1,0 +1,17 @@
+.add-vehicle-page{
+    margin: 100px 16px 16px;
+    .vehicle-name{
+        height: 26px;
+        width: 220px;
+    }
+    .vehicle-type{
+        font-size: 14px;
+        border: 1px solid rgba(140, 140, 140, 0.2);
+        font-size: 16px;
+        height: 35px;
+        padding: 3px 8px;
+        width: 210px;
+        border-radius: 2px;
+        width: 100%;
+    }
+}

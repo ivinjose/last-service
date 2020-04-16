@@ -1,0 +1,46 @@
+@import '../../styles/colorcodes.css';
+
+.vehicle-directory-page{
+    .cards{
+        margin: 70px 16px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-content{
+        color: #353535;
+        height: 100%;
+        text-align: center;
+        position: relative;
+
+        .icon{
+            padding: 35px 0 20px;
+
+            img{
+                width: 48px;
+            }
+        }
+
+        .message{
+            font-size: 15px;
+            padding: 10px 15px;
+        }
+
+        .footer{
+            border-top: 1px solid #7cabda33;
+            padding: 12px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            font-size: 14px;
+            font-weight: 500;
+
+            a{
+                text-decoration: none;
+                color: var(--ctaText);
+            }
+        }
+    }
+}

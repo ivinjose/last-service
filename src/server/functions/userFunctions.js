@@ -32,9 +32,9 @@ module.exports = {
     getUser(req, res) {
         User.findOne({ _id: ObjectId(req.params.id) }, (err, result) => {
             if (err) {
-                res.status(400).send({ message: "Could not fetch the user", meta: err });
+                res.status(400).send({ status: 'error', message: "Could not fetch the user", meta: err });
             } else {
-                res.status(200).send({ message: "Successfully fetched the user", data: result });
+                res.status(200).send({ status: 'success', message: "Successfully fetched the user", data: result });
             }
         });
     },

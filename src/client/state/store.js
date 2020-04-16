@@ -1,4 +1,5 @@
 import createStore from 'storeon';
+import { persistState } from '@storeon/localstorage'
 import user from './user';
 import vehicles from './vehicles';
 import services from './services';
@@ -17,11 +18,25 @@ const snackbarMessage = store => {
     store.on('snackbar:hide', ()=>({ snackbarMessage: {show: false, message: null} }));
 }
 
+const serviceableComponents = store => {
+    store.on('@init', ()=>({ serviceableComponents: [
+        { 'id': 'general', 'label': 'General Service' },
+        { 'id': 'engine-oil', 'label': 'Engine oil' },
+        { 'id': 'break-fluid', 'label': 'Break fluid' },
+        { 'id': 'air-filter', 'label': 'Air filter' },
+        { 'id': 'break-disc', 'label': 'Break disc' },
+        { 'id': 'font-wiper-blade', 'label': 'Front wiper blade' },
+        { 'id': 'rear-wiper-blade', 'label': 'Rear wiper blade' }
+    ] }));
+};
+
 export const store = createStore([
-    user, 
     loading, 
     snackbarMessage,
+    user,
     vehicles,
     services,
+    serviceableComponents,
+    persistState(['user', 'vehicles']),
     process.env.NODE_ENV !== 'production' && require('storeon/devtools')
 ]);
