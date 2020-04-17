@@ -10,6 +10,11 @@ import { saveVehiclesAsync } from "../../state/vehicles";
 import { getRouteDetails, routeConstants } from "../../routes/routes";
 import ApiConstants from "../../constants/ApiConstants";
 
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+
 const AddVehiclePage = (props) => {
 	const { user, dispatch } = useStoreon('user');
 
@@ -43,16 +48,28 @@ const AddVehiclePage = (props) => {
 			<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
 
 			<div className={styles['add-vehicle-page']}>
+				<FormControl className={styles['vehicle-type-form']}>
+					<InputLabel>Type of vehicle</InputLabel>
+					<Select
+						value={type}
+						onChange={updateTypeCb}>
+						<MenuItem key="two-wheeler" value="two-wheeler" >Two wheeler</MenuItem>
+						<MenuItem key="four-wheeler" value="four-wheeler" >Four wheeler</MenuItem>
+						<MenuItem key="other" value="other" >other</MenuItem>	
+					</Select>
+				</FormControl>
+				<Space vertical={25} />
+
 				<Input type="text" name="name" placeholder="Vehicle Name" style={{width: '100%'}} onChange={updateNameCb} />
 				<Space vertical={25} />
 
-				<select className={styles['vehicle-type']} name="vehicle-type" onChange={updateTypeCb}>
+				{/* <select className={styles['vehicle-type']} name="vehicle-type" onChange={updateTypeCb}>
 					<option value="">Type of vehicle?</option>
 					<option value="two-wheeler">Two wheeler</option>
 					<option value="four-wheeler">Four wheeler</option>
 					<option value="other">Other</option>
-				</select>
-				<Space vertical={25} />
+				</select> */}
+				{/* <Space vertical={25} /> */}
 
 				<Input type="text" name="registration" placeholder="Vehicle RC Number" style={{width: '100%'}} onChange={updateRegistrationCb} />
 				<Space vertical={30} />
