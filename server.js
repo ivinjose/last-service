@@ -38,7 +38,9 @@ mongoose.connect(constants.MONGODB_CONNECTION_STRING, () => {
     console.log("connected to mongodob");
 });
 
-/** Signup API */
+
+/** USER APIs */
+/** Signup  */
 app.post("/api/signup", function(req, res) {
     userFunctions.signup(req).then((result)=>{
         res.status(200).send({ status: 'success', message: "Successfully created the user", data: result });
@@ -47,7 +49,7 @@ app.post("/api/signup", function(req, res) {
     });
 });
 
-/** Login API */
+/** Login */
 app.post("/api/login", function(req, res) {
     userFunctions.login(req).then((result)=>{
         const token = jwt.sign(result._id.toString(), constants.JWT_PRIVATE_KEY)
@@ -62,6 +64,26 @@ app.post("/api/login", function(req, res) {
 app.get("/api/users/:id", userFunctions.getUser);
 
 
+/** VEHICLE APIs  */
+/** Add vehicles of a user */
+app.post("/api/users/:id/vehicles", function(req, res) {
+    if (Object.keys(req.query).length === 0) {
+        vehicleFunctions.addVehiclesOfUser(req, res);
+    } else {
+        serviceFunctions.searchServicesOfUser(req, res);
+    }
+});
+
+/** Get vehicles of a user */
+app.get("/api/users/:id/vehicles", vehicleFunctions.getVehiclesOfUser);
+
+/** Update vehicles of a user */
+app.put("/api/vehicles/:id", vehicleFunctions.updateVehicle);
+
+//app.post("/api/vehicles/:id", vehicleFunctions.addVehiclesOfUser);
+
+
+/** SERVICE APIs  */
 /** Get services of a user */
 app.get("/api/users/:id/services", function(req, res) {
     if (Object.keys(req.query).length === 0) {
@@ -83,22 +105,7 @@ app.get("/api/vehicles/:id/services", function(req, res) {
 /** Add services of a vehicle */
 app.post("/api/vehicles/:id/service", serviceFunctions.addServices);
 
-/** Add vehiles of a user */
-app.post("/api/users/:id/vehicles", function(req, res) {
-    if (Object.keys(req.query).length === 0) {
-        vehicleFunctions.addVehiclesOfUser(req, res);
-    } else {
-        serviceFunctions.searchServicesOfUser(req, res);
-    }
-});
 
-/** Get vehiles of a user */
-app.get("/api/users/:id/vehicles", vehicleFunctions.getVehiclesOfUser);
-
-/** Update vehiles of a user */
-app.put("/api/vehicles/:id", vehicleFunctions.updateVehicle);
-
-// app.post("/api/vehicles/:id", vehicleFunctions.addVehiclesOfUser);
 
 /** Serve the HTML for local development */
 app.get('/*', (req,res) => {
