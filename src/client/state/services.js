@@ -15,6 +15,7 @@ const services = store => {
         return { services: data };
     });
 
+    //TODO:: This is not being used. Fix!
     store.on('services/get:error', (state, error)=>{
         store.dispatch('loading:false');
         console.log('Error in fetching services', error);

@@ -10,11 +10,18 @@ const documents = store => {
         store.dispatch('documents/get:success', documents.data);
     });
 
+    store.on('documents/vehicle/get', async (state, vehicle)=>{
+        store.dispatch('loading:true');
+        const documents = await makeApiCall("/api/vehicles/" + vehicle + "/documents", { method: 'GET' });
+        store.dispatch('documents/get:success', documents.data);
+    });
+
     store.on('documents/get:success', (state, data)=>{
         store.dispatch('loading:false');
         return { documents: data };
     });
 
+    //TODO:: This is not being used. Fix!
     store.on('documents/get:error', (state, error)=>{
         store.dispatch('loading:false');
         console.log('Error in fetching documents', error);
@@ -33,15 +40,15 @@ const documents = store => {
     });
 };
 
-export const saveServiceAsync = async (dispatch, data) => {
+export const saveDocumentAsync = async (dispatch, data) => {
     dispatch('loading:true');
     const newDocument = await makeApiCall("/api/users/" + data.userId + "/document", { method: 'POST', body: data });
     return new Promise(resolve => {
         if( newDocument.status == ApiConstants.STATUS_SUCCESS ){
-            dispatch('vehicles/add:success', newDocument.data);
+            dispatch('document/add:success', newDocument.data);
             resolve({ status: ApiConstants.STATUS_SUCCESS, data: newDocument.data[0] });
         }else{
-            dispatch('vehicles/add:error', newDocument.message);
+            dispatch('document/add:error', newDocument.message);
             resolve({ status: ApiConstants.STATUS_ERROR, data: null });
         }
     });
