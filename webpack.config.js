@@ -1,9 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
+const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = {
-    mode: 'production',
+module.exports = Object.assign({
+    mode: 'development',
     context: path.join(__dirname, 'src/client/components'),
     entry: [
+        'webpack-hot-middleware/client?quiet=true',
         '@babel/polyfill',
         './index.js',
     ],
@@ -50,4 +53,19 @@ module.exports = {
         ],
     },
     devtool: 'inline-sourcemap', // has to be removed in production
-};
+    watch: true,
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
+}, 
+// Production web pack setup
+isProd ? {
+    mode: 'production',
+    entry: [
+        '@babel/polyfill',
+        './index.js',
+    ],
+    devtool: 'nosources-source-map',
+    plugins: [],
+    watch: false,
+} : {});

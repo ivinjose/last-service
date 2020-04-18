@@ -1,4 +1,3 @@
-
 import moment from 'moment';
 
 /**
@@ -12,3 +11,11 @@ import moment from 'moment';
 export const getTimestampFromMoment = date => date.unix();
 export const getDateStringFromTimestamp = timestamp => getMomentFromTimestamp(timestamp).format('MMMM Do YYYY');
 export const getMomentFromTimestamp = timestamp => moment.unix(timestamp);
+export const formatCurrency = (amount=0, minimumFractionDigits=0) => {
+    return Number(amount).toLocaleString('en-IN', {
+        maximumFractionDigits:2,
+        minimumFractionDigits,
+        style: 'currency',
+        currency: 'INR',
+    });
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Service.css';
+import { formatCurrency } from '../../../utils/Helpers';
 
 const Service = ({service, style}) => {
 	return(
@@ -17,7 +18,7 @@ const Service = ({service, style}) => {
 					
 					<tr>
 						<td className={styles['col']}>Amount</td>
-						<td className={styles['col-details']}><span>{service.amount + " " + String.fromCharCode(8377)}</span></td>
+						<td className={styles['col-details']}><span>{formatCurrency(service.amount)}</span></td>
 					</tr>
 					<tr>
 						<td className={styles['col']}>Component</td>

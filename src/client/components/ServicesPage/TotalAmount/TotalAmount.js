@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './TotalAmount.css';
+import { formatCurrency } from '../../../utils/Helpers';
 
 const TotalAmount = ({ services }) => {
     if (!services || services.length === 0) {
@@ -20,11 +21,7 @@ const getTotalAmount = services => {
             totalAmount += amount;
         }
     });
-    return totalAmount.toLocaleString('en-IN', {
-        maximumFractionDigits: 2,
-        style: 'currency',
-        currency: 'INR',
-    });
+    return formatCurrency(totalAmount, 2);
 };
 
 export default TotalAmount;

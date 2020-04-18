@@ -47,7 +47,7 @@ const services = store => {
 
 export const saveServiceAsync = async (dispatch, data) => {
     dispatch('loading:true');
-    const newService = await makeApiCall("/api/vehicles/" + data.vehicle + "/service", { method: 'POST', body: data });
+    const newService = await makeApiCall(`/api/vehicles/${data.vehicle}/service`, { method: 'POST', body: data });
     return new Promise(resolve => {
         if( newService.status == ApiConstants.STATUS_SUCCESS ){
             dispatch('service/add:success', newService.data);
