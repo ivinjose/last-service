@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useStoreon from 'storeon/react'
 import Strings from '../../constants/StringConstants';
+import { saveDocumentAsync } from "../../state/documents";
+import ApiConstants from "../../constants/ApiConstants";
 
 const AddDocumentPage = () => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
@@ -43,8 +45,18 @@ const AddDocumentPage = () => {
 			reminderDate,
 			comment
 		};
-		clear();
 		console.log({document});
+
+		saveDocumentAsync( dispatch, document ).then(({status, data: newDocument})=>{
+			debugger;
+			if( status == ApiConstants.STATUS_SUCCESS ){
+				clear();
+				// const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
+				// setNewService( mutatedNewService )
+			}else{
+				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
+			}
+		});
 	}
 
 	return(

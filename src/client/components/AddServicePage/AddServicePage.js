@@ -56,7 +56,7 @@ const AddServicePage = (props) => {
 
 		saveServiceAsync( dispatch, service ).then(({status, data: newService})=>{
 			if( status == ApiConstants.STATUS_SUCCESS ){
-				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+				// props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
 				const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
 				clear()
 				setNewService( mutatedNewService )
