@@ -24,6 +24,7 @@ export default {
         DIRECTORY: "DIRECTORY",
         SERVICES: "SERVICES",
         DOCUMENTS: "DOCUMENTS",
+        DOCUMENTS: "DOCUMENTS",
         ADD_SERVICE: "ADD SERVICE",
         ADD_VEHICLE: "ADD VEHICLE",
         ADD_DOCUMENT: "ADD DOCUMENT",

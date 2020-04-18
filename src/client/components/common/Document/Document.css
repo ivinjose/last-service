@@ -1,0 +1,70 @@
+.document,
+.document-empty{
+	font-size: 16px;
+	border-bottom: #00000021 1px solid;
+	padding: 20px 0px;
+	margin-bottom: 15px;
+	color: #1f2939;
+
+	.date{
+		font-weight: 600;
+		margin-bottom: 15px;
+	}
+
+	table {
+		color: #1f2939;
+		width: 100%;
+		margin-left: -1px;
+
+		tr {
+			td {
+				padding: 0 0 9px;
+			}
+			.col {
+				width: 40%;
+			}
+			.col-details{
+				text-align: right;
+			}
+		}
+	}
+
+	.comment{
+		margin-top: 10px;
+	}
+}
+
+.document-empty{
+	.date,
+	.vehicle,
+	.type,
+	.reminder-date,
+    .comment{
+        background-color: #e7e7e7;
+		border-radius: 4px;
+		border-bottom: none;
+		height: 20px;
+		margin-bottom: 10px;
+	}
+	
+	.date{
+        width: 145px;
+    }
+
+    .vehicle{
+        width: 100px;
+    }
+
+    .type{
+        width: 135px;
+	}
+	
+	.reminder-date{
+        width: 115px;
+    }
+
+    .comment{
+		width: 215px;
+		margin-bottom: 0;
+    }
+}
