@@ -39,6 +39,14 @@ const AddServicePage = (props) => {
 	const updateAmountCb = event => setAmount(event.target.value); 
 	const updateCommentCb = event => setComment(event.target.value); 
 
+	const clear = () => {
+		setVehicleId("");
+		setDate("");
+		setComponent("");
+		setAmount("");
+		setComment("");
+	}
+
 	const saveService = () => {
 		if( !(vehicleId && date && component && amount) ){
 			dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
@@ -50,11 +58,7 @@ const AddServicePage = (props) => {
 			if( status == ApiConstants.STATUS_SUCCESS ){
 				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
 				const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
-				setVehicleId("");
-				setDate("");
-				setComponent("");
-				setAmount("");
-				setComment("");
+				clear()
 				setNewService( mutatedNewService )
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);

@@ -5,9 +5,9 @@ import ApiConstants from "../constants/ApiConstants";
 const vehicles = store => {
     store.on('@init', ()=>({ vehicles: [] }));
 
-    store.on('vehicles/get', async (state, userId)=>{
+    store.on('vehicles/get', async (state, user)=>{
         store.dispatch('loading:true');
-        const vehicles = await makeApiCall("/api/users/" + userId + "/vehicles", { method: 'GET' });
+        const vehicles = await makeApiCall("/api/users/" + user + "/vehicles", { method: 'GET' });
         store.dispatch('vehicles/get:success', vehicles.data);
     });
 

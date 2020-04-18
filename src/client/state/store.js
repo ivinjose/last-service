@@ -3,6 +3,7 @@ import { persistState } from '@storeon/localstorage'
 import user from './user';
 import vehicles from './vehicles';
 import services from './services';
+import documents from './documents';
 
 const loading = store => {
     store.on('@init', ()=>({ loading: false }));
@@ -36,6 +37,7 @@ export const store = createStore([
     user,
     vehicles,
     services,
+    documents,
     serviceableComponents,
     persistState(['user', 'vehicles']),
     process.env.NODE_ENV !== 'production' && require('storeon/devtools')

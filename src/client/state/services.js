@@ -21,13 +21,6 @@ const services = store => {
         return { services: [] };
     });
 
-    // store.on('service/add', async (state, data)=>{
-    //     store.dispatch('loading:true');
-    //     const newServices = await makeApiCall("/api/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
-    //     store.dispatch('service/add:success', newServices.data);
-    //     store.dispatch('snackbar:show', "Service added sucessfully");
-    // });
-
     store.on('service/add:success', (state, newServices)=>{
         store.dispatch('loading:false');
         return { services: [ ...state.services, ...newServices ] };
