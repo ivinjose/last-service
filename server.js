@@ -33,16 +33,12 @@ if( isDev ){
 app.use(express.static('www'));
 app.use(cookieParser(), bodyParser.json(), middlewares.setHeaders, middlewares.validateUserCookie);
 
-/**
- * Connect to DB
- */
+/** Connect to DB */
 mongoose.connect(constants.MONGODB_CONNECTION_STRING, () => {
     console.log("connected to mongodob");
 });
 
-/**
- * APIs
- */
+/** Signup API */
 app.post("/api/signup", function(req, res) {
     userFunctions.signup(req).then((result)=>{
         res.status(200).send({ status: 'success', message: "Successfully created the user", data: result });
@@ -51,6 +47,7 @@ app.post("/api/signup", function(req, res) {
     });
 });
 
+/** Login API */
 app.post("/api/login", function(req, res) {
     userFunctions.login(req).then((result)=>{
         const token = jwt.sign(result._id.toString(), constants.JWT_PRIVATE_KEY)
@@ -61,10 +58,11 @@ app.post("/api/login", function(req, res) {
     });
 });
 
+/** Get user details */
 app.get("/api/users/:id", userFunctions.getUser);
 
-app.get("/api/users/:id/vehicles", vehicleFunctions.getVehiclesOfUser);
 
+/** Get services of a user */
 app.get("/api/users/:id/services", function(req, res) {
     if (Object.keys(req.query).length === 0) {
         serviceFunctions.getServicesOfUser(req, res);
@@ -73,6 +71,7 @@ app.get("/api/users/:id/services", function(req, res) {
     }
 });
 
+/** Get services of a vehicle */
 app.get("/api/vehicles/:id/services", function(req, res) {
     if (Object.keys(req.query).length === 0) {
         serviceFunctions.getServicesOfVehicle(req, res);
@@ -81,6 +80,10 @@ app.get("/api/vehicles/:id/services", function(req, res) {
     }
 });
 
+/** Add services of a vehicle */
+app.post("/api/vehicles/:id/service", serviceFunctions.addServices);
+
+/** Add vehiles of a user */
 app.post("/api/users/:id/vehicles", function(req, res) {
     if (Object.keys(req.query).length === 0) {
         vehicleFunctions.addVehiclesOfUser(req, res);
@@ -89,17 +92,15 @@ app.post("/api/users/:id/vehicles", function(req, res) {
     }
 });
 
-app.post("/api/vehicles/:id", vehicleFunctions.addVehiclesOfUser);
+/** Get vehiles of a user */
+app.get("/api/users/:id/vehicles", vehicleFunctions.getVehiclesOfUser);
 
+/** Update vehiles of a user */
 app.put("/api/vehicles/:id", vehicleFunctions.updateVehicle);
 
-// app.get("/api/services", serviceFunctions.getServices;
+// app.post("/api/vehicles/:id", vehicleFunctions.addVehiclesOfUser);
 
-app.post("/api/vehicles/:id/service", serviceFunctions.addServices);
-
-/**
- * Server the HTML for local development
- */
+/** Serve the HTML for local development */
 app.get('/*', (req,res) => {
 	res.sendFile(path.join(__dirname, './www/index.html'))
 });
