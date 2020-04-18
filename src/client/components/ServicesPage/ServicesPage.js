@@ -1,74 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import connect from 'storeon/react/connect'
-
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
 import Service, { ServiceEmpty } from '../common/Service';
-
+import useStoreon from 'storeon/react'
 import styles from './ServicesPage.css';
 import lizard from '../../images/lizard.jpg';
 import Strings from '../../constants/StringConstants';
 import { prettifyDate } from "../../utils/Helpers";
 
-class ServicesPage extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			currentVehicle: ""
-		};
-	}
+const ServicesPage = (props) => {
+	const { services, vehicles, serviceableComponents, loading, dispatch } = useStoreon('services', 'vehicles', 'serviceableComponents', 'loading');
 
-	componentDidMount() {
-		let queryParams = queryString.parse(this.props.location.search);
+	const [ vehicle, setVehicle ] = useState("");
+	const setVehicleCb = event => {
+		setVehicle(event.target.value);
+		getServices(event.target.value);
+	} 
+
+	useEffect(()=>{
+		const queryParams = queryString.parse(props.location.search);
 		if (queryParams && queryParams.vehicle) {
-			this.chooseVehicle(queryParams.vehicle);
+			setVehicle(queryParams.vehicle);
+			getServices(queryParams.vehicle);
 		}
+	}, []);
+
+	const getServices = (selectedVehicle) => {
+		dispatch('services/get', selectedVehicle);
 	}
 
-	render() {
-		//TODO::Find out why multiple renders happen
-		const placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
-		const menuItems = [placeHolderItem, ...this.props.vehicles.map((vehicle) => (
-			<MenuItem value={vehicle._id} key={vehicle._id} >
-				{vehicle.name}
-			</MenuItem>
-		))];
+	const placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
+	const menuItems = [placeHolderItem, ...vehicles.map((vehicle) => (
+		<MenuItem value={vehicle._id} key={vehicle._id} >
+			{vehicle.name}
+		</MenuItem>
+	))];
 
-		return (
-			<React.Fragment>
-				<Header title={Strings.PAGE_TITLES.SERVICES} />
-				<div className={styles['services-page']}>
-					<Space vertical={15} />
-					<Select
-						displayEmpty
-						value={this.state.currentVehicle}
-						onChange={(e) => this.chooseVehicle(e.target.value)}
-						className={styles['select-cmp']}>
-						{menuItems}
-					</Select>
-					
-					<Space vertical={15} />
-					{renderServices(this.props.services, this.props.loading, this.props.serviceableComponents)}
-				</div>
-			</React.Fragment>
-		);
-	}
-
-	chooseVehicle(id) {
-		this.setState({
-			currentVehicle: id
-		});
-		this.getServiceDetailsOf(id);
-	}
-
-	getServiceDetailsOf(vehicle) {
-		this.props.dispatch('services/get', vehicle);
-	}
+	return (
+		<React.Fragment>
+			<Header title={Strings.PAGE_TITLES.SERVICES} />
+			<div className={styles['services-page']}>
+				<Space vertical={15} />
+				<Select
+					displayEmpty
+					value={vehicle}
+					onChange={setVehicleCb}
+					className={styles['select-cmp']}>
+					{menuItems}
+				</Select>
+				
+				<Space vertical={15} />
+				{renderServices(services, loading, serviceableComponents)}
+			</div>
+		</React.Fragment>
+	);
 }
 
 const renderServices = (services, loading, components) =>{
@@ -114,8 +105,4 @@ const Empty = () => {
 	);
 };
 
-ServicesPage.contextTypes = {
-	store: PropTypes.object
-};
-
-export default connect('vehicles', 'services', 'serviceableComponents', 'loading', ServicesPage);
+export default ServicesPage;
