@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import connect from 'storeon/react/connect'
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
