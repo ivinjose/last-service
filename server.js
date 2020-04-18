@@ -6,9 +6,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const constants = require("./src/server/constants");
+const userFunctions = require("./src/server/functions/userFunctions");
 const vehicleFunctions = require("./src/server/functions/vehicleFunctions");
 const serviceFunctions = require("./src/server/functions/serviceFunctions");
-const userFunctions = require("./src/server/functions/userFunctions");
+const documentFunctions = require("./src/server/functions/documentFunctions");
 const middlewares = require('./src/server/helpers/middlewares');
 const webpackConfig = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -64,6 +65,7 @@ app.post("/api/login", function(req, res) {
 app.get("/api/users/:id", userFunctions.getUser);
 
 
+
 /** VEHICLE APIs  */
 /** Add vehicles of a user */
 app.post("/api/users/:id/vehicles", function(req, res) {
@@ -81,6 +83,7 @@ app.get("/api/users/:id/vehicles", vehicleFunctions.getVehiclesOfUser);
 app.put("/api/vehicles/:id", vehicleFunctions.updateVehicle);
 
 //app.post("/api/vehicles/:id", vehicleFunctions.addVehiclesOfUser);
+
 
 
 /** SERVICE APIs  */
@@ -105,6 +108,29 @@ app.get("/api/vehicles/:id/services", function(req, res) {
 /** Add services of a vehicle */
 app.post("/api/vehicles/:id/service", serviceFunctions.addServices);
 
+
+
+/** DOCUMENT APIs  */
+/** Get documents of a user */
+app.get("/api/users/:id/documents", function(req, res) {
+    if (Object.keys(req.query).length === 0) {
+        documentFunctions.getDocumentsOfUser(req, res);
+    } else {
+        documentFunctions.searchDocumentsOfUser(req, res);
+    }
+});
+
+/** Get documents of a vehicle */
+app.get("/api/vehicles/:id/documents", function(req, res) {
+    if (Object.keys(req.query).length === 0) {
+        documentFunctions.getDocumentsOfVehicle(req, res);
+    } else {
+        documentFunctions.searchDocumentsOfUser(req, res);
+    }
+});
+
+/** Add documents of a user */
+app.post("/api/users/:id/document", documentFunctions.addDocument);
 
 
 /** Serve the HTML for local development */
