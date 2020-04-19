@@ -14,6 +14,7 @@ import { saveServiceAsync } from "../../state/services";
 import ApiConstants from "../../constants/ApiConstants";
 import useStoreon from 'storeon/react'
 import { getVehicleFromLocation, mutateNewServiceForDisplay } from "./helpers";
+import { routeConstants, getRouteDetailsFromPath } from '../../routes/routes';
 
 
 const AddServicePage = (props) => {
@@ -27,6 +28,9 @@ const AddServicePage = (props) => {
 	const [ editMode, setEditMode ] = useState(false);
 
 	useEffect(() => {
+		if( getRouteDetailsFromPath( props.location.pathname ).key === routeConstants.EDIT_SERVICE ){
+			setEditMode(true)
+		}
 		const vehicleFromLocation = getVehicleFromLocation(props.location);
 		vehicleFromLocation && setVehicleId( vehicleFromLocation );
 	},[]);
@@ -56,8 +60,8 @@ const AddServicePage = (props) => {
 			if( status == ApiConstants.STATUS_SUCCESS ){
 				// props.history.push(getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path);
 				const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
-				clear()
-				setNewService( mutatedNewService )
+				clear();
+				setNewService( mutatedNewService );
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
 			}
