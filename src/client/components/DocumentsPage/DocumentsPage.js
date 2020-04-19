@@ -69,9 +69,11 @@ const renderDocument = (documents, vehicles, loading) =>{
 				<React.Fragment>
 					{
 						documents.map( document => {
-							document.renewalDate = prettifyDate(document.renewalDate);
-							document.reminderDate = prettifyDate(document.reminderDate);
-							document.vehicle = document.vehicle.name;
+							document = Object.assign({}, document, { 
+											vehicle: document.vehicle.name, 
+											renewalDate: prettifyDate(document.renewalDate),
+											reminderDate: prettifyDate(document.reminderDate)
+										});
 							return <Document document={document} />
 						})
 					}

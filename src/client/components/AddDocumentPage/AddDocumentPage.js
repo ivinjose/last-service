@@ -48,7 +48,6 @@ const AddDocumentPage = (props) => {
 		console.log({document});
 
 		saveDocumentAsync( dispatch, document ).then(({status, data: newDocument})=>{
-			debugger;
 			if( status == ApiConstants.STATUS_SUCCESS ){
 				clear();
 				// const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
