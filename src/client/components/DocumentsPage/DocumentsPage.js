@@ -69,11 +69,10 @@ const renderDocument = (documents, vehicles, loading) =>{
 			return(
 				<React.Fragment>
 					{
-						documents.map( document =>{
+						documents.map( document => {
 							document.renewalDate = prettifyDate(document.renewalDate);
 							document.reminderDate = prettifyDate(document.reminderDate);
-							const vehicle = vehicles.find( vehicle => vehicle._id === document.vehicle );
-							document.vehicle = vehicle.name;
+							document.vehicle = document.vehicle.name;
 							return <Document document={document} />
 						})
 					}

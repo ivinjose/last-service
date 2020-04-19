@@ -58,7 +58,9 @@ module.exports = {
             } else {
                 res.status(200).send({ status: 'success', message: "Successfully fetched the documents", data: result });
             }
-        });
+        })
+        .populate({ path: 'user', model: 'user', select: 'name' })
+        .populate({ path: 'vehicle', model: 'vehicle', select: 'name' });
     },
 
     getDocumentsOfVehicle(req, res) {
@@ -68,7 +70,9 @@ module.exports = {
             } else {
                 res.status(200).send({ status: 'success', message: "Successfully fetched the documents", data: result });
             }
-        });
+        }) 
+        .populate({ path: 'user', model: 'user', select: 'name' })
+        .populate({ path: 'vehicle', model: 'vehicle', select: 'name' });
     },
 
     addDocument(req, res) {
