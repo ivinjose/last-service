@@ -24,6 +24,7 @@ const AddServicePage = (props) => {
 	const [ amount, setAmount ] = useState("");
 	const [ comment, setComment ] = useState("");
 	const [ newService, setNewService ] = useState(null);
+	const [ editMode, setEditMode ] = useState(false);
 
 	useEffect(() => {
 		const vehicleFromLocation = getVehicleFromLocation(props.location);
@@ -53,7 +54,7 @@ const AddServicePage = (props) => {
 
 		saveServiceAsync( dispatch, service ).then(({status, data: newService})=>{
 			if( status == ApiConstants.STATUS_SUCCESS ){
-				// props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+				// props.history.push(getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path);
 				const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
 				clear()
 				setNewService( mutatedNewService )
@@ -65,10 +66,10 @@ const AddServicePage = (props) => {
 
 	return (
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
+			<Header location={props.location} />
 
 			<div className={styles['add-service-page']}>
-				<FormControl className={styles['form-control']}>
+				<FormControl className={styles['form-control']} disabled={editMode} >
 					<InputLabel>Choose your vehicle</InputLabel>
 					<Select
 						value={vehicleId}

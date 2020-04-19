@@ -1,4 +1,6 @@
 export default {
+    APP_NAME: "SERVICE MANAGER",
+    
     SNACKBAR_MESSAGES: {
         SIGNUP_SUCCESS: "Your account created succesfully. Please login to continue.",
         SIGNUP_ERROR: "Could not create the account. Please try again.",
@@ -24,9 +26,23 @@ export default {
         DIRECTORY: "DIRECTORY",
         SERVICES: "SERVICES",
         DOCUMENTS: "DOCUMENTS",
-        DOCUMENTS: "DOCUMENTS",
         ADD_SERVICE: "ADD SERVICE",
         ADD_VEHICLE: "ADD VEHICLE",
         ADD_DOCUMENT: "ADD DOCUMENT",
+        EDIT_SERVICE: "EDIT SERVICE"
+    },
+
+    URL_TITLES: {
+        HOME: "Home",
+        LOGIN: "Login",
+        LOGOUT: "Logout",
+        SIGNUP: "Create Account",
+        DIRECTORY: "Directory",
+        SERVICES: "View Services",
+        DOCUMENTS: "View Documents",
+        ADD_SERVICE: "Add New Service",
+        ADD_VEHICLE: "Add New Vehicle",
+        ADD_DOCUMENT: "Add New Document",
+        EDIT_SERVICE: "Edit Service"
     }
 }

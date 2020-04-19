@@ -3,7 +3,7 @@ import Styles from './Header.css'
 import clsx from 'clsx'
 import { useLocation } from 'react-router-dom'
 
-import {routes} from '../../../routes/routes'
+import { routes, getRouteDetailsFromPath } from '../../../routes/routes'
 import useStoreon from 'storeon/react'
 import Drawer from '@material-ui/core/Drawer'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -14,6 +14,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import userIcon from "../../../images/user.svg"
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+import Strings from '../../../constants/StringConstants';
 
 const drawerWidth = 240
 
@@ -43,6 +44,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Header(props) {
+    let title = Strings.APP_NAME;
+    if( props.title ){
+        title = props.title;
+    }else if( props.location ){
+        title = getRouteDetailsFromPath(props.location.pathname).title;
+    }
     const classes = useStyles()
     const theme = useTheme()
     const [isDrawerOpen, openDrawer] = React.useState(false)
@@ -73,7 +80,7 @@ function Header(props) {
                     <MenuIcon />
                 </IconButton>
                 <span className={Styles['title']}>
-                    {props.title}
+                    {title}
                 </span>
             </Toolbar>
             <Drawer
@@ -99,6 +106,9 @@ function Header(props) {
                 
                 <ul className={Styles['list']}>
                     {routes.map((route) => {
+                        if(route.isHidden){
+                            return null;
+                        }
                         const liClassName = clsx( Styles['list-item'], location.pathname == route.path? Styles['selected']:null );
                         if(route.isSecure !== user.isLoggedIn ){
                             return null;

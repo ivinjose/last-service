@@ -13,7 +13,7 @@ import styles from './ServicesPage.css';
 import lizard from '../../images/lizard.jpg';
 import Strings from '../../constants/StringConstants';
 import { prettifyDate } from "../../utils/Helpers";
-import { getRouteDetails, routeConstants } from "../../routes/routes";
+import { getRouteDetailsFromKey, routeConstants } from "../../routes/routes";
 import { Link } from 'react-router-dom';
 
 const ServicesPage = (props) => {
@@ -84,7 +84,7 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 						})
 					}
 					<Fab className={styles['fab']} color="primary" aria-label="add">
-						<Link to={getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path+"?vehicle="+vehicleSelected}>
+						<Link to={getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path+"?vehicle="+vehicleSelected}>
 							<AddIcon style={{color: '#fff'}} />
 						</Link>
 					</Fab>
