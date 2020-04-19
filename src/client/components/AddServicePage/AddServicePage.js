@@ -11,10 +11,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Strings from '../../constants/StringConstants';
 import { saveServiceAsync } from "../../state/services";
-import { getRouteDetails, routeConstants } from "../../routes/routes";
 import ApiConstants from "../../constants/ApiConstants";
 import useStoreon from 'storeon/react'
 import { getVehicleFromLocation, mutateNewServiceForDisplay } from "./helpers";
+import { routeConstants, getRouteDetailsFromPath } from '../../routes/routes';
 
 
 const AddServicePage = (props) => {
@@ -25,19 +25,29 @@ const AddServicePage = (props) => {
 	const [ amount, setAmount ] = useState("");
 	const [ comment, setComment ] = useState("");
 	const [ newService, setNewService ] = useState(null);
+	const [ editMode, setEditMode ] = useState(false);
 
-	//TODO:: Debug why this state value is not reflecting in Select Component
-	// useEffect(()=>{
-	// 	const vehicleFromLocation = getVehicleFromLocation(props.location);
-	// 	console.log({vehicleFromLocation});
-	// 	vehicleFromLocation && setVehicleId( vehicleFromLocation );
-	// },[]);
+	useEffect(() => {
+		if( getRouteDetailsFromPath( props.location.pathname ).key === routeConstants.EDIT_SERVICE ){
+			setEditMode(true)
+		}
+		const vehicleFromLocation = getVehicleFromLocation(props.location);
+		vehicleFromLocation && setVehicleId( vehicleFromLocation );
+	},[]);
 
 	const updateVehicleIdCb = event => setVehicleId(event.target.value);
 	const updateDateCb = event => setDate(event.target.value);
 	const updateComponentCb = event => setComponent(event.target.value); 
 	const updateAmountCb = event => setAmount(event.target.value); 
 	const updateCommentCb = event => setComment(event.target.value); 
+
+	const clear = () => {
+		setVehicleId("");
+		setDate("");
+		setComponent("");
+		setAmount("");
+		setComment("");
+	}
 
 	const saveService = () => {
 		if( !(vehicleId && date && component && amount) ){
@@ -48,14 +58,10 @@ const AddServicePage = (props) => {
 
 		saveServiceAsync( dispatch, service ).then(({status, data: newService})=>{
 			if( status == ApiConstants.STATUS_SUCCESS ){
-				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+				// props.history.push(getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path);
 				const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
-				setVehicleId("");
-				setDate("");
-				setComponent("");
-				setAmount("");
-				setComment("");
-				setNewService( mutatedNewService )
+				clear();
+				setNewService( mutatedNewService );
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
 			}
@@ -64,10 +70,10 @@ const AddServicePage = (props) => {
 
 	return (
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.ADD_SERVICE} />
+			<Header location={props.location} />
 
 			<div className={styles['add-service-page']}>
-				<FormControl className={styles['form-control']}>
+				<FormControl className={styles['form-control']} disabled={editMode} >
 					<InputLabel>Choose your vehicle</InputLabel>
 					<Select
 						value={vehicleId}

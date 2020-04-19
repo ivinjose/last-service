@@ -3,38 +3,33 @@ import queryString from 'query-string';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import MenuItem from '@material-ui/core/MenuItem';
-import TotalAmount from './TotalAmount';
-import Service, { ServiceEmpty } from '../common/Service';
+import Document, { DocumentEmpty } from '../common/Document';
 import useStoreon from 'storeon/react'
-import styles from './ServicesPage.css';
+import styles from './DocumentsPage.css';
 import lizard from '../../images/lizard.jpg';
 import { prettifyDate } from "../../utils/Helpers";
-import { getRouteDetailsFromKey, routeConstants } from "../../routes/routes";
-import { Link } from 'react-router-dom';
 
-const ServicesPage = (props) => {
-	const { services, vehicles, serviceableComponents, loading, dispatch } = useStoreon('services', 'vehicles', 'serviceableComponents', 'loading');
+const DocumentsPage = (props) => {
+	const { user, documents, vehicles, loading, dispatch } = useStoreon('user', 'documents', 'vehicles', 'loading');
 
 	const [ vehicle, setVehicle ] = useState("");
 	const setVehicleCb = event => {
 		setVehicle(event.target.value);
-		getServices(event.target.value);
+		getDocumentsOfVehicle(event.target.value);
 	} 
 
 	useEffect(()=>{
+		getDocuments();
 		const queryParams = queryString.parse(props.location.search);
 		if (queryParams && queryParams.vehicle) {
 			setVehicle(queryParams.vehicle);
-			getServices(queryParams.vehicle);
+			getDocumentsOfVehicle(queryParams.vehicle);
 		}
 	}, []);
 
-	const getServices = (selectedVehicle) => {
-		dispatch('services/get', selectedVehicle);
-	}
+	const getDocuments = () =>  dispatch('documents/get', user._id);
+	const getDocumentsOfVehicle = selectedVehicle => dispatch('documents/vehicle/get', selectedVehicle);
 
 	const placeHolderItem = <MenuItem disabled value="" key='chooseVehicle'><em>Choose Vehicle</em></MenuItem>;
 	const menuItems = [placeHolderItem, ...vehicles.map((vehicle) => (
@@ -46,7 +41,7 @@ const ServicesPage = (props) => {
 	return (
 		<React.Fragment>
 			<Header location={props.location} />
-			<div className={styles['services-page']}>
+			<div className={styles['documents-page']}>
 				<Space vertical={15} />
 				<Select
 					displayEmpty
@@ -57,36 +52,31 @@ const ServicesPage = (props) => {
 				</Select>
 				
 				<Space vertical={15} />
-				{renderServices(vehicle, services, loading, serviceableComponents)}
+				{renderDocument(documents, vehicles, loading)}
 			</div>
 		</React.Fragment>
 	);
 }
 
-const renderServices = (vehicleSelected, services, loading, components) =>{
+const renderDocument = (documents, vehicles, loading) =>{
 	if( loading ){
 		return <Loader />
 	}else{
-		if( services.length == 0 ){
+		if( documents.length == 0 ){
 			return <Empty />;
 		}else{
 			return(
 				<React.Fragment>
-					<TotalAmount services={services} />
 					{
-						services.map( service =>{
-							service.vehicle = null; /** Setting it to null because no point in repeating the vehicle name in the services page */
-							service.date = prettifyDate(service.date);
-							const component = components.find( component => component.id === service.component );
-							service.component = component? component.label : null;
-							return <Service service={service} />
+						documents.map( document => {
+							document = Object.assign({}, document, { 
+											vehicle: document.vehicle.name, 
+											renewalDate: prettifyDate(document.renewalDate),
+											reminderDate: prettifyDate(document.reminderDate)
+										});
+							return <Document document={document} />
 						})
 					}
-					<Fab className={styles['fab']} color="primary" aria-label="add">
-						<Link to={getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path+"?vehicle="+vehicleSelected}>
-							<AddIcon style={{color: '#fff'}} />
-						</Link>
-					</Fab>
 				</React.Fragment>
 			)
 		}
@@ -96,8 +86,8 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 const Loader = () => {
 	return (
 		<React.Fragment>
-			<ServiceEmpty />
-			<ServiceEmpty />
+			<DocumentEmpty />
+			<DocumentEmpty />
 		</React.Fragment>
 	);
 }
@@ -111,4 +101,4 @@ const Empty = () => {
 	);
 };
 
-export default ServicesPage;
+export default DocumentsPage;

@@ -7,7 +7,7 @@ import styles from './AddVehiclePage.css';
 import Button from '@material-ui/core/Button';
 import Strings from '../../constants/StringConstants';
 import { saveVehiclesAsync } from "../../state/vehicles";
-import { getRouteDetails, routeConstants } from "../../routes/routes";
+import { getRouteDetailsFromKey, routeConstants } from "../../routes/routes";
 import ApiConstants from "../../constants/ApiConstants";
 
 import Select from '@material-ui/core/Select';
@@ -36,7 +36,7 @@ const AddVehiclePage = (props) => {
 
 		saveVehiclesAsync( dispatch, {userId: user._id, vehicles: [vehicle]} ).then(({status, data, message})=>{
 			if( status == ApiConstants.STATUS_SUCCESS ){
-				props.history.push(getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path);
+				props.history.push(getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path);
 			}else{
 				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
 			}
@@ -45,7 +45,7 @@ const AddVehiclePage = (props) => {
 	
 	return (
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
+			<Header location={props.location}/>
 
 			<div className={styles['add-vehicle-page']}>
 				<FormControl className={styles['vehicle-type-form']}>

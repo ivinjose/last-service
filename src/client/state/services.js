@@ -15,18 +15,12 @@ const services = store => {
         return { services: data };
     });
 
+    //TODO:: This is not being used. Fix!
     store.on('services/get:error', (state, error)=>{
         store.dispatch('loading:false');
         console.log('Error in fetching services', error);
         return { services: [] };
     });
-
-    // store.on('service/add', async (state, data)=>{
-    //     store.dispatch('loading:true');
-    //     const newServices = await makeApiCall("/api/vehicles/" + data.vehicleId + "/service", { method: 'POST', body: data.serviceDetails });
-    //     store.dispatch('service/add:success', newServices.data);
-    //     store.dispatch('snackbar:show', "Service added sucessfully");
-    // });
 
     store.on('service/add:success', (state, newServices)=>{
         store.dispatch('loading:false');
@@ -45,10 +39,10 @@ export const saveServiceAsync = async (dispatch, data) => {
     const newService = await makeApiCall("/api/vehicles/" + data.vehicle + "/service", { method: 'POST', body: data });
     return new Promise(resolve => {
         if( newService.status == ApiConstants.STATUS_SUCCESS ){
-            dispatch('vehicles/add:success', newService.data);
+            dispatch('service/add:success', newService.data);
             resolve({ status: ApiConstants.STATUS_SUCCESS, data: newService.data[0] });
         }else{
-            dispatch('vehicles/add:error', newService.message);
+            dispatch('service/add:error', newService.message);
             resolve({ status: ApiConstants.STATUS_ERROR, data: null });
         }
     });

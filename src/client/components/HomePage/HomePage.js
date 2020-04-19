@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import styles from './HomePage.css';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
-import { routeConstants, getRouteDetails } from '../../routes/routes';
+import { routeConstants, getRouteDetailsFromKey } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
 import Vehicle, { VehicleEmpty } from "./Vehicle";
 import { Link } from 'react-router-dom';
 import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
-const HomePage = () => {
+const HomePage = (props) => {
 	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
 	useEffect(()=>{
@@ -20,7 +20,7 @@ const HomePage = () => {
 
 	return(
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.HOME} user={user}/>
+			<Header location={props.location} user={user}/>
 			<div className={styles['home-page']}>
 				{
 					loading?
@@ -32,7 +32,7 @@ const HomePage = () => {
 								<Vehicles vehicles={vehicles} />
 								<Space vertical={15} />
 								<div className={styles['button']}>
-									<Link to={getRouteDetails(routeConstants.ADD_VEHICLE_DETAILS).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
+									<Link to={getRouteDetailsFromKey(routeConstants.ADD_VEHICLE).path}>{Strings.CTA_TEXT.ADD_VEHICLE}</Link>
 								</div>
 							</React.Fragment>
 				}

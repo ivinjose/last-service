@@ -27,7 +27,7 @@ const LoginPage = (props) => {
 
     return(
         <React.Fragment>
-            <Header title={Strings.PAGE_TITLES.LOGIN} />
+            <Header location={props.location} />
             <div className={Styles["login-page"]}>
                 <Input type="text" name="id" placeholder="Email or Mobile number" onChange={setIdCb}/>
                 <Space vertical={15} />

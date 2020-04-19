@@ -1,6 +1,6 @@
 @import '../../styles/colorcodes.css';
 
-.services-page {
+.documents-page {
     margin: 70px 16px 16px;
 
     .select-cmp {
@@ -17,14 +17,4 @@
             width: 260px;
         }
     }
-
-    .fab {
-        background-color: #2196f3;
-        margin: 0px;
-        top: auto;
-        right: 20px;
-        bottom: 20px;
-        left: auto;
-        position: fixed;
-    };
 }
