@@ -13,7 +13,7 @@ import Strings from '../../constants/StringConstants';
 import { saveDocumentAsync } from "../../state/documents";
 import ApiConstants from "../../constants/ApiConstants";
 
-const AddDocumentPage = () => {
+const AddDocumentPage = (props) => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
 	const [ vehicle, setVehicle ] = useState();
@@ -61,7 +61,7 @@ const AddDocumentPage = () => {
 
 	return(
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.ADD_DOCUMENT} />
+			<Header location={props.location} />
 			<div className={styles['add-document-page']}>
 				<FormControl className={styles['form-control']}>
 					<InputLabel htmlFor="age-helper">Choose your vehicle</InputLabel>

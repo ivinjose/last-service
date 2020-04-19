@@ -8,7 +8,6 @@ import Document, { DocumentEmpty } from '../common/Document';
 import useStoreon from 'storeon/react'
 import styles from './DocumentsPage.css';
 import lizard from '../../images/lizard.jpg';
-import Strings from '../../constants/StringConstants';
 import { prettifyDate } from "../../utils/Helpers";
 
 const DocumentsPage = (props) => {
@@ -41,7 +40,7 @@ const DocumentsPage = (props) => {
 
 	return (
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.DOCUMENTS} />
+			<Header location={props.location} />
 			<div className={styles['documents-page']}>
 				<Space vertical={15} />
 				<Select

@@ -42,7 +42,7 @@ const SignupPage = (props) => {
 
     return(
         <React.Fragment>
-            <Header title={Strings.PAGE_TITLES.SIGNUP} />
+            <Header location={props.location} />
             <div className={styles["signup-page"]}>
                 <Input type="text" name="name" placeholder="Your Name" onChange={setNameCb} />
                 <Space vertical={15} />

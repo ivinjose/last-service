@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
-const HomePage = () => {
+const HomePage = (props) => {
 	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
 	useEffect(()=>{
@@ -20,7 +20,7 @@ const HomePage = () => {
 
 	return(
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.HOME} user={user}/>
+			<Header location={props.location} user={user}/>
 			<div className={styles['home-page']}>
 				{
 					loading?

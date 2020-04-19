@@ -21,6 +21,12 @@ const routeConstants = {
     EDIT_SERVICE: 'EDIT_SERVICE',
 }
 
+/**
+ * Flag features of the below routes list
+ * isSecure makes it behind a loggedin check
+ * isHidden hides it from the drawer menu
+ */
+
 const routes = [
     {
         key: 'HOME',
@@ -85,7 +91,7 @@ const routes = [
         title: Strings.PAGE_TITLES.EDIT_SERVICE,
         component: AddServicePage,
         isSecure: true,
-        isHidden: false
+        isHidden: true
     },
     {
         key: 'SIGNUP',

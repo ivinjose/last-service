@@ -45,7 +45,7 @@ const AddVehiclePage = (props) => {
 	
 	return (
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.ADD_VEHICLE}/>
+			<Header location={props.location}/>
 
 			<div className={styles['add-vehicle-page']}>
 				<FormControl className={styles['vehicle-type-form']}>

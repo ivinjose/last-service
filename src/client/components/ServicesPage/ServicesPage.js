@@ -11,7 +11,6 @@ import Service, { ServiceEmpty } from '../common/Service';
 import useStoreon from 'storeon/react'
 import styles from './ServicesPage.css';
 import lizard from '../../images/lizard.jpg';
-import Strings from '../../constants/StringConstants';
 import { prettifyDate } from "../../utils/Helpers";
 import { getRouteDetailsFromKey, routeConstants } from "../../routes/routes";
 import { Link } from 'react-router-dom';
@@ -46,7 +45,7 @@ const ServicesPage = (props) => {
 
 	return (
 		<React.Fragment>
-			<Header title={Strings.PAGE_TITLES.SERVICES} />
+			<Header location={props.location} />
 			<div className={styles['services-page']}>
 				<Space vertical={15} />
 				<Select
