@@ -32,7 +32,7 @@ export default {
         EDIT_SERVICE: "EDIT SERVICE"
     },
 
-    URL_TITLES: {
+    MENU_TITLES: {
         HOME: "Home",
         LOGIN: "Login",
         LOGOUT: "Logout",

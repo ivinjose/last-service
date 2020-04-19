@@ -31,7 +31,7 @@ const routes = [
     {
         key: 'HOME',
         path: "/",
-        name: Strings.URL_TITLES.HOME,
+        name: Strings.MENU_TITLES.HOME,
         title: Strings.PAGE_TITLES.HOME,
         component: HomePage,
         isSecure: true
@@ -39,7 +39,7 @@ const routes = [
     {
         key: 'VEHICLE_DIRECTORY',
         path: "/vehicle",
-        name: Strings.URL_TITLES.DIRECTORY,
+        name: Strings.MENU_TITLES.DIRECTORY,
         title: Strings.PAGE_TITLES.DIRECTORY,
         component: VehicleDirectoryPage,
         isSecure: true
@@ -47,7 +47,7 @@ const routes = [
     {
         key: 'VIEW_SERVICES',
         path: "/services",
-        name: Strings.URL_TITLES.SERVICES,
+        name: Strings.MENU_TITLES.SERVICES,
         title: Strings.PAGE_TITLES.SERVICES,
         component: ServicesPage,
         isSecure: true
@@ -55,7 +55,7 @@ const routes = [
     {
         key: 'VIEW_DOCUMENTS',
         path: "/documents",
-        name: Strings.URL_TITLES.DOCUMENTS,
+        name: Strings.MENU_TITLES.DOCUMENTS,
         title: Strings.PAGE_TITLES.DOCUMENTS,
         component: DocumentsPage,
         isSecure: true
@@ -63,7 +63,7 @@ const routes = [
     {
         key: 'ADD_SERVICE',
         path: "/services/add",
-        name: Strings.URL_TITLES.ADD_SERVICE,
+        name: Strings.MENU_TITLES.ADD_SERVICE,
         title: Strings.PAGE_TITLES.ADD_SERVICE,
         component: AddServicePage,
         isSecure: true
@@ -71,7 +71,7 @@ const routes = [
     {
         key: 'ADD_DOCUMENT',
         path: "/document/add",
-        name: Strings.URL_TITLES.ADD_DOCUMENT,
+        name: Strings.MENU_TITLES.ADD_DOCUMENT,
         title: Strings.PAGE_TITLES.ADD_DOCUMENT,
         component: AddDocumentPage,
         isSecure: true
@@ -79,7 +79,7 @@ const routes = [
     {
         key: 'ADD_VEHICLE',
         path: "/vehicles/add",
-        name: Strings.URL_TITLES.ADD_VEHICLE,
+        name: Strings.MENU_TITLES.ADD_VEHICLE,
         title: Strings.PAGE_TITLES.ADD_VEHICLE,
         component: AddVehiclePage,
         isSecure: true
@@ -87,7 +87,7 @@ const routes = [
     {
         key: 'EDIT_SERVICE',
         path: "/services/edit",
-        name: Strings.URL_TITLES.EDIT_SERVICE,
+        name: Strings.MENU_TITLES.EDIT_SERVICE,
         title: Strings.PAGE_TITLES.EDIT_SERVICE,
         component: AddServicePage,
         isSecure: true,
@@ -96,7 +96,7 @@ const routes = [
     {
         key: 'SIGNUP',
         path: "/signup",
-        name: Strings.URL_TITLES.SIGNUP,
+        name: Strings.MENU_TITLES.SIGNUP,
         title: Strings.PAGE_TITLES.SIGNUP,
         component: SignupPage,
         isSecure: false
@@ -104,7 +104,7 @@ const routes = [
     {
         key: 'LOGIN',
         path: "/login",
-        name: Strings.URL_TITLES.LOGIN,
+        name: Strings.MENU_TITLES.LOGIN,
         title: Strings.PAGE_TITLES.LOGIN,
         component: LoginPage,
         isSecure: false
@@ -112,7 +112,7 @@ const routes = [
     {
         key: 'LOGOUT',
         path: "/logout",
-        name: Strings.URL_TITLES.LOGOUT,
+        name: Strings.MENU_TITLES.LOGOUT,
         component: LogoutPage,
         isSecure: true
     }  
