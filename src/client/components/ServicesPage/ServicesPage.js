@@ -3,6 +3,8 @@ import queryString from 'query-string';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import Select from '@material-ui/core/Select';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import MenuItem from '@material-ui/core/MenuItem';
 import TotalAmount from './TotalAmount';
 import Service, { ServiceEmpty } from '../common/Service';
@@ -11,6 +13,8 @@ import styles from './ServicesPage.css';
 import lizard from '../../images/lizard.jpg';
 import Strings from '../../constants/StringConstants';
 import { prettifyDate } from "../../utils/Helpers";
+import { getRouteDetails, routeConstants } from "../../routes/routes";
+import { Link } from 'react-router-dom';
 
 const ServicesPage = (props) => {
 	const { services, vehicles, serviceableComponents, loading, dispatch } = useStoreon('services', 'vehicles', 'serviceableComponents', 'loading');
@@ -54,13 +58,13 @@ const ServicesPage = (props) => {
 				</Select>
 				
 				<Space vertical={15} />
-				{renderServices(services, loading, serviceableComponents)}
+				{renderServices(vehicle, services, loading, serviceableComponents)}
 			</div>
 		</React.Fragment>
 	);
 }
 
-const renderServices = (services, loading, components) =>{
+const renderServices = (vehicleSelected, services, loading, components) =>{
 	if( loading ){
 		return <Loader />
 	}else{
@@ -79,6 +83,11 @@ const renderServices = (services, loading, components) =>{
 							return <Service service={service} />
 						})
 					}
+					<Fab className={styles['fab']} color="primary" aria-label="add">
+						<Link to={getRouteDetails(routeConstants.ADD_SERVICE_DETAILS).path+"?vehicle="+vehicleSelected}>
+							<AddIcon style={{color: '#fff'}} />
+						</Link>
+					</Fab>
 				</React.Fragment>
 			)
 		}

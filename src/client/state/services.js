@@ -39,10 +39,10 @@ export const saveServiceAsync = async (dispatch, data) => {
     const newService = await makeApiCall("/api/vehicles/" + data.vehicle + "/service", { method: 'POST', body: data });
     return new Promise(resolve => {
         if( newService.status == ApiConstants.STATUS_SUCCESS ){
-            dispatch('vehicles/add:success', newService.data);
+            dispatch('service/add:success', newService.data);
             resolve({ status: ApiConstants.STATUS_SUCCESS, data: newService.data[0] });
         }else{
-            dispatch('vehicles/add:error', newService.message);
+            dispatch('service/add:error', newService.message);
             resolve({ status: ApiConstants.STATUS_ERROR, data: null });
         }
     });

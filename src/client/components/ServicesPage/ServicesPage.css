@@ -17,4 +17,14 @@
             width: 260px;
         }
     }
+
+    .fab {
+        background-color: #2196f3;
+        margin: 0px;
+        top: auto;
+        right: 20px;
+        bottom: 20px;
+        left: auto;
+        position: fixed;
+    };
 }

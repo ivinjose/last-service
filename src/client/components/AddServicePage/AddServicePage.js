@@ -11,7 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Strings from '../../constants/StringConstants';
 import { saveServiceAsync } from "../../state/services";
-import { getRouteDetails, routeConstants } from "../../routes/routes";
 import ApiConstants from "../../constants/ApiConstants";
 import useStoreon from 'storeon/react'
 import { getVehicleFromLocation, mutateNewServiceForDisplay } from "./helpers";
@@ -26,12 +25,10 @@ const AddServicePage = (props) => {
 	const [ comment, setComment ] = useState("");
 	const [ newService, setNewService ] = useState(null);
 
-	//TODO:: Debug why this state value is not reflecting in Select Component
-	// useEffect(()=>{
-	// 	const vehicleFromLocation = getVehicleFromLocation(props.location);
-	// 	console.log({vehicleFromLocation});
-	// 	vehicleFromLocation && setVehicleId( vehicleFromLocation );
-	// },[]);
+	useEffect(() => {
+		const vehicleFromLocation = getVehicleFromLocation(props.location);
+		vehicleFromLocation && setVehicleId( vehicleFromLocation );
+	},[]);
 
 	const updateVehicleIdCb = event => setVehicleId(event.target.value);
 	const updateDateCb = event => setDate(event.target.value);
