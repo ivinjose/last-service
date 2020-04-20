@@ -1,4 +1,6 @@
 
+import moment from 'moment';
+
 export const prettifyDate = date =>{
 	if( !date || date === " " ){
 		return 'Invalid date';
@@ -10,3 +12,15 @@ export const prettifyDate = date =>{
 	
 	return `${mo} ${da}, ${ye}`;
 };
+
+/**
+ * Note for moment:
+ * The onChange event gives a moment object
+ * To get the unix timestamp from it, call selectedDate.unix()
+ * To convert a unix timestamp to moment object, call var parsed = moment.unix(timestamp), 
+ * and print parsed.toDate(), you'll get your displayable date string
+ */	
+
+export const getTimestampFromMoment = date => date.unix();
+export const getMomentFromTimestamp = timestamp => moment.unix(timestamp);
+
