@@ -59,7 +59,6 @@ const AddServicePage = (props) => {
 		}
 		const service = { user: user._id, vehicle: vehicleId, date: getTimestampFromMoment(date), component, amount, comment };
 
-		clear();
 		saveServiceAsync( dispatch, service ).then(({status, data: newService})=>{
 			if( status == ApiConstants.STATUS_SUCCESS ){
 				// props.history.push(getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path);

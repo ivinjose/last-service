@@ -1,5 +1,5 @@
 import queryString from 'query-string';
-import { prettifyDate } from "../../utils/Helpers";
+import { getMomentFromTimestamp } from "../../utils/Helpers";
 
 export const getVehicleFromLocation = location => {
 	const queryParams = queryString.parse(location.search);
@@ -12,6 +12,6 @@ export const getVehicleFromLocation = location => {
 export const mutateNewServiceForDisplay = (newService, vehicles, components ) => {
 	const vehicle = vehicles.find( vehicle => vehicle._id === newService.vehicle );
 	const component = components.find( component => component.id === newService.component );
-	const prettifiedDate = prettifyDate(newService.date);
-	return Object.assign({}, newService, { vehicle: vehicle.name, component: component.label, date: prettifiedDate });
+	const prettifiedMoment = getMomentFromTimestamp(newService.date);
+	return Object.assign({}, newService, { vehicle: vehicle.name, component: component.label, date: prettifiedMoment.format('MMMM Do YYYY') });
 }
