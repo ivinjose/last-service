@@ -8,7 +8,7 @@ import Document, { DocumentEmpty } from '../common/Document';
 import useStoreon from 'storeon/react'
 import styles from './DocumentsPage.css';
 import lizard from '../../images/lizard.jpg';
-import { prettifyDate } from "../../utils/Helpers";
+import { getDateStringFromTimestamp } from "../../utils/Helpers";
 
 const DocumentsPage = (props) => {
 	const { user, documents, vehicles, loading, dispatch } = useStoreon('user', 'documents', 'vehicles', 'loading');
@@ -20,6 +20,7 @@ const DocumentsPage = (props) => {
 	} 
 
 	useEffect(()=>{
+		dispatch('documents/clear');
 		getDocuments();
 		const queryParams = queryString.parse(props.location.search);
 		if (queryParams && queryParams.vehicle) {
@@ -71,8 +72,8 @@ const renderDocument = (documents, vehicles, loading) =>{
 						documents.map( document => {
 							document = Object.assign({}, document, { 
 											vehicle: document.vehicle.name, 
-											renewalDate: prettifyDate(document.renewalDate),
-											reminderDate: prettifyDate(document.reminderDate)
+											renewalDate: getDateStringFromTimestamp(document.renewalDate),
+											reminderDate: getDateStringFromTimestamp(document.reminderDate)
 										});
 							return <Document document={document} />
 						})

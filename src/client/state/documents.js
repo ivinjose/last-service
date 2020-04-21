@@ -4,6 +4,8 @@ import ApiConstants from "../constants/ApiConstants";
 const documents = store => {
     store.on('@init', ()=>({ documents: [] }));
 
+    store.on('documents/clear', ()=>({ documents: [] }));
+
     store.on('documents/get', async (state, user)=>{
         store.dispatch('loading:true');
         const documents = await makeApiCall("/api/users/" + user + "/documents", { method: 'GET' });

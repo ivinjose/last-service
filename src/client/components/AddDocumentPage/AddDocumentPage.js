@@ -12,27 +12,30 @@ import useStoreon from 'storeon/react'
 import Strings from '../../constants/StringConstants';
 import { saveDocumentAsync } from "../../state/documents";
 import ApiConstants from "../../constants/ApiConstants";
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+import { getTimestampFromMoment } from "../../utils/Helpers";
 
 const AddDocumentPage = (props) => {
 	const { user, vehicles, dispatch } = useStoreon('user', 'vehicles');
 
 	const [ vehicle, setVehicle ] = useState();
 	const [ documentType, setDocumentType ] = useState();
-	const [ renewalDate, setRenewalDate ] = useState();
-	const [ reminderDate, setReminderDate ] = useState();
+	const [ renewalDate, setRenewalDate ] = useState(null);
+	const [ reminderDate, setReminderDate ] = useState(null);
 	const [ comment, setComment ] = useState();
 
 	const setVehicleCb = event => setVehicle(event.target.value);
 	const setDocumentTypeCb = event => setDocumentType(event.target.value);
-	const setRenewalDateCb = event => setRenewalDate(event.target.value);
-	const setReminderDateCb = event => setReminderDate(event.target.value);
+	const setRenewalDateCb = selectedMoment => setRenewalDate(selectedMoment);
+	const setReminderDateCb = selectedMoment => setReminderDate(selectedMoment);
 	const setCommentCb = event => setComment(event.target.value);
 
 	const clear = () => {
 		setVehicle("");
 		setDocumentType("");
-		setRenewalDate("");
-		setReminderDate("");
+		setRenewalDate(null);
+		setReminderDate(null);
 		setComment("");	
 	}
 
@@ -41,8 +44,8 @@ const AddDocumentPage = (props) => {
 			user: user._id,
 			vehicle,
 			documentType,
-			renewalDate,
-			reminderDate,
+			renewalDate: getTimestampFromMoment(renewalDate),
+			reminderDate: getTimestampFromMoment(reminderDate),
 			comment
 		};
 		console.log({document});
@@ -71,28 +74,50 @@ const AddDocumentPage = (props) => {
 					</Select>
 				</FormControl>
 
-				<Space vertical={20} />
+				<Space vertical={25} />
 				<TextField
 						placeholder="Document type (pollution/insurance etc.)"
 						fullWidth={true}
 						onChange={setDocumentTypeCb}
 						value={documentType} />
 
-				<Space vertical={20} />
-				<TextField
-					type="date"
-					placeholder="When is the next renewal date?"
-					onChange={setRenewalDateCb}
-					fullWidth={true}
-					value={renewalDate} />	
-				
-				<Space vertical={20} />
-				<TextField
-					type="date"
-					placeholder="When do you want to be reminded?"
-					onChange={setReminderDateCb}
-					fullWidth={true}
-					value={reminderDate} />	
+				<MuiPickersUtilsProvider utils={MomentUtils}>
+					<KeyboardDatePicker
+						fullWidth
+						disableToolbar
+						disablePast
+						autoOk
+						variant="dialog"
+						format="MMMM DD, dddd, YYYY"
+						margin="normal"
+						id="renewal-date-picker-dialog"
+						label="When is the next renewal date?"
+						value={renewalDate}
+						onChange={setRenewalDateCb}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+    			</MuiPickersUtilsProvider>
+
+				<MuiPickersUtilsProvider utils={MomentUtils}>
+					<KeyboardDatePicker
+						fullWidth
+						disableToolbar
+						disablePast
+						autoOk
+						variant="dialog"
+						format="MMMM DD, dddd, YYYY"
+						margin="normal"
+						id="reminder-date-picker-dialog"
+						label="When do you want to be reminded?"
+						value={reminderDate}
+						onChange={setReminderDateCb}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+    			</MuiPickersUtilsProvider>
 
 				<Space vertical={20} />
 				<TextField

@@ -8,6 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 import Button from '@material-ui/core/Button';
 import Strings from '../../constants/StringConstants';
 import { saveServiceAsync } from "../../state/services";
@@ -15,12 +17,13 @@ import ApiConstants from "../../constants/ApiConstants";
 import useStoreon from 'storeon/react'
 import { getVehicleFromLocation, mutateNewServiceForDisplay } from "./helpers";
 import { routeConstants, getRouteDetailsFromPath } from '../../routes/routes';
+import { getTimestampFromMoment } from "../../utils/Helpers";
 
 
 const AddServicePage = (props) => {
 	const { user, vehicles, serviceableComponents, dispatch } = useStoreon('user', 'vehicles', 'serviceableComponents');
 	const [ vehicleId, setVehicleId ] = useState("");
-	const [ date, setDate ] = useState("");
+	const [ date, setDate ] = useState(null);
 	const [ component, setComponent ] = useState("");
 	const [ amount, setAmount ] = useState("");
 	const [ comment, setComment ] = useState("");
@@ -36,14 +39,14 @@ const AddServicePage = (props) => {
 	},[]);
 
 	const updateVehicleIdCb = event => setVehicleId(event.target.value);
-	const updateDateCb = event => setDate(event.target.value);
+	const updateDateCb = selectedMoment => setDate(selectedMoment);
 	const updateComponentCb = event => setComponent(event.target.value); 
 	const updateAmountCb = event => setAmount(event.target.value); 
 	const updateCommentCb = event => setComment(event.target.value); 
 
 	const clear = () => {
 		setVehicleId("");
-		setDate("");
+		setDate(null);
 		setComponent("");
 		setAmount("");
 		setComment("");
@@ -54,7 +57,7 @@ const AddServicePage = (props) => {
 			dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.INVALID_DETAILS);
 			return;
 		}
-		const service = { user: user._id, vehicle: vehicleId, date, component, amount, comment };
+		const service = { user: user._id, vehicle: vehicleId, date: getTimestampFromMoment(date), component, amount, comment };
 
 		saveServiceAsync( dispatch, service ).then(({status, data: newService})=>{
 			if( status == ApiConstants.STATUS_SUCCESS ){
@@ -81,15 +84,26 @@ const AddServicePage = (props) => {
 						{ vehicles.map(vehicle => <MenuItem key={vehicle._id} value={vehicle._id} >{vehicle.name}</MenuItem> ) }
 					</Select>
 				</FormControl>
-				<Space vertical={25} />
 
-				<TextField
-					type="date"
-					placeholder="On which date service happened?"
-					onChange={updateDateCb}
-					fullWidth={true}
-					value={date} />
-				<Space vertical={15} />
+				<MuiPickersUtilsProvider utils={MomentUtils}>
+					<KeyboardDatePicker
+						fullWidth
+						disableToolbar
+						disableFuture
+						autoOk
+						variant="dialog"
+						format="MMMM DD, dddd, YYYY"
+						margin="normal"
+						id="date-picker-inline"
+						label="On which date service happened?"
+						value={date}
+						onChange={updateDateCb}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+    			</MuiPickersUtilsProvider>
+				<Space vertical={10} />
 
 				<FormControl className={styles['form-control']}>
 					<InputLabel>Type of service / Component</InputLabel>
