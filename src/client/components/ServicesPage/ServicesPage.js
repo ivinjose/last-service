@@ -11,7 +11,7 @@ import Service, { ServiceEmpty } from '../common/Service';
 import useStoreon from 'storeon/react'
 import styles from './ServicesPage.css';
 import lizard from '../../images/lizard.jpg';
-import { prettifyDate } from "../../utils/Helpers";
+import { getDateStringFromTimestamp } from "../../utils/Helpers";
 import { getRouteDetailsFromKey, routeConstants } from "../../routes/routes";
 import { Link } from 'react-router-dom';
 
@@ -68,7 +68,7 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 		return <Loader />
 	}else{
 		if( services.length == 0 ){
-			return <Empty />;
+			return <Empty vehicleSelected={vehicleSelected}/>;
 		}else{
 			return(
 				<React.Fragment>
@@ -76,7 +76,7 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 					{
 						services.map( service =>{
 							service.vehicle = null; /** Setting it to null because no point in repeating the vehicle name in the services page */
-							service.date = prettifyDate(service.date);
+							service.date = getDateStringFromTimestamp(service.date);
 							const component = components.find( component => component.id === service.component );
 							service.component = component? component.label : null;
 							return <Service service={service} />
@@ -102,11 +102,16 @@ const Loader = () => {
 	);
 }
 
-const Empty = () => {
+const Empty = ({vehicleSelected}) => {
 	return (
 		<div className={styles['empty']}>
 			<img className={styles['image']} src={lizard} />
 			<div>It's so empty in here!</div>
+			<Fab className={styles['fab']} color="primary" aria-label="add">
+				<Link to={getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path+"?vehicle="+vehicleSelected}>
+					<AddIcon style={{color: '#fff'}} />
+				</Link>
+			</Fab>
 		</div>
 	);
 };

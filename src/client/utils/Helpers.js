@@ -22,5 +22,5 @@ export const prettifyDate = date =>{
  */	
 
 export const getTimestampFromMoment = date => date.unix();
+export const getDateStringFromTimestamp = timestamp => getMomentFromTimestamp(timestamp).format('MMMM Do YYYY');
 export const getMomentFromTimestamp = timestamp => moment.unix(timestamp);
-
