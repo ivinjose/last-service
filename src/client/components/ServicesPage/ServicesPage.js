@@ -25,6 +25,7 @@ const ServicesPage = (props) => {
 	} 
 
 	useEffect(()=>{
+		dispatch('services/clear');
 		const queryParams = queryString.parse(props.location.search);
 		if (queryParams && queryParams.vehicle) {
 			setVehicle(queryParams.vehicle);

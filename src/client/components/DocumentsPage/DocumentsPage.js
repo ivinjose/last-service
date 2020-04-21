@@ -20,6 +20,7 @@ const DocumentsPage = (props) => {
 	} 
 
 	useEffect(()=>{
+		dispatch('documents/clear');
 		getDocuments();
 		const queryParams = queryString.parse(props.location.search);
 		if (queryParams && queryParams.vehicle) {
