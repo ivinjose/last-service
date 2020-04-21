@@ -6,6 +6,7 @@ import Space from '../common/Stylers/Space';
 import Input from "../common/Input";
 import { Link } from 'react-router-dom';
 import Strings from '../../constants/StringConstants';
+import sha256 from 'crypto-js/sha256';
 
 const LoginPage = (props) => {
     const { user, dispatch } = useStoreon('user');
@@ -14,7 +15,7 @@ const LoginPage = (props) => {
 
     const setIdCb = event => setId(event.target.value);
     const setPasswordCb = event => setPassword(event.target.value);
-    const doLogin = () => dispatch('user/login', {id, password});
+    const doLogin = () => dispatch('user/login', {id, password: sha256(password).toString() });
 
     useEffect(()=>{
         if(user.isLoggedIn) {

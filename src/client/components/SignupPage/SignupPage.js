@@ -5,6 +5,7 @@ import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import Input from "../common/Input";
 import Strings from "../../constants/StringConstants";
+import sha256 from 'crypto-js/sha256';
 
 const SignupPage = (props) => {
     const { user, dispatch } = useStoreon('user');
@@ -28,7 +29,7 @@ const SignupPage = (props) => {
             dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.PASSWORD_MATCH_ERROR);
             return;
         }
-        dispatch('user/signup', { name, id, password });
+        dispatch('user/signup', { name, id, password: sha256(password).toString() });
     };
     
     useEffect(()=>{
