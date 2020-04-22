@@ -11,6 +11,7 @@ const user = store => {
     store.on('user/signup', async (state, userDetails)=>{
         store.dispatch('loading:true');
         const result = await makeApiCall("/api/signup", { method: 'POST', body: {userDetails} });
+        
         if( result.status === ApiConstants.STATUS_SUCCESS ){
             store.dispatch('user/signup:success', result.data);
         }else{

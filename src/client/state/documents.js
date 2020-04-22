@@ -9,25 +9,33 @@ const documents = store => {
     store.on('documents/get', async (state, user)=>{
         store.dispatch('loading:true');
         const documents = await makeApiCall("/api/users/" + user + "/documents", { method: 'GET' });
-        if( vehicles.status === ApiConstants.UNAUTHORIZED ){
+
+        if( documents.status === ApiConstants.STATUS_SUCCESS ){
+            store.dispatch('documents/get:success', documents.data);
+        }else if( documents.status === ApiConstants.UNAUTHORIZED ){
             store.dispatch('documents/get:error');
             store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
             store.dispatch('user/clear');
-            return;
+        }else{
+            store.dispatch('documents/get:error');
+            store.dispatch('snackbar:show', documents.message);
         }
-        store.dispatch('documents/get:success', documents.data);
     });
 
     store.on('documents/vehicle/get', async (state, vehicle)=>{
         store.dispatch('loading:true');
         const documents = await makeApiCall("/api/vehicles/" + vehicle + "/documents", { method: 'GET' });
-        if( vehicles.status === ApiConstants.UNAUTHORIZED ){
+
+        if( documents.status === ApiConstants.STATUS_SUCCESS ){
+            store.dispatch('documents/get:success', documents.data);
+        }else if( documents.status === ApiConstants.UNAUTHORIZED ){
             store.dispatch('documents/get:error');
             store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
             store.dispatch('user/clear');
-            return;
+        }else{
+            store.dispatch('documents/get:error');
+            store.dispatch('snackbar:show', documents.message);
         }
-        store.dispatch('documents/get:success', documents.data);
     });
 
     store.on('documents/get:success', (state, data)=>{

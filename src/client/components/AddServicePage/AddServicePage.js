@@ -66,7 +66,7 @@ const AddServicePage = (props) => {
 				clear();
 				setNewService( mutatedNewService );
 			}else{
-				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
+				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WRONG);
 			}
 		});
 	}

@@ -10,7 +10,7 @@ export default {
         INVALID_DETAILS: "Empty/Incorrect details entered. Please verify the details entered.",
         PASSWORD_MATCH_ERROR: "Passwords do not match. Please re-enter.",
         VEHICLE_ADD_SUCCESS: "Your vehicle is added successfully. Start adding services.",
-        SOMETHING_WENT_WROING: "Something went wrong. Please try again.",
+        SOMETHING_WENT_WRONG: "Something went wrong. Please try again.",
         COOKIE_NOT_FOUND: "We've forcefully logged you out because of invalid credentials. Please login again!"
     },
 
