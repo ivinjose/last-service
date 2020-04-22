@@ -9,12 +9,24 @@ const documents = store => {
     store.on('documents/get', async (state, user)=>{
         store.dispatch('loading:true');
         const documents = await makeApiCall("/api/users/" + user + "/documents", { method: 'GET' });
+        if( vehicles.status === ApiConstants.UNAUTHORIZED ){
+            store.dispatch('documents/get:error');
+            store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
+            store.dispatch('user/clear');
+            return;
+        }
         store.dispatch('documents/get:success', documents.data);
     });
 
     store.on('documents/vehicle/get', async (state, vehicle)=>{
         store.dispatch('loading:true');
         const documents = await makeApiCall("/api/vehicles/" + vehicle + "/documents", { method: 'GET' });
+        if( vehicles.status === ApiConstants.UNAUTHORIZED ){
+            store.dispatch('documents/get:error');
+            store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
+            store.dispatch('user/clear');
+            return;
+        }
         store.dispatch('documents/get:success', documents.data);
     });
 

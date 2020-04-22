@@ -8,6 +8,12 @@ const vehicles = store => {
     store.on('vehicles/get', async (state, user)=>{
         store.dispatch('loading:true');
         const vehicles = await makeApiCall("/api/users/" + user + "/vehicles", { method: 'GET' });
+        if( vehicles.status === ApiConstants.UNAUTHORIZED ){
+            store.dispatch('vehicles/get:error');
+            store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
+            store.dispatch('user/clear');
+            return;
+        }
         store.dispatch('vehicles/get:success', vehicles.data);
     });
 

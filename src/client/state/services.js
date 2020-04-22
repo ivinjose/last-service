@@ -9,6 +9,12 @@ const services = store => {
     store.on('services/get', async (state, vehicle)=>{
         store.dispatch('loading:true');
         const services = await makeApiCall("/api/vehicles/" + vehicle + "/services", { method: 'GET' });
+        if( vehicles.status === ApiConstants.UNAUTHORIZED ){
+            store.dispatch('services/get:error');
+            store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
+            store.dispatch('user/clear');
+            return;
+        }
         store.dispatch('services/get:success', services.data);
     });
 

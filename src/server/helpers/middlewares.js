@@ -10,16 +10,19 @@ const setHeaders = (req, res, next) => {
 };
 
 const validateUserCookie = (req, res, next) => {
-    if( req.method == 'OPTIONS' || req.path == '/api/login' || req.path == '/api/signup' ){
-        next();
-        return;
+    if( ( req.path.includes('/api') && req.method == 'OPTIONS' ) 
+        || req.path == '/api/login' 
+        || req.path == '/api/signup' 
+        || !req.path.includes('/api') ){
+            next();
+            return;
     }
     const { cookies: { token } } = req;
 
     if( token ){
         jwt.verify(token, constants.JWT_PRIVATE_KEY, function(err, decodedToken){
             if( err ){
-                res.status(401).send('Unauthorized access');
+                res.status(401).send({ status: 401, message: 'Unauthorized access. Please login.' });
                 return;
             }
 
@@ -29,17 +32,17 @@ const validateUserCookie = (req, res, next) => {
                         next();
                         return;
                     }else{
-                        res.status(401).send('Unauthorized access. Please login.');
+                        res.status(401).send({ status: 401, message: 'Unauthorized access. Please login.' });
                     }
                 }).catch(error => {
-                    res.status(401).send('Unauthorized access. Please login.');
+                    res.status(401).send({ status: 401, message: 'Unauthorized access. Please login.' });
                 })
             }else{
-                res.status(401).send('Unauthorized access. Please login.');
+                res.status(401).send({ status: 401, message: 'Unauthorized access. Please login.' });
             }
         });
     }else{
-        res.status(401).send('Unauthorized access. Please login.');
+        res.status(401).send({ status: 401, message: 'Unauthorized access. Please login.' });
     }
 }
 
