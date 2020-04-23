@@ -56,7 +56,7 @@ const AddDocumentPage = (props) => {
 				// const mutatedNewService = mutateNewServiceForDisplay(newService, vehicles, serviceableComponents);
 				// setNewService( mutatedNewService )
 			}else{
-				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
+				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WRONG);
 			}
 		});
 	}

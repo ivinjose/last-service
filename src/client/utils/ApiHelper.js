@@ -1,4 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import ApiConstants from "../constants/ApiConstants";
+import Strings from "../constants/StringConstants";
 
 const defaultHeaders = {
     'Content-Type': 'application/json'
@@ -16,7 +18,8 @@ const makeApiCall = async (url, {method, headers, body}) => {
 		const jsonResponse = await apiResponse.json();
 		return jsonResponse;
 	}catch(error){
-		return error;
+		console.log(error)
+		return { status: ApiConstants.STATUS_ERROR, message: Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WRONG };
 	}
 }
 

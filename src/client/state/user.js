@@ -5,10 +5,13 @@ import ApiConstants from "../constants/ApiConstants";
 const user = store => {
     store.on('@init', ()=>({ user: {isLoggedIn: false} }));
 
+    store.on('user/clear', ()=>({ user: {isLoggedIn: false} }));
+
     /* Signup flow */
     store.on('user/signup', async (state, userDetails)=>{
         store.dispatch('loading:true');
         const result = await makeApiCall("/api/signup", { method: 'POST', body: {userDetails} });
+        
         if( result.status === ApiConstants.STATUS_SUCCESS ){
             store.dispatch('user/signup:success', result.data);
         }else{

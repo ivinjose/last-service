@@ -38,7 +38,7 @@ const AddVehiclePage = (props) => {
 			if( status == ApiConstants.STATUS_SUCCESS ){
 				props.history.push(getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path);
 			}else{
-				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WROING);
+				dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.SOMETHING_WENT_WRONG);
 			}
 		});
 	}

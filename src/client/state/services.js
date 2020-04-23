@@ -9,7 +9,17 @@ const services = store => {
     store.on('services/get', async (state, vehicle)=>{
         store.dispatch('loading:true');
         const services = await makeApiCall("/api/vehicles/" + vehicle + "/services", { method: 'GET' });
-        store.dispatch('services/get:success', services.data);
+
+        if( services.status === ApiConstants.STATUS_SUCCESS ){
+            store.dispatch('services/get:success', services.data);
+        }else if( services.status === ApiConstants.UNAUTHORIZED ){
+            store.dispatch('services/get:error');
+            store.dispatch('snackbar:show', Strings.SNACKBAR_MESSAGES.COOKIE_NOT_FOUND);
+            store.dispatch('user/clear');
+        }else{
+            store.dispatch('services/get:error');
+            store.dispatch('snackbar:show', services.message);
+        }
     });
 
     store.on('services/get:success', (state, data)=>{
@@ -20,7 +30,6 @@ const services = store => {
     //TODO:: This is not being used. Fix!
     store.on('services/get:error', (state, error)=>{
         store.dispatch('loading:false');
-        console.log('Error in fetching services', error);
         return { services: [] };
     });
 
