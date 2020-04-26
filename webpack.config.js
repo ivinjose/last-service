@@ -1,9 +1,10 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'production',
     context: path.join(__dirname, 'src/client/components'),
     entry: [
-        'babel-polyfill',
+        '@babel/polyfill',
         './index.js',
     ],
     output: {
@@ -24,8 +25,9 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                            modules: {
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                            }
                         }
                     },
                     'postcss-loader'
