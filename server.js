@@ -15,12 +15,13 @@ const webpackConfig = require('./webpack.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const app = express();
 const isDev = process.argv[2] === 'dev';
+const compiler = webpack(webpackConfig);
 
 /**
  * Use webpack dev middleware for local development
  */
 if( isDev ){
-    app.use(webpackDevMiddleware(webpack(webpackConfig), {
+    app.use(webpackDevMiddleware(compiler, {
         hot: true,
         filename: 'bundle.js',
         publicPath: '/',
@@ -29,6 +30,7 @@ if( isDev ){
         },
         historyApiFallback: true,
     }));
+    app.use(require("webpack-hot-middleware")(compiler));
 }
 
 app.use(express.static('www'));

@@ -78,9 +78,10 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 						services.map( service =>{
 							service.vehicle = null; /** Setting it to null because no point in repeating the vehicle name in the services page */
 							service.date = getDateStringFromTimestamp(service.date);
+							const serviceId = service._id;
 							const component = components.find( component => component.id === service.component );
 							service.component = component? component.label : null;
-							return <Service service={service} />
+							return <Service service={service} key={serviceId}/>
 						})
 					}
 					<Fab className={styles['fab']} color="primary" aria-label="add">
