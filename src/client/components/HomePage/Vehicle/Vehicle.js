@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Vehicle.css';
 import DataConstants from "../../../constants/DataConstants";
 import car from '../../../images/car.png';
@@ -9,17 +8,15 @@ const Vehicle = (vehicle) => {
 	const image = vehicle.image || getImage(vehicle.type);
 	return(
 		<div className={styles['vehicle']}>
-			<Link className={styles['link']} to={"/services?vehicle="+vehicle._id}>
-				<div className={styles['details']}>
-					<div className={styles['image-block']}>
-						<img src={image} />
-					</div>
-					<div className={styles['info']}>
-						<div className={styles['name']}>{vehicle.name}</div>
-						{vehicle.subtext && <div className={styles['subtext']}>{vehicle.subtext}</div>}
-					</div>
-				</div>	
-			</Link>
+			<div className={styles['details']}>
+				<div className={styles['image-block']}>
+					<img src={image} />
+				</div>
+				<div className={styles['info']}>
+					<div className={styles['name']}>{vehicle.name}</div>
+					{vehicle.subtext && <div className={styles['subtext']}>{vehicle.subtext}</div>}
+				</div>
+			</div>	
 			{/* <div className={styles['menu']}>=</div> */}
 		</div>
 	)

@@ -41,7 +41,7 @@ const HomePage = (props) => {
 	);
 }
 
-const Vehicles = ({vehicles}) => vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} />);
+const Vehicles = ({vehicles}) => vehicles.map( vehicle => <Link className={styles['link']} to={"/services?vehicle="+vehicle._id}><Vehicle key={vehicle._id} {...vehicle} /></Link>);
 
 const Loader = () => {
 	return (
