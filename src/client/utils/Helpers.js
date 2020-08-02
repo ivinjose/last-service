@@ -9,8 +9,11 @@ import moment from 'moment';
  */	
 
 export const getTimestampFromMoment = date => date.unix();
+
 export const getDateStringFromTimestamp = timestamp => getMomentFromTimestamp(timestamp).format('MMMM Do YYYY');
+
 export const getMomentFromTimestamp = timestamp => moment.unix(timestamp);
+
 export const formatCurrency = (amount=0, minimumFractionDigits=0) => {
     return Number(amount).toLocaleString('en-IN', {
         maximumFractionDigits:2,
@@ -19,3 +22,7 @@ export const formatCurrency = (amount=0, minimumFractionDigits=0) => {
         currency: 'INR',
     });
 };
+
+export const getVehicleNameFromList = (id, vehicles) => {
+    return vehicles.find( vehicle => vehicle._id === id );
+}

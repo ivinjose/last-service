@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import queryString from 'query-string';
 import styles from './VehicleDirectoryPage.css';
-
 import Header from '../common/Header';
 import Card from '../common/Card';
 import Space from '../common/Stylers/Space';
 import { Link } from 'react-router-dom';
-
 import service from "../../images/service.svg";
 import document from "../../images/document.svg";
 import reminder from "../../images/reminder.svg";
+import useStoreon from 'storeon/react';
+import { getVehicleNameFromList } from '../../utils/Helpers';
+
+const cardCustomStyle = {
+    height: '200px',
+    width: '275px'
+};
 
 const VehicleDirectoryPage = (props) => {
-    const cardCustomStyle = {
-        height: '200px',
-        width: '275px'
-    };
+    const { vehicles } = useStoreon('vehicles');
+    const [ vehicle, setVehicle ] = useState("");
+
+    useEffect(()=>{
+        const queryParams = queryString.parse(props.location.search);
+		if (queryParams && queryParams.vehicle) {
+            const currentVehicle = getVehicleNameFromList(queryParams.vehicle, vehicles);
+			setVehicle(currentVehicle.name);
+		}
+    }, []);
+
     return(
         <React.Fragment>
-            <Header location={props.location} />
+            <Header title={vehicle} />
             <div className={styles['vehicle-directory-page']}>
                 {/* VehicleDirectory vehicle info here */}
                 <Space vertical={15} />
