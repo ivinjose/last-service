@@ -4,7 +4,7 @@ import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import { routeConstants, getRouteDetailsFromKey } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
-import Vehicle, { VehicleEmpty } from "./Vehicle";
+import Vehicle, { VehicleEmpty } from "../common/Vehicle";
 import { Link } from 'react-router-dom';
 import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
