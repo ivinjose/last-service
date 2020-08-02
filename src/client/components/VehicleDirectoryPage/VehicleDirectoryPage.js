@@ -13,7 +13,7 @@ import { getVehicleNameFromList } from '../../utils/Helpers';
 
 const cardCustomStyle = {
     height: '165px',
-    width: '275px'
+    width: '100%'
 };
 
 const VehicleDirectoryPage = (props) => {
