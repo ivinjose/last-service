@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import styles from './HomePage.css';
+import styles from './VehiclesPage.css';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import { routeConstants, getRouteDetailsFromKey } from '../../routes/routes';
 import Strings from '../../constants/StringConstants';
-import Vehicle, { VehicleEmpty } from "./Vehicle";
+import Vehicle, { VehicleEmpty } from "../common/Vehicle";
 import { Link } from 'react-router-dom';
 import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
-const HomePage = (props) => {
+const VehiclesPage = (props) => {
 	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
 	useEffect(()=>{
@@ -41,7 +41,7 @@ const HomePage = (props) => {
 	);
 }
 
-const Vehicles = ({vehicles}) => vehicles.map( vehicle => <Vehicle key={vehicle._id} {...vehicle} />);
+const Vehicles = ({vehicles}) => vehicles.map( vehicle => <Link className={styles['link']} to={"/vehicle?vehicle="+vehicle._id}><Vehicle key={vehicle._id} {...vehicle} /></Link>);
 
 const Loader = () => {
 	return (
@@ -61,4 +61,4 @@ const Empty = () => {
 	);
 };
 
-export default HomePage;
+export default VehiclesPage;

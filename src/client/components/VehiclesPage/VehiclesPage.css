@@ -3,6 +3,11 @@
 .home-page{
     margin: 70px 16px 16px;
 
+    .link{
+        color: #1f1f1f;
+        text-decoration: none;
+    }
+
     .vehicle{
         margin-top: 15px;
         text-align: center;

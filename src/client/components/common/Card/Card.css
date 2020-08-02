@@ -1,7 +1,6 @@
 .card{
-    border: 1px solid #7cabda66;
-    border-radius: 3px;
-    -webkit-box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.44);
-    -moz-box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.44);
-    box-shadow: 6px 6px 10px -8px rgba(0,0,0,0.44);
+    border-bottom: 1px solid #7cabda66;
+    /* -webkit-box-shadow: 0px 6px 5px -7px rgba(77,75,77,1);
+    -moz-box-shadow: 0px 6px 5px -7px rgba(77,75,77,1);
+    box-shadow: 0px 6px 5px -7px rgba(77,75,77,1); */
 }
