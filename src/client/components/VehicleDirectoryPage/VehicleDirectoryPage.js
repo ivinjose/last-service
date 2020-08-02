@@ -18,29 +18,36 @@ const cardCustomStyle = {
 
 const VehicleDirectoryPage = (props) => {
     const { vehicles } = useStoreon('vehicles');
-    const [ vehicle, setVehicle ] = useState("");
+    const [ vehicle, setVehicle ] = useState({});
+    const vehicleName = vehicle.name? vehicle.name.toUpperCase() : "";
 
     useEffect(()=>{
         const queryParams = queryString.parse(props.location.search);
 		if (queryParams && queryParams.vehicle) {
-            const currentVehicle = getVehicleNameFromList(queryParams.vehicle, vehicles);
-			setVehicle(currentVehicle.name);
-		}
+            const vehicle = getVehicleNameFromList(queryParams.vehicle, vehicles);
+			if(vehicle){
+                setVehicle(vehicle);
+            }else{
+                props.history.replace("/");
+            }
+		}else{
+            props.history.replace("/");
+        }
     }, []);
 
     return(
         <React.Fragment>
-            <Header title={vehicle} />
+            <Header title={vehicleName} />
             <div className={styles['vehicle-directory-page']}>
                 {/* VehicleDirectory vehicle info here */}
                 <Space vertical={15} />
                 <div className={styles['cards']}>
                     <Card style={cardCustomStyle}>
-                        <CardContent link="/services" linkText="SERVICES" message="You have 2 services due!" icon={service} />
+                        <CardContent link={"/services?vehicle="+vehicle._id} linkText="SERVICES" message="You have 2 services due!" icon={service} />
                     </Card>
                     <Space vertical={25} />
                     <Card style={cardCustomStyle}>
-                        <CardContent link="/documents" linkText="DOCUMENTS" message="You have 1 document for renewal!" icon={document} />
+                        <CardContent link={"/documents?vehicle="+vehicle._id} linkText="DOCUMENTS" message="You have 1 document for renewal!" icon={document} />
                     </Card>
                     <Space vertical={25} />
                     <Card style={cardCustomStyle}>

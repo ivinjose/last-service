@@ -51,6 +51,7 @@ const routes = [
         name: Strings.MENU_TITLES.DIRECTORY,
         title: Strings.PAGE_TITLES.DIRECTORY,
         component: VehicleDirectoryPage,
+        isHidden: true,
         isSecure: true
     },
     {
