@@ -12,7 +12,7 @@ import useStoreon from 'storeon/react';
 import { getVehicleNameFromList } from '../../utils/Helpers';
 
 const cardCustomStyle = {
-    height: '200px',
+    height: '165px',
     width: '275px'
 };
 
@@ -61,17 +61,13 @@ const VehicleDirectoryPage = (props) => {
 
 const CardContent = ({message, link, linkText, icon}) => {
     return(
-        <div className={styles['card-content']}>
-            <div className={styles['icon']}>
-                <img src={icon} />
+        <Link to={link} className={styles['link']}>
+            <div className={styles['card-content']}>
+                <div className={styles['icon']}><img src={icon} /></div>
+                <div className={styles['message']}>{message}</div>
+                <div className={styles['footer']}>{linkText}</div>
             </div>
-            <div className={styles['message']}>
-                {message}
-            </div>
-            <div className={styles['footer']}>
-                <Link to={link} className={styles['link']}>{linkText}</Link>
-            </div>
-        </div>
+        </Link>
     );
 };
 
