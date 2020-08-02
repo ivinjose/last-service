@@ -1,4 +1,4 @@
-import HomePage from '../components/HomePage';
+import VehiclesPage from '../components/VehiclesPage';
 import VehicleDirectoryPage from "../components/VehicleDirectoryPage";
 import ServicesPage from '../components/ServicesPage';
 import DocumentsPage from '../components/DocumentsPage';
@@ -12,6 +12,7 @@ import Strings from '../constants/StringConstants';
 
 const routeConstants = {
     HOME: 'HOME',
+    VEHICLES: 'VEHICLES',
     VEHICLE_DIRECTORY: 'VEHICLE_DIRECTORY', 
     VIEW_SERVICES: 'VIEW_SERVICES',
     VIEW_DOCUMENTS: 'VIEW_DOCUMENTS',
@@ -33,7 +34,15 @@ const routes = [
         path: "/",
         name: Strings.MENU_TITLES.HOME,
         title: Strings.PAGE_TITLES.HOME,
-        component: HomePage,
+        component: VehiclesPage,
+        isSecure: true
+    },
+    {
+        key: 'VEHICLES',
+        path: "/vehicles",
+        name: Strings.MENU_TITLES.VEHICLES,
+        title: Strings.PAGE_TITLES.VEHICLES,
+        component: VehiclesPage,
         isSecure: true
     },
     {

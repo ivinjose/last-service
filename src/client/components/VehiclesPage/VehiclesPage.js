@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './HomePage.css';
+import styles from './VehiclesPage.css';
 import Header from '../common/Header';
 import Space from '../common/Stylers/Space';
 import { routeConstants, getRouteDetailsFromKey } from '../../routes/routes';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import lizard from '../../images/lizard.jpg';
 import useStoreon from 'storeon/react'
 
-const HomePage = (props) => {
+const VehiclesPage = (props) => {
 	const { user, vehicles, loading, dispatch } = useStoreon('user', 'vehicles', 'loading');
 
 	useEffect(()=>{
@@ -61,4 +61,4 @@ const Empty = () => {
 	);
 };
 
-export default HomePage;
+export default VehiclesPage;
