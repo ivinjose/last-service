@@ -1,39 +1,38 @@
 import React from 'react';
+import classNames from 'classnames';
 import styles from './Service.css';
 import { formatCurrency } from '../../../utils/Helpers';
 
 const Service = ({service, style}) => {
 	return(
 		<div className={styles['service']} style={style}  key={service._id} >
-			<div className={styles['date']}>{service.date}</div>
-			<table>
-				<tbody>
-					{
-						service.vehicle &&
-						<tr>
-							<td className={styles['col']}>Vehicle</td>
-							<td className={styles['col-details']}><span>{service.vehicle}</span></td>
-						</tr>
-					}
-					
-					<tr>
-						<td className={styles['col']}>Amount</td>
-						<td className={styles['col-details']}><span>{formatCurrency(service.amount)}</span></td>
-					</tr>
-					<tr>
-						<td className={styles['col']}>Component</td>
-						<td className={styles['col-details']}><span>{service.component}</span></td>
-					</tr>
-					{
-						service.kmsReading &&
-						<tr>
-							<td className={styles['col']}>Distance</td>
-							<td className={styles['col-details']}><span>{service.kmsReading} kms</span></td>
-						</tr>
-					}
-				</tbody>
-			</table>
-			{ service.comment && <div className={styles['comment']}>{service.comment}</div> }
+			<div className={styles['wrapper']}>
+
+				<div className={classNames(styles['value'], styles['options'])}>...</div>
+				<div className={classNames(styles['label'], styles['date'])}>{service.date}</div>
+				
+				{ service.vehicle &&
+					<React.Fragment>
+						<div className={styles['label']}>Vehicle</div>
+						<div className={styles['value']}>{service.vehicle}</div>
+					</React.Fragment>
+				}
+
+				<div className={styles['label']}>Amount</div>
+				<div className={styles['value']}>{formatCurrency(service.amount)}</div>
+
+				<div className={styles['label']}>Component</div>
+				<div className={styles['value']}>{service.component}</div>
+
+				{ service.kmsReading &&
+					<React.Fragment>
+						<div className={styles['label']}>Distance</div>
+						<div className={styles['value']}>{service.kmsReading} kms</div>
+					</React.Fragment>
+				}
+				
+				{ service.comment && <div className={classNames(styles['label'], styles['comment'])}>- {service.comment}</div> }
+			</div>
 		</div>
 	);
 };

@@ -2,30 +2,31 @@
 .service-empty{
 	font-size: 16px;
 	border-bottom: #00000021 1px solid;
-	padding: 20px 0px;
-	margin-bottom: 15px;
+	padding-bottom: 20px;
+	margin-top: 15px;
 	color: #1f2939;
 
-	.date{
-		font-weight: 600;
-		margin-bottom: 15px;
-	}
+	.wrapper{
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+		grid-gap: 1em;
 
-	table {
-		color: #1f2939;
-		width: 100%;
-		margin-left: -1px;
+		.value{
+			justify-self: right;
+		}
 
-		tr {
-			td {
-				padding: 0 0 9px;
-			}
-			.col {
-				width: 40%;
-			}
-			.col-details{
-				text-align: right;
-			}
+		.options,
+		.date{
+			font-weight: 600;
+			grid-column: span 2;
+		}
+
+		.comment{
+			grid-column: span 2;
+		}
+
+		.options{
+			align-self: flex-start;
 		}
 	}
 
