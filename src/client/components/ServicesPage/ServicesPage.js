@@ -58,13 +58,33 @@ const ServicesPage = (props) => {
 				</Select>
 				
 				<Space vertical={15} />
-				{renderServices(vehicle, services, loading, serviceableComponents)}
+				{renderServices(vehicle, services, loading, serviceableComponents, props.history)}
 			</div>
 		</React.Fragment>
 	);
 }
 
-const renderServices = (vehicleSelected, services, loading, components) =>{
+const getOptionsMenu = (history, serviceId) => {
+	return [
+		{
+			label: 'Edit',
+			action: (e) => {
+				e.stopPropagation();
+				history.push(`${getRouteDetailsFromKey(routeConstants.EDIT_SERVICE).path}?service=${serviceId}`);
+			}
+		},
+		{
+			label: 'Delete',
+			action: (e) => {
+				e.stopPropagation();
+				//dispatch the action to delete on confirmation
+				console.log('delete')
+			}
+		}
+	];
+};
+
+const renderServices = (vehicleSelected, services, loading, components, history) =>{
 	if( loading ){
 		return <Loader />
 	}else{
@@ -82,7 +102,7 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 							const serviceId = service._id;
 							const component = components.find( component => component.id === service.component );
 							service.component = component? component.label : null;
-							return <Service service={service} key={serviceId}/>
+							return <Service service={service} key={serviceId} optionsMenu={getOptionsMenu(history, service._id)}/>
 						})
 					}
 					</div>

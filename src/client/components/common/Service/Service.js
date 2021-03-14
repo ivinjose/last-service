@@ -4,30 +4,13 @@ import styles from './Service.css';
 import { formatCurrency } from '../../../utils/Helpers';
 import OptionsMenu from "./OptionsMenu";
 
-const options = [
-	{
-		label: 'Modify',
-		action: (e) => {
-			e.stopPropagation();
-			alert('modify')
-		}
-	},
-	{
-		label: 'Edit',
-		action: (e) => {
-			e.stopPropagation();
-			alert('edit')
-		}
-	}
-];
-
-const Service = ({service, style}) => {
+const Service = ({service, style, optionsMenu}) => {
 	return(
 		<div className={styles['service']} style={style}  key={service._id} >
 			<div className={styles['wrapper']}>
 
 				<div className={classNames(styles['value'], styles['options'])}>
-					<OptionsMenu options={options}/>
+					<OptionsMenu options={optionsMenu}/>
 				</div>
 				<div className={classNames(styles['label'], styles['date'])}>{service.date}</div>
 				
