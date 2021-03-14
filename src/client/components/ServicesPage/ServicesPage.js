@@ -74,6 +74,7 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 			return(
 				<React.Fragment>
 					<TotalAmount services={services} />
+					<div>
 					{
 						services.map( service =>{
 							service.vehicle = null; /** Setting it to null because no point in repeating the vehicle name in the services page */
@@ -84,6 +85,7 @@ const renderServices = (vehicleSelected, services, loading, components) =>{
 							return <Service service={service} key={serviceId}/>
 						})
 					}
+					</div>
 					<Fab className={styles['fab']} color="primary" aria-label="add">
 						<Link to={getRouteDetailsFromKey(routeConstants.ADD_SERVICE).path+"?vehicle="+vehicleSelected}>
 							<AddIcon style={{color: '#fff'}} />

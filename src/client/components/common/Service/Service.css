@@ -3,7 +3,7 @@
 	font-size: 16px;
 	border-bottom: #00000021 1px solid;
 	padding-bottom: 20px;
-	margin-top: 15px;
+	margin-top: 25px;
 	color: #1f2939;
 
 	.wrapper{
@@ -27,12 +27,18 @@
 
 		.options{
 			align-self: flex-start;
+			font-size: 24px;
+			line-height: 0;
 		}
 	}
 
 	.comment{
 		margin-top: 10px;
 	}
+}
+
+.service:last-child{
+	border-bottom: none;
 }
 
 .service-empty{
