@@ -63,6 +63,18 @@ module.exports = {
         .populate({ path: 'vehicle', model: 'vehicle', select: 'name' });
     },
 
+    getService(req, res) {
+        Service.findOne({ _id: req.params.id }, (err, result) => {
+            if (err) {
+                res.status(404).send({ status: 'error', message: "Could not fetch the service", meta: err });
+            } else {
+                res.status(200).send({ status: 'success', message: "Successfully fetched the service", data: result });
+            }
+        })
+        .populate({ path: 'user', model: 'user', select: 'name' })
+        .populate({ path: 'vehicle', model: 'vehicle', select: 'name' });
+    },
+
     getServicesOfVehicle(req, res) {
         Service.find({ vehicle: req.params.id }, (err, result) => {
             if (err) {

@@ -20,8 +20,8 @@ const OptionsMenu = ({options}) => {
                     isExpanded &&
                     <ul className={styles['items']}>
                         {
-                            options.map( option => {
-                                return <li className={styles['item']} onClick={option.action}>{option.label}</li>
+                            options.map( (option, index) => {
+                                return <li key={index} className={styles['item']} onClick={option.action}>{option.label}</li>
                             })
                         }
                         
