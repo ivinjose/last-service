@@ -107,6 +107,11 @@ app.get("/api/vehicles/:id/services", function(req, res) {
     }
 });
 
+/** Get a particular service */
+app.get("/api/services/:id", function(req, res) {
+    serviceFunctions.getService(req, res);
+});
+
 /** Add services of a vehicle */
 app.post("/api/vehicles/:id/service", serviceFunctions.addServices);
 
